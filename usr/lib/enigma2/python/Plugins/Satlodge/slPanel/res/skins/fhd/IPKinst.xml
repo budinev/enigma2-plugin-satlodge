@@ -1,0 +1,31 @@
+<screen name="IPKinst" flags="wfNoBorder" position="0,0" size="1920,1080" title="..::SatLodge Panel Addon Manager::.." backgroundColor="#ffffffff" zPosition="-1" transparent="0">
+  <ePixmap position="0,0" size="1920,1080" zPosition="-1" pixmap="/usr/lib/enigma2/python/Plugins/SatLodge/slPanel/res/pics/menu_plug_lsFHD.png" />  
+  <widget name="title" position="472,31" zPosition="3" size="908,66" font="font2;40" foregroundColor="#ffcc33" backgroundColor="black" transparent="1" halign="center" />
+  <widget name="version" position="1544,36" zPosition="3" size="324,50" font="font2;30" backgroundColor="background" transparent="1" foregroundColor="#ffffff" halign="right" />
+  <widget name="maintener" position="1379,36" zPosition="3" size="324,50" font="font2;30" backgroundColor="background" transparent="1" foregroundColor="#ffffff" halign="center" />
+  <widget name="text" itemHeight="40" position="140,257" font="font1;32" size="1213,587" foregroundColor="#ffffff" foregroundColorSelected="#0000ff" backgroundColorSelected="#b8b8b8" zPosition="2" />
+  <!--eLabel text="Put in /tmp addon plugin .ipk and install" position="179,165" size="700,60" transparent="1" font="font1;32" foregroundColor="#ffcc33" zPosition="5" /-->
+  <widget name="info1" position="42,865" zPosition="3" size="1392,80" font="font1;40" foregroundColor="#ffffff" backgroundColor="black" transparent="1" halign="center" />
+  <widget source="ipkglisttmp" render="Listbox" itemHeight="50" font="font1;30" position="139,250" size="1215,579" foregroundColor="#ffffff" foregroundColorSelected="#0000ff" backgroundColorSelected="#b8b8b8" transparent="1" zPosition="2">
+  <convert type="StringList" />
+  </widget>
+
+<!--  
+  <eLabel position="92,1000" size="20,50" backgroundColor="red" zPosition="1" /> 
+  <widget name="key_red" position="117,1000" zPosition="3" size="240,50" valign="center" halign="left" foregroundColor="white" font="Regular; 30" transparent="1" shadowColor="#25062748" shadowOffset="-2,-2" />
+  -->
+  
+  <eLabel position="415,1000" size="20,50" backgroundColor="green" zPosition="1" />
+  <widget name="key_green" position="442,1000" zPosition="3" size="390,50" valign="center" halign="left" foregroundColor="white" font="Regular; 30" transparent="1" shadowColor="#25062748" shadowOffset="-2,-2" />
+  <eLabel position="841,1000" size="20,50" backgroundColor="yellow" zPosition="1" /> 
+  <widget name="key_yellow" position="866,1000" zPosition="3" size="312,50" valign="center" halign="left" foregroundColor="white" font="Regular; 30" transparent="1" shadowColor="#25062748" shadowOffset="-2,-2" />
+  <eLabel position="1186,1000" size="20,50" backgroundColor="blue" zPosition="1" /> 
+  <widget name="key_blue" position="1211,1000" zPosition="3" size="346,50" valign="center" halign="left" foregroundColor="white" font="Regular; 30" transparent="1" shadowColor="#25062748" shadowOffset="-2,-2" />
+  <widget source="global.CurrentTime" render="Label" position="1558,1010" size="200,50" font="Regular;32" halign="right" backgroundColor="black" foregroundColor="grey" transparent="1">
+  <convert type="ClockToText">Format:%d.%m.%Y</convert></widget>
+  <widget source="global.CurrentTime" render="Label" position="1752,1010" size="100,50" font="Regular;32" halign="right" backgroundColor="black" transparent="1">
+  <convert type="ClockToText">Default</convert>
+  </widget>
+  <widget name="info" halign="left" position="149,130" zPosition="3" size="1233,78" font="font1;40" foregroundColor="#ffffff" transparent="1" />
+<eLabel name="label" position="133,230" size="1213,587" />
+</screen>

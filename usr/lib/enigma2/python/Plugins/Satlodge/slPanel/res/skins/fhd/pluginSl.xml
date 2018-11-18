@@ -1,0 +1,36 @@
+<screen name="pluginSl" flags="wfNoBorder" position="0,0" size="1920,1080" title="..::SatLodge Uninstaller::.." backgroundColor="#ffffffff" zPosition="-1" transparent="0">
+    <ePixmap position="0,0" size="1920,1082" zPosition="-1" pixmap="/usr/lib/enigma2/python/Plugins/SatLodge/slPanel/res/pics/menu_plug_lsFHD.png" />  
+    <widget name="title" position="472,31" zPosition="3" size="908,66" font="font2;40" foregroundColor="#ffcc33" backgroundColor="black" transparent="1" halign="center" />
+    <widget name="version" position="1544,36" zPosition="3" size="324,50" font="font2;30" backgroundColor="background" transparent="1" foregroundColor="#ffffff" halign="right" />
+    <widget name="maintener" position="1379,36" zPosition="3" size="324,50" font="font2;30" backgroundColor="background" transparent="1" foregroundColor="#ffffff" halign="center" />
+    <!--
+    <widget source="list" render="Listbox" position="147,224" size="1120,635" zPosition="3" scrollbarMode="showOnDemand">
+        <convert type="TemplatedMultiContent">{"template": [MultiContentEntryText(pos = (50, 5), size = (300, 30), font=0, flags = RT_HALIGN_LEFT | RT_HALIGN_LEFT, text = 1),],"fonts": [gFont("Regular", 30)],"itemHeight": 40}
+        </convert>
+    </widget>
+    -->
+    
+    <widget name="list" position="147,224" size="1120,635" foregroundColor="#ffffff" foregroundColorSelected="#0000ff" backgroundColorSelected="#b8b8b8" scrollbarMode="showOnDemand" zPosition="2" />  
+
+<!--  
+  <eLabel position="92,1000" size="20,50" backgroundColor="red" zPosition="1" /> 
+  <widget name="key_red" position="117,1000" zPosition="3" size="240,50" valign="center" halign="left" foregroundColor="white" font="Regular; 30" transparent="1" shadowColor="#25062748" shadowOffset="-2,-2" />
+  -->
+  
+  <eLabel position="415,1000" size="20,50" backgroundColor="green" zPosition="1" />
+  <widget name="key_green" position="442,1000" zPosition="3" size="390,50" valign="center" halign="left" foregroundColor="white" font="Regular; 30" transparent="1" shadowColor="#25062748" shadowOffset="-2,-2" />
+  <eLabel position="841,1000" size="20,50" backgroundColor="yellow" zPosition="1" /> 
+  <widget name="key_yellow" position="866,1000" zPosition="3" size="312,50" valign="center" halign="left" foregroundColor="white" font="Regular; 30" transparent="1" shadowColor="#25062748" shadowOffset="-2,-2" />
+<!--  
+  <eLabel position="1186,1000" size="20,50" backgroundColor="blue" zPosition="1" /> 
+  <widget name="key_blue" position="1211,1000" zPosition="3" size="346,50" valign="center" halign="left" foregroundColor="white" font="Regular; 30" transparent="1" shadowColor="#25062748" shadowOffset="-2,-2" />
+-->   
+    
+    <widget name="info" halign="left" position="149,130" zPosition="3" size="1233,78" font="font1;38" foregroundColor="#ffffff" transparent="1" />
+    <widget source="global.CurrentTime" render="Label" position="1558,1010" size="200,50" font="Regular;32" halign="right" backgroundColor="black" foregroundColor="grey" transparent="1">
+    <convert type="ClockToText">Format:%d.%m.%Y</convert></widget>
+    <widget source="global.CurrentTime" render="Label" position="1752,1010" size="100,50" font="Regular;32" halign="right" backgroundColor="black" transparent="1">
+    <convert type="ClockToText">Default</convert>
+    </widget>
+    <eLabel name="label" position="147,222" size="1120,635" zPosition="0" />
+</screen>

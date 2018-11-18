@@ -1,0 +1,58 @@
+<screen name="slMessageBox" flags="wfNoBorder" position="center,center" size="1175,600" title="..::SatLodge Panel Addon Manager::.." backgroundColor="#ffffffff">
+  <ePixmap position="0,0" size="1175,599" zPosition="-1" pixmap="/usr/lib/enigma2/python/Plugins/SatLodge/slPanel/res/pics/menu_plug_ls.png" />
+  <widget name="ErrorPixmap" pixmap="skin_default/icons/input_error.png" position="771,196" size="100,100" alphatest="blend" />
+  <widget name="QuestionPixmap" pixmap="skin_default/icons/input_question.png" position="770,198" size="100,100" alphatest="blend" />
+  <widget name="InfoPixmap" pixmap="skin_default/icons/input_info.png" position="769,197" size="100,100" alphatest="blend" />
+  <widget name="WarningPixmap" pixmap="skin_default/icons/input_warning.png" position="770,200" size="100,100" alphatest="blend" />
+  <widget name="list" position="65,154" size="500,371" itemHeight="32" selectionPixmap="/usr/lib/enigma2/python/Plugins/SatLodge/slPanel/res/pics/sel32.png" scrollbarMode="showNever" transparent="1" />
+  <ePixmap position="22,11" size="71,39" zPosition="10" pixmap="/usr/lib/enigma2/python/Plugins/SatLodge/slPanel/res/pics/ok.png" transparent="1" alphatest="blend" />
+  <ePixmap position="94,11" size="71,39" zPosition="10" pixmap="/usr/lib/enigma2/python/Plugins/SatLodge/slPanel/res/pics/exit.png" transparent="1" alphatest="blend" />
+  <!--widget name="Text" itemHeight="30" position="53,97" size="200,320" font="font1;26" foregroundColor="#ffffff" foregroundColorSelected="#0000ff" backgroundColorSelected="#b8b8b8" zPosition="2" /-->
+  <widget name="Text" position="68,75" size="498,320" font="font1;26" foregroundColor="#ffffff" zPosition="2" />  
+  <widget name="text" font="font1;22" position="67,72" size="500,305" foregroundColor="#fff700" />
+  <!--<eLabel name="text" position="273,203" font="font1;24" size="552,278" foregroundColor="#ffffff" foregroundColorSelected="#0000ff" backgroundColorSelected="#b8b8b8" zPosition="2" />-->
+  <widget name="selectedChoice" position="307,96" zPosition="3" size="324,50" font="font1;24" backgroundColor="#2518252e" transparent="1" foregroundColor="#ffffff" halign="center" />
+<!--   <applet type="onLayoutFinish">
+
+# this should be factored out into some helper code, but currently demonstrates applets.
+from enigma import eSize, ePoint
+orgwidth = self.instance.size().width()
+orgpos = self.instance.position()
+textsize = self["text"].getSize()
+
+# y size still must be fixed in font stuff...
+textsize = (textsize[0] + 80, textsize[1] + 80)
+offset = 30
+if self.type == self.TYPE_YESNO:
+	offset = 70
+wsizex = textsize[0] + 120
+wsizey = textsize[1] + offset
+if (800 &gt; wsizex):
+	wsizex = 800
+wsize = (wsizex, wsizey)
+
+
+# resize
+self.instance.resize(eSize(*wsize))
+
+# resize label
+self["text"].instance.resize(eSize(*textsize))
+
+# move list
+listsize = (wsizex - 15, 64)
+self["list"].instance.move(ePoint(10, textsize[1]))
+self["list"].instance.resize(eSize(*listsize))
+
+# center window
+newwidth = wsize[0]
+self.instance.move(ePoint(orgpos.x() + (orgwidth - newwidth)/2, orgpos.y()))
+</applet> -->
+  <widget source="global.CurrentTime" render="Label" position="919,553" size="140,25" font="Regular;23" halign="right" backgroundColor="black" foregroundColor="grey" transparent="1">
+  <convert type="ClockToText">Format:%d.%m.%Y</convert></widget>
+  <widget source="global.CurrentTime" render="Label" position="1048,553" size="85,25" font="Regular;23" halign="right" backgroundColor="black" transparent="1">
+  <convert type="ClockToText">Default</convert>
+  </widget>
+  <widget name="title" position="344,10" zPosition="3" size="500,50" font="font2;28" foregroundColor="#ffcc33" backgroundColor="black" transparent="1" halign="center" />
+  <widget name="version" position="824,11" zPosition="3" size="324,50" font="font2;24" backgroundColor="#2518252e" transparent="1" foregroundColor="#ffffff" halign="right" />
+  <widget name="maintener" position="726,11" zPosition="3" size="324,50" font="font2;24" backgroundColor="#2518252e" transparent="1" foregroundColor="#ffffff" halign="center" /> 
+</screen>

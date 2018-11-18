@@ -1,0 +1,19 @@
+<screen name="GetipklistLs" position="center,center" size="1200,700" flags="wfNoBorder" backgroundColor="#41000000" title="..:: Sat-Lodge Cam Manager ::..">
+ <widget name="text" font="Regular;25" position="51,130" size="500,350" scrollbarMode="showOnDemand" itemHeight="40" transparent="1" />
+ <widget name="info" position="49,70" zPosition="4" size="504,40" font="Regular;22" foregroundColor="#ffcc33" transparent="1" halign="center" valign="center" />
+ <ePixmap position="0,-1" zPosition="-2" size="1200,700" pixmap="/usr/lib/enigma2/python/Plugins/SatLodge/slManager/res/img/center2.png" alphatest="blend" />
+  <!--
+  <widget name="version" position="858,17" zPosition="3" halign="right" size="206,27" font="Regular;20" foregroundColor="#ffcc33" transparent="1" />
+  <widget name="maintener" position="50,17" zPosition="3" halign="left" size="206,27" font="Regular;20" foregroundColor="#ffcc33" transparent="1" />
+  -->
+  <widget name="version" position="824,11" zPosition="3" size="324,50" font="font2;24" backgroundColor="#2518252e" transparent="1" foregroundColor="#ffffff" halign="right" />
+  <widget name="maintener" position="726,11" zPosition="3" size="324,50" font="font2;24" backgroundColor="#2518252e" transparent="1" foregroundColor="#ffffff" halign="center" />
+  <widget name="team" position="344,10" zPosition="3" size="500,50" font="font2;28" foregroundColor="#ffcc33" backgroundColor="black" transparent="1" halign="center" />
+  
+<!--  <widget name="team" position="386,15" zPosition="3" halign="center" size="381,36" font="Regular;26" foregroundColor="#ffcc33" transparent="1" />-->
+  <widget source="global.CurrentTime" render="Label" position="919,643" size="140,25" font="Regular;23" halign="right" backgroundColor="black" foregroundColor="grey" transparent="1">
+  <convert type="ClockToText">Format:%d.%m.%Y</convert></widget>
+  <widget source="global.CurrentTime" render="Label" position="1048,643" size="85,25" font="Regular;23" halign="right" backgroundColor="black" transparent="1">
+  <convert type="ClockToText">Default</convert>
+  </widget>
+</screen>

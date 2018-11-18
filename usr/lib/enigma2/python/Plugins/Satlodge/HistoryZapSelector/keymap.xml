@@ -1,0 +1,26 @@
+<keymap>
+	<map context="HistoryZapActions">
+		<key id="KEY_GREEN" mapto="green" flags="m" />
+		<key id="KEY_RED" mapto="red" flags="m" />
+		<key id="KEY_BLUE" mapto="blue" flags="m" />
+		<key id="KEY_YELLOW" mapto="yellow" flags="m" />
+		<key id="KEY_MENU" mapto="menu" flags="m"/>
+		<key id="KEY_SPACE" mapto="menu" flags="m"/>
+		<key id="\x0a" mapto="ok" flags="m"/>
+		<key id="\x1b" mapto="cancel" flags="m"/>
+		<key id="KEY_OK" mapto="ok" flags="m"/>
+		<key id="KEY_EXIT" mapto="cancel" flags="m"/>
+		<key id="KEY_ENTER" mapto="ok" flags="m"/>
+		<key id="KEY_ESC" mapto="cancel" flags="m"/>
+		<key id="KEY_INFO" mapto="showInfo" flags="b"/>
+		<key id="KEY_INFO" mapto="showInfoLong" flags="l"/>
+		<key id="KEY_EPG" mapto="showGuide" flags="b"/>
+		<key id="KEY_EPG" mapto="showGuideLong" flags="l"/>
+		<key id="KEY_PREVIOUS" mapto="jumpPreviousMark" flags="m"/>
+		<key id="KEY_0" mapto="toggleMark" flags="m"/>
+		<key id="KEY_NEXT" mapto="jumpNextMark" flags="m"/>
+		<key id="KEY_PREVIOUSSONG" mapto="jumpPreviousMark" flags="m"/>
+		<key id="KEY_TAB" mapto="toggleMark" flags="m"/>
+		<key id="KEY_NEXTSONG" mapto="jumpNextMark" flags="m"/>
+	</map>
+</keymap>

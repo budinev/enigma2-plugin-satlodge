@@ -1,0 +1,22 @@
+<screen name="GetipklistLs" position="0,0" size="1920,1080" flags="wfNoBorder" backgroundColor="#41000000" title="..:: Sat-Lodge Cam Manager ::..">
+ <!--<widget name="text" position="53,185" size="638,574" font="Regular;40" scrollbarMode="showOnDemand" itemHeight="50" transparent="1" />-->
+ <widget name="text" position="53,185" size="638,574" scrollbarMode="showOnDemand" itemHeight="50" transparent="1" />
+ <widget name="info" position="59,124" zPosition="4" size="550,50" font="Regular;40" foregroundColor="#ffcc33" transparent="1" halign="center" valign="center" />
+ <ePixmap position="0,0" zPosition="-2" size="1920,1080" pixmap="/usr/lib/enigma2/python/Plugins/SatLodge/slManager/res/img/center2FHD.png" alphatest="blend" />
+  <!--
+  <widget name="version" position="1623,30" zPosition="3" halign="right" size="240,40" font="Regular; 30" foregroundColor="#ffcc33" transparent="1" />
+  <widget name="maintener" position="93,30" zPosition="3" halign="left" size="240,40" font="Regular; 30" foregroundColor="#ffcc33" transparent="1" />
+  -->
+  <widget name="team" position="461,26" zPosition="3" size="1085,66" font="font2;40" foregroundColor="#ffcc33" backgroundColor="black" transparent="1" halign="center" />
+<!--  <widget name="team" position="668,21" zPosition="3" halign="center" size="664,60" font="Regular;40" foregroundColor="#ffcc33" transparent="1" />-->
+  <widget name="version" position="1544,36" zPosition="3" size="324,50" font="font2;30" backgroundColor="background" transparent="1" foregroundColor="#ffffff" halign="right" />
+  <widget name="maintener" position="1379,36" zPosition="3" size="324,50" font="font2;30" backgroundColor="background" transparent="1" foregroundColor="#ffffff" halign="center" />
+  
+<!--  <widget name="team" position="668,21" zPosition="3" halign="center" size="664,60" font="Regular;40" foregroundColor="#ffcc33" transparent="1" />-->
+  <widget source="global.CurrentTime" render="Label" position="1558,1010" size="200,50" font="Regular;32" halign="right" backgroundColor="black" foregroundColor="grey" transparent="1">
+  <convert type="ClockToText">Format:%d.%m.%Y</convert></widget>
+  <widget source="global.CurrentTime" render="Label" position="1752,1010" size="100,50" font="Regular;32" halign="right" backgroundColor="black" transparent="1">
+  <convert type="ClockToText">Default</convert>
+  </widget>
+  
+</screen>

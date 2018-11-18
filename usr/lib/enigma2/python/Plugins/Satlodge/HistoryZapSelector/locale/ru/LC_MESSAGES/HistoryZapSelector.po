@@ -1,0 +1,233 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2008-02-28 19:54+0100\n"
+"PO-Revision-Date: 2018-03-04 13:45+0100\n"
+"Language-Team: LANGUAGE <Dima-73@inbox.lv>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Last-Translator: Dimitrij <Dima-73@inbox.lv>\n"
+"Language: ru\n"
+"X-Generator: Poedit 1.8.7\n"
+
+msgid " ver. "
+msgstr " вер. "
+
+msgid "%02d.%02d - %02d.%02d (%s%d min)"
+msgstr "%02d.%02d - %02d.%02d (%s%d мин)"
+
+msgid "%s  number: %s"
+msgstr "%s  номер: %s"
+
+msgid "Behavior of keys for use"
+msgstr "Поведение кнопок для использования"
+
+msgid "Clear History"
+msgstr "Очистить историю"
+
+msgid "Del entry  Clear history        Preview"
+msgstr "Удал. запись  Очистить историю    Превью"
+
+msgid "Del entry  Clear history  List  Preview"
+msgstr "Удал. запись  Очистить историю  Список  Превью"
+
+msgid "Delete selected  Clear history                 Preview"
+msgstr "Удалить запись  Очистка истории             Превью"
+
+msgid "Delete selected  Clear history  All list       Preview"
+msgstr "Удалить запись  Очистка истории  Весь лист  Превью"
+
+msgid "Duration type"
+msgstr "Тип показа продолжительности"
+
+msgid "Enable Zap History"
+msgstr "Включить плагин истории каналов"
+
+msgid "History list clean is failed!"
+msgstr "Очистка истории каналов не удалась!"
+
+msgid "History list clean is successed!"
+msgstr "Очистка истории каналов выполнена!"
+
+msgid "History zap: count %d"
+msgstr "История каналов: кол-во %d"
+
+msgid "Invalid number: %s"
+msgstr "Недействительный номер: %s"
+
+msgid "Main screen"
+msgstr "Основой экран"
+
+msgid "Maximum zap history entries"
+msgstr "Максимальное количество каналов"
+
+msgid "Pipzap"
+msgstr "Режим Pipzap"
+
+msgid "Preview zap to service ?"
+msgstr "Предварительное переключение на сервис?"
+
+msgid "Really clear history list ?"
+msgstr "Действительно очистить список истории?"
+
+msgid "Really delete current entry ?"
+msgstr "Действительно удалить текущую запись истории?"
+
+msgid "Settings zap history"
+msgstr "Настройки плагина истории каналов"
+
+msgid "Setup Zap History:"
+msgstr "     Настройки истории каналов:"
+
+msgid "Show duration events"
+msgstr "Показать продолжительность событий"
+
+msgid "Show panel buttons on display"
+msgstr "Показать панель кнопок на экране"
+
+msgid "Show warning message before action"
+msgstr "Предупреждающее сообщение перед акцией"
+
+msgid "Standard PiP"
+msgstr "Стандартный PiP"
+
+msgid "Style services list"
+msgstr "Стиль списка сервисов"
+
+msgid "Use number zap"
+msgstr "Переключение цифровыми кнопками"
+
+msgid "Use picons"
+msgstr "Использовать пиконы"
+
+msgid "Use the number keys for zap to service"
+msgstr "Используйте цифровые кнопки для переключения на сервис"
+
+msgid "Zap as:"
+msgstr "Переключить как:"
+
+msgid "Zap focus PiP (if only enabled)"
+msgstr "Переключение как PiP (если он включен)"
+
+msgid "clear history list"
+msgstr "Очистка списка истории"
+
+msgid "default (only service name)"
+msgstr "дефолт (название сервиса)"
+
+msgid "delete selected entry"
+msgstr "удалить выбранную запись"
+
+msgid "disabled"
+msgstr "отключено"
+
+msgid "enabled"
+msgstr "включено"
+
+msgid "event name"
+msgstr "название события"
+
+msgid "event name and description"
+msgstr "название события и описание"
+
+msgid "exit"
+msgstr "выход"
+
+msgid "next entry"
+msgstr "следующая запись"
+
+msgid "only CH+/-,B+/-,P+/-"
+msgstr "только CH+/-,B+/-,P+/-"
+
+msgid "only LEFT/RIGHT"
+msgstr "только LEFT/RIGHT"
+
+msgid "only Pipzap"
+msgstr "только Pipzap"
+
+msgid "only TEXT/HELP"
+msgstr "только TEXT/HELP"
+
+msgid "only standard PiP"
+msgstr "только стандартный PiP"
+
+msgid "open Event View"
+msgstr "открыть просмотр события"
+
+msgid "open list options"
+msgstr "открыть список выбора"
+
+msgid "open single EPG"
+msgstr "открыть одиночное EPG"
+
+msgid "preview for selected entry"
+msgstr "превью для выбранной записи"
+
+msgid "previous entry"
+msgstr "предыдущая запись"
+
+msgid "progress bar"
+msgstr "прогресс бар"
+
+msgid "remaining minutes"
+msgstr "минуты"
+
+msgid "show all list"
+msgstr "показать весь список"
+
+msgid "show options list"
+msgstr "показать список выбора"
+
+msgid "standard <  >"
+msgstr "стандарт <  >"
+
+msgid "zap to service"
+msgstr "переключить на сервис"
+
+msgid ""
+"Warning!\n"
+"VCS plugin hotkey need disabled!\n"
+msgstr ""
+"Внимание!\n"
+"Горячие кнопки плагина VCS необходимо отключить!\n"
+
+msgid "GUI needs restart to activate hotkey!"
+msgstr "Необходим рестарт GUI для активации горячих кнопок!"
+
+msgid "Successed!"
+msgstr "Успешно!"
+
+msgid "Failed!"
+msgstr "Не удалось!"
+
+msgid "Disable auto saving?"
+msgstr "Отключить автосохранение?"
+
+msgid "Enable auto saving?"
+msgstr "Включить автосохранение?"
+
+msgid "Options"
+msgstr "Опции"
+
+msgid "Options for history"
+msgstr "Опции списка истории"
+
+msgid "config: "
+msgstr "конфиг: "
+
+msgid "Save history list"
+msgstr "Сохранить список истории"
+
+msgid "Restore history list"
+msgstr "Восстановить список истории"
+
+msgid "Delete history list"
+msgstr "Удалить список истории"
+
+msgid "Show history list"
+msgstr "Показать список истории"
+
+msgid "Auto save history before stopping E2"
+msgstr "Автосохранение истории перед остановкой E2"
