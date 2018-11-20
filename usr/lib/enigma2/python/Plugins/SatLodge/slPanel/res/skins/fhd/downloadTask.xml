@@ -1,0 +1,18 @@
+<screen name="downloadTask" position="center,730" size="1910,350" backgroundColor="#00060606" >			
+			<widget name="title" position="0,10" size="1920,34" zPosition="5" valign="center" halign="center" font="Regular;32" transparent="1" foregroundColor="#ff0000" shadowColor="black" shadowOffset="-1,-1" />
+			<widget source="tasklist" render="Listbox" position="0,45" size="1920,180" zPosition="7" scrollbarMode="showOnDemand" transparent="1" >
+				<convert type="TemplatedMultiContent">
+					{"template": [
+							MultiContentEntryText(pos = (20,1), size = (1280, 34), font=1, flags = RT_HALIGN_LEFT, text = 1), # index 1 is the name
+							MultiContentEntryText(pos = (1030, 1), size = (200, 34), font=1, flags = RT_HALIGN_RIGHT, text = 2), # index 2 is the state
+							MultiContentEntryProgress(pos = (1240, 1), size = (200, 34), percent = -3), # index 3 should be progress
+							MultiContentEntryText(pos = (1450, 1), size = (300, 34), font=1, flags = RT_HALIGN_LEFT, text = 4), # index 4 is the percentage
+						],
+					"fonts": [gFont("Regular", 32),gFont("Regular", 32)],
+					"itemHeight": 36
+					}
+				</convert>
+			</widget>
+        <eLabel position="center,235" zPosition="4" size="1920,34" halign="center" font="Regular;32" transparent="1" foregroundColor="#ffff00" backgroundColor="#41000000" text="Press EXIT to return to previous page," />
+        <eLabel position="center,265" zPosition="4" size="1920,34" halign="center" font="Regular;32" transparent="1" foregroundColor="#ffff00" backgroundColor="#41000000" text="   without to cancel the download !" />		
+</screen>

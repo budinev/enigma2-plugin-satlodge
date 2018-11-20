@@ -1,0 +1,52 @@
+<screen name="ImageDownloader" flags="wfNoBorder" position="center,center" size="1175,600" title="..::SatLodge Panel Addon Manager::.." backgroundColor="#ffffffff">
+  <ePixmap position="0,0" size="1175,600" zPosition="-1" pixmap="/usr/lib/enigma2/python/Plugins/SatLodge/slPanel/res/pics/menu_plug_ls.png" />
+  <widget name="title" position="344,10" zPosition="3" size="500,50" font="font2;28" foregroundColor="#ffcc33" backgroundColor="black" transparent="1" halign="center" />
+  <widget name="version" position="824,11" zPosition="3" size="324,50" font="font2;24" backgroundColor="#2518252e" transparent="1" foregroundColor="#ffffff" halign="right" />
+  <widget name="maintener" position="726,11" zPosition="3" size="324,50" font="font2;24" backgroundColor="#2518252e" transparent="1" foregroundColor="#ffffff" halign="center" />
+	<widget source="menu" render="Listbox" position="53,77" size="800,189" zPosition="3" transparent="1" foregroundColor="#ffff00" foregroundColorSelected="#ffffff" backgroundColorSelected="#000000" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/ImageDownloader/skin/nbuttons/select50.png" scrollbarMode="showNever">
+	<convert type="TemplatedMultiContent">
+	{"template": [
+	MultiContentEntryText(pos = (10, 10), size = (770, 30), flags = RT_HALIGN_LEFT, text = 1), # index 0 is the MenuText,
+	],
+	"fonts": [gFont("Regular", 26)],
+	"itemHeight": 50
+	}
+	</convert>
+	</widget>
+	<widget source="menu" render="Listbox" position="55,268" size="800,150" zPosition="4" scrollbarMode="showNever" selectionDisabled="1" transparent="1">
+	<convert type="TemplatedMultiContent">
+	{"template": [
+	MultiContentEntryText(pos = (10, 0), size = (770, 150), flags = RT_HALIGN_CENTER|RT_VALIGN_TOP|RT_WRAP, text = 2), # index 0 is the MenuText,
+	],
+	"fonts": [gFont("Regular", 22)],
+	"itemHeight": 150
+	}
+	</convert>
+	</widget>
+	<widget source="downloadtext" render="Label" position="310,529" size="800,60" valign="center" halign="center" font="Regular;23" transparent="1" zPosition="3" foregroundColor="#ff6a6a" />
+	<widget source="targettext" render="Label" position="54,416" size="800,60" valign="center" halign="center" font="Regular;25" transparent="1" zPosition="3" foregroundColor="#ffff00" />
+	<widget name="target" position="54,470" size="800,60" valign="center" halign="center" font="Regular;23" transparent="1" zPosition="4" />
+
+  
+  <eLabel position="85,550" size="10,37" backgroundColor="red" zPosition="1" /> 
+  <widget name="key_red" position="95,550" zPosition="3" size="140,37" valign="center" halign="left" foregroundColor="white" font="Regular;24" transparent="1" shadowColor="#25062748" shadowOffset="-2,-2" />
+  <eLabel position="245,550" size="10,37" backgroundColor="green" zPosition="1" />
+  <widget name="key_green" position="260,550" zPosition="3" size="203,37" valign="center" halign="left" foregroundColor="white" font="Regular;24" transparent="1" shadowColor="#25062748" shadowOffset="-2,-2" />
+
+
+  
+  <widget source="global.CurrentTime" render="Label" position="919,553" size="140,25" font="Regular;23" halign="right" backgroundColor="black" foregroundColor="grey" transparent="1">
+  <convert type="ClockToText">Format:%d.%m.%Y</convert></widget>
+  <widget source="global.CurrentTime" render="Label" position="1048,553" size="85,25" font="Regular;23" halign="right" backgroundColor="black" transparent="1">
+  <convert type="ClockToText">Default</convert>
+  </widget>
+</screen>
+  
+
+
+
+  
+  
+  
+
+  
