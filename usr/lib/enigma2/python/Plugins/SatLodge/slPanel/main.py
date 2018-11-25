@@ -96,6 +96,7 @@ def freespace():
 class STBmodel(Screen):
 
 
+
     instance = None
     skin = skin_path + 'STBmodel.xml'  
     f = open(skin, 'r')
@@ -111,15 +112,9 @@ class STBmodel(Screen):
         self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion))         
         self.session = session
 
-
-
     # def __init__(self, session):
-
         # self.session = session
-
-
         # skin = skin_path + 'STBmodel.xml'
-            
         # f = open(skin, 'r')
         # self.skin = f.read()
         # f.close()
@@ -189,12 +184,7 @@ class STBmodel(Screen):
     def okClicked(self):
         cindex = self['list'].getSelectionIndex()
         param=self.data[cindex][1]
-
-        
         self.session.open(FEEDmodel, param)
-
-
-
 
 		
 class FEEDmodel(Screen):
@@ -216,9 +206,7 @@ class FEEDmodel(Screen):
 
     # def __init__(self, session,param=None):
         # self.session = session
-        
         # skin = skin_path + 'FEEDmodel.xml'
-        
         # f = open(skin, 'r')
         # self.skin = f.read()
         # f.close()
@@ -285,7 +273,6 @@ class SERVERmodel(Screen):
 
     # def __init__(self, session,param=None):
         # self.session = session
-        
         # skin = skin_path + 'SERVERmodel.xml'
         # f = open(skin, 'r')
         # self.skin = f.read()
@@ -356,7 +343,6 @@ class DownloaderImage(Screen):
 
     # def __init__(self, session,param=None):
         # self.session = session
-
         # skin = skin_path + 'DownloaderImage.xml'
         # f = open(skin, 'r')
         # self.skin = f.read()
@@ -478,10 +464,10 @@ class ImageDownLoader(Screen):
              _('Start Download'),
              _('\nStarts To Download Image !') + self.oktext,
              None))
-            self.list.append(('Background',
-             _('Download in Background'),
-             _('\nDownload in Background and Explore other Images !') + self.oktext,
-             None))
+            # self.list.append(('Background',
+             # _('Download in Background'),
+             # _('\nDownload in Background and Explore other Images !') + self.oktext,
+             # None))
             self.list.append(('Downloadlocation',
              _('Set Download Location'),
              _('\nSelect Your Download Location : HDD or USB !') + self.oktext,
@@ -520,7 +506,7 @@ class ImageDownLoader(Screen):
         self['menu'].index = idx
 
     def setWindowTitle(self):
-        self.setTitle(_('Image Downloader 2.0'))
+        self.setTitle(_('Thanks Image Downloader 2.0 Tools'))
 
     def fnameexists(self):
         path = getDownloadPath()
@@ -541,6 +527,9 @@ class ImageDownLoader(Screen):
             else:
                 runDownload = True
                 self.localfile = path + os.path.basename(self.imageurl)
+                #########lower file for flashimage
+                self.localfile =self.localfile.lower()  
+                
                 self.session.openWithCallback(self.cancel, Downloader, self.imageurl, self.localfile, path)
 							
     def checkmountDownloadPath(self, path):
@@ -597,6 +586,10 @@ class ImageDownLoader(Screen):
                     runDownload = True
                     path = getDownloadPath()
                     self.localfile = path + os.path.basename(self.imageurl)
+                    
+                    #########lower file for flashimage
+                    self.localfile =self.localfile.lower()  
+                
                     self.session.openWithCallback(self.cancel, Downloader, self.imageurl, self.localfile, path)
                 else:
                     self.session.openWithCallback(self.callMyMsg, MessageBox, _('The File Aleady Exists, ' + 'Overwrite ?'), MessageBox.TYPE_YESNO)
@@ -604,19 +597,19 @@ class ImageDownLoader(Screen):
                 self.session.open(ImageDownLoaderFiles)
             elif currentEntry == 'Downloadlocation':
                 self.session.openWithCallback(self.Downloadlocation_choosen, ImageDownloadLocation)
-            elif currentEntry == 'Background':
-                if not self.fnameexists() == True:
-                   path = getDownloadPath()				
-                   self.localfile = path + os.path.basename(self.imageurl)
-                   title=os.path.basename(self.imageurl)
-                   from download import startdownload
-                   startdownload(self.session, 'download', self.imageurl, self.localfile, title, None, True)
-                else:
-                   path = getDownloadPath()				
-                   self.localfile = path + os.path.basename(self.imageurl)
-                   title=os.path.basename(self.imageurl)
-                   from download import startdownload
-                   startdownload(self.session, 'download', self.imageurl, self.localfile, title, None, True)
+            # elif currentEntry == 'Background':
+                # if not self.fnameexists() == True:
+                   # path = getDownloadPath()				
+                   # self.localfile = path + os.path.basename(self.imageurl)
+                   # title=os.path.basename(self.imageurl)
+                   # from download import startdownload
+                   # startdownload(self.session, 'download', self.imageurl, self.localfile, title, None, True)
+                # else:
+                   # path = getDownloadPath()				
+                   # self.localfile = path + os.path.basename(self.imageurl)
+                   # title=os.path.basename(self.imageurl)
+                   # from download import startdownload
+                   # startdownload(self.session, 'download', self.imageurl, self.localfile, title, None, True)
 
 				
     def Downloadlocation_choosen(self, option):
@@ -788,7 +781,6 @@ class ImageDownloadLocation(Screen, HelpableScreen):
         
     # def __init__(self, session, text = '', filename = '', currDir = None, location = None, userMode = False, windowTitle = _('Choose Download location'), minFree = None, autoAdd = False, editDir = False, inhibitDirs = [], inhibitMounts = []):
         # self.session = session
-        
         # skin = skin_path + 'ImageDownloadLocation.xml'
         # f = open(skin, 'r')
         # self.skin = f.read()
@@ -976,7 +968,7 @@ class ImageDownloadLocation(Screen, HelpableScreen):
         return
 
         
-from Components.ProgressBar import ProgressBar
+
 from Components.Sources.Progress import Progress
         
 class Downloader(Screen):
@@ -1051,10 +1043,7 @@ class Downloader(Screen):
             else:
                 self.close()
                 return
-        # return
-        
-        
-        
+       
     def responseFailed(self, failure_instance = None, error_message = ''):
         self.error_message = error_message
         if error_message == '' and failure_instance is not None:

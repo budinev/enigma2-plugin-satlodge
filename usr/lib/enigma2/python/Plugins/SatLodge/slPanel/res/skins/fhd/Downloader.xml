@@ -1,5 +1,5 @@
-<screen position="30,30" size="700,250" flags="wfNoBorder">
-	<widget name="info" position="40,20" size="620,40" backgroundColor="#000000" foregroundColor="#ffff00" valign="center" halign="center" font="Regular;23" transparent="1" zPosition="5"/>
-	<widget name="progress" position="60,70" size="580,30" transparent="1" borderWidth="1" zPosition="4"/>
-	<widget name="info2" position="155,110" size="500,120" backgroundColor="#000000" foregroundColor="#ffffff" font="Regular;23" halign="center" valign="center" transparent="1" zPosition="6"  />
+<screen name="Downloader" position="30,30" size="700,250" flags="wfNoBorder">
+	<widget name="info" position="40,20" size="620,40" backgroundColor="#000000" foregroundColor="#ffff00" valign="center" halign="center" font="Regular;23" transparent="1" zPosition="5" />
+	<widget name="progress" position="39,70" size="619,30" transparent="1" borderWidth="1" zPosition="4" />
+	<widget name="info2" position="44,110" size="611,120" backgroundColor="#000000" foregroundColor="#ffffff" font="Regular;23" halign="center" valign="center" transparent="1" zPosition="6" />
 </screen>

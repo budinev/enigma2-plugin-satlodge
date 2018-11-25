@@ -45,8 +45,7 @@ def getteams(name,url,page):
         addDir(team[0], team[1], mode, team[2], '', 1)
 
 def lodgemodels(name,url,page):
-        models = ['All_Models',
-         'zgemmah2',
+        models = ['zgemmah2',
          'zgemmah3',
          'zgemmah5',
          'zgemmah7',
@@ -59,11 +58,11 @@ def lodgemodels(name,url,page):
              
 def extract_lodgeimages(model,url,page):
     if 'sat-lodge' in url: 
-        if model == 'All_Models':
-            model = ''
-        else:
-            model = model        
-
+        # if model == 'All_Models':
+            # model = ''
+        # else:
+            # model = model        
+        model = model    
         print 'model',model 	
         url='http://webplus.sat-lodge.it/index.php?dir=Zgemma/' + model + '/'
 	   

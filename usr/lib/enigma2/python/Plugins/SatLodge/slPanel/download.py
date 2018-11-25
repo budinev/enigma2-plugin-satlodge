@@ -322,10 +322,8 @@ class downloadTask(Screen):
         self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion))         
         self.session = session
 
-				
     # def __init__(self, session, plugin_path, tasklist, filename = None):
         # self.session = session
-
         # skin = skin_path + 'downloadTask.xml'
         # f = open(skin, 'r')
         # self.skin = f.read()
