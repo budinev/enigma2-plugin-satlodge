@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2018-11-18 21:30+0100\n"
+"POT-Creation-Date: 2018-05-18 17:21+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -13,645 +13,389 @@ msgstr ""
 "X-Poedit-Basepath: ../../../..\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: download.py:164
-msgid "Downloading ..."
-msgstr "Downloading ..."
-
-#: download.py:232
-#, python-format
-msgid ""
-"Video Download Failed!\n"
-"\n"
-"Corrupted Download File:\n"
-"%s"
-msgstr ""
-
-#: download.py:233
-#, python-format
-msgid ""
-"Video Download Failed!\n"
-"\n"
-"Could not read RTMP-Packet:\n"
-"%s"
-msgstr ""
-
-#: download.py:234
-#, python-format
-msgid ""
-"Video Download Failed!\n"
-"\n"
-"Segmentation fault:\n"
-"%s"
-msgstr ""
-
-#: download.py:235
-#, python-format
-msgid ""
-"Video Download Failed!\n"
-"\n"
-"Server returned error:\n"
-"%s"
-msgstr ""
-
-#: download.py:236
-#, python-format
-msgid ""
-"Video Download Failed!\n"
-"\n"
-"Unknown Error:\n"
-"%s"
-msgstr ""
-
-#: download.py:269
-#, python-format
-msgid "%d of %d MB"
-msgstr ""
-
-#: download.py:319 main.py:109 main.py:211 main.py:281 main.py:352 main.py:783
-msgid "Sat-Lodge Panel by lululla"
-msgstr "Sat-Lodge Panel by lululla"
-
-#: main.py:130 main.py:225 main.py:293 main.py:392 main.py:415 main.py:497
-#: main.py:841 plugin - Copia.py:1609 plugin.py:1613
-msgid "Select"
-msgstr "Seleziona"
-
-#: main.py:131
-msgid "Exit"
-msgstr "Uscire"
-
-#: main.py:226 main.py:294 main.py:365 main.py:496 main.py:827
-msgid "Back"
-msgstr ""
-
-#: main.py:364 main.py:366 main.py:390 main.py:413 main.py:678
-msgid " "
-msgstr ""
-
-#: main.py:472
-msgid ""
-"\n"
-"Select To Continue !"
-msgstr ""
-
-#: main.py:476
-msgid "Start Download"
-msgstr ""
-
-#: main.py:477
-msgid ""
-"\n"
-"Starts To Download Image !"
-msgstr ""
-
-#: main.py:480
-msgid "Download in Background"
-msgstr ""
-
-#: main.py:481
-msgid ""
-"\n"
-"Download in Background and Explore other Images !"
-msgstr ""
-
-#: main.py:484
-msgid "Set Download Location"
-msgstr ""
-
-#: main.py:485
-msgid ""
-"\n"
-"Select Your Download Location : HDD or USB !"
-msgstr ""
-
-#: main.py:488
-msgid "Explore Local Images"
-msgstr ""
-
-#: main.py:489
-msgid ""
-"\n"
-"View Downloaded Images !"
-msgstr ""
-
-#: main.py:499
-msgid "Selected Download Location:"
-msgstr ""
-
-#: main.py:505
-msgid ""
-"Selected Image To Download:\n"
-" "
-msgstr ""
-
-#: main.py:521
-msgid "Image Downloader 2.0"
-msgstr ""
-
-#: main.py:537
-msgid "FlashExpander is used,no Image DownLoad possible."
-msgstr ""
-
-#: main.py:546
-msgid "Nothing Entered"
-msgstr ""
-
-#: main.py:549
-msgid ""
-"Free space is less than 60MB,please choose another download location,or "
-"delete files from storage device"
-msgstr ""
-
-#: main.py:600
-msgid "The File Aleady Exists, Overwrite ?"
-msgstr ""
-
-#: main.py:636
-msgid ""
-"Sorry, your Download destination is not writeable.\n"
-"\n"
-"Please choose another one."
-msgstr ""
-
-#: main.py:677
-msgid "Back "
-msgstr ""
-
-#: main.py:709
-msgid ""
-"\n"
-"Will Be Removed,\n"
-"Are You Sure ?"
-msgstr ""
-
-#: main.py:723
-msgid "Unable To Delete File !"
-msgstr ""
-
-#: main.py:737
-msgid "Unable To Show Files, Check \n"
-msgstr ""
-
-#: main.py:778 main.py:849
-msgid "Choose Download location"
-msgstr ""
-
-#: main.py:796
-msgid "Selected Download Place:"
-msgstr ""
-
-#: main.py:826 plugin - Copia.py:3338 plugin.py:3342
-msgid "Save"
-msgstr "Salva"
-
-#: main.py:842
-msgid "Cancel"
-msgstr ""
-
-#: main.py:893
-msgid "Invalid Location"
-msgstr ""
-
-#: main.py:916
-msgid "Nothing Entered !"
-msgstr ""
-
-#: main.py:971
-msgid ""
-"There Might Not Be Enough Space On The Selected Partition.\n"
-"Do You Really Want To Continue ?"
-msgstr ""
-
-#: main.py:1034
-msgid "Downloading"
-msgstr ""
-
-#: plugin - Copia.py:150 plugin.py:150
+#: plugin.py:148 ~plugin.py:157
 msgid "Free"
 msgstr "Free"
 
-#: plugin - Copia.py:205 Copia.py:484 plugin.py:206 plugin.py:485
+#: plugin.py:202 plugin.py:459 ~plugin.py:222 ~plugin.py:486
 msgid "SETTINGS DAILY"
 msgstr "SETTINGS DAILY"
 
-#: plugin - Copia.py:206 Copia.py:464 plugin.py:207 plugin.py:465
+#: plugin.py:203 plugin.py:439 ~plugin.py:224 ~plugin.py:464
 msgid "DEPENDENCIES"
 msgstr "DIPENDENZE"
 
-#: plugin - Copia.py:207 Copia.py:462 plugin.py:208 plugin.py:463
+#: plugin.py:204 plugin.py:437 ~plugin.py:225 ~plugin.py:462
 msgid "DRIVERS"
 msgstr "DRIVERS"
 
-#: plugin - Copia.py:208 Copia.py:466 plugin.py:209 plugin.py:467
+#: plugin.py:205 plugin.py:441 ~plugin.py:226 ~plugin.py:468
 msgid "PLUGIN BACKUP"
 msgstr "PLUGIN BACKUP"
 
-#: plugin - Copia.py:209 Copia.py:470 plugin.py:210 plugin.py:471
+#: plugin.py:206 plugin.py:445 ~plugin.py:227 ~plugin.py:472
 msgid "PLUGIN EPG"
 msgstr "PLUGIN EPG"
 
-#: plugin - Copia.py:210 Copia.py:468 plugin.py:211 plugin.py:469
+#: plugin.py:207 plugin.py:443 ~plugin.py:228 ~plugin.py:470
 msgid "PLUGIN EMULATORS CAMS"
 msgstr "PLUGIN EMULATORS CAMS"
 
-#: plugin - Copia.py:211 Copia.py:472 plugin.py:212 plugin.py:473
+#: plugin.py:208 plugin.py:447 ~plugin.py:229 ~plugin.py:474
 msgid "PLUGIN IPTV"
 msgstr "PLUGIN IPTV"
 
-#: plugin - Copia.py:212 Copia.py:474 plugin.py:213 plugin.py:475
+#: plugin.py:209 plugin.py:449 ~plugin.py:230 ~plugin.py:476
 msgid "PLUGIN KODI"
 msgstr "PLUGIN KODI"
 
-#: plugin - Copia.py:213 Copia.py:476 plugin.py:214 plugin.py:477
+#: plugin.py:210 plugin.py:451 ~plugin.py:231 ~plugin.py:478
 msgid "PLUGIN MULTIBOOT"
 msgstr "PLUGIN MULTIBOOT"
 
-#: plugin - Copia.py:214 Copia.py:478 plugin.py:215 plugin.py:479
+#: plugin.py:211 plugin.py:453 ~plugin.py:232 ~plugin.py:480
 msgid "PLUGIN PICONS"
 msgstr "PLUGIN PICONS"
 
-#: plugin - Copia.py:215 Copia.py:480 plugin.py:216 plugin.py:481
+#: plugin.py:212 plugin.py:455 ~plugin.py:233 ~plugin.py:482
 msgid "PLUGIN PPANEL"
 msgstr "PLUGIN PPANEL"
 
-#: plugin - Copia.py:216 Copia.py:482 plugin.py:217 plugin.py:483
+#: plugin.py:213 plugin.py:457 ~plugin.py:234 ~plugin.py:484
 msgid "PLUGIN SETTINGS PANEL"
 msgstr "PLUGIN SETTINGS PANEL"
 
-#: plugin - Copia.py:217 Copia.py:486 plugin.py:218 plugin.py:487
+#: plugin.py:214 plugin.py:461 ~plugin.py:235 ~plugin.py:488
 msgid "PLUGIN SPINNER"
 msgstr "PLUGIN SPINNER"
 
-#: plugin - Copia.py:218 Copia.py:488 plugin.py:219 plugin.py:489
+#: plugin.py:215 plugin.py:463 ~plugin.py:236 ~plugin.py:490
 msgid "PLUGIN SKINS"
 msgstr "PLUGIN SKINS"
 
-#: plugin - Copia.py:219 Copia.py:490 plugin.py:220 plugin.py:491
+#: plugin.py:216 plugin.py:465 ~plugin.py:237 ~plugin.py:492
 msgid "PLUGIN SPORT"
 msgstr "PLUGIN SPORT"
 
-#: plugin - Copia.py:220 Copia.py:492 plugin.py:221 plugin.py:493
+#: plugin.py:217 plugin.py:467 ~plugin.py:238 ~plugin.py:494
 msgid "PLUGIN UTILITY"
 msgstr "PLUGIN UTILITY"
 
-#: plugin - Copia.py:221 Copia.py:494 plugin.py:222 plugin.py:495
+#: plugin.py:218 plugin.py:469 ~plugin.py:239 ~plugin.py:496
 msgid "PLUGIN WEATHER"
 msgstr "PLUGIN METEO"
 
-#: plugin - Copia.py:289 Copia.py:1639 plugin.py:284 plugin.py:1643
-msgid "SETTINGS CIEFP"
-msgstr ""
-
-#: plugin - Copia.py:290 Copia.py:1641 plugin.py:285 plugin.py:1645
-msgid "SETTINGS MALIMALI"
-msgstr ""
-
-#: plugin - Copia.py:291 Copia.py:1644 plugin.py:286 plugin.py:1648
+#: plugin.py:278 plugin.py:1612 ~plugin.py:302 ~plugin.py:1722
 msgid "SETTINGS MANUTEK"
 msgstr ""
 
-#: plugin - Copia.py:292 Copia.py:1646 plugin.py:287 plugin.py:1650
-msgid "SETTINGS MILENKO61"
-msgstr ""
-
-#: plugin - Copia.py:293 Copia.py:1648 plugin.py:288 plugin.py:1652
+#: plugin.py:279 plugin.py:1614 ~plugin.py:303 ~plugin.py:1724
 msgid "SETTINGS MORPHEUS"
 msgstr ""
 
-#: plugin - Copia.py:294 Copia.py:1651 plugin.py:289 plugin.py:1655
-msgid "SETTINGS PREDRAG"
-msgstr ""
-
-#: plugin - Copia.py:295 Copia.py:1654 plugin.py:290 plugin.py:1658
+#: plugin.py:280 plugin.py:1610 ~plugin.py:304 ~plugin.py:1720
 msgid "SETTINGS VHANNIBAL"
 msgstr ""
 
-#: plugin - Copia.py:395 Copia.py:506 Copia.py:575 Copia.py:643 Copia.py:712
-#: Copia.py:783 Copia.py:853 Copia.py:923 Copia.py:992 Copia.py:1060
-#: Copia.py:1128 Copia.py:1195 Copia.py:1262 Copia.py:1328 Copia.py:1394
-#: Copia.py:1461 Copia.py:1528 Copia.py:1601 Copia.py:1798 Copia.py:1923
-#: Copia.py:2048 Copia.py:2176 Copia.py:2295 Copia.py:2416 Copia.py:2540
-#: Copia.py:2658 Copia.py:2883 Copia.py:2949 Copia.py:3067 Copia.py:3167
-#: Copia.py:3331 plugin.py:390 plugin.py:510 plugin.py:579 plugin.py:647
-#: plugin.py:716 plugin.py:787 plugin.py:857 plugin.py:927 plugin.py:996
-#: plugin.py:1064 plugin.py:1132 plugin.py:1199 plugin.py:1266 plugin.py:1332
-#: plugin.py:1398 plugin.py:1465 plugin.py:1532 plugin.py:1605 plugin.py:1802
-#: plugin.py:1927 plugin.py:2052 plugin.py:2180 plugin.py:2299 plugin.py:2420
-#: plugin.py:2544 plugin.py:2662 plugin.py:2887 plugin.py:2953 plugin.py:3071
-#: plugin.py:3171 plugin.py:3335
+#: plugin.py:370 plugin.py:480 plugin.py:549 plugin.py:617 plugin.py:686
+#: plugin.py:757 plugin.py:827 plugin.py:897 plugin.py:966 plugin.py:1034
+#: plugin.py:1102 plugin.py:1169 plugin.py:1236 plugin.py:1302 plugin.py:1368
+#: plugin.py:1435 plugin.py:1502 plugin.py:1575 plugin.py:1630 plugin.py:1754
+#: plugin.py:1883 plugin.py:2001 plugin.py:2226 plugin.py:2292 plugin.py:2410
+#: plugin.py:2509 plugin.py:2673 ~plugin.py:389
 #, python-format
 msgid "Sat-Lodge Panel by lululla V. %s"
 msgstr ""
 
-#: plugin - Copia.py:400 plugin.py:395
+#: plugin.py:375 ~plugin.py:396
 msgid "..:: Sat-Lodge Panel ::.."
 msgstr "..:: Sat-Lodge Panel ::.."
 
-#: plugin - Copia.py:401 Copia.py:522 Copia.py:590 Copia.py:659 Copia.py:729
-#: Copia.py:800 Copia.py:869 Copia.py:939 Copia.py:1008 Copia.py:1075
-#: Copia.py:1143 Copia.py:1211 Copia.py:1278 Copia.py:1343 Copia.py:1410
-#: Copia.py:1477 Copia.py:1544 Copia.py:2682 Copia.py:2885 Copia.py:2964
-#: Copia.py:3072 Copia.py:3182 Copia.py:3334 plugin.py:396 plugin.py:526
-#: plugin.py:594 plugin.py:663 plugin.py:733 plugin.py:804 plugin.py:873
-#: plugin.py:943 plugin.py:1012 plugin.py:1079 plugin.py:1147 plugin.py:1215
-#: plugin.py:1282 plugin.py:1347 plugin.py:1414 plugin.py:1481 plugin.py:1548
-#: plugin.py:2686 plugin.py:2889 plugin.py:2968 plugin.py:3076 plugin.py:3186
-#: plugin.py:3338
+#: plugin.py:376 plugin.py:496 plugin.py:564 plugin.py:633 plugin.py:703
+#: plugin.py:774 plugin.py:843 plugin.py:913 plugin.py:982 plugin.py:1049
+#: plugin.py:1117 plugin.py:1185 plugin.py:1252 plugin.py:1317 plugin.py:1384
+#: plugin.py:1451 plugin.py:1518 plugin.py:2025 plugin.py:2228 plugin.py:2307
+#: plugin.py:2415 plugin.py:2524 plugin.py:2676 ~plugin.py:397 ~plugin.py:528
+#: ~plugin.py:599 ~plugin.py:670 ~plugin.py:742 ~plugin.py:814 ~plugin.py:887
+#: ~plugin.py:961 ~plugin.py:1033 ~plugin.py:1105 ~plugin.py:1179
+#: ~plugin.py:1251 ~plugin.py:1327 ~plugin.py:1399 ~plugin.py:1476
+#: ~plugin.py:1548 ~plugin.py:1621 ~plugin.py:2179 ~plugin.py:2398
+#: ~plugin.py:2475 ~plugin.py:2596 ~plugin.py:2718 ~plugin.py:2871
 #, python-format
 msgid "V. %s"
 msgstr ""
 
-#: plugin - Copia.py:402 Copia.py:523 Copia.py:591 Copia.py:660 Copia.py:730
-#: Copia.py:801 Copia.py:870 Copia.py:940 Copia.py:1009 Copia.py:1076
-#: Copia.py:1144 Copia.py:1212 Copia.py:1279 Copia.py:1344 Copia.py:1411
-#: Copia.py:1478 Copia.py:1545 Copia.py:1608 Copia.py:1814 Copia.py:1939
-#: Copia.py:2064 Copia.py:2192 Copia.py:2311 Copia.py:2432 Copia.py:2556
-#: Copia.py:2683 Copia.py:2886 Copia.py:2967 Copia.py:3073 Copia.py:3183
-#: Copia.py:3335 plugin.py:397 plugin.py:527 plugin.py:595 plugin.py:664
-#: plugin.py:734 plugin.py:805 plugin.py:874 plugin.py:944 plugin.py:1013
-#: plugin.py:1080 plugin.py:1148 plugin.py:1216 plugin.py:1283 plugin.py:1348
-#: plugin.py:1415 plugin.py:1482 plugin.py:1549 plugin.py:1612 plugin.py:1818
-#: plugin.py:1943 plugin.py:2068 plugin.py:2196 plugin.py:2315 plugin.py:2436
-#: plugin.py:2560 plugin.py:2687 plugin.py:2890 plugin.py:2971 plugin.py:3077
-#: plugin.py:3187 plugin.py:3339
+#: plugin.py:377 plugin.py:497 plugin.py:565 plugin.py:634 plugin.py:704
+#: plugin.py:775 plugin.py:844 plugin.py:914 plugin.py:983 plugin.py:1050
+#: plugin.py:1118 plugin.py:1186 plugin.py:1253 plugin.py:1318 plugin.py:1385
+#: plugin.py:1452 plugin.py:1519 plugin.py:2026 plugin.py:2229 plugin.py:2310
+#: plugin.py:2416 plugin.py:2525 plugin.py:2677 ~plugin.py:398 ~plugin.py:529
+#: ~plugin.py:600 ~plugin.py:671 ~plugin.py:743 ~plugin.py:815 ~plugin.py:888
+#: ~plugin.py:962 ~plugin.py:1034 ~plugin.py:1106 ~plugin.py:1180
+#: ~plugin.py:1252 ~plugin.py:1328 ~plugin.py:1400 ~plugin.py:1477
+#: ~plugin.py:1549 ~plugin.py:1622 ~plugin.py:2180 ~plugin.py:2399
+#: ~plugin.py:2478 ~plugin.py:2597 ~plugin.py:2719 ~plugin.py:2872
 msgid " by ))^^(("
 msgstr ""
 
-#: plugin - Copia.py:403 Copia.py:3075 plugin.py:398 plugin.py:3079
+#: plugin.py:378 plugin.py:2418 ~plugin.py:400 ~plugin.py:2599
 msgid "Uninstall"
 msgstr "Disinstalla"
 
-#: plugin - Copia.py:404 plugin.py:399
+#: plugin.py:379 ~plugin.py:401
 msgid "Extensions"
 msgstr "Extensions"
 
-#: plugin - Copia.py:405 plugin.py:400
+#: plugin.py:380 ~plugin.py:403
 msgid "SatLodge Manager"
 msgstr "SatLodge Manager"
 
-#: plugin - Copia.py:512 Copia.py:581 Copia.py:649 Copia.py:718 Copia.py:789
-#: Copia.py:859 Copia.py:929 Copia.py:998 Copia.py:1066 Copia.py:1134
-#: Copia.py:1201 Copia.py:1268 Copia.py:1334 Copia.py:1400 Copia.py:1467
-#: Copia.py:1534 Copia.py:1804 Copia.py:1929 Copia.py:2054 Copia.py:2182
-#: Copia.py:2301 Copia.py:2422 Copia.py:2546 plugin.py:516 plugin.py:585
-#: plugin.py:653 plugin.py:722 plugin.py:793 plugin.py:863 plugin.py:933
-#: plugin.py:1002 plugin.py:1070 plugin.py:1138 plugin.py:1205 plugin.py:1272
-#: plugin.py:1338 plugin.py:1404 plugin.py:1471 plugin.py:1538 plugin.py:1808
-#: plugin.py:1933 plugin.py:2058 plugin.py:2186 plugin.py:2305 plugin.py:2426
-#: plugin.py:2550
+#: plugin.py:486 plugin.py:555 plugin.py:623 plugin.py:692 plugin.py:763
+#: plugin.py:833 plugin.py:903 plugin.py:972 plugin.py:1040 plugin.py:1108
+#: plugin.py:1175 plugin.py:1242 plugin.py:1308 plugin.py:1374 plugin.py:1441
+#: plugin.py:1508 plugin.py:1636 plugin.py:1760 plugin.py:1889 ~plugin.py:518
+#: ~plugin.py:589 ~plugin.py:660 ~plugin.py:731 ~plugin.py:803 ~plugin.py:876
+#: ~plugin.py:950 ~plugin.py:1022 ~plugin.py:1094 ~plugin.py:1168
+#: ~plugin.py:1240 ~plugin.py:1316 ~plugin.py:1388 ~plugin.py:1463
+#: ~plugin.py:1537 ~plugin.py:1610 ~plugin.py:1746 ~plugin.py:1886
+#: ~plugin.py:2034
 msgid "Getting the list, please wait ..."
 msgstr "Ricevo l'elenco , si prega di attendere ..."
 
-#: plugin - Copia.py:521 plugin.py:525
+#: plugin.py:495 ~plugin.py:527
 msgid "..:: DRIVERS ::.."
 msgstr "..:: DRIVERS ::.."
 
-#: plugin - Copia.py:534 Copia.py:602 Copia.py:671 Copia.py:741 Copia.py:812
-#: Copia.py:881 Copia.py:951 Copia.py:1020 Copia.py:1087 Copia.py:1155
-#: Copia.py:1223 Copia.py:1289 Copia.py:1354 Copia.py:1421 Copia.py:1488
-#: Copia.py:1556 Copia.py:1826 Copia.py:1951 Copia.py:2074 Copia.py:2203
-#: Copia.py:2322 Copia.py:2443 Copia.py:2567 plugin.py:538 plugin.py:606
-#: plugin.py:675 plugin.py:745 plugin.py:816 plugin.py:885 plugin.py:955
-#: plugin.py:1024 plugin.py:1091 plugin.py:1159 plugin.py:1227 plugin.py:1293
-#: plugin.py:1358 plugin.py:1425 plugin.py:1492 plugin.py:1560 plugin.py:1830
-#: plugin.py:1955 plugin.py:2078 plugin.py:2207 plugin.py:2326 plugin.py:2447
-#: plugin.py:2571
+#: plugin.py:508 plugin.py:576 plugin.py:645 plugin.py:715 plugin.py:786
+#: plugin.py:855 plugin.py:925 plugin.py:994 plugin.py:1061 plugin.py:1129
+#: plugin.py:1197 plugin.py:1263 plugin.py:1328 plugin.py:1395 plugin.py:1462
+#: plugin.py:1530 plugin.py:1658 plugin.py:1780 plugin.py:1910 ~plugin.py:540
+#: ~plugin.py:611 ~plugin.py:682 ~plugin.py:754 ~plugin.py:826 ~plugin.py:899
+#: ~plugin.py:973 ~plugin.py:1045 ~plugin.py:1117 ~plugin.py:1191
+#: ~plugin.py:1263 ~plugin.py:1338 ~plugin.py:1410 ~plugin.py:1488
+#: ~plugin.py:1560 ~plugin.py:1633 ~plugin.py:1770 ~plugin.py:1909
+#: ~plugin.py:2056
 msgid "Try again later ..."
 msgstr "Riprovare dopo ..."
 
-#: plugin - Copia.py:547 Copia.py:615 Copia.py:684 Copia.py:754 Copia.py:825
-#: Copia.py:894 Copia.py:964 Copia.py:1033 Copia.py:1100 Copia.py:1168
-#: Copia.py:1236 Copia.py:1302 Copia.py:1367 Copia.py:1434 Copia.py:1501
-#: Copia.py:1569 Copia.py:1848 Copia.py:1973 Copia.py:2103 Copia.py:2229
-#: Copia.py:2350 Copia.py:2472 Copia.py:2592 plugin.py:551 plugin.py:619
-#: plugin.py:688 plugin.py:758 plugin.py:829 plugin.py:898 plugin.py:968
-#: plugin.py:1037 plugin.py:1104 plugin.py:1172 plugin.py:1240 plugin.py:1306
-#: plugin.py:1371 plugin.py:1438 plugin.py:1505 plugin.py:1573 plugin.py:1852
-#: plugin.py:1977 plugin.py:2107 plugin.py:2233 plugin.py:2354 plugin.py:2476
-#: plugin.py:2596
+#: plugin.py:521 plugin.py:589 plugin.py:658 plugin.py:728 plugin.py:799
+#: plugin.py:868 plugin.py:938 plugin.py:1007 plugin.py:1074 plugin.py:1142
+#: plugin.py:1210 plugin.py:1276 plugin.py:1341 plugin.py:1408 plugin.py:1475
+#: plugin.py:1543 plugin.py:1680 plugin.py:1809 plugin.py:1935 ~plugin.py:553
+#: ~plugin.py:624 ~plugin.py:695 ~plugin.py:767 ~plugin.py:839 ~plugin.py:912
+#: ~plugin.py:986 ~plugin.py:1058 ~plugin.py:1130 ~plugin.py:1204
+#: ~plugin.py:1276 ~plugin.py:1351 ~plugin.py:1423 ~plugin.py:1501
+#: ~plugin.py:1573 ~plugin.py:1646 ~plugin.py:1794 ~plugin.py:1947
+#: ~plugin.py:2084
 msgid "Please select ..."
 msgstr "Seleziona Prego ..."
 
-#: plugin - Copia.py:589 plugin.py:593
+#: plugin.py:563 ~plugin.py:598
 msgid "..:: DEPENDENCIES ::.."
 msgstr "..:: DIPENDENZE ::.."
 
-#: plugin - Copia.py:658 plugin.py:662
+#: plugin.py:632 ~plugin.py:669
 msgid "..:: PICONS ::.."
 msgstr "..:: PICONS ::.."
 
-#: plugin - Copia.py:728 plugin.py:732
+#: plugin.py:702 ~plugin.py:741
 msgid "..:: PLUGINS BACKUP ::.."
 msgstr "..:: PLUGINS BACKUP ::.."
 
-#: plugin - Copia.py:799 plugin.py:803
+#: plugin.py:773 ~plugin.py:813
 msgid "..:: PLUGIN EMULATORS CAMS ::.."
 msgstr "..:: PLUGIN EMULATORS CAMS ::.."
 
-#: plugin - Copia.py:868 plugin.py:872
+#: plugin.py:842 ~plugin.py:886
 msgid "..:: PLUGIN EPG ::.."
 msgstr "..:: PLUGIN EPG ::.."
 
-#: plugin - Copia.py:938 plugin.py:942
+#: plugin.py:912 ~plugin.py:960
 msgid "..:: PLUGIN IPTV ::.."
 msgstr "..:: PLUGIN IPTV ::.."
 
-#: plugin - Copia.py:1007 plugin.py:1011
+#: plugin.py:981 ~plugin.py:1032
 msgid "..:: PLUGIN KODI ::.."
 msgstr "..:: PLUGIN KODI ::.."
 
-#: plugin - Copia.py:1074 plugin.py:1078
+#: plugin.py:1048 ~plugin.py:1104
 msgid "..:: PLUGIN MULTIBOOT ::.."
 msgstr "..:: PLUGIN MULTIBOOT ::.."
 
-#: plugin - Copia.py:1142 plugin.py:1146
+#: plugin.py:1116 ~plugin.py:1178
 msgid "..:: PLUGIN PPANEL ::.."
 msgstr "..:: PLUGIN PPANEL ::.."
 
-#: plugin - Copia.py:1210 plugin.py:1214
+#: plugin.py:1184 ~plugin.py:1250
 msgid "..:: PLUGIN SETTINGS PANEL ::.."
 msgstr "..:: PLUGIN SETTINGS PANEL ::.."
 
-#: plugin - Copia.py:1277 plugin.py:1281
+#: plugin.py:1251 ~plugin.py:1326
 msgid "..:: PLUGIN SPINNER ::.."
 msgstr "..:: PLUGIN SPINNER ::.."
 
-#: plugin - Copia.py:1342 plugin.py:1346
+#: plugin.py:1316 ~plugin.py:1398
 msgid "..:: PLUGIN SKINS ::.."
 msgstr "..:: PLUGIN SKINS ::.."
 
-#: plugin - Copia.py:1409 plugin.py:1413
+#: plugin.py:1383 ~plugin.py:1475
 msgid "..:: PLUGIN SPORT ::.."
 msgstr "..:: PLUGIN SPORT ::.."
 
-#: plugin - Copia.py:1476 plugin.py:1480
+#: plugin.py:1450 ~plugin.py:1547
 msgid "..:: PLUGIN UTILITY ::.."
 msgstr "..:: PLUGIN UTILITY ::.."
 
-#: plugin - Copia.py:1543 plugin.py:1547
+#: plugin.py:1517 ~plugin.py:1620
 msgid "..:: PLUGIN METEO ::.."
 msgstr "..:: PLUGIN METEO ::.."
 
-#: plugin - Copia.py:1606 plugin.py:1610
+#: plugin.py:1580 ~plugin.py:1685
 msgid "..:: DAILY SETTINGS ::.."
-msgstr "..:: DAILY SETTINGS ::.."
+msgstr ""
 
-#: plugin - Copia.py:1607 Copia.py:1813 Copia.py:1938 Copia.py:2063
-#: Copia.py:2191 Copia.py:2310 Copia.py:2431 Copia.py:2555 plugin.py:1611
-#: plugin.py:1817 plugin.py:1942 plugin.py:2067 plugin.py:2195 plugin.py:2314
-#: plugin.py:2435 plugin.py:2559
+#: plugin.py:1581 plugin.py:1645 plugin.py:1769 plugin.py:1898 ~plugin.py:1686
+#: ~plugin.py:1755 ~plugin.py:1896 ~plugin.py:2044
 #, python-format
 msgid "Version %s"
 msgstr "Versione %s"
 
-#: plugin - Copia.py:1812 plugin.py:1816
-msgid "..:: SETTING Vhannibal ::.."
-msgstr "..:: SETTING Vhannibal ::.."
+#: plugin.py:1582 plugin.py:1646 plugin.py:1770 plugin.py:1899 ~plugin.py:1687
+#: ~plugin.py:1756 ~plugin.py:1897 ~plugin.py:2045
+msgid " (c) by ))^^(("
+msgstr " (c) by ))^^(("
 
-#: plugin - Copia.py:1855 Copia.py:1980 Copia.py:2110 Copia.py:2236
-#: Copia.py:2357 Copia.py:2479 Copia.py:2599 Copia.py:2692 plugin.py:1859
-#: plugin.py:1984 plugin.py:2114 plugin.py:2240 plugin.py:2361 plugin.py:2483
-#: plugin.py:2603 plugin.py:2696
+#: plugin.py:1583 ~plugin.py:1688
+msgid "Select"
+msgstr "Seleziona"
+
+#: plugin.py:1644 ~plugin.py:1754
+msgid "..:: SETTING Vhannibal ::.."
+msgstr ""
+
+#: plugin.py:1687 plugin.py:1816 plugin.py:1942 plugin.py:2035 ~plugin.py:1804
+#: ~plugin.py:1956 ~plugin.py:2091 ~plugin.py:2191
 msgid "Do you want to install?"
 msgstr "Vuoi installare?"
 
-#: plugin - Copia.py:1901 Copia.py:2028 Copia.py:2155 Copia.py:2275
-#: Copia.py:2396 Copia.py:2518 Copia.py:2638 plugin.py:1905 plugin.py:2032
-#: plugin.py:2159 plugin.py:2279 plugin.py:2400 plugin.py:2522 plugin.py:2642
+#: plugin.py:1733 plugin.py:1861 plugin.py:1981 ~plugin.py:1859 ~plugin.py:2007
+#: ~plugin.py:2133
 msgid "Installo i Settings"
 msgstr "Installo i Settings"
 
-#: plugin - Copia.py:1907 Copia.py:2033 Copia.py:2161 Copia.py:2280
-#: Copia.py:2401 Copia.py:2523 Copia.py:2643 plugin.py:1911 plugin.py:2037
-#: plugin.py:2165 plugin.py:2284 plugin.py:2405 plugin.py:2527 plugin.py:2647
+#: plugin.py:1739 plugin.py:1867 plugin.py:1986 ~plugin.py:1867 ~plugin.py:2014
+#: ~plugin.py:2140
 msgid "Setting Installati!"
 msgstr "Setting Installati!"
 
-#: plugin - Copia.py:1908 Copia.py:2034 Copia.py:2162 Copia.py:2281
-#: Copia.py:2402 Copia.py:2524 Copia.py:2644 plugin.py:1912 plugin.py:2038
-#: plugin.py:2166 plugin.py:2285 plugin.py:2406 plugin.py:2528 plugin.py:2648
+#: plugin.py:1740 plugin.py:1868 plugin.py:1987 ~plugin.py:1868 ~plugin.py:2015
+#: ~plugin.py:2141
 msgid "Installazione eseguita con successo!"
 msgstr "Installazione eseguita con successo!"
 
-#: plugin - Copia.py:1937 plugin.py:1941
-msgid "..:: SETTING Milenko61 ::.."
-msgstr "..:: SETTING Milenko61 ::.."
-
-#: plugin - Copia.py:2062 plugin.py:2066
+#: plugin.py:1768 ~plugin.py:1895
 msgid "..:: SETTING Manutek ::.."
-msgstr "..:: SETTING Manutek ::.."
+msgstr ""
 
-#: plugin - Copia.py:2190 plugin.py:2194
-msgid "..:: SETTING Ciefp ::.."
-msgstr "..:: SETTING Ciefp ::.."
-
-#: plugin - Copia.py:2309 plugin.py:2313
-msgid "..:: SETTING Malimali ::.."
-msgstr "..:: SETTING Malimali ::.."
-
-#: plugin - Copia.py:2430 plugin.py:2434
-msgid "..:: SETTING Predrag ::.."
-msgstr "..:: SETTING Predrag ::.."
-
-#: plugin - Copia.py:2554 plugin.py:2558
+#: plugin.py:1897 ~plugin.py:2043
 msgid "..:: SETTING Morpheus883 ::.."
-msgstr "..:: SETTING Morpheus883 ::.."
+msgstr ""
 
-#: plugin - Copia.py:2680 plugin.py:2684
+#: plugin.py:2023 ~plugin.py:2177
 msgid "Please install ..."
 msgstr "Installa prego ..."
 
-#: plugin - Copia.py:2681 plugin.py:2685
+#: plugin.py:2024 ~plugin.py:2178
 msgid "..:: Please Select to Install::.."
 msgstr "..:: Prego Seleziona e Installa::.."
 
-#: plugin - Copia.py:2710 Copia.py:2714 Copia.py:2719 Copia.py:2732
-#: Copia.py:2744 Copia.py:2756 Copia.py:2772 Copia.py:2785 Copia.py:2822
-#: plugin.py:2714 plugin.py:2718 plugin.py:2723 plugin.py:2736 plugin.py:2748
-#: plugin.py:2760 plugin.py:2776 plugin.py:2789 plugin.py:2826
+#: plugin.py:2053 plugin.py:2057 plugin.py:2062 plugin.py:2075 plugin.py:2087
+#: plugin.py:2099 plugin.py:2115 plugin.py:2128 plugin.py:2165 ~plugin.py:2209
+#: ~plugin.py:2213 ~plugin.py:2219 ~plugin.py:2234 ~plugin.py:2248
+#: ~plugin.py:2262 ~plugin.py:2282 ~plugin.py:2297 ~plugin.py:2332
 msgid "Installing "
 msgstr "Installazione "
 
-#: plugin - Copia.py:2710 Copia.py:2714 Copia.py:2719 Copia.py:2732
-#: Copia.py:2744 Copia.py:2756 Copia.py:2772 Copia.py:2785 Copia.py:2822
-#: Copia.py:2848 plugin.py:2714 plugin.py:2718 plugin.py:2723 plugin.py:2736
-#: plugin.py:2748 plugin.py:2760 plugin.py:2776 plugin.py:2789 plugin.py:2826
-#: plugin.py:2852
+#: plugin.py:2053 plugin.py:2057 plugin.py:2062 plugin.py:2075 plugin.py:2087
+#: plugin.py:2099 plugin.py:2115 plugin.py:2128 plugin.py:2165 plugin.py:2191
+#: ~plugin.py:2209 ~plugin.py:2213 ~plugin.py:2219 ~plugin.py:2234
+#: ~plugin.py:2248 ~plugin.py:2262 ~plugin.py:2282 ~plugin.py:2297
+#: ~plugin.py:2332 ~plugin.py:2361
 msgid "... please wait"
 msgstr "... attendere prego"
 
-#: plugin - Copia.py:2715 Copia.py:2726 Copia.py:2738 Copia.py:2750
-#: Copia.py:2762 Copia.py:2778 plugin.py:2719 plugin.py:2730 plugin.py:2742
-#: plugin.py:2754 plugin.py:2766 plugin.py:2782
+#: plugin.py:2058 plugin.py:2069 plugin.py:2081 plugin.py:2093 plugin.py:2105
+#: plugin.py:2121 ~plugin.py:2214 ~plugin.py:2227 ~plugin.py:2241
+#: ~plugin.py:2255 ~plugin.py:2269 ~plugin.py:2289
 #, python-format
 msgid "Installing: %s"
 msgstr "Installazione: %s"
 
-#: plugin - Copia.py:2727 Copia.py:2728 Copia.py:2739 Copia.py:2740
-#: Copia.py:2751 Copia.py:2752 Copia.py:2763 Copia.py:2764 Copia.py:2779
-#: Copia.py:2780 Copia.py:2868 plugin.py:2731 plugin.py:2732 plugin.py:2743
-#: plugin.py:2744 plugin.py:2755 plugin.py:2756 plugin.py:2767 plugin.py:2768
-#: plugin.py:2783 plugin.py:2784 plugin.py:2872
+#: plugin.py:2070 plugin.py:2071 plugin.py:2082 plugin.py:2083 plugin.py:2094
+#: plugin.py:2095 plugin.py:2106 plugin.py:2107 plugin.py:2122 plugin.py:2123
+#: plugin.py:2211 ~plugin.py:2228 ~plugin.py:2229 ~plugin.py:2242
+#: ~plugin.py:2243 ~plugin.py:2256 ~plugin.py:2257 ~plugin.py:2270
+#: ~plugin.py:2271 ~plugin.py:2290 ~plugin.py:2291 ~plugin.py:2381
 msgid "Installation successful!"
 msgstr "Installazione riuscita!"
 
-#: plugin - Copia.py:2767 Copia.py:3021 plugin.py:2771 plugin.py:3025
+#: plugin.py:2110 plugin.py:2364 ~plugin.py:2276 ~plugin.py:2535
 msgid "Unknow Image!"
 msgstr "Unknow Image!"
 
-#: plugin - Copia.py:2768 plugin.py:2772
+#: plugin.py:2111 ~plugin.py:2277
 msgid "Installation aborted!"
 msgstr "Installation aborted!"
 
-#: plugin - Copia.py:2812 plugin.py:2816
+#: plugin.py:2155 ~plugin.py:2325
 msgid "Download Failed!"
 msgstr "Download Failed!"
 
-#: plugin - Copia.py:2840 Copia.py:2841 plugin.py:2844 plugin.py:2845
+#: plugin.py:2183 plugin.py:2184
 msgid "Addon KodiLite installed!"
 msgstr "Addon KodiLite installato!"
 
-#: plugin - Copia.py:2843 plugin.py:2847
+#: plugin.py:2186
 msgid "KodiLite not installed!"
 msgstr "KodiLite non installato!"
 
-#: plugin - Copia.py:2848 plugin.py:2852
+#: plugin.py:2191 ~plugin.py:2361
 msgid "Downloading file select in /tmp"
 msgstr "Scarico file selezionato in /tmp"
 
-#: plugin - Copia.py:2853 plugin.py:2857
+#: plugin.py:2196 ~plugin.py:2366
 msgid "Download file in /tmp successful!"
 msgstr "File scaricato con successo in /tmp!"
 
-#: plugin - Copia.py:2854 plugin.py:2858
+#: plugin.py:2197 ~plugin.py:2367
 msgid "Download file in /tmp successful!!"
 msgstr "File scaricato con successo in /tmp!!"
 
-#: plugin - Copia.py:2856 plugin.py:2860
+#: plugin.py:2199 ~plugin.py:2369
 msgid "Download failed!"
 msgstr "Download Fallito!"
 
-#: plugin - Copia.py:2856 plugin.py:2860
+#: plugin.py:2199 ~plugin.py:2369
 msgid "... Not supported"
 msgstr "... Non supportato"
 
-#: plugin - Copia.py:2867 plugin.py:2871
+#: plugin.py:2210 ~plugin.py:2380
 msgid "Setting Installed!"
 msgstr "Setting Installati!"
 
-#: plugin - Copia.py:2907 plugin.py:2911
+#: plugin.py:2250 ~plugin.py:2420
 msgid "Execution Progress:"
 msgstr "Progresso in esecuzione :"
 
-#: plugin - Copia.py:2919 plugin.py:2923
+#: plugin.py:2262 ~plugin.py:2432
 msgid "Execution finished!!"
 msgstr "Esecuzione finita!!"
 
-#: plugin - Copia.py:2963 plugin.py:2967
+#: plugin.py:2306 ~plugin.py:2474
 msgid "..:: INSTALL EXTENSIONS ::.."
 msgstr "..:: INSTALLA ESTENSIONI ::.."
 
-#: plugin - Copia.py:2965 plugin.py:2969
+#: plugin.py:2308
 msgid ""
 "Put addon .ipk .tar.gz .deb and install\n"
 "Set path from config"
@@ -659,142 +403,140 @@ msgstr ""
 "Metti addon .ipk .tar.gz .deb e installa\n"
 "Imposta il percorso dalla configurazione"
 
-#: plugin - Copia.py:2968 plugin.py:2972
+#: plugin.py:2311 ~plugin.py:2479
 msgid "Install"
 msgstr "Installa"
 
-#: plugin - Copia.py:2969 Copia.py:3076 plugin.py:2973 plugin.py:3080
+#: plugin.py:2312 plugin.py:2419 ~plugin.py:2480 ~plugin.py:2600
 msgid "Restart"
 msgstr "Riavvio"
 
-#: plugin - Copia.py:2970 plugin.py:2974
+#: plugin.py:2313 ~plugin.py:2481
 msgid "Remove"
 msgstr "Rimuovi"
 
-#: plugin - Copia.py:3003 plugin.py:3007
+#: plugin.py:2346 ~plugin.py:2517
 msgid "Do you really want to install the selected Addon?"
 msgstr "Vuoi davvero installare l'addon selezionato??"
 
-#: plugin - Copia.py:3031 plugin.py:3035
+#: plugin.py:2374 ~plugin.py:2546
 msgid "Do you really want to remove selected?"
 msgstr "Vuoi rimuovere elemento selezionato?"
 
-#: plugin - Copia.py:3043 plugin.py:3047
+#: plugin.py:2386 ~plugin.py:2558
 msgid "Do you want restart enigma2 to reload installed addons ?"
 msgstr "Riavviare E2 per attivare i plugin installati ?"
 
-#: plugin - Copia.py:3071 plugin.py:3075
+#: plugin.py:2414 ~plugin.py:2595
 msgid "..:: SAT-LODGE UNINSTALLER ::.."
 msgstr "..:: SAT-LODGE UNINSTALLER ::.."
 
-#: plugin - Copia.py:3107 plugin.py:3111
+#: plugin.py:2450 ~plugin.py:2632
 #, python-format
 msgid "Removing: %s"
 msgstr "Rimozione: %s"
 
-#: plugin - Copia.py:3128 plugin.py:3132
+#: plugin.py:2471 ~plugin.py:2654
 msgid "Do you want to remove?"
 msgstr "Vuoi rimuovere??"
 
-#: plugin - Copia.py:3132 plugin.py:3136
+#: plugin.py:2475 ~plugin.py:2673
 msgid "Do you want restart enigma2 ?"
 msgstr "Vuoi riavviare E2 ?"
 
-#: plugin - Copia.py:3181 plugin.py:3185
+#: plugin.py:2523 ~plugin.py:2717
 msgid "..:: Sat_Lodge Message::.."
 msgstr "..:: Sat_Lodge Message::.."
 
-#: plugin - Copia.py:3195 plugin.py:3199
+#: plugin.py:2537 ~plugin.py:2731
 msgid "Question"
 msgstr "Domanda"
 
-#: plugin - Copia.py:3196 plugin.py:3200
+#: plugin.py:2538 ~plugin.py:2732
 msgid "Information"
 msgstr "Informazione"
 
-#: plugin - Copia.py:3197 plugin.py:3201
+#: plugin.py:2539 ~plugin.py:2733
 msgid "Warning"
 msgstr "Attenzione"
 
-#: plugin - Copia.py:3198 plugin.py:3202
+#: plugin.py:2540 ~plugin.py:2734
 msgid "Error"
 msgstr "Errore"
 
-#: plugin - Copia.py:3198 plugin.py:3202
+#: plugin.py:2540 ~plugin.py:2734
 msgid "Message"
 msgstr "Messaggio"
 
-#: plugin - Copia.py:3203 Copia.py:3205 plugin.py:3207 plugin.py:3209
+#: plugin.py:2545 plugin.py:2547 ~plugin.py:2739 ~plugin.py:2741
 msgid "Yes"
 msgstr "Si"
 
-#: plugin - Copia.py:3203 Copia.py:3205 plugin.py:3207 plugin.py:3209
+#: plugin.py:2545 plugin.py:2547 ~plugin.py:2739 ~plugin.py:2741
 msgid "No"
 msgstr "No"
 
-#: plugin - Copia.py:3333 plugin.py:3337
+#: plugin.py:2675 ~plugin.py:2870
 msgid "..:: Sat-Lodge Config ::.."
 msgstr "..:: Sat-Lodge Config ::.."
 
-#: plugin - Copia.py:3336 plugin.py:3340
+#: plugin.py:2678 ~plugin.py:2873
 msgid "Config Panel Addon"
 msgstr "Configura Pannello Addon"
 
-#: plugin - Copia.py:3343 plugin.py:3347
+#: plugin.py:2680 ~plugin.py:2875
+msgid "Save"
+msgstr "Salva"
+
+#: plugin.py:2685 ~plugin.py:2883
 msgid "Path Manual IPK"
 msgstr "Cartella IPK"
 
-#: plugin - Copia.py:3344 plugin.py:3348
+#: plugin.py:2686 ~plugin.py:2884
 msgid "Link in Extensions Menu"
 msgstr "Link in Menu Estensioni"
 
-#: plugin - Copia.py:3345 plugin.py:3349
+#: plugin.py:2687 ~plugin.py:2885
 msgid "Link in Main Menu"
 msgstr "Link in Main Menu"
 
-#: plugin - Copia.py:3346 plugin.py:3350
+#: plugin.py:2688 ~plugin.py:2886
 msgid "Link in Setup Menu"
 msgstr "Link in Setup Menu"
 
-#: plugin - Copia.py:3361 plugin.py:3365
+#: plugin.py:2703 ~plugin.py:2901
 msgid "Quit without saving"
 msgstr "Chiudere senza Salvare"
 
-#: plugin - Copia.py:3372 plugin.py:3376
+#: plugin.py:2714 ~plugin.py:2912
 msgid "Device not detected!"
 msgstr "Dispositivo non rilevato!"
 
-#: plugin - Copia.py:3380 plugin.py:3384
+#: plugin.py:2722 ~plugin.py:2920
 msgid "Successfully saved configuration"
 msgstr "Configurazione salvata con successo"
 
-#: plugin - Copia.py:3389 Copia.py:3416 Copia.py:3417 Copia.py:3418
-#: plugin.py:3393 plugin.py:3420 plugin.py:3421 plugin.py:3422
+#: plugin.py:2731 plugin.py:2758 plugin.py:2759 plugin.py:2760 ~plugin.py:2929
+#: ~plugin.py:2959 ~plugin.py:2960 ~plugin.py:2961 ~plugin.py:2964
 msgid "SatLodge Panel"
 msgstr "SatLodge Panel"
 
-#: plugin - Copia.py:3421 plugin.py:3425
+#: plugin.py:2763
 #, python-format
 msgid "SatLodge Panel V. %s"
-msgstr "SatLodge Panel V. %s"
+msgstr ""
 
-#: plugin.py:205 plugin.py:497
-msgid "IMAGE"
-msgstr "IMAGE"
+#: ~plugin.py:2350 ~plugin.py:2351
+msgid "Download file in KodiLite installed!"
+msgstr "File scaricato e installato in Kodilite"
 
-#~ msgid " (c) by ))^^(("
-#~ msgstr " (c) by ))^^(("
+#: ~plugin.py:2354
+msgid "KodiLite non installato!"
+msgstr "KodiLite non installato!"
 
-#~ msgid "Download file in KodiLite installed!"
-#~ msgstr "File scaricato e installato in Kodilite"
-
-#~ msgid "KodiLite non installato!"
-#~ msgstr "KodiLite non installato!"
-
-#~ msgid "Put addon .ipk .tar.gz .deb and install from config path"
-#~ msgstr ""
-#~ "Inserisci addon .ipk .tar.gz .deb e installa dal percorso di "
-#~ "configurazione"
+#: ~plugin.py:2476
+msgid "Put addon .ipk .tar.gz .deb and install from config path"
+msgstr "Inserisci addon .ipk .tar.gz .deb e installa dal percorso di configurazione"
 
 #~ msgid "PLUGIN MODDED"
 #~ msgstr "PLUGIN MODDED"
@@ -804,6 +546,9 @@ msgstr "IMAGE"
 
 #~ msgid "..:: SETTING ::.."
 #~ msgstr "..:: SETTING ::.."
+
+#~ msgid "Exit"
+#~ msgstr "Uscire"
 
 #~ msgid "Update"
 #~ msgstr "Aggiorna"

@@ -1,9 +1,15 @@
 <screen name="slInstallGo" flags="wfNoBorder" position="0,0" size="1920,1080" title="..::SatLodge Panel Addon Manager::.." backgroundColor="#ffffffff" zPosition="-1" transparent="0">
   <ePixmap position="0,0" size="1920,1080" zPosition="-1" pixmap="/usr/lib/enigma2/python/Plugins/SatLodge/slPanel/res/pics/menu_plug_lsFHD.png" />  
-  <widget name="title" position="472,31" zPosition="3" size="908,66" font="font2;40" foregroundColor="#ffcc33" backgroundColor="black" transparent="1" halign="center" />
-  <widget name="version" position="1544,36" zPosition="3" size="324,50" font="font2;30" backgroundColor="background" transparent="1" foregroundColor="#ffffff" halign="right" />
-  <widget name="maintener" position="1379,36" zPosition="3" size="324,50" font="font2;30" backgroundColor="background" transparent="1" foregroundColor="#ffffff" halign="center" />
-  <widget name="text" itemHeight="40" position="135,236" size="1210,655" foregroundColor="#ffffff" scrollbarMode="showOnDemand" zPosition="2" />
-  <widget name="info" position="54,974" zPosition="4" size="1240,60" font="font1;36" foregroundColor="#7fff00" transparent="1" />
-<eLabel name="label" position="135,236" size="1210,655" />
+  <widget name="title" position="472,31" zPosition="3" size="908,66" font="Regular;40" foregroundColor="#ffcc33" backgroundColor="black" transparent="1" halign="center" />
+  <widget name="version" position="1544,36" zPosition="3" size="324,50" font="Regular;30" backgroundColor="background" transparent="1" foregroundColor="#ffffff" halign="right" />
+  <widget name="maintener" position="1379,36" zPosition="3" size="324,50" font="Regular;30" backgroundColor="background" transparent="1" foregroundColor="#ffffff" halign="center" />
+  <widget name="text" itemHeight="50" position="135,236" size="1210,655" foregroundColor="#ffffff" scrollbarMode="showOnDemand" zPosition="2" />
+  <widget name="info" position="133,155" zPosition="4" size="1240,60" font="Regular;36" foregroundColor="#7fff00" transparent="1" />
+  <eLabel name="label" position="135,236" size="1210,655" />
+  <eLabel position="42,1000" size="20,50" backgroundColor="red" zPosition="1" /> 
+  <widget name="key_red" position="62,1000" zPosition="3" size="350,50" valign="center" halign="left" foregroundColor="white" font="Regular;30" transparent="1" shadowColor="#25062748" shadowOffset="-2,-2" />
+ 
+  <eLabel position="415,1000" size="20,50" backgroundColor="green" zPosition="1" />
+  <widget name="key_green" position="442,1000" zPosition="3" size="390,50" valign="center" halign="left" foregroundColor="white" font="Regular;30" transparent="1" shadowColor="#25062748" shadowOffset="-2,-2" />
+
 </screen>

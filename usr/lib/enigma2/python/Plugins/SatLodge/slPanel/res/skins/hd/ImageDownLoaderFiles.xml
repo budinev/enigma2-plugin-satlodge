@@ -1,11 +1,11 @@
 <screen name="ImageDownloaderFiles" flags="wfNoBorder" position="center,center" size="1175,600" title="..::SatLodge Panel Addon Manager::.." backgroundColor="#ffffffff">
   <ePixmap position="0,0" size="1175,600" zPosition="-1" pixmap="/usr/lib/enigma2/python/Plugins/SatLodge/slPanel/res/pics/menu_plug_ls.png" />
-  <widget name="title" position="344,10" zPosition="3" size="500,50" font="font2;28" foregroundColor="#ffcc33" backgroundColor="black" transparent="1" halign="center" />
-  <widget name="version" position="824,11" zPosition="3" size="324,50" font="font2;24" backgroundColor="#2518252e" transparent="1" foregroundColor="#ffffff" halign="right" />
-  <widget name="maintener" position="726,11" zPosition="3" size="324,50" font="font2;24" backgroundColor="#2518252e" transparent="1" foregroundColor="#ffffff" halign="center" />
+  <widget name="title" position="344,10" zPosition="3" size="500,50" font="Regular;28" foregroundColor="#ffcc33" backgroundColor="black" transparent="1" halign="center" />
+  <widget name="version" position="824,11" zPosition="3" size="324,50" font="Regular;24" backgroundColor="#2518252e" transparent="1" foregroundColor="#ffffff" halign="right" />
+  <widget name="maintener" position="726,11" zPosition="3" size="324,50" font="Regular;24" backgroundColor="#2518252e" transparent="1" foregroundColor="#ffffff" halign="center" />
   <widget name="menu" itemHeight="30" position="53,97" size="500,420" foregroundColor="#ffffff" foregroundColorSelected="#0000ff" backgroundColorSelected="#b8b8b8" scrollbarMode="showOnDemand" zPosition="2" />
 
-  <widget name="info" position="416,536" zPosition="4" size="554,62" font="font1;28" foregroundColor="#7fff00" transparent="1" />
+  <widget name="info" position="416,536" zPosition="4" size="554,62" font="Regular;28" foregroundColor="#7fff00" transparent="1" />
   
   <eLabel position="85,550" size="10,37" backgroundColor="red" zPosition="1" /> 
   <widget name="key_red" position="95,550" zPosition="3" size="140,37" valign="center" halign="left" foregroundColor="white" font="Regular;24" transparent="1" shadowColor="#25062748" shadowOffset="-2,-2" />

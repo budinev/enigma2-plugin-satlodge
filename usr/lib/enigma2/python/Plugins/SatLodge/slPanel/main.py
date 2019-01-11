@@ -64,14 +64,6 @@ if HD.width() > 1280:
 else:
    skin_path = plugin_path + '/res/skins/hd/'
    
-class skins(Screen):
-    instance = None
-    skin = skin_path + 'all.xml'  
-    f = open(skin, 'r')
-    skin = f.read()
-    f.close() 
-    
-###################
    
 def getDownloadPath():
     Downloadpath = config.plugins.ImageDown.Downloadlocation.value
@@ -95,31 +87,13 @@ def freespace():
 
 class STBmodel(Screen):
 
-
-
-    instance = None
-    skin = skin_path + 'STBmodel.xml'  
-    f = open(skin, 'r')
-    skin = f.read()
-    f.close()     
-    
     def __init__(self, session):
-    
-        assert not STBmodel.instance, "only one STBmodel instance is allowed!"
-        STBmodel.instance = self
-        self.skin = STBmodel.skin
+        self.session = session
+        skin = skin_path + 'STBmodel.xml'        
+        with open(skin, 'r') as f:
+            self.skin = f.read()
         Screen.__init__(self, session)
         self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion))         
-        self.session = session
-
-    # def __init__(self, session):
-        # self.session = session
-        # skin = skin_path + 'STBmodel.xml'
-        # f = open(skin, 'r')
-        # self.skin = f.read()
-        # f.close()
-        # Screen.__init__(self, session)
-        
         mktmp = 'mkdir -p /tmp/ImageDownloader'
         self.container = eConsoleAppContainer()
         self.container.execute(mktmp)
@@ -188,29 +162,16 @@ class STBmodel(Screen):
 
 		
 class FEEDmodel(Screen):
-
-    instance = None
-    skin = skin_path + 'FEEDmodel.xml'  
-    f = open(skin, 'r')
-    skin = f.read()
-    f.close()     
-    
-    def __init__(self, session,param=None):    
-        assert not FEEDmodel.instance, "only one FEEDmodel instance is allowed!"
-        FEEDmodel.instance = self
-        self.skin = FEEDmodel.skin
-        Screen.__init__(self, session)
-        self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion))         
+  
+    def __init__(self, session,param=None):
         self.session = session
-
-
-    # def __init__(self, session,param=None):
-        # self.session = session
-        # skin = skin_path + 'FEEDmodel.xml'
-        # f = open(skin, 'r')
-        # self.skin = f.read()
-        # f.close()
-        # Screen.__init__(self, session)        
+        skin = skin_path + 'FEEDmodel.xml'
+        with open(skin, 'r') as f:
+            self.skin = f.read()
+        Screen.__init__(self, session)  
+        
+        self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion))         
+        
         self['title'] = Label("Brands")
         self['key_green'] = Label(_('Select'))
         self['key_red'] = Label(_('Back'))
@@ -256,28 +217,15 @@ class FEEDmodel(Screen):
         self.session.open(SERVERmodel, param)
 
 class SERVERmodel(Screen):
-
-    instance = None
-    skin = skin_path + 'SERVERmodel.xml'  
-    f = open(skin, 'r')
-    skin = f.read()
-    f.close()     
-    
-    def __init__(self, session,param=None):    
-        assert not SERVERmodel.instance, "only one SERVERmodel instance is allowed!"
-        SERVERmodel.instance = self
-        self.skin = SERVERmodel.skin
-        Screen.__init__(self, session)
-        self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion))         
+        
+    def __init__(self, session,param=None):
         self.session = session
-
-    # def __init__(self, session,param=None):
-        # self.session = session
-        # skin = skin_path + 'SERVERmodel.xml'
-        # f = open(skin, 'r')
-        # self.skin = f.read()
-        # f.close()
-        # Screen.__init__(self, session)
+        skin = skin_path + 'SERVERmodel.xml'
+        with open(skin, 'r') as f:
+            self.skin = f.read()        
+        Screen.__init__(self, session)        
+        self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion))         
+        
         self['title'] = Label("Models")
         self['key_green'] = Label(_('Select'))
         self['key_red'] = Label(_('Back'))		
@@ -327,27 +275,14 @@ class SERVERmodel(Screen):
 
 class DownloaderImage(Screen):
 
-    instance = None
-    skin = skin_path + 'DownloaderImage.xml'  
-    f = open(skin, 'r')
-    skin = f.read()
-    f.close()     
-    
-    def __init__(self, session,param=None):    
-        assert not DownloaderImage.instance, "only one DownloaderImage instance is allowed!"
-        DownloaderImage.instance = self
-        self.skin = DownloaderImage.skin
+    def __init__(self, session,param=None):
+        self.session = session
+        skin = skin_path + 'DownloaderImage.xml'
+        with open(skin, 'r') as f:
+            self.skin = f.read()        
         Screen.__init__(self, session)
         self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion))         
-        self.session = session
-
-    # def __init__(self, session,param=None):
-        # self.session = session
-        # skin = skin_path + 'DownloaderImage.xml'
-        # f = open(skin, 'r')
-        # self.skin = f.read()
-        # f.close()
-        # Screen.__init__(self, session)
+        
         self.param = param
         self['key_green'] = Label(_(' '))
         self['key_red'] = Label(_('Back'))
@@ -429,29 +364,14 @@ class DownloaderImage(Screen):
         self.session.openWithCallback(self.ListToMulticontent, ImageDownLoader, param)
 
 class ImageDownLoader(Screen):   
-
-    # instance = None
-    # skin = skin_path + 'ImageDownloader.xml'  
-    # f = open(skin, 'r')
-    # skin = f.read()
-    # f.close()     
-    
-    # def __init__(self, session,param):    
-        # assert not ImageDownloader.instance, "only one ImageDownloader instance is allowed!"
-        # ImageDownloader.instance = self
-        # self.skin = ImageDownloader.skin
-        # Screen.__init__(self, session)
-        # self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion))         
-        # self.session = session
    
     def __init__(self, session,param):
         self.session = session
-        
         skin = skin_path + 'ImageDownloader.xml'
-        f = open(skin, 'r')
-        self.skin = f.read()
-        f.close()
+        with open(skin, 'r') as f:
+            self.skin = f.read()        
         Screen.__init__(self, session)
+        self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion))         
         
         self.param=param
         self.imageurl=param
@@ -643,29 +563,13 @@ class ImageDownLoader(Screen):
 
 class ImageDownLoaderFiles(Screen):
 
-
-    # instance = None
-    # skin = skin_path + 'ImageDownLoaderFiles.xml'  
-    # f = open(skin, 'r')
-    # skin = f.read()
-    # f.close()     
-    
-    # def __init__(self, session):    
-        # assert not ImageDownLoaderFiles.instance, "only one ImageDownLoaderFiles instance is allowed!"
-        # ImageDownLoaderFiles.instance = self
-        # self.skin = ImageDownLoaderFiles.skin
-        # Screen.__init__(self, session)
-        # self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion))         
-        # self.session = session
-  
     def __init__(self, session):
         self.session = session
-        
         skin = skin_path + 'ImageDownLoaderFiles.xml'
-        f = open(skin, 'r')
-        self.skin = f.read()
-        f.close()
+        with open(skin, 'r') as f:
+            self.skin = f.read()        
         Screen.__init__(self, session)
+        self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion))         
         
         list = []
         self['menu'] = MenuList([], True, eListboxPythonMultiContent)
@@ -764,28 +668,15 @@ class ImageDownLoaderFiles(Screen):
         self.selectionChanged()
 		
 class ImageDownloadLocation(Screen, HelpableScreen):
-    instance = None
-    skin = skin_path + 'ImageDownloadLocation.xml'  
-    f = open(skin, 'r')
-    skin = f.read()
-    f.close()     
-    
+
     def __init__(self, session, text = '', filename = '', currDir = None, location = None, userMode = False, windowTitle = _('Choose Download location'), minFree = None, autoAdd = False, editDir = False, inhibitDirs = [], inhibitMounts = []):
-        assert not ImageDownloadLocation.instance, "only one ImageDownloadLocation instance is allowed!"
-        ImageDownloadLocation.instance = self
-        self.skin = ImageDownloadLocation.skin
+        
+        self.session = session          
+        skin = skin_path + 'ImageDownloadLocation.xml'
+        with open(skin, 'r') as f:
+            self.skin = f.read()
         Screen.__init__(self, session)
         self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion))         
-        self.session = session
-        
-        
-    # def __init__(self, session, text = '', filename = '', currDir = None, location = None, userMode = False, windowTitle = _('Choose Download location'), minFree = None, autoAdd = False, editDir = False, inhibitDirs = [], inhibitMounts = []):
-        # self.session = session
-        # skin = skin_path + 'ImageDownloadLocation.xml'
-        # f = open(skin, 'r')
-        # self.skin = f.read()
-        # f.close()
-        # Screen.__init__(self, session)
         HelpableScreen.__init__(self)
         self['text'] = StaticText(_('Selected Download Place:'))
         self.text = text
@@ -973,30 +864,14 @@ from Components.Sources.Progress import Progress
         
 class Downloader(Screen):
 
-
-    # instance = None
-    # skin = skin_path + 'Downloader.xml'  
-    # f = open(skin, 'r')
-    # skin = f.read()
-    # f.close()     
-    
-    # def __init__(self, session, url = None, target = None, path = None):   
-        # assert not Downloader.instance, "only one Downloader instance is allowed!"
-        # Downloader.instance = self
-        # self.skin = Downloader.skin
-        # Screen.__init__(self, session)
-        # self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion))         
-        # self.session = session
-
-
     def __init__(self, session, url = None, target = None, path = None):
         self.session = session
             
         skin = skin_path + 'Downloader.xml'
-        f = open(skin, 'r')
-        self.skin = f.read()
-        f.close()
+        with open(skin, 'r') as f:
+            self.skin = f.read()  
         Screen.__init__(self, session)
+        self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion))         
         
         print url
         self.url = url

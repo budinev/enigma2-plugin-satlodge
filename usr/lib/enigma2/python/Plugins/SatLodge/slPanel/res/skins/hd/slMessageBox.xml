@@ -4,14 +4,16 @@
   <widget name="QuestionPixmap" pixmap="skin_default/icons/input_question.png" position="770,198" size="100,100" alphatest="blend" />
   <widget name="InfoPixmap" pixmap="skin_default/icons/input_info.png" position="769,197" size="100,100" alphatest="blend" />
   <widget name="WarningPixmap" pixmap="skin_default/icons/input_warning.png" position="770,200" size="100,100" alphatest="blend" />
-  <widget name="list" position="65,154" size="500,371" itemHeight="32" selectionPixmap="/usr/lib/enigma2/python/Plugins/SatLodge/slPanel/res/pics/sel32.png" scrollbarMode="showNever" transparent="1" />
+  <!-- <widget name="list" position="65,154" size="500,371" itemHeight="32" selectionPixmap="/usr/lib/enigma2/python/Plugins/SatLodge/slPanel/res/pics/sel32.png" scrollbarMode="showNever" transparent="1" /> -->
+  <widget name="list" position="65,154" size="500,371" selectionPixmap="/usr/lib/enigma2/python/Plugins/SatLodge/slPanel/res/pics/sel32.png" scrollbarMode="showNever" transparent="1" />
+  
   <ePixmap position="22,11" size="71,39" zPosition="10" pixmap="/usr/lib/enigma2/python/Plugins/SatLodge/slPanel/res/pics/ok.png" transparent="1" alphatest="blend" />
   <ePixmap position="94,11" size="71,39" zPosition="10" pixmap="/usr/lib/enigma2/python/Plugins/SatLodge/slPanel/res/pics/exit.png" transparent="1" alphatest="blend" />
-  <!--widget name="Text" itemHeight="30" position="53,97" size="200,320" font="font1;26" foregroundColor="#ffffff" foregroundColorSelected="#0000ff" backgroundColorSelected="#b8b8b8" zPosition="2" /-->
-  <widget name="Text" position="68,75" size="498,320" font="font1;26" foregroundColor="#ffffff" zPosition="2" />  
-  <widget name="text" font="font1;22" position="67,72" size="500,305" foregroundColor="#fff700" />
-  <!--<eLabel name="text" position="273,203" font="font1;24" size="552,278" foregroundColor="#ffffff" foregroundColorSelected="#0000ff" backgroundColorSelected="#b8b8b8" zPosition="2" />-->
-  <widget name="selectedChoice" position="307,96" zPosition="3" size="324,50" font="font1;24" backgroundColor="#2518252e" transparent="1" foregroundColor="#ffffff" halign="center" />
+  <!--widget name="Text" itemHeight="50" position="53,97" size="200,320" font="Regular;26" foregroundColor="#ffffff" foregroundColorSelected="#0000ff" backgroundColorSelected="#b8b8b8" zPosition="2" /-->
+  <widget name="Text" position="68,75" size="498,320" font="Regular;26" foregroundColor="#ffffff" zPosition="2" />  
+  <widget name="text" font="Regular;22" position="67,72" size="500,305" foregroundColor="#fff700" />
+  <!--<eLabel name="text" position="273,203" font="Regular;24" size="552,278" foregroundColor="#ffffff" foregroundColorSelected="#0000ff" backgroundColorSelected="#b8b8b8" zPosition="2" />-->
+  <widget name="selectedChoice" position="307,96" zPosition="3" size="324,50" font="Regular;24" backgroundColor="#2518252e" transparent="1" foregroundColor="#ffffff" halign="center" />
 <!--   <applet type="onLayoutFinish">
 
 # this should be factored out into some helper code, but currently demonstrates applets.
@@ -52,7 +54,7 @@ self.instance.move(ePoint(orgpos.x() + (orgwidth - newwidth)/2, orgpos.y()))
   <widget source="global.CurrentTime" render="Label" position="1048,553" size="85,25" font="Regular;23" halign="right" backgroundColor="black" transparent="1">
   <convert type="ClockToText">Default</convert>
   </widget>
-  <widget name="title" position="344,10" zPosition="3" size="500,50" font="font2;28" foregroundColor="#ffcc33" backgroundColor="black" transparent="1" halign="center" />
-  <widget name="version" position="824,11" zPosition="3" size="324,50" font="font2;24" backgroundColor="#2518252e" transparent="1" foregroundColor="#ffffff" halign="right" />
-  <widget name="maintener" position="726,11" zPosition="3" size="324,50" font="font2;24" backgroundColor="#2518252e" transparent="1" foregroundColor="#ffffff" halign="center" /> 
+  <widget name="title" position="344,10" zPosition="3" size="500,50" font="Regular;28" foregroundColor="#ffcc33" backgroundColor="black" transparent="1" halign="center" />
+  <widget name="version" position="824,11" zPosition="3" size="324,50" font="Regular;24" backgroundColor="#2518252e" transparent="1" foregroundColor="#ffffff" halign="right" />
+  <widget name="maintener" position="726,11" zPosition="3" size="324,50" font="Regular;24" backgroundColor="#2518252e" transparent="1" foregroundColor="#ffffff" halign="center" /> 
 </screen>

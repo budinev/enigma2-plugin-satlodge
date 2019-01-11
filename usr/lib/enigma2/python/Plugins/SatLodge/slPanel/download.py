@@ -63,13 +63,6 @@ if HD.width() > 1280:
 else:
    skin_path = plugin_path + '/res/skins/hd/'
    
-class skins(Screen):
-    instance = None
-    skin = skin_path + 'all.xml'  
-    f = open(skin, 'r')
-    skin = f.read()
-    f.close() 
-    
 ###################   
 def freespace():
          downloadlocation=dlocation
@@ -308,27 +301,13 @@ class downloadTask(Task):
 
 class downloadTask(Screen):
 
-    instance = None
-    skin = skin_path + 'downloadTask.xml'  
-    f = open(skin, 'r')
-    skin = f.read()
-    f.close()     
-    
-    def __init__(self, session, plugin_path, tasklist, filename = None):   
-        assert not downloadTask.instance, "only one downloadTask instance is allowed!"
-        downloadTask.instance = self
-        self.skin = downloadTask.skin
+    def __init__(self, session, plugin_path, tasklist, filename = None):
+        self.session = session
+        skin = skin_path + 'downloadTask.xml'
+        with open(skin, 'r') as f:
+            self.skin = f.read()        
         Screen.__init__(self, session)
         self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion))         
-        self.session = session
-
-    # def __init__(self, session, plugin_path, tasklist, filename = None):
-        # self.session = session
-        # skin = skin_path + 'downloadTask.xml'
-        # f = open(skin, 'r')
-        # self.skin = f.read()
-        # f.close()
-        # Screen.__init__(self, session)
         self.tasklist = tasklist
         self.filename = filename
         self['tasklist'] = List(self.tasklist)

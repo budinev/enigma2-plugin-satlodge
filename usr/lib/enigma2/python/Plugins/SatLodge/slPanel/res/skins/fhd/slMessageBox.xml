@@ -4,12 +4,12 @@
   <widget name="QuestionPixmap" pixmap="skin_default/icons/input_question.png" position="1437,407" size="100,100" alphatest="blend" />
   <widget name="InfoPixmap" pixmap="skin_default/icons/input_info.png" position="1436,406" size="100,100" alphatest="blend" />
   <widget name="WarningPixmap" pixmap="skin_default/icons/input_warning.png" position="1437,404" size="100,100" alphatest="blend" />
-  <widget name="list" position="83,355" size="796,554" font="font1;28" itemHeight="36" selectionPixmap="/usr/lib/enigma2/python/Plugins/SatLodge/slPanel/res/pics/sel32.png" scrollbarMode="showNever" transparent="1" />
-  <!--widget name="Text" itemHeight="40" position="84,184" size="383,547" font="font1;34" foregroundColor="#ffffff" foregroundColorSelected="#0000ff" backgroundColorSelected="#b8b8b8" zPosition="2" /-->
-  <widget name="Text" position="84,217" size="791,514" font="font1;34" foregroundColor="#ffffff" zPosition="2" />
-  <widget name="text" font="font1;34" position="86,213" size="800,506" foregroundColor="#fff700" />
-  <!--<eLabel name="text" position="273,203" font="font1;24" size="552,278" foregroundColor="#ffffff" foregroundColorSelected="#0000ff" backgroundColorSelected="#b8b8b8" zPosition="2" />-->
-  <widget name="selectedChoice" position="360,157" zPosition="3" size="524,50" font="font1;32" backgroundColor="#2518252e" transparent="1" foregroundColor="#ffffff" halign="center" />
+  <widget name="list" position="83,355" size="796,554" font="Regular;28" itemHeight="50" selectionPixmap="/usr/lib/enigma2/python/Plugins/SatLodge/slPanel/res/pics/sel32.png" scrollbarMode="showNever" transparent="1" />
+  <!--widget name="Text" itemHeight="40" position="84,184" size="383,547" font="Regular;34" foregroundColor="#ffffff" foregroundColorSelected="#0000ff" backgroundColorSelected="#b8b8b8" zPosition="2" /-->
+  <widget name="Text" position="84,217" size="791,514" font="Regular;34" foregroundColor="#ffffff" zPosition="2" />
+  <widget name="text" font="Regular;34" position="86,213" size="800,506" foregroundColor="#fff700" />
+  <!--<eLabel name="text" position="273,203" font="Regular;24" size="552,278" foregroundColor="#ffffff" foregroundColorSelected="#0000ff" backgroundColorSelected="#b8b8b8" zPosition="2" />-->
+  <widget name="selectedChoice" position="360,157" zPosition="3" size="524,50" font="Regular;32" backgroundColor="#2518252e" transparent="1" foregroundColor="#ffffff" halign="center" />
   
 <!--   <applet type="onLayoutFinish">
 
@@ -46,9 +46,9 @@ self["list"].instance.resize(eSize(*listsize))
 newwidth = wsize[0]
 self.instance.move(ePoint(orgpos.x() + (orgwidth - newwidth)/2, orgpos.y()))
 </applet> -->
-  <widget name="title" position="472,31" zPosition="3" size="908,66" font="font2;40" foregroundColor="#ffcc33" backgroundColor="black" transparent="1" halign="center" />
-  <widget name="version" position="1544,36" zPosition="3" size="324,50" font="font2;30" backgroundColor="background" transparent="1" foregroundColor="#ffffff" halign="right" />
-  <widget name="maintener" position="1379,36" zPosition="3" size="324,50" font="font2;30" backgroundColor="background" transparent="1" foregroundColor="#ffffff" halign="center" />
+  <widget name="title" position="472,31" zPosition="3" size="908,66" font="Regular;40" foregroundColor="#ffcc33" backgroundColor="black" transparent="1" halign="center" />
+  <widget name="version" position="1544,36" zPosition="3" size="324,50" font="Regular;30" backgroundColor="background" transparent="1" foregroundColor="#ffffff" halign="right" />
+  <widget name="maintener" position="1379,36" zPosition="3" size="324,50" font="Regular;30" backgroundColor="background" transparent="1" foregroundColor="#ffffff" halign="center" />
 
   <widget source="global.CurrentTime" render="Label" position="1558,1010" size="200,50" font="Regular;32" halign="right" backgroundColor="black" foregroundColor="grey" transparent="1">
   <convert type="ClockToText">Format:%d.%m.%Y</convert></widget>

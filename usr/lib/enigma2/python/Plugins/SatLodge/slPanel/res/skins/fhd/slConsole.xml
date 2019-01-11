@@ -1,8 +1,8 @@
 <screen name="slConsole" flags="wfNoBorder" position="0,0" size="1920,1080" title="..::SatLodge Console::.." backgroundColor="#ffffffff" zPosition="-1" transparent="0">
   <ePixmap position="0,0" size="1920,1080" zPosition="-1" pixmap="/usr/lib/enigma2/python/Plugins/SatLodge/slPanel/res/pics/menu_plug_lsFHD.png" />  
-  <!--widget name="title" position="472,31" zPosition="3" size="908,66" font="font2;40" foregroundColor="#ffcc33" backgroundColor="black" transparent="1" halign="center" /-->
-  <widget name="version" position="1544,36" zPosition="3" size="324,50" font="font2;30" backgroundColor="background" transparent="1" foregroundColor="#ffffff" halign="right" />
-  <widget name="maintener" position="1379,36" zPosition="3" size="324,50" font="font2;30" backgroundColor="background" transparent="1" foregroundColor="#ffffff" halign="center" />
-  <!--widget name="text" itemHeight="40" position="135,236" font="font1;28" size="804,655" foregroundColor="#ffffff" foregroundColorSelected="#0000ff" backgroundColorSelected="#b8b8b8" scrollbarMode="showOnDemand" zPosition="2" /-->
-  <widget name="text" position="135,236" font="font1;28" size="804,655" foregroundColor="#ffffff" zPosition="2" />
+  <!--widget name="title" position="472,31" zPosition="3" size="908,66" font="Regular;40" foregroundColor="#ffcc33" backgroundColor="black" transparent="1" halign="center" /-->
+  <widget name="version" position="1544,36" zPosition="3" size="324,50" font="Regular;30" backgroundColor="background" transparent="1" foregroundColor="#ffffff" halign="right" />
+  <widget name="maintener" position="1379,36" zPosition="3" size="324,50" font="Regular;30" backgroundColor="background" transparent="1" foregroundColor="#ffffff" halign="center" />
+  <!--widget name="text" itemHeight="40" position="135,236" font="Regular;28" size="804,655" foregroundColor="#ffffff" foregroundColorSelected="#0000ff" backgroundColorSelected="#b8b8b8" scrollbarMode="showOnDemand" zPosition="2" /-->
+  <widget name="text" position="135,236" font="Regular;28" size="804,655" foregroundColor="#ffffff" zPosition="2" />
 </screen>

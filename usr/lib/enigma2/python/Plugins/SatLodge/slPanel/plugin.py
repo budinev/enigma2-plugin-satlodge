@@ -14,7 +14,6 @@ from Components.ScrollLabel import ScrollLabel
 from Components.Sources.List import List
 from Components.Sources.StaticText import StaticText 
 from enigma import *
-from enigma import eConsoleAppContainer
 from enigma import eListbox, eTimer, eListboxPythonMultiContent, eConsoleAppContainer, addFont, gFont 
 from enigma import RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_HALIGN_CENTER, getDesktop, loadPNG, loadPic
 from os import environ as os_environ
@@ -41,10 +40,10 @@ import urllib
 import shutil
 import urllib2
 from Screens.MessageBox import MessageBox
-#################pcd start#####################
+
 from Screens.Console import Console
 from twisted.web.client import downloadPage
-###################pcd end#######################
+
 # def mountipkpth():
 	# ipkpth = []
 	# if os.path.isfile('/proc/mounts'):
@@ -89,7 +88,7 @@ except:
 
 DESKHEIGHT = getDesktop(0).size().height()
 
-currversion = '1.8'
+currversion = '1.9'
 plugin_path = '/usr/lib/enigma2/python/Plugins/SatLodge/slPanel'
 ico_path = '/usr/lib/enigma2/python/Plugins/SatLodge/slPanel/res/pics/addons3.png'
 ##########################################
@@ -113,7 +112,6 @@ skin_path = plugin_path
 HD = getDesktop(0).size()
 if HD.width() > 1280:
    skin_path = plugin_path + '/res/skins/fhd/'
-
 else:
    skin_path = plugin_path + '/res/skins/hd/'
 
@@ -169,22 +167,11 @@ def _(txt):
 localeInit()
 language.addCallback(localeInit)
 #########################################################
-plugin_fonts = '/usr/lib/enigma2/python/Plugins/SatLodge/slPanel/fonts'
-from enigma import addFont
-try:
-    addFont('%s/res/fonts/imprisha.ttf' % plugin_path, 'font2', 100, 1)
-    #font2 = otherlist
-    addFont('%s/res/fonts/Austrise.ttf' % plugin_path, 'font1', 100, 1) 
-    #font1 = sllist ->home e onelist e caratteri in skin
-except Exception as ex:
-    print ex
-########################################################
 class logoStrt(Screen):
     skin = """
     <screen name="logoStrt" position="center,center" size="462,454" flags="wfNoBorder">
     <ePixmap position="0,0" size="462,454" pixmap="/usr/lib/enigma2/python/Plugins/SatLodge/slPanel/res/pics/sl_hd.png" />
-    </screen> """      
-    
+    </screen> """    
 
     def __init__(self, session):
         self.session = session  
@@ -226,12 +213,15 @@ class SLList(MenuList):
 
     def __init__(self, list):
         MenuList.__init__(self, list, False, eListboxPythonMultiContent)
-        if DESKHEIGHT < 1000:		
+        
+        if DESKHEIGHT > 1280:	
+            self.l.setItemHeight(50)
+            self.l.setFont(0, gFont('Regular', 40))	
+        else:            
             self.l.setItemHeight(30)
-            self.l.setFont(0, gFont('font1', 24))
-        else:
-            self.l.setItemHeight(40)
-            self.l.setFont(0, gFont('font1', 36))	
+            self.l.setFont(0, gFont('Regular', 24))
+
+
             
 def SLListEntry(name, idx):
     res = [name]
@@ -272,15 +262,23 @@ def SLListEntry(name, idx):
     elif idx == 17:
         png = ico1_path 
         
-    if fileExists(png):
-        res.append(MultiContentEntryPixmapAlphaTest(pos=(0, 0), size=(25, 25), png=loadPNG(png)))
-        res.append(MultiContentEntryText(pos=(35, 0), size=(1000, 320), font=0, text=name))
-    return res
+    if DESKHEIGHT > 1280:
+    	if fileExists(png):
+    		res.append(MultiContentEntryPixmapAlphaTest(pos=(10, 15), size=(20, 20), png=loadPNG(png)))
+    		res.append(MultiContentEntryText(pos=(60, 0), size=(1200, 50), font=0, text=name, color = 0xa6d1fe, flags=RT_VALIGN_CENTER))
+    else:
+    	if fileExists(png):
+    		res.append(MultiContentEntryPixmapAlphaTest(pos=(10, 7), size=(20, 20), png=loadPNG(png)))
+    		res.append(MultiContentEntryText(pos=(60, 0), size=(1200, 40), font=0, text=name, color = 0xa6d1fe, flags=RT_VALIGN_CENTER))
+    return res         
+        
+    # if fileExists(png):
+        # res.append(MultiContentEntryPixmapAlphaTest(pos=(0, 0), size=(25, 25), png=loadPNG(png)))
+        # res.append(MultiContentEntryText(pos=(35, 0), size=(1000, 320), font=0, text=name))
+    # return res
 
-######################## daily list
  
 Panel_list2 = [
-# _('SETTINGS CORVONE'), 
  _('SETTINGS CIEFP'), 
  _('SETTINGS MALIMALI'),  
  _('SETTINGS MANUTEK'),  
@@ -305,26 +303,37 @@ def DailyListEntry(name, idx):
         png = ico1_path 
     elif idx == 6:
         png = ico1_path         
-    elif idx == 7:
-        png = ico1_path  
-        
-    if fileExists(png):
-        res.append(MultiContentEntryPixmapAlphaTest(pos=(0, 0), size=(20, 20), png=loadPNG(png)))
-        res.append(MultiContentEntryText(pos=(25, 0), size=(1000, 320), font=0, text=name))
+
+
+    if DESKHEIGHT > 1280:	
+    	if fileExists(png):
+    		res.append(MultiContentEntryPixmapAlphaTest(pos=(10, 13), size=(20, 20), png=loadPNG(png)))
+    		res.append(MultiContentEntryText(pos=(60, 0), size=(1200, 50), font=0, text=name, color = 0xa6d1fe, flags=RT_VALIGN_CENTER))
+    else:	
+    	if fileExists(png):
+    		res.append(MultiContentEntryPixmapAlphaTest(pos=(10, 7), size=(20, 20), png=loadPNG(png)))
+    		res.append(MultiContentEntryText(pos=(60, 0), size=(1200, 40), font=0, text=name, color = 0xa6d1fe, flags=RT_VALIGN_CENTER))
     return res
+    
+    # if fileExists(png):
+        # res.append(MultiContentEntryPixmapAlphaTest(pos=(0, 0), size=(20, 20), png=loadPNG(png)))
+        # res.append(MultiContentEntryText(pos=(25, 0), size=(1000, 320), font=0, text=name))
+    # return res
 ######################
 
-class oneList(MenuList):
+class oneListsl(MenuList):
     def __init__(self, list):
             MenuList.__init__(self, list, True, eListboxPythonMultiContent)
-            if DESKHEIGHT < 1000: 
-                    self.l.setItemHeight(30)
+            if DESKHEIGHT > 1280: 
+                    self.l.setItemHeight(50)
+                    textfont = int(38)
+                    self.l.setFont(0, gFont('Regular', textfont))            
+            else:            
+                    self.l.setItemHeight(35)
                     textfont = int(24)
-                    self.l.setFont(0, gFont('font1', textfont))
-            else:
-                    self.l.setItemHeight(40)
-                    textfont = int(36)
-                    self.l.setFont(0, gFont('font1', textfont))
+                    self.l.setFont(0, gFont('Regular', textfont))
+
+
 
                
 def oneListEntry(name):
@@ -333,9 +342,15 @@ def oneListEntry(name):
     png2 = ico3_path     
     res = [name]
     #
-    res.append(MultiContentEntryPixmapAlphaTest(pos=(0, 0), size=(30, 30), png=loadPNG(png2)))    
-    
-    res.append(MultiContentEntryText(pos=(50, 0), size=(1000, 420), font=0, text=name))
+    if DESKHEIGHT > 1280:  
+        res.append(MultiContentEntryPixmapAlphaTest(pos=(10, 13), size=(30, 30), png=loadPNG(png2)))
+        res.append(MultiContentEntryText(pos=(60, 0), size=(1200, 50), font=0, text=name, color = 0xa6d1fe, flags=RT_VALIGN_CENTER))  
+    else:        
+        res.append(MultiContentEntryPixmapAlphaTest(pos=(10, 7), size=(30, 30), png=loadPNG(png2)))
+        res.append(MultiContentEntryText(pos=(60, 0), size=(1200, 40), font=0, text=name, color = 0xa6d1fe, flags=RT_VALIGN_CENTER))
+    return res    
+    # res.append(MultiContentEntryPixmapAlphaTest(pos=(0, 0), size=(30, 30), png=loadPNG(png2)))    
+    # res.append(MultiContentEntryText(pos=(50, 0), size=(1000, 420), font=0, text=name))
 
     return res
 
@@ -349,43 +364,47 @@ def showlist(data, list):
         list.setList(plist)			
 
 
-class OtherListsl(MenuList):
-	def __init__(self, list):
-		MenuList.__init__(self, list, True, eListboxPythonMultiContent)
-		if DESKHEIGHT < 1000: 
-		       self.l.setItemHeight(30)
-		       textfont = int(24)
-		       self.l.setFont(0, gFont('font2', textfont)) 
-		else:
-		       self.l.setItemHeight(40)
-		       textfont = int(36)
-		       self.l.setFont(0, gFont('font2', textfont))
+# class OtherListsl(MenuList):
+	# def __init__(self, list):
+		# MenuList.__init__(self, list, True, eListboxPythonMultiContent)
+		# if DESKHEIGHT < 1000: 
+		       # self.l.setItemHeight(30)
+		       # textfont = int(24)
+		       # self.l.setFont(0, gFont('Regular', textfont)) 
+		# else:
+		       # self.l.setItemHeight(40)
+		       # textfont = int(36)
+		       # self.l.setFont(0, gFont('Regular', textfont))
                        
-###################
+# ###################
 
-class skins(Screen):
-    instance = None
-    skin = skin_path + 'all.xml'  
-    f = open(skin, 'r')
-    skin = f.read()
-    f.close() 
+# class skins(Screen):
+    # instance = None
+    # skin = skin_path + 'all.xml'  
+    # f = open(skin, 'r')
+    # skin = f.read()
+    # f.close() 
     
-###################
+# ###################
 
 
    
 class Homesl(Screen):
-    instance = None
-    skin = skin_path + 'Homesl.xml'  
-    f = open(skin, 'r')
-    skin = f.read()
-    f.close()     
+    # instance = None
+    # skin = skin_path + 'Homesl.xml'  
+    # f = open(skin, 'r')
+    # skin = f.read()
+    # f.close()     
     
     def __init__(self, session):
-    
-        assert not Homesl.instance, "only one Homesl instance is allowed!"
-        Homesl.instance = self
-        self.skin = Homesl.skin
+        self.session = session
+        skin = skin_path + 'Homesl.xml'
+        with open(skin, 'r') as f:
+            self.skin = f.read()
+        self.setup_title = ('Hometv')
+        # assert not Homesl.instance, "only one Homesl instance is allowed!"
+        # Homesl.instance = self
+        # self.skin = Homesl.skin
         Screen.__init__(self, session)
         self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion))         
         self.session = session
@@ -395,6 +414,7 @@ class Homesl(Screen):
         self['title'] = Label(_('..:: Sat-Lodge Panel ::..'))
         self['version'] = Label(_('V. %s' %  currversion))
         self['maintener'] = Label(_(' by ))^^((')) 
+        self['key_red'] = Button(_('Exit')) 
         self["key_yellow"] = Button(_("Uninstall"))
         self['key_green'] = Button(_('Extensions')) 
         self["key_blue"] = Button(_("SatLodge Manager"))
@@ -408,6 +428,7 @@ class Homesl(Screen):
          'blue': self.slManager,
          # 'yellow': self.slUpdate,
          'yellow': self.ipkDs,
+         'red': self.closerm,
          'back': self.closerm,
          'cancel': self.closerm}, -1)
         self.onLayoutFinish.append(self.updateMenuList)
@@ -417,7 +438,6 @@ class Homesl(Screen):
         from .main import STBmodel
         session.open(STBmodel)
     
-        
     def slManager(self):
         if fileExists('/usr/lib/enigma2/python/Plugins/SatLodge/slManager/plugin.pyo'):
             from Plugins.SatLodge.slManager.plugin import slManager
@@ -496,24 +516,25 @@ class Homesl(Screen):
             self.session.open(PluginWeather)
         elif sel == _('IMAGE'):
             from .main import STBmodel
-            self.session.open(STBmodel)           
-
-
+            self.session.open(STBmodel)  
 class Drivers(Screen):
-    instance = None
- 
     def __init__(self, session):        
-        assert not skins.instance, "only one skins instance is allowed!"
-        skins.instance = self
-        self.skin = skins.skin        
+  
+        self.session = session
+        skin = skin_path + 'all.xml'
+        with open(skin, 'r') as f:
+            self.skin = f.read()
+        self.setup_title = ('Drivers')
+        
         Screen.__init__(self, session)
         self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion))         
-        self.session = session
         self.list = []		
-        self['text'] = oneList([]) 		
+        self['text'] = oneListsl([]) 		
         self.addon = 'emu'
         self.icount = 0
         self['info'] = Label(_('Getting the list, please wait ...'))		
+        self['key_green'] = Button(_('Install'))
+        self['key_red'] = Button(_('Back'))    
         self.downloading = False		
         self.timer = eTimer()
         try:
@@ -526,6 +547,8 @@ class Drivers(Screen):
         self['version'] = Label(_('V. %s' %  currversion))
         self['maintener'] = Label(_(' by ))^^((')) 
         self['actions'] = ActionMap(['SetupActions', 'ColorActions'], {'ok': self.okRun,
+         'green': self.okRun,
+         'red': self.close,
          'cancel': self.close}, -2)
 
 
@@ -569,20 +592,24 @@ class Drivers(Screen):
             self.close
             
 class slDependencies(Screen):
-    instance = None
 
     def __init__(self, session):        
-        assert not skins.instance, "only one skins instance is allowed!"
-        skins.instance = self
-        self.skin = skins.skin      
+
+        self.session = session
+        skin = skin_path + 'all.xml'
+        with open(skin, 'r') as f:
+            self.skin = f.read()
+        self.setup_title = ('slDependencies')
+        
         Screen.__init__(self, session)
         self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion))         
-        self.session = session
         self.list = []		
-        self['text'] = oneList([]) 		
+        self['text'] = oneListsl([]) 		
         self.addon = 'emu'
         self.icount = 0
         self['info'] = Label(_('Getting the list, please wait ...'))		
+        self['key_green'] = Button(_('Install'))
+        self['key_red'] = Button(_('Back'))  
         self.downloading = False		
         self.timer = eTimer()
         try:
@@ -594,6 +621,8 @@ class slDependencies(Screen):
         self['version'] = Label(_('V. %s' %  currversion))
         self['maintener'] = Label(_(' by ))^^((')) 
         self['actions'] = ActionMap(['SetupActions', 'ColorActions'], {'ok': self.okRun,
+         'green': self.okRun,
+         'red': self.close,  
          'cancel': self.close}, -2)
 
 
@@ -637,20 +666,22 @@ class slDependencies(Screen):
             self.close			
 
 class Picons(Screen):
-    instance = None
-    
+
     def __init__(self, session):        
-        assert not skins.instance, "only one skins instance is allowed!"
-        skins.instance = self
-        self.skin = skins.skin  
+        self.session = session
+        skin = skin_path + 'all.xml'
+        with open(skin, 'r') as f:
+            self.skin = f.read()
+        self.setup_title = ('Picons')
         Screen.__init__(self, session)
         self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion))         
-        self.session = session        
         self.list = []		
-        self['text'] = oneList([]) 		
+        self['text'] = oneListsl([]) 		
         self.addon = 'emu'
         self.icount = 0
         self['info'] = Label(_('Getting the list, please wait ...'))		
+        self['key_green'] = Button(_('Install'))
+        self['key_red'] = Button(_('Back')) 
         self.downloading = False		
         self.timer = eTimer()
         try:
@@ -663,6 +694,8 @@ class Picons(Screen):
         self['version'] = Label(_('V. %s' %  currversion))
         self['maintener'] = Label(_(' by ))^^(('))  
         self['actions'] = ActionMap(['SetupActions', 'ColorActions'], {'ok': self.okRun,
+         'green': self.okRun,
+         'red': self.close,  
          'cancel': self.close}, -2)
 
 
@@ -706,20 +739,23 @@ class Picons(Screen):
             self.close
 
 class PluginBackup(Screen):
-    instance = None
 
     def __init__(self, session):        
-        assert not skins.instance, "only one skins instance is allowed!"
-        skins.instance = self
-        self.skin = skins.skin      
+        self.session = session
+        skin = skin_path + 'all.xml'
+        with open(skin, 'r') as f:
+            self.skin = f.read()
+        self.setup_title = ('PluginBackup')
         Screen.__init__(self, session)
-        self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion))         
-        self.session = session      
+        self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion)) 
+  
         self.list = []		
-        self['text'] = oneList([]) 		
+        self['text'] = oneListsl([]) 		
         self.addon = 'emu'
         self.icount = 0
         self['info'] = Label(_('Getting the list, please wait ...'))		
+        self['key_green'] = Button(_('Install'))
+        self['key_red'] = Button(_('Back')) 
         self.downloading = False		
         self.timer = eTimer()
         try:
@@ -733,6 +769,8 @@ class PluginBackup(Screen):
         self['version'] = Label(_('V. %s' %  currversion))
         self['maintener'] = Label(_(' by ))^^(('))   
         self['actions'] = ActionMap(['SetupActions', 'ColorActions'], {'ok': self.okRun,
+         'green': self.okRun,
+         'red': self.close, 
          'cancel': self.close}, -2)
 
 
@@ -777,33 +815,37 @@ class PluginBackup(Screen):
 
 class PluginEmulators(Screen):
 
-    instance = None
-    
     def __init__(self, session):        
-        assert not skins.instance, "only one skins instance is allowed!"
-        skins.instance = self
-        self.skin = skins.skin      
+        self.session = session
+        skin = skin_path + 'all.xml'
+        with open(skin, 'r') as f:
+            self.skin = f.read()
+        self.setup_title = ('Picons')
         Screen.__init__(self, session)
-        self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion))         
-        self.session = session  
+        self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion)) 
         self.list = []
-        self['text'] = oneList([])
+        self['text'] = oneListsl([])
         self.addon = 'emu'
         self.icount = 0
+        self['key_green'] = Button(_('Install'))
+        self['key_red'] = Button(_('Back'))   
         self['info'] = Label(_('Getting the list, please wait ...'))			
+        self['key_green'] = Button(_('Install'))
+        self['key_red'] = Button(_('Back'))  
         self.downloading = False
         self.timer = eTimer()
         try:
             self.timer.callback.append(self.downloadxmlpage)
         except:
             self.timer_conn = self.timer.timeout.connect(self.downloadxmlpage)
-        
         self.timer.start(1500, True)
 
         self['title'] = Label(_('..:: PLUGIN EMULATORS CAMS ::..'))
         self['version'] = Label(_('V. %s' %  currversion))
         self['maintener'] = Label(_(' by ))^^((')) 
         self['actions'] = ActionMap(['SetupActions', 'ColorActions'], {'ok': self.okRun,
+         'green': self.okRun,
+         'red': self.close, 
          'cancel': self.close}, -2)
 
 
@@ -847,20 +889,24 @@ class PluginEmulators(Screen):
 
 
 class PluginEpg(Screen):
-    instance = None
 
     def __init__(self, session):        
-        assert not skins.instance, "only one skins instance is allowed!"
-        skins.instance = self
-        self.skin = skins.skin  
+        self.session = session
+        skin = skin_path + 'all.xml'
+        with open(skin, 'r') as f:
+            self.skin = f.read()
+        self.setup_title = ('PluginEpg')
+        
         Screen.__init__(self, session)
-        self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion))         
-        self.session = session  
+        self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion)) 
+        
         self.list = []
-        self['text'] = oneList([])
+        self['text'] = oneListsl([])
         self.addon = 'emu'
         self.icount = 0
         self['info'] = Label(_('Getting the list, please wait ...'))			
+        self['key_green'] = Button(_('Install'))
+        self['key_red'] = Button(_('Back')) 
         self.downloading = False
         self.timer = eTimer()
         try:
@@ -873,6 +919,8 @@ class PluginEpg(Screen):
         self['version'] = Label(_('V. %s' %  currversion))
         self['maintener'] = Label(_(' by ))^^((')) 
         self['actions'] = ActionMap(['SetupActions', 'ColorActions'], {'ok': self.okRun,
+         'green': self.okRun,
+         'red': self.close,  
          'cancel': self.close}, -2)
 
 
@@ -917,20 +965,21 @@ class PluginEpg(Screen):
             
 class PluginIptv(Screen):
 
-    instance = None
-
     def __init__(self, session):        
-        assert not skins.instance, "only one skins instance is allowed!"
-        skins.instance = self
-        self.skin = skins.skin  
+        self.session = session
+        skin = skin_path + 'all.xml'
+        with open(skin, 'r') as f:
+            self.skin = f.read()
+        self.setup_title = ('PluginIptv')
         Screen.__init__(self, session)
-        self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion))         
-        self.session = session  
+        self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion)) 
         self.list = []
-        self['text'] = oneList([]) 
+        self['text'] = oneListsl([]) 
         self.addon = 'emu'
         self.icount = 0
         self['info'] = Label(_('Getting the list, please wait ...'))		
+        self['key_green'] = Button(_('Install'))
+        self['key_red'] = Button(_('Back')) 
         self.downloading = False
         self.timer = eTimer()
         try:
@@ -943,6 +992,8 @@ class PluginIptv(Screen):
         self['version'] = Label(_('V. %s' %  currversion))
         self['maintener'] = Label(_(' by ))^^(('))        
         self['actions'] = ActionMap(['SetupActions', 'ColorActions'], {'ok': self.okRun,
+         'green': self.okRun,
+         'red': self.close,   
          'cancel': self.close}, -2)
 
 
@@ -986,20 +1037,23 @@ class PluginIptv(Screen):
 
 class Kodi(Screen):
 
-    instance = None
-
     def __init__(self, session):        
-        assert not skins.instance, "only one skins instance is allowed!"
-        skins.instance = self
-        self.skin = skins.skin  
+        self.session = session
+        skin = skin_path + 'all.xml'
+        with open(skin, 'r') as f:
+            self.skin = f.read()
+        self.setup_title = ('Kodi')
+        
         Screen.__init__(self, session)
-        self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion))         
-        self.session = session  
+        self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion)) 
+        
         self.list = []		
-        self['text'] = oneList([]) 		
+        self['text'] = oneListsl([]) 		
         self.addon = 'emu'
         self.icount = 0
         self['info'] = Label(_('Getting the list, please wait ...'))
+        self['key_green'] = Button(_('Install'))
+        self['key_red'] = Button(_('Back')) 
         self.downloading = False
         self.timer = eTimer()
         try:
@@ -1012,6 +1066,8 @@ class Kodi(Screen):
         self['version'] = Label(_('V. %s' %  currversion))
         self['maintener'] = Label(_(' by ))^^(('))          
         self['actions'] = ActionMap(['SetupActions', 'ColorActions'], {'ok': self.okRun,
+         'green': self.okRun,
+         'red': self.close, 
          'cancel': self.close}, -2)
 
 
@@ -1054,20 +1110,22 @@ class Kodi(Screen):
             self.close
 
 class PluginMultiboot(Screen):
-    instance = None
     
     def __init__(self, session):        
-        assert not skins.instance, "only one skins instance is allowed!"
-        skins.instance = self
-        self.skin = skins.skin  
+        self.session = session
+        skin = skin_path + 'all.xml'
+        with open(skin, 'r') as f:
+            self.skin = f.read()
+        self.setup_title = ('PluginMultiboot')
         Screen.__init__(self, session)
-        self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion))         
-        self.session = session  
+        self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion)) 
         self.list = []		
-        self['text'] = oneList([]) 		
+        self['text'] = oneListsl([]) 		
         self.addon = 'emu'
         self.icount = 0
         self['info'] = Label(_('Getting the list, please wait ...'))
+        self['key_green'] = Button(_('Install'))
+        self['key_red'] = Button(_('Back'))  
         self.downloading = False
         self.timer = eTimer()
         try:
@@ -1079,6 +1137,8 @@ class PluginMultiboot(Screen):
         self['version'] = Label(_('V. %s' %  currversion))
         self['maintener'] = Label(_(' by ))^^(('))         
         self['actions'] = ActionMap(['SetupActions', 'ColorActions'], {'ok': self.okRun,
+         'green': self.okRun,
+         'red': self.close,  
          'cancel': self.close}, -2)
 
 
@@ -1122,20 +1182,24 @@ class PluginMultiboot(Screen):
 
             
 class PluginPpanel(Screen):
-    instance = None
     
     def __init__(self, session):        
-        assert not skins.instance, "only one skins instance is allowed!"
-        skins.instance = self
-        self.skin = skins.skin  
+        self.session = session
+        skin = skin_path + 'all.xml'
+        with open(skin, 'r') as f:
+            self.skin = f.read()
+        self.setup_title = ('PluginPpanel')
+        
         Screen.__init__(self, session)
-        self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion))         
-        self.session = session  
+        self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion)) 
+        
         self.list = []		
-        self['text'] = oneList([]) 		
+        self['text'] = oneListsl([]) 		
         self.addon = 'emu'
         self.icount = 0
         self['info'] = Label(_('Getting the list, please wait ...'))
+        self['key_green'] = Button(_('Install'))
+        self['key_red'] = Button(_('Back'))   
         self.downloading = False
         self.timer = eTimer()
         try:
@@ -1147,6 +1211,8 @@ class PluginPpanel(Screen):
         self['version'] = Label(_('V. %s' %  currversion))
         self['maintener'] = Label(_(' by ))^^((')) 
         self['actions'] = ActionMap(['SetupActions', 'ColorActions'], {'ok': self.okRun,
+         'green': self.okRun,
+         'red': self.close,  
          'cancel': self.close}, -2)
 
 
@@ -1189,20 +1255,24 @@ class PluginPpanel(Screen):
             self.close
 
 class PluginSettings(Screen):
-    instance = None
 
     def __init__(self, session):        
-        assert not skins.instance, "only one skins instance is allowed!"
-        skins.instance = self
-        self.skin = skins.skin  
+        self.session = session
+        skin = skin_path + 'all.xml'
+        with open(skin, 'r') as f:
+            self.skin = f.read()
+        self.setup_title = ('PluginSettings')
+        
         Screen.__init__(self, session)
-        self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion))         
-        self.session = session  
+        self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion)) 
+        
         self.list = []		
-        self['text'] = oneList([]) 		
+        self['text'] = oneListsl([]) 		
         self.addon = 'emu'
         self.icount = 0
         self['info'] = Label(_('Getting the list, please wait ...'))
+        self['key_green'] = Button(_('Install'))
+        self['key_red'] = Button(_('Back')) 
         self.downloading = False
         self.timer = eTimer()
         try:
@@ -1215,6 +1285,8 @@ class PluginSettings(Screen):
         self['version'] = Label(_('V. %s' %  currversion))
         self['maintener'] = Label(_(' by ))^^((')) 
         self['actions'] = ActionMap(['SetupActions', 'ColorActions'], {'ok': self.okRun,
+         'green': self.okRun,
+         'red': self.close,   
          'cancel': self.close}, -2)
 
 
@@ -1255,21 +1327,26 @@ class PluginSettings(Screen):
         else:
             self.close
 
+
 class PluginSpinner(Screen):
-    instance = None
 
     def __init__(self, session):        
-        assert not skins.instance, "only one skins instance is allowed!"
-        skins.instance = self
-        self.skin = skins.skin  
+        self.session = session
+        skin = skin_path + 'all.xml'
+        with open(skin, 'r') as f:
+            self.skin = f.read()
+        self.setup_title = ('PluginSpinner')
+        
         Screen.__init__(self, session)
-        self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion))         
-        self.session = session  
+        self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion)) 
+        
         self.list = []		
-        self['text'] = oneList([])
+        self['text'] = oneListsl([])
         self.addon = 'emu'
         self.icount = 0
         self['info'] = Label(_('Getting the list, please wait ...'))
+        self['key_green'] = Button(_('Install'))
+        self['key_red'] = Button(_('Back'))         
         self.downloading = False
         self.timer = eTimer()
         try:
@@ -1282,6 +1359,8 @@ class PluginSpinner(Screen):
         self['version'] = Label(_('V. %s' %  currversion))
         self['maintener'] = Label(_(' by ))^^(('))         
         self['actions'] = ActionMap(['WizardActions', 'InputActions', 'EPGSelectActions', 'SetupActions', 'ColorActions'], {'ok': self.okRun,
+         'green': self.okRun,
+         'red': self.close,           
          'cancel': self.close}, -2)
 
     def downloadxmlpage(self):
@@ -1322,20 +1401,31 @@ class PluginSpinner(Screen):
             self.close
 
 class PluginSkins(Screen):
-    instance = None
+    # instance = None
 
-    def __init__(self, session):        
-        assert not skins.instance, "only one skins instance is allowed!"
-        skins.instance = self
-        self.skin = skins.skin  
+    def __init__(self, session):   
+        self.session = session
+        skin = skin_path + 'all.xml'
+        with open(skin, 'r') as f:
+            self.skin = f.read()
+        self.setup_title = ('PluginSkins')
         Screen.__init__(self, session)
-        self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion))         
-        self.session = session  
+        self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion)) 
+    
+        # assert not skins.instance, "only one skins instance is allowed!"
+        # skins.instance = self
+        # self.skin = skins.skin  
+        # Screen.__init__(self, session)
+        # self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion))         
+        # self.session = session  
+        
         self.list = []		
-        self['text'] = oneList([])
+        self['text'] = oneListsl([])
         self.addon = 'emu'
         self.icount = 0
         self['info'] = Label(_('Getting the list, please wait ...'))
+        self['key_green'] = Button(_('Install'))
+        self['key_red'] = Button(_('Back'))         
         self.downloading = False
         self.timer = eTimer()
         try:
@@ -1347,6 +1437,8 @@ class PluginSkins(Screen):
         self['version'] = Label(_('V. %s' %  currversion))
         self['maintener'] = Label(_(' by ))^^(('))            
         self['actions'] = ActionMap(['WizardActions', 'InputActions', 'EPGSelectActions', 'SetupActions', 'ColorActions'], {'ok': self.okRun,
+         'green': self.okRun,
+         'red': self.close,
          'cancel': self.close}, -2)
 
     def downloadxmlpage(self):
@@ -1389,19 +1481,21 @@ class PluginSkins(Screen):
     
 class PluginSport(Screen):
 
-    instance = None
     def __init__(self, session):        
-        assert not skins.instance, "only one skins instance is allowed!"
-        skins.instance = self
-        self.skin = skins.skin  
+        self.session = session
+        skin = skin_path + 'all.xml'
+        with open(skin, 'r') as f:
+            self.skin = f.read()
+        self.setup_title = ('PluginSport')
         Screen.__init__(self, session)
-        self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion))         
-        self.session = session  
+        self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion)) 
         self.list = []		
-        self['text'] = oneList([]) 		
+        self['text'] = oneListsl([]) 		
         self.addon = 'emu'
         self.icount = 0
         self['info'] = Label(_('Getting the list, please wait ...'))
+        self['key_green'] = Button(_('Install'))
+        self['key_red'] = Button(_('Back'))  
         self.downloading = False
         self.timer = eTimer()
         try:
@@ -1414,6 +1508,8 @@ class PluginSport(Screen):
         self['version'] = Label(_('V. %s' %  currversion))
         self['maintener'] = Label(_(' by ))^^(('))     
         self['actions'] = ActionMap(['SetupActions', 'ColorActions'], {'ok': self.okRun,
+         'green': self.okRun,
+         'red': self.close,   
          'cancel': self.close}, -2)
 
     def downloadxmlpage(self):
@@ -1455,20 +1551,23 @@ class PluginSport(Screen):
 
 class PluginUtility(Screen):
 
-    instance = None
-
     def __init__(self, session):        
-        assert not skins.instance, "only one skins instance is allowed!"
-        skins.instance = self
-        self.skin = skins.skin  
+        self.session = session
+        skin = skin_path + 'all.xml'
+        with open(skin, 'r') as f:
+            self.skin = f.read()
+        self.setup_title = ('PluginUtility')
+        
         Screen.__init__(self, session)
-        self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion))         
-        self.session = session  
+        self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion)) 
+        
         self.list = []		
-        self['text'] = oneList([]) 		
+        self['text'] = oneListsl([]) 		
         self.addon = 'emu'
         self.icount = 0
         self['info'] = Label(_('Getting the list, please wait ...'))
+        self['key_green'] = Button(_('Install'))
+        self['key_red'] = Button(_('Back'))   
         self.downloading = False
         self.timer = eTimer()
         try:
@@ -1481,6 +1580,8 @@ class PluginUtility(Screen):
         self['version'] = Label(_('V. %s' %  currversion))
         self['maintener'] = Label(_(' by ))^^(('))        
         self['actions'] = ActionMap(['SetupActions', 'ColorActions'], {'ok': self.okRun,
+         'green': self.okRun,
+         'red': self.close,    
          'cancel': self.close}, -2)
 
     def downloadxmlpage(self):
@@ -1522,20 +1623,22 @@ class PluginUtility(Screen):
             self.close
 
 class PluginWeather(Screen):
-    instance = None
     
     def __init__(self, session):        
-        assert not skins.instance, "only one skins instance is allowed!"
-        skins.instance = self
-        self.skin = skins.skin      
+        self.session = session
+        skin = skin_path + 'all.xml'
+        with open(skin, 'r') as f:
+            self.skin = f.read()
+        self.setup_title = ('PluginWeather')
         Screen.__init__(self, session)
-        self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion))         
-        self.session = session  
+        self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion)) 
         self.list = []		
-        self['text'] = oneList([]) 		
+        self['text'] = oneListsl([]) 		
         self.addon = 'emu'
         self.icount = 0
         self['info'] = Label(_('Getting the list, please wait ...'))
+        self['key_green'] = Button(_('Install'))
+        self['key_red'] = Button(_('Back'))  
         self.downloading = False
         self.timer = eTimer()
         try:
@@ -1548,6 +1651,8 @@ class PluginWeather(Screen):
         self['version'] = Label(_('V. %s' %  currversion))
         self['maintener'] = Label(_(' by ))^^(('))          
         self['actions'] = ActionMap(['SetupActions', 'ColorActions'], {'ok': self.okRun,
+         'green': self.okRun,
+         'red': self.close,   
          'cancel': self.close}, -2)
 
 
@@ -1591,29 +1696,29 @@ class PluginWeather(Screen):
 
 ##############################
 class DailySetting(Screen):
-    instance = None
-    skin = skin_path + 'DailySetting.xml'  
-    f = open(skin, 'r')
-    skin = f.read()
-    f.close() 
 
     def __init__(self, session):        
-        assert not DailySetting.instance, "only one DailySetting instance is allowed!"
-        DailySetting.instance = self
-        self.skin = DailySetting.skin   
+        self.session = session
+        skin = skin_path + 'DailySetting.xml'
+        with open(skin, 'r') as f:
+            self.skin = f.read()
+        self.setup_title = ('DailySetting')
+        
         Screen.__init__(self, session)
-        self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion))         
-        self.session = session  
+        self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion)) 
+
         self['text'] = SLList([])
         self.working = False
         self.selection = 'all'
         self['title'] = Label(_('..:: DAILY SETTINGS ::..'))
-        self['version'] = Label(_('Version %s' % currversion))
+        self['version'] = Label(_('V. %s' %  currversion))
         self['maintener'] = Label(_(' by ))^^((')) 
         self['key_green'] = Button(_('Select'))         
+        self['key_red'] = Button(_('Back')) 
         self['actions'] = NumberActionMap(['SetupActions', 'ColorActions', ], {'ok': self.okRun,
          'green': self.okRun,
          'back': self.closerm,
+         'red': self.closerm,
          'cancel': self.closerm}, -1)
         self.onLayoutFinish.append(self.updateMenuList)
 
@@ -1637,9 +1742,7 @@ class DailySetting(Screen):
   
     def keyNumberGlobalCB(self, idx):
         sel = self.menu_list[idx]
-        # if sel == _('SETTINGS CORVONE'):
-            # self.session.open(slSettingCorvo) 
-            
+           
         if sel == _('SETTINGS CIEFP'):
             self.session.open(slSettingCiefp)             
         elif sel == _('SETTINGS MALIMALI'):
@@ -1658,154 +1761,25 @@ class DailySetting(Screen):
         elif sel == _('SETTINGS VHANNIBAL'):
             self.session.open(PluginslSettingVhan)             
             
-# class slSettingCorvo(Screen):
-    # instance = None
-    # skin = skin_path + 'Setting.xml'  
-    # f = open(skin, 'r')
-    # skin = f.read()
-    # f.close()     
-
-    # def __init__(self, session):        
-        # assert not slSettingCorvo.instance, "only one slSettingCorvo instance is allowed!"
-        # slSettingCorvo.instance = self
-        # self.skin = slSettingCorvo.skin       
-        # Screen.__init__(self, session)
-        # self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion))         
-        # self.session = session  
-        # self.list = []		
-        # self['text'] = oneList([]) 		
-        # self.addon = 'emu'
-        # self.icount = 0
-        # self['info'] = Label(_('Getting the list, please wait ...'))
-        # self.downloading = False
-        # self.timer = eTimer()
-        # try:
-            # self.timer.callback.append(self.downloadxmlpagecb)
-        # except:
-            # self.timer_conn = self.timer.timeout.connect(self.downloadxmlpagecb)
-        # self.timer.start(1500, True)
-        # self['title'] = Label(_('..:: SETTING Corvone ::..'))
-        # self['version'] = Label(_('Version %s' % currversion))
-        # self['maintener'] = Label(_(' by ))^^(('))           
-        # self['actions'] = ActionMap(['SetupActions', 'ColorActions'], {'ok': self.okRun,
-         # 'cancel': self.close}, -2)
-
-
-    # def downloadxmlpagecb(self):
-        # url = base64.b64decode("aHR0cDovL3d3dy5jb3J2b25lLmNvbS9jb3J2b25lLmNvbS9wbHVnaW4vcGFuZWwtYWRkb25zL2luZGV4LnBocD9kaXI9U2V0dGluZ3NCeUNvcnZvbmUv")
-        # getPage(url).addCallback(self._gotPageLoad).addErrback(self.errorLoad)			
-        
-    # def errorLoad(self, error):
-        # print str(error)	
-        # self['info'].setText(_('Try again later ...'))
-        # self.downloading = False
-
-    # def _gotPageLoad(self, data):
-# #        print "In Setting data =", data
-        # self.xml = data
-        # self.names = []
-        # self.urls = []
-        # try:
-            # print "In Setting self.xml =", self.xml
-            # regex = 'href=".*?file=(.*?)"'
-            # match = re.compile(regex,re.DOTALL).findall(self.xml)
-            # print "In Setting match =", match
-            # for url in match:
-                    # name = url #"Vhannibal" + url
-                    # name = name.replace(".zip", "")
-                    # name = name.replace("%20", " ")
-                    # name = name.replace("%2B", "--")
-                    # url64b = base64.b64decode("aHR0cDovL3d3dy5jb3J2b25lLmNvbS9jb3J2b25lLmNvbS9wbHVnaW4vcGFuZWwtYWRkb25zL1NldHRpbmdzQnlDb3J2b25lLw==")
-                    # url = url64b + url
-                    # print "url64b+url: ", url
-                    # self.urls.append(url)
-                    # self.names.append(name)
-                    # self['info'].setText(_('Please select ...'))					   
-            # showlist(self.names, self['text'])							
-            # self.downloading = True
-        # except:
-            # self.downloading = False
-            
-    # def okRun(self):
-        # self.session.openWithCallback(self.okInstall,slMessageBox,(_("Do you want to install?")), slMessageBox.TYPE_YESNO)             
-            
-    # def okInstall(self, result):
-        # if result:
-            # if self.downloading == True:
-# #            try:
-                # selection = str(self['text'].getCurrent())
-                # idx = self["text"].getSelectionIndex()
-                # self.name = self.names[idx]
-                # print 'self.name : ', self.name
-                # url = self.urls[idx]
-                # dest = "/tmp/settings.zip"
-                # print "url =", url
-                # downloadPage(url, dest).addCallback(self.install).addErrback(self.showError)
-# #            except:
-# #                return
-
-            # else:
-                # self.close  
-                # #return
-                
-    # def showError(self, error):
-                # print "download error =", error
-                # self.close()
-
-    # def install(self, fplug):
-        # checkfile = '/tmp/settings.zip'
-        # if os.path.exists(checkfile):
-            # os.system('rm -rf /etc/enigma2/lamedb')
-            # os.system('rm -rf /etc/enigma2/*.radio')
-            # os.system('rm -rf /etc/enigma2/*.tv')
-
-            # fdest1 = "/tmp" 
-            # fdest2 = "/etc/enigma2"
-            # cmd1 = "unzip -o -q '/tmp/settings.zip' -d " + fdest1
-           
-            # self.name2 = self.name.replace(" ", "%20")
-            # self.name2 = self.name.replace("--", "+")            
-            # self.name = self.name2
-
-            # cmd2 = "cp -rf  '/tmp/" + self.name + "'/* " + fdest2
-            # print "cmd2 =", cmd2
-            # cmd3 = "wget -qO - http://127.0.0.1/web/servicelistreload?mode=0 > /tmp/inst.txt 2>&1 &"
-            # cmd4 = "rm -rf /tmp/settings.zip"
-            # cmd5 = "rm -rf /tmp/Corvone*" 
-            # cmd = []
-            # cmd.append(cmd1)
-            # cmd.append(cmd2)
-            # cmd.append(cmd3)
-            # cmd.append(cmd4)
-            # cmd.append(cmd5)
-            # title = _("Installo i Settings")          
-            # self.session.open(slConsole,_(title),cmd)              
-            # #self.onShown.append(self.reloadSettings)
-        
-    # def reloadSettings(self):
-        # ReloadBouquet()
-        # self.mbox = self.session.open(slMessageBox, _('Setting Installati!'), slMessageBox.TYPE_INFO, timeout=5)
-        # self['info'].setText(_('Installazione eseguita con successo!'))     
         
 class PluginslSettingVhan(Screen):
-    instance = None
-    skin = skin_path + 'Setting.xml'  
-    f = open(skin, 'r')
-    skin = f.read()
-    f.close()     
 
-    def __init__(self, session):        
-        assert not PluginslSettingVhan.instance, "only one PluginslSettingVhan instance is allowed!"
-        PluginslSettingVhan.instance = self
-        self.skin = PluginslSettingVhan.skin       
+    def __init__(self, session):  
+        self.session = session
+        skin = skin_path + 'Setting.xml'
+        with open(skin, 'r') as f:
+            self.skin = f.read()
+        self.setup_title = ('PluginslSettingVhan')
         Screen.__init__(self, session)
-        self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion))         
-        self.session = session  
+        self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion))  
+
         self.list = []		
-        self['text'] = oneList([]) 		
+        self['text'] = oneListsl([]) 		
         self.addon = 'emu'
         self.icount = 0
         self['info'] = Label(_('Getting the list, please wait ...'))
+        self['key_green'] = Button(_('Install'))
+        self['key_red'] = Button(_('Back'))   
         self.downloading = False
         self.timer = eTimer()
         try:
@@ -1814,9 +1788,11 @@ class PluginslSettingVhan(Screen):
             self.timer_conn = self.timer.timeout.connect(self.downloadxmlpagecb)
         self.timer.start(1500, True)
         self['title'] = Label(_('..:: SETTING Vhannibal ::..'))
-        self['version'] = Label(_('Version %s' % currversion))
+        self['version'] = Label(_('V. %s' %  currversion))
         self['maintener'] = Label(_(' by ))^^(('))           
         self['actions'] = ActionMap(['SetupActions', 'ColorActions'], {'ok': self.okRun,
+         'green': self.okRun,
+         'red': self.close,
          'cancel': self.close}, -2)
 
 
@@ -1913,24 +1889,24 @@ class PluginslSettingVhan(Screen):
 
         
 class PluginslMilenko61(Screen):
-    instance = None
-    skin = skin_path + 'Setting.xml'  
-    f = open(skin, 'r')
-    skin = f.read()
-    f.close()     
 
     def __init__(self, session):        
-        assert not PluginslMilenko61.instance, "only one PluginslMilenko61 instance is allowed!"
-        PluginslMilenko61.instance = self
-        self.skin = PluginslMilenko61.skin       
+        self.session = session
+        skin = skin_path + 'Setting.xml'
+        with open(skin, 'r') as f:
+            self.skin = f.read()
+        self.setup_title = ('PluginslMilenko61')
+        
         Screen.__init__(self, session)
-        self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion))         
-        self.session = session  
+        self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion)) 
+
         self.list = []		
-        self['text'] = oneList([]) 		
+        self['text'] = oneListsl([]) 		
         self.addon = 'emu'
         self.icount = 0
         self['info'] = Label(_('Getting the list, please wait ...'))
+        self['key_green'] = Button(_('Install'))
+        self['key_red'] = Button(_('Back')) 
         self.downloading = False
         self.timer = eTimer()
         try:
@@ -1939,9 +1915,11 @@ class PluginslMilenko61(Screen):
             self.timer_conn = self.timer.timeout.connect(self.downloadxmlpagecb)
         self.timer.start(1500, True)
         self['title'] = Label(_('..:: SETTING Milenko61 ::..'))
-        self['version'] = Label(_('Version %s' % currversion))
+        self['version'] = Label(_('V. %s' %  currversion))
         self['maintener'] = Label(_(' by ))^^(('))           
         self['actions'] = ActionMap(['SetupActions', 'ColorActions'], {'ok': self.okRun,
+         'green': self.okRun,
+         'red': self.close,  
          'cancel': self.close}, -2)
 
 
@@ -2038,24 +2016,23 @@ class PluginslMilenko61(Screen):
         self['info'].setText(_('Installazione eseguita con successo!')) 
         
 class PluginslSettingManutek(Screen):
-    instance = None
-    skin = skin_path + 'Setting.xml'  
-    f = open(skin, 'r')
-    skin = f.read()
-    f.close()     
 
     def __init__(self, session):        
-        assert not PluginslSettingManutek.instance, "only one PluginslSettingManutek instance is allowed!"
-        PluginslSettingManutek.instance = self
-        self.skin = PluginslSettingManutek.skin         
+        self.session = session
+        skin = skin_path + 'Setting.xml'
+        with open(skin, 'r') as f:
+            self.skin = f.read()
+        self.setup_title = ('PluginslSettingManutek')
+        
         Screen.__init__(self, session)
-        self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion))         
-        self.session = session  
+        self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion)) 
         self.list = []		
-        self['text'] = oneList([]) 		
+        self['text'] = oneListsl([]) 		
         self.addon = 'emu'
         self.icount = 0
         self['info'] = Label(_('Getting the list, please wait ...'))
+        self['key_green'] = Button(_('Install'))
+        self['key_red'] = Button(_('Back'))    
         self.downloading = False
         self.timer = eTimer()
         try:
@@ -2064,9 +2041,11 @@ class PluginslSettingManutek(Screen):
             self.timer_conn = self.timer.timeout.connect(self.downloadxmlpagecb)
         self.timer.start(1500, True)
         self['title'] = Label(_('..:: SETTING Manutek ::..'))
-        self['version'] = Label(_('Version %s' % currversion))
+        self['version'] = Label(_('V. %s' %  currversion))
         self['maintener'] = Label(_(' by ))^^(('))           
         self['actions'] = ActionMap(['SetupActions', 'ColorActions'], {'ok': self.okRun,
+         'green': self.okRun,
+         'red': self.close,  
          'cancel': self.close}, -2)
 
     def downloadxmlpagecb(self):
@@ -2166,24 +2145,22 @@ class PluginslSettingManutek(Screen):
         self['info'].setText(_('Installazione eseguita con successo!'))                 
             
 class slSettingCiefp(Screen):
-    instance = None
-    skin = skin_path + 'Setting.xml'  
-    f = open(skin, 'r')
-    skin = f.read()
-    f.close()     
-    
+
     def __init__(self, session):        
-        assert not slSettingCiefp.instance, "only one slSettingCiefp instance is allowed!"
-        slSettingCiefp.instance = self
-        self.skin = slSettingCiefp.skin          
+        self.session = session
+        skin = skin_path + 'Setting.xml'
+        with open(skin, 'r') as f:
+            self.skin = f.read()
+        self.setup_title = ('slSettingCiefp')
         Screen.__init__(self, session)
-        self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion))         
-        self.session = session  
+        self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion)) 
         self.list = []		
-        self['text'] = oneList([]) 		
+        self['text'] = oneListsl([]) 		
         self.addon = 'emu'
         self.icount = 0
         self['info'] = Label(_('Getting the list, please wait ...'))
+        self['key_green'] = Button(_('Install'))
+        self['key_red'] = Button(_('Back'))         
         self.downloading = False
         self.timer = eTimer()
         try:
@@ -2192,9 +2169,11 @@ class slSettingCiefp(Screen):
             self.timer_conn = self.timer.timeout.connect(self.downloadxmlpagecb)
         self.timer.start(1500, True)
         self['title'] = Label(_('..:: SETTING Ciefp ::..'))
-        self['version'] = Label(_('Version %s' % currversion))
+        self['version'] = Label(_('V. %s' %  currversion))
         self['maintener'] = Label(_(' by ))^^(('))           
         self['actions'] = ActionMap(['SetupActions', 'ColorActions'], {'ok': self.okRun,
+         'green': self.okRun,
+         'red': self.close,        
          'cancel': self.close}, -2)
          
     def downloadxmlpagecb(self):
@@ -2285,24 +2264,22 @@ class slSettingCiefp(Screen):
         self['info'].setText(_('Installazione eseguita con successo!')) 
         
 class slSettingMalimali(Screen):
-    instance = None
-    skin = skin_path + 'Setting.xml'  
-    f = open(skin, 'r')
-    skin = f.read()
-    f.close()     
     
     def __init__(self, session):        
-        assert not slSettingMalimali.instance, "only one slSettingMalimali instance is allowed!"
-        slSettingMalimali.instance = self
-        self.skin = slSettingMalimali.skin          
+        self.session = session
+        skin = skin_path + 'Setting.xml'
+        with open(skin, 'r') as f:
+            self.skin = f.read()
+        self.setup_title = ('slSettingMalimali')
         Screen.__init__(self, session)
-        self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion))         
-        self.session = session  
+        self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion)) 
         self.list = []		
-        self['text'] = oneList([]) 		
+        self['text'] = oneListsl([]) 		
         self.addon = 'emu'
         self.icount = 0
         self['info'] = Label(_('Getting the list, please wait ...'))
+        self['key_green'] = Button(_('Install'))
+        self['key_red'] = Button(_('Back')) 
         self.downloading = False
         self.timer = eTimer()
         try:
@@ -2311,9 +2288,11 @@ class slSettingMalimali(Screen):
             self.timer_conn = self.timer.timeout.connect(self.downloadxmlpagecb)
         self.timer.start(1500, True)
         self['title'] = Label(_('..:: SETTING Malimali ::..'))
-        self['version'] = Label(_('Version %s' % currversion))
+        self['version'] = Label(_('V. %s' %  currversion))
         self['maintener'] = Label(_(' by ))^^(('))           
         self['actions'] = ActionMap(['SetupActions', 'ColorActions'], {'ok': self.okRun,
+         'green': self.okRun,
+         'red': self.close,  
          'cancel': self.close}, -2)
          
     def downloadxmlpagecb(self):
@@ -2406,24 +2385,22 @@ class slSettingMalimali(Screen):
         self['info'].setText(_('Installazione eseguita con successo!'))         
 
 class slSettingPredrag(Screen):
-    instance = None
-    skin = skin_path + 'Setting.xml'  
-    f = open(skin, 'r')
-    skin = f.read()
-    f.close()     
-    
+
     def __init__(self, session):        
-        assert not slSettingPredrag.instance, "only one slSettingPredrag instance is allowed!"
-        slSettingPredrag.instance = self
-        self.skin = slSettingPredrag.skin          
+        self.session = session
+        skin = skin_path + 'Setting.xml'
+        with open(skin, 'r') as f:
+            self.skin = f.read()
+        self.setup_title = ('slSettingPredrag')
         Screen.__init__(self, session)
-        self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion))         
-        self.session = session  
+        self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion)) 
         self.list = []		
-        self['text'] = oneList([]) 		
+        self['text'] = oneListsl([]) 		
         self.addon = 'emu'
         self.icount = 0
         self['info'] = Label(_('Getting the list, please wait ...'))
+        self['key_green'] = Button(_('Install'))
+        self['key_red'] = Button(_('Back'))   
         self.downloading = False
         self.timer = eTimer()
         try:
@@ -2432,9 +2409,11 @@ class slSettingPredrag(Screen):
             self.timer_conn = self.timer.timeout.connect(self.downloadxmlpagecb)
         self.timer.start(1500, True)
         self['title'] = Label(_('..:: SETTING Predrag ::..'))
-        self['version'] = Label(_('Version %s' % currversion))
+        self['version'] = Label(_('V. %s' %  currversion))
         self['maintener'] = Label(_(' by ))^^(('))           
         self['actions'] = ActionMap(['SetupActions', 'ColorActions'], {'ok': self.okRun,
+         'green': self.okRun,
+         'red': self.close,    
          'cancel': self.close}, -2)
          
     def downloadxmlpagecb(self):
@@ -2458,9 +2437,7 @@ class slSettingPredrag(Screen):
             match = re.compile(regex,re.DOTALL).findall(self.xml)
             print "In Setting match =", match
             for url in match:
-                    
                 if url.find('.tar.gz') != -1 : 
-                    
                     name = "predrag" + url
                     # name = name.replace(".zip", "")
                     name = name.replace(".tar.gz", "")                    
@@ -2468,7 +2445,6 @@ class slSettingPredrag(Screen):
                     #Settings_Morph883_0.8W-4.8E-13E.tar.gz
                     # name = name.replace("_Morph883_", "Morpheus883 ")                     
                     # name = name.replace("Settings", "")                        
-                    
                     url64b = base64.b64decode("aHR0cDovLzE3OC42My4xNTYuNzUvcGFuZWxhZGRvbnMvUHJlZHJAZy9wcmVkcmFn")                 
                     url = url64b + url
                     self.urls.append(url)
@@ -2530,24 +2506,22 @@ class slSettingPredrag(Screen):
 
         
 class PluginslSettingMorpheus(Screen):
-    instance = None
-    skin = skin_path + 'Setting.xml'  
-    f = open(skin, 'r')
-    skin = f.read()
-    f.close()     
-    
+
     def __init__(self, session):        
-        assert not PluginslSettingMorpheus.instance, "only one PluginslSettingMorpheus instance is allowed!"
-        PluginslSettingMorpheus.instance = self
-        self.skin = PluginslSettingMorpheus.skin          
+        self.session = session
+        skin = skin_path + 'Setting.xml'
+        with open(skin, 'r') as f:
+            self.skin = f.read()
+        self.setup_title = ('PluginslSettingMorpheus')
         Screen.__init__(self, session)
-        self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion))         
-        self.session = session  
+        self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion)) 
         self.list = []		
-        self['text'] = oneList([]) 		
+        self['text'] = oneListsl([]) 		
         self.addon = 'emu'
         self.icount = 0
         self['info'] = Label(_('Getting the list, please wait ...'))
+        self['key_green'] = Button(_('Install'))
+        self['key_red'] = Button(_('Back'))
         self.downloading = False
         self.timer = eTimer()
         try:
@@ -2556,9 +2530,11 @@ class PluginslSettingMorpheus(Screen):
             self.timer_conn = self.timer.timeout.connect(self.downloadxmlpagecb)
         self.timer.start(1500, True)
         self['title'] = Label(_('..:: SETTING Morpheus883 ::..'))
-        self['version'] = Label(_('Version %s' % currversion))
+        self['version'] = Label(_('V. %s' %  currversion))
         self['maintener'] = Label(_(' by ))^^(('))           
         self['actions'] = ActionMap(['SetupActions', 'ColorActions'], {'ok': self.okRun,
+         'green': self.okRun,
+         'red': self.close,   
          'cancel': self.close}, -2)
          
     def downloadxmlpagecb(self):
@@ -2648,19 +2624,16 @@ class PluginslSettingMorpheus(Screen):
         self['info'].setText(_('Installazione eseguita con successo!'))     
        
 class InstallGo(Screen):
-    instance = None
-    skin = skin_path + 'InstallGo.xml' 
-    f = open(skin, 'r')
-    skin = f.read()
-    f.close() 
-    
+
     def __init__(self, session, data, name, selection = None):     
-        assert not InstallGo.instance, "only one InstallGo instance is allowed!"
-        InstallGo.instance = self
-        self.skin = InstallGo.skin   
+        self.session = session
+        skin = skin_path + 'InstallGo.xml'
+        with open(skin, 'r') as f:
+            self.skin = f.read()
+        self.setup_title = ('InstallGo')
+        
         Screen.__init__(self, session)
-        self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion))         
-        self.session = session  
+        self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion)) 
         print "In slInstallGo data =", data
         print "In slInstallGo name =", name
         self.selection = selection
@@ -2680,12 +2653,16 @@ class InstallGo(Screen):
                 self.names.append(name)
                 self.urls.append(url)				
         print "In slInstallGo self.names =", self.names
-        self['text'] = OtherListsl([])
+        self['text'] = oneListsl([])
         self['info'].setText(_('Please install ...'))	
+        self['key_green'] = Button(_('Install'))
+        self['key_red'] = Button(_('Back'))  
         self['title'] = Label(_('..:: Please Select to Install::..'))
         self['version'] = Label(_('V. %s' %  currversion))
         self['maintener'] = Label(_(' by ))^^((')) 
         self['actions'] = ActionMap(['SetupActions'], {'ok': self.message,
+         'green': self.message,
+         'red': self.close,
          'cancel': self.close}, -2)
         self.onLayoutFinish.append(self.start)
         
@@ -2872,20 +2849,15 @@ class InstallGo(Screen):
             self['info'].setText(_('Installation successful!'))  
 
 class slConsole(Screen):
-    instance = None
-    skin = skin_path + 'slConsole.xml'  
-    f = open(skin, 'r')
-    skin = f.read()
-    f.close() 
-
+        
     def __init__(self, session, title = None, cmdlist = None, finishedCallback = None, closeOnSuccess = False):
-    
-        assert not slConsole.instance, "only one slConsole instance is allowed!"
-        slConsole.instance = self
-        self.skin = slConsole.skin      
+        self.session = session
+        skin = skin_path + 'slConsole.xml'
+        with open(skin, 'r') as f:
+            self.skin = f.read()
+        self.setup_title = ('slConsole')
         Screen.__init__(self, session)
-        self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion))         
-        self.session = session  
+        self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion)) 
         self['version'] = Label(_('V. %s' %  currversion))
         self['maintener'] = Label(_(' by ))^^(('))         
         self.finishedCallback = finishedCallback
@@ -2896,8 +2868,6 @@ class slConsole(Screen):
          'up': self['text'].pageUp,
          'down': self['text'].pageDown}, -1)
         self.cmdlist = cmdlist
-        #self.newtitle = title
-        #self.onShown.append(self.updateTitle)
         self.container = eConsoleAppContainer()
         self.run = 0
         self.container.appClosed.append(self.runFinished)
@@ -2939,19 +2909,17 @@ class slConsole(Screen):
         self['text'].setText(self['text'].getText() + str)
 
 class IPKinst(Screen):
-    instance = None
-    skin = skin_path + 'IPKinst.xml'  
-    f = open(skin, 'r')
-    skin = f.read()
-    f.close() 
-    
+
     def __init__(self, session):
-        assert not IPKinst.instance, "only one IPKinst instance is allowed!"
-        IPKinst.instance = self
-        self.skin = IPKinst.skin      
+    
+        self.session = session
+        skin = skin_path + 'IPKinst.xml'
+        with open(skin, 'r') as f:
+            self.skin = f.read()
+        self.setup_title = ('IPKinst')
         Screen.__init__(self, session)
-        self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion))         
-        self.session = session  
+        self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion))     
+
         self.flist = []
         idx = 0
         ipkpth = config.plugins.slPanel.ipkpth.value
@@ -2972,10 +2940,12 @@ class IPKinst(Screen):
         self['key_green'] = Button(_('Install'))
         self['key_yellow'] = Button(_('Restart'))
         self['key_blue'] = Button(_('Remove'))
+        self['key_red'] = Button(_('Back'))  
         self['actions'] = ActionMap(['OkCancelActions', 'WizardActions', 'ColorActions', "MenuActions"], {'ok': self.ipkinst,
          'green': self.ipkinst,
          'yellow': self.msgipkinst,
          'blue': self.msgipkrmv,
+         'red': self.close,
          'menu': self.goConfig,
          'cancel': self.close}, -1)
         self.getfreespace()
@@ -3057,31 +3027,28 @@ class IPKinst(Screen):
 
             
 class pluginSl(Screen):
-    instance = None
-    skin = skin_path + 'pluginSl.xml'  
-    f = open(skin, 'r')
-    skin = f.read()
-    f.close() 
 
     def __init__(self, session):
-        assert not pluginSl.instance, "only one pluginSl instance is allowed!"
-        pluginSl.instance = self
-        self.skin = pluginSl.skin      
+        self.session = session
+        skin = skin_path + 'pluginSl.xml'
+        with open(skin, 'r') as f:
+            self.skin = f.read()
+        self.setup_title = ('pluginSl')
         Screen.__init__(self, session)
-        self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion))         
-        self.session = session  
+        self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion)) 
         self.list = []
-        self['list'] = OtherListsl([])  
+        self['list'] = oneListsl([])  
         self['title'] = Label(_('..:: SAT-LODGE UNINSTALLER ::..'))
         self['version'] = Label(_('V. %s' %  currversion))
         self['maintener'] = Label(_(' by ))^^(('))        
-        #self['green'] = Pixmap()
-        self['key_green'] = Label(_('Uninstall'))
+        self['key_green'] = Button(_('Uninstall'))
         self['key_yellow'] = Button(_('Restart'))
+        self['key_red'] = Button(_('Back'))    
         self['info'] = Label()
         self['actions'] = ActionMap(['SetupActions', 'ColorActions'], {'green': self.message1,
          'ok': self.message1,
          'yellow': self.msgipkrst,
+         'red': self.close,
          'cancel': self.close}, -1)
         self.getfreespace()
         ###########
@@ -3115,6 +3082,7 @@ class pluginSl(Screen):
         fspace = freespace()
         self.freespace = fspace
         self['info'].setText(self.freespace)
+        self.openList()
 
     def freespace():
         try:
@@ -3155,21 +3123,15 @@ class slMessageBox(Screen):
     TYPE_WARNING = 2
     TYPE_ERROR = 3
     TYPE_MESSAGE = 4
-
-    instance = None
-    skin = skin_path + 'slMessageBox.xml'  
-    f = open(skin, 'r')
-    skin = f.read()
-    f.close()     
+   
     def __init__(self, session, text, type = TYPE_YESNO, timeout = -1, close_on_any_key = False, default = True, enable_input = True, msgBoxID = None, picon = None, simple = False, list = [], timeout_default = None):
-
-
-        assert not slMessageBox.instance, "only one slMessageBox instance is allowed!"
-        slMessageBox.instance = self
-        self.skin = slMessageBox.skin      
+        self.session = session
+        skin = skin_path + 'slMessageBox.xml'
+        with open(skin, 'r') as f:
+            self.skin = f.read()
+        self.setup_title = ('slMessageBox')
         Screen.__init__(self, session)
-        self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion))         
-        self.session = session          
+        self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion)) 
         self.type = type
         self.msgBoxID = msgBoxID
         self['text'] = Label(text)
@@ -3321,25 +3283,21 @@ class slMessageBox(Screen):
 
 
 class slPanelConfig(Screen, ConfigListScreen):
-    instance = None
-    skin = skin_path + 'slPanelConfig.xml'  
-    f = open(skin, 'r')
-    skin = f.read()
-    f.close()         
 
     def __init__(self, session):
-        assert not slPanelConfig.instance, "only one slPanelConfig instance is allowed!"
-        slPanelConfig.instance = self
-        self.skin = slPanelConfig.skin      
+        self.session = session
+        skin = skin_path + 'slPanelConfig.xml'
+        with open(skin, 'r') as f:
+            self.skin = f.read()
+        self.setup_title = ('slPanelConfig')
         Screen.__init__(self, session)
-        self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion))         
-        self.session = session  
+        self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion)) 
         self['title'] = Label(_('..:: Sat-Lodge Config ::..'))
         self['version'] = Label(_('V. %s' %  currversion))
         self['maintener'] = Label(_(' by ))^^((')) 
         self['info'] = Label(_('Config Panel Addon'))       
-        self['green'] = Pixmap()
-        self['key_green'] = Label(_('Save'))
+        self['key_red'] = Button(_('Back'))
+        self['key_green'] = Button(_('Save'))
         # self['key_yellow'] = Button(_('Update'))
         configlist = []
         ConfigListScreen.__init__(self, configlist, session=session)
