@@ -3,46 +3,56 @@
 #"*     all right reserved               *"
 #"*          no copy                     *"
 #"****************************************"
+# from skin import loadSkin
 from Components.ActionMap import ActionMap, NumberActionMap
 from Components.Button import Button
 from Components.FileList import FileList
 from Components.Label import Label
+from Components.Language import language
 from Components.MenuList import MenuList
+from Components.MultiContent import MultiContentEntryText, MultiContentEntryPixmapAlphaTest
 from Components.Pixmap import Pixmap
 from Components.PluginComponent import plugins
+from Components.ScrollLabel import ScrollLabel
 from Components.Sources.List import List
-from enigma import *
+from Components.Sources.StaticText import StaticText
 from Plugins.Plugin import PluginDescriptor
 from Screens.ChoiceBox import ChoiceBox
 from Screens.Console import Console
-from Screens.MessageBox import MessageBox
-from Screens.Screen import Screen
 from Screens.Console import Console
-from Screens.Standby import TryQuitMainloop
+from Screens.MessageBox import MessageBox
 from Screens.PluginBrowser import PluginBrowser
-from Components.PluginComponent import plugins
+from Screens.Screen import Screen
+from Screens.Standby import TryQuitMainloop
 from ServiceReference import ServiceReference
-# from skin import loadSkin
 from Tools import Notifications
-from xml.dom import Node, minidom
-from twisted.web.client import getPage
+from Tools.BoundFunction import boundFunction
+from Tools.Directories import *
 from Tools.Directories import SCOPE_SKIN_IMAGE, resolveFilename, SCOPE_PLUGINS, fileExists, copyfile, SCOPE_LANGUAGE
-from Tools.LoadPixmap import LoadPixmap
-from Components.ScrollLabel import ScrollLabel
-import os
-import urllib
-from enigma import getDesktop
 from Tools.GetEcmInfo import GetEcmInfo
-from enigma import eTimer, eDVBCI_UI, eListboxPythonStringContent, eListboxPythonConfigContent
+from Tools.LoadPixmap import LoadPixmap
+from enigma import *
+from enigma import getDesktop, gFont, eListboxPythonMultiContent, eTimer, ePicLoad, loadPNG, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_HALIGN_CENTER, RT_VALIGN_CENTER
+from os import path, listdir, remove, mkdir, chmod, walk
+from twisted.web.client import getPage
+from xml.dom import Node, minidom
+import os
+import os, gettext, sys, time
 import time
+import urllib
+Version = '1.6'
 plugin_path = '/usr/lib/enigma2/python/Plugins/SatLodge/slManager/'
 
+
+
+dwidth = getDesktop(0).size().width()
+DESKHEIGHT = getDesktop(0).size().height()
 skin_path = plugin_path
 HD = getDesktop(0).size()
 if HD.width() > 1280:
-   skin_path = plugin_path + '/res/skins/fhd/'
+   skin_path = plugin_path + 'res/skins/fhd/'
 else:
-   skin_path = plugin_path + '/res/skins/hd/'
+   skin_path = plugin_path + 'res/skins/hd/'
    
    
 ########skin
@@ -61,22 +71,31 @@ else:
     # loadSkin(plugin_path + 'img/skin.xml')
     
 
-DESKHEIGHT = getDesktop(0).size().height()
-from Components.MultiContent import MultiContentEntryText, MultiContentEntryPixmapAlphaTest
-from enigma import eTimer, eListboxPythonMultiContent, gFont
-from enigma import gFont, eTimer, eConsoleAppContainer, ePicLoad, loadPNG, loadJPG, getDesktop, eServiceReference, iPlayableService, eListboxPythonMultiContent, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_HALIGN_CENTER, RT_VALIGN_CENTER
-dwidth = getDesktop(0).size().width()
+
 
 
 
 
 
 def show_list(h):
-    png1 = '/usr/lib/enigma2/python/Plugins/SatLodge/slManager/res/img/actcam.png'
-    png2 = '/usr/lib/enigma2/python/Plugins/SatLodge/slManager/res/img/defcam.png'
+    # png1 = '/usr/lib/enigma2/python/Plugins/SatLodge/slManager/res/img/actcam.png'
+    # png2 = '/usr/lib/enigma2/python/Plugins/SatLodge/slManager/res/img/defcam.png'
+    png1 = plugin_path + 'res/img/actcam.png'
+    png2 = plugin_path + 'res/img/defcam.png'    
     cond = readCurrent_1()
-    if HD.width() == 1280:    
-    # if sz_w == 1280:
+    if HD.width() > 1280:  
+
+        res = [(h)]
+        # cond = readCurrent_1()
+        if cond == h:
+            res.append(MultiContentEntryPixmapAlphaTest(pos=(5, 6), size=(51, 40), png=loadPNG(png1)))
+            res.append(MultiContentEntryText(pos=(60, 2), size=(698, 50), font=8, text=h+' (Active)', color = 0xadff00 , flags=RT_HALIGN_CENTER))
+
+        else:
+            res.append(MultiContentEntryPixmapAlphaTest(pos=(5, 6), size=(51, 40), png=loadPNG(png2)))
+            res.append(MultiContentEntryText(pos=(60, 2), size=(698, 50), font=8, text=h, flags=RT_HALIGN_CENTER))
+        return res    
+    else:
         res = [(h)]
         if cond == h:
             res.append(MultiContentEntryText(pos=(60, 2), size=(406, 40), font=5, text=h+' (Active)', color = 0xadff00, flags=RT_HALIGN_CENTER))
@@ -85,76 +104,16 @@ def show_list(h):
             res.append(MultiContentEntryText(pos=(60, 2), size=(406, 40), font=5, text=h, flags=RT_HALIGN_CENTER))
             res.append(MultiContentEntryPixmapAlphaTest(pos=(5, 2), size=(51, 40), png=loadPNG(png2)))
         return res
-    else:
-        res = [(h)]
-        # cond = readCurrent_1()
-        if cond == h:
-            res.append(MultiContentEntryPixmapAlphaTest(pos=(5, 6), size=(51, 40), png=loadPNG(png1)))
-            res.append(MultiContentEntryText(pos=(60, 2), size=(698, 50), font=8, text=h+' (Active)', color = 0xadff00 , flags=RT_HALIGN_CENTER))
-        else:
-            res.append(MultiContentEntryPixmapAlphaTest(pos=(5, 6), size=(51, 40), png=loadPNG(png2)))
-            res.append(MultiContentEntryText(pos=(60, 2), size=(698, 50), font=8, text=h, flags=RT_HALIGN_CENTER))
-        return res
-
-# def show_list(h):
-    # png1 = '/usr/lib/enigma2/python/Plugins/SatLodge/slManager/img/actcam.png'
-    # png2 = '/usr/lib/enigma2/python/Plugins/SatLodge/slManager/img/defcam.png'
-    # cond = readCurrent_1()
-    # if sz_w == 1280:
-        # res = [(h)]
-        # if cond == h:
-            # res.append(MultiContentEntryText(pos=(2, 2), size=(406, 40), font=5, text=h+' (Active)', color = 0xadff00, flags=RT_HALIGN_CENTER))
-            # res.append(MultiContentEntryPixmapAlphaTest(pos=(10, 2), size=(51, 40), png=loadPNG(png1)))
-        # else:
-            # res.append(MultiContentEntryText(pos=(2, 2), size=(406, 40), font=5, text=h, flags=RT_HALIGN_CENTER))
-            # res.append(MultiContentEntryPixmapAlphaTest(pos=(10, 2), size=(51, 40), png=loadPNG(png2)))
-        # return res
-    # else:
-        # res = [(h)]
-        # # cond = readCurrent_1()
-        # if cond == h:
-            # res.append(MultiContentEntryPixmapAlphaTest(pos=(10, 6), size=(51, 40), png=loadPNG(png1)))
-            # res.append(MultiContentEntryText(pos=(37, 2), size=(698, 50), font=8, text=h+' (Active)', color = 0xadff00 , flags=RT_HALIGN_CENTER))
-        # else:
-            # res.append(MultiContentEntryPixmapAlphaTest(pos=(10, 6), size=(51, 40), png=loadPNG(png2)))
-            # res.append(MultiContentEntryText(pos=(37, 2), size=(698, 50), font=8, text=h, flags=RT_HALIGN_CENTER))
-        # return res
-
-        
-def show_list_1(h):
-
-    if HD.width() == 1280:
-    # if sz_w == 1280:
-        res = [h]
-        res.append(MultiContentEntryText(pos=(2, 2), size=(660, 40), font=0, text=h, flags=RT_HALIGN_LEFT))
-        return res
-    else:
-        res = [h]
-        res.append(MultiContentEntryText(pos=(2, 2), size=(670, 50), font=0, text=h, flags=RT_HALIGN_LEFT))
-        return res
-        
-class m2list(MenuList):
-    def __init__(self, list):
-        MenuList.__init__(self, list, False, eListboxPythonMultiContent)
-        self.l.setFont(0, gFont('Regular', 14))
-        self.l.setFont(1, gFont('Regular', 16))
-        self.l.setFont(2, gFont('Regular', 18))
-        self.l.setFont(3, gFont('Regular', 20))
-        self.l.setFont(4, gFont('Regular', 22))
-        self.l.setFont(5, gFont('Regular', 24))
-        self.l.setFont(6, gFont('Regular', 26))
-        self.l.setFont(7, gFont('Regular', 28))
-        self.l.setFont(8, gFont('Regular', 30))
-        
 class webList(MenuList):
     def __init__(self, list):
         MenuList.__init__(self, list, True, eListboxPythonMultiContent)
-        if DESKHEIGHT > 1000:
+        if DESKHEIGHT == 1920:
             self.l.setItemHeight(50)
             self.l.setFont(0, gFont('Regular', 36))
         else:
             self.l.setItemHeight(40)
             self.l.setFont(0, gFont('Regular', 23))
+            
 def showlist(data, list):
     icount = 0
     plist = []
@@ -163,9 +122,53 @@ def showlist(data, list):
         plist.append(show_list_1(name))
         icount = icount + 1
         list.setList(plist)
-    
+ 
+        
+def show_list_1(h):
 
-Version = '1.4'
+    if HD.width() > 1280: 
+
+        res = [h]
+        res.append(MultiContentEntryText(pos=(2, 2), size=(670, 40), font=8, text=h, flags=RT_HALIGN_LEFT))    
+    else:       
+
+
+        res = [h]
+        res.append(MultiContentEntryText(pos=(2, 2), size=(660, 30), font=3, text=h, flags=RT_HALIGN_LEFT))    
+    return res
+        
+# def show_list_1(h):
+
+    # if HD.width() == 1280:
+    # # if sz_w == 1280:
+        # res = [h]
+        # res.append(MultiContentEntryText(pos=(2, 2), size=(660, 40), font=0, text=h, flags=RT_HALIGN_LEFT))
+        # return res
+    # else:
+        # res = [h]
+        # res.append(MultiContentEntryText(pos=(2, 2), size=(670, 50), font=0, text=h, flags=RT_HALIGN_LEFT))
+        # return res
+        
+class m2list(MenuList):
+    def __init__(self, list):
+        MenuList.__init__(self, list, False, eListboxPythonMultiContent)
+        self.l.setFont(0, gFont('Regular', 16))
+        self.l.setFont(1, gFont('Regular', 20))
+        self.l.setFont(2, gFont('Regular', 22))
+        self.l.setFont(3, gFont('Regular', 24))
+        self.l.setFont(4, gFont('Regular', 26))
+        self.l.setFont(5, gFont('Regular', 28))
+        self.l.setFont(6, gFont('Regular', 30))
+        self.l.setFont(7, gFont('Regular', 32))
+        self.l.setFont(8, gFont('Regular', 34))
+        if HD.width() > 1280: 
+            self.l.setItemHeight(50)        
+        else:        
+            self.l.setItemHeight(45)  
+        
+   
+
+
 ECM_INFO = '/tmp/ecm.info'
 EMPTY_ECM_INFO = ('', '0', '0', '0')
 
@@ -178,10 +181,10 @@ class slManager(Screen):
 
         instance = None
     
-        if DESKHEIGHT < 1000:		
-            skin = skin_path + 'slManager.xml'
-        else:	
-            skin = skin_path + 'slManagerFHD.xml'
+        # if DESKHEIGHT < 1280:		
+        skin = skin_path + 'slManager.xml'
+        # else:	
+            # skin = skin_path + 'slManagerFHD.xml'
         f = open(skin, 'r')
         skin = f.read()
         f.close()    
@@ -233,7 +236,6 @@ class slManager(Screen):
                 self.softcamslist = []
                 self['desc'] = Label()
                 self['ecminfo'] = Label(_('Ecm Info')) 
-                # self["list"] = MenuList(self.softcamslist)
                 self["list"] = m2list([])
                 self.timer = eTimer()
                 self['desc'].setText(_('Scanning and retrieval list softcam ...'))
@@ -256,12 +258,8 @@ class slManager(Screen):
 
         def slpanel(self):
             if fileExists('/usr/lib/enigma2/python/Plugins/SatLodge/slPanel/plugin.pyo'):
-                # from Plugins.SatLodge.slPanel.plugin import *
                 from Plugins.SatLodge.slPanel.plugin import logoStrt                
-                #self.close( )
-                #self.close(logoStrt)
                 self.session.openWithCallback(self.close, logoStrt)
-#                self.session.open(self.close, logoStrt) 
             else: 
                 self.session.open(MessageBox,("slPanel Not Installed!!"), type=MessageBox.TYPE_INFO, timeout=3)
                
@@ -336,7 +334,6 @@ class slManager(Screen):
                         except:
                                 self.close()
 
-                # self.session.open(MessageBox,str(self.softcamslist)+'\n'+str(self.cmd1), type=MessageBox.TYPE_INFO)
                 if last != var:
                         try:
                                 self.currCam = self.softcamslist[var][0]
@@ -419,11 +416,11 @@ class slManager(Screen):
                         sfile.close()
                         # self['list'].setList(self.softcamslist)
                         self['list'].l.setList(self.softcamslist)
-                        if HD.width() == 1280:                        
-                        # if sz_w == 1280:
-                            self['list'].l.setItemHeight(40)
-                        else:
-                            self['list'].l.setItemHeight(50)
+                        # if HD.width() == 1280:                        
+                        # # if sz_w == 1280:
+                            # self['list'].l.setItemHeight(40)
+                        # else:
+                            # self['list'].l.setItemHeight(50)
                         self.namelist = pliste
                 return
 
@@ -497,16 +494,15 @@ class slManager(Screen):
                 os.system("cp /etc/autocam2.txt /etc/autocam.txt")
 
 
-
 ###################################                
 class GetipklistLs(Screen):
 
     instance = None
     
-    if DESKHEIGHT < 1000:		
-        skin = skin_path + 'GetipklistLs.xml'
-    else:	
-        skin = skin_path + 'GetipklistLsFHD.xml'
+    # if DESKHEIGHT < 1280:		
+    skin = skin_path + 'GetipklistLs.xml'
+    # else:	
+        # skin = skin_path + 'GetipklistLsFHD.xml'
     f = open(skin, 'r')
     skin = f.read()
     f.close()    
@@ -530,7 +526,9 @@ class GetipklistLs(Screen):
         # # self.list = []
         self.names = []
         self.names_1 = []
-        self['text'] = webList([])
+        self.list = []		
+        self['text'] = m2list([])
+        # self['text'] = webList([])
         self['maintener'] = Label(_(' by ))^^(('))         
         self['info'] = Label(_('Getting the list, please wait ...'))
         self['version'] = Label(_('V. %s' % Version)) 
@@ -546,7 +544,16 @@ class GetipklistLs(Screen):
         self.timer.start(100, 1)
         self['actions'] = ActionMap(['SetupActions', 'ColorActions'], {'ok': self.okClicked,
         'cancel': self.close}, -1)
+        # self.onShown.append(self.get_list)
 
+
+    # def get_list(self):
+        # self.timer = eTimer()
+        # try:
+            # self.timer.callback.append(self.downloadxmlpage)
+
+        # except:
+            # self.timer_conn = self.timer.timeout.connect(self.downloadxmlpage)
     def downloadxmlpage(self):
         url = 'http://sat-lodge.it/xml/PluginEmulators.xml'    
 
@@ -594,7 +601,6 @@ class GetipklistLs(Screen):
                 return
 
         else:
-#            self.close          
             return        
 
 
@@ -604,10 +610,10 @@ class GetipkLs(Screen):
 
     instance = None
     
-    if DESKHEIGHT < 1000:		
-        skin = skin_path + 'GetipkLs.xml'
-    else:	
-        skin = skin_path + 'GetipkLsFHD.xml'
+    # if DESKHEIGHT < 1280:		
+    skin = skin_path + 'GetipkLs.xml'
+    # else:	
+        # skin = skin_path + 'GetipkLsFHD.xml'
     f = open(skin, 'r')
     skin = f.read()
     f.close()    
@@ -626,7 +632,8 @@ class GetipkLs(Screen):
         # Screen.__init__(self, session)
         self.xmlparse = xmlparse
         self.selection = selection
-        self['text'] = webList([])
+        self['text'] = m2list([])        
+        # self['text'] = webList([])
         self.list = []
         for plugins in self.xmlparse.getElementsByTagName('plugins'):
             if str(plugins.getAttribute('cont').encode('utf8')) == self.selection:
@@ -677,6 +684,27 @@ class GetipkLs(Screen):
             dom = self.dom
             com = self.com
             self.session.open(Console, _('Installing: %s') % dom, ['ipkg install -force-overwrite %s' % com])
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 def startConfig(session, **kwargs):

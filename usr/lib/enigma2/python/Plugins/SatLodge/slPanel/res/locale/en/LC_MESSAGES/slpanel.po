@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2018-05-18 14:43+0200\n"
-"PO-Revision-Date: 2018-05-18 14:44+0200\n"
+"POT-Creation-Date: 2019-02-10 14:41+0100\n"
+"PO-Revision-Date: 2019-02-10 14:42+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en_150\n"
@@ -14,473 +14,549 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SearchPath-0: plugin.py\n"
 
-#: plugin.py:153
-msgid "Free"
-msgstr "Free"
+#: plugin.py:163 plugin.py:474
+msgid "IMAGE"
+msgstr ""
 
-#: plugin.py:218 plugin.py:491
+#: plugin.py:164 plugin.py:462
 msgid "SETTINGS DAILY"
 msgstr ""
 
-#: plugin.py:219 plugin.py:471
+#: plugin.py:165 plugin.py:442
 msgid "DEPENDENCIES"
 msgstr ""
 
-#: plugin.py:220 plugin.py:469
+#: plugin.py:166 plugin.py:440
 msgid "DRIVERS"
 msgstr ""
 
-#: plugin.py:221 plugin.py:473
+#: plugin.py:167 plugin.py:444
 msgid "PLUGIN BACKUP"
 msgstr ""
 
-#: plugin.py:222 plugin.py:477
+#: plugin.py:168 plugin.py:448
 msgid "PLUGIN EPG"
 msgstr ""
 
-#: plugin.py:223 plugin.py:475
+#: plugin.py:169 plugin.py:446
 msgid "PLUGIN EMULATORS CAMS"
 msgstr ""
 
-#: plugin.py:224 plugin.py:479
+#: plugin.py:170 plugin.py:450
 msgid "PLUGIN IPTV"
 msgstr ""
 
-#: plugin.py:225 plugin.py:481
+#: plugin.py:171 plugin.py:452
 msgid "PLUGIN KODI"
 msgstr ""
 
-#: plugin.py:226 plugin.py:483
+#: plugin.py:172 plugin.py:454
 msgid "PLUGIN MULTIBOOT"
 msgstr ""
 
-#: plugin.py:227 plugin.py:485
+#: plugin.py:173 plugin.py:456
 msgid "PLUGIN PICONS"
 msgstr ""
 
-#: plugin.py:228 plugin.py:487
+#: plugin.py:174 plugin.py:458
 msgid "PLUGIN PPANEL"
 msgstr ""
 
-#: plugin.py:229 plugin.py:489
+#: plugin.py:175 plugin.py:460
 msgid "PLUGIN SETTINGS PANEL"
 msgstr ""
 
-#: plugin.py:230 plugin.py:493
+#: plugin.py:176 plugin.py:464
 msgid "PLUGIN SPINNER"
 msgstr ""
 
-#: plugin.py:231 plugin.py:495
+#: plugin.py:177 plugin.py:466
 msgid "PLUGIN SKINS"
 msgstr ""
 
-#: plugin.py:232 plugin.py:497
+#: plugin.py:178 plugin.py:468
 msgid "PLUGIN SPORT"
 msgstr ""
 
-#: plugin.py:233 plugin.py:499
+#: plugin.py:179 plugin.py:470
 msgid "PLUGIN UTILITY"
 msgstr ""
 
-#: plugin.py:234 plugin.py:501
+#: plugin.py:180 plugin.py:472
 msgid "PLUGIN WEATHER"
 msgstr ""
 
-#: plugin.py:297 plugin.py:1932
+#: plugin.py:266 plugin.py:1710
+msgid "SETTINGS CIEFP"
+msgstr ""
+
+#: plugin.py:267 plugin.py:1712
+msgid "SETTINGS MALIMALI"
+msgstr ""
+
+#: plugin.py:268 plugin.py:1715
 msgid "SETTINGS MANUTEK"
 msgstr ""
 
-#: plugin.py:298 plugin.py:1934
+#: plugin.py:269 plugin.py:1717
+msgid "SETTINGS MILENKA61"
+msgstr ""
+
+#: plugin.py:270 plugin.py:1719
 msgid "SETTINGS MORPHEUS"
 msgstr ""
 
-#: plugin.py:299 plugin.py:1930
+#: plugin.py:271 plugin.py:1722
+msgid "SETTINGS PREDRAG"
+msgstr ""
+
+#: plugin.py:272 plugin.py:1725
 msgid "SETTINGS VHANNIBAL"
 msgstr ""
 
-#: plugin.py:395 plugin.py:533 plugin.py:614 plugin.py:696 plugin.py:778
-#: plugin.py:862 plugin.py:948 plugin.py:1034 plugin.py:1119 plugin.py:1205
-#: plugin.py:1293 plugin.py:1378 plugin.py:1468 plugin.py:1552 plugin.py:1636
-#: plugin.py:1720 plugin.py:1804 plugin.py:1889 plugin.py:1959 plugin.py:2110
-#: plugin.py:2270 plugin.py:2410 plugin.py:2669 plugin.py:2745 plugin.py:2879
-#: plugin.py:3029 plugin.py:3208
+#: plugin.py:366 plugin.py:488 plugin.py:563 plugin.py:635 plugin.py:708
+#: plugin.py:783 plugin.py:859 plugin.py:933 plugin.py:1006 plugin.py:1079
+#: plugin.py:1152 plugin.py:1225 plugin.py:1299 plugin.py:1371 plugin.py:1449
+#: plugin.py:1520 plugin.py:1592 plugin.py:1668 plugin.py:1739 plugin.py:1863
+#: plugin.py:1989 plugin.py:2249 plugin.py:2387 plugin.py:2506 plugin.py:2621
+#: plugin.py:2739 plugin.py:2960 plugin.py:3021 plugin.py:3140 plugin.py:3236
+#: plugin.py:3396
 #, python-format
 msgid "Sat-Lodge Panel by lululla V. %s"
 msgstr "Sat-Lodge Panel by lululla V. %s"
 
-#: plugin.py:401
+#: plugin.py:371
 msgid "..:: Sat-Lodge Panel ::.."
 msgstr ""
 
-#: plugin.py:402 plugin.py:550 plugin.py:631 plugin.py:713 plugin.py:796
-#: plugin.py:881 plugin.py:966 plugin.py:1052 plugin.py:1137 plugin.py:1224
-#: plugin.py:1312 plugin.py:1398 plugin.py:1486 plugin.py:1571 plugin.py:1654
-#: plugin.py:1738 plugin.py:1822 plugin.py:2436 plugin.py:2673 plugin.py:2762
-#: plugin.py:2896 plugin.py:3046 plugin.py:3213
+#: plugin.py:372 plugin.py:505 plugin.py:579 plugin.py:652 plugin.py:727
+#: plugin.py:802 plugin.py:877 plugin.py:950 plugin.py:1024 plugin.py:1095
+#: plugin.py:1169 plugin.py:1243 plugin.py:1317 plugin.py:1395 plugin.py:1466
+#: plugin.py:1538 plugin.py:1609 plugin.py:1678 plugin.py:1756 plugin.py:1880
+#: plugin.py:2005 plugin.py:2271 plugin.py:2403 plugin.py:2522 plugin.py:2637
+#: plugin.py:2764 plugin.py:2961 plugin.py:3036 plugin.py:3144 plugin.py:3250
+#: plugin.py:3398
 #, python-format
 msgid "V. %s"
 msgstr ""
 
-#: plugin.py:403 plugin.py:551 plugin.py:632 plugin.py:714 plugin.py:797
-#: plugin.py:882 plugin.py:967 plugin.py:1053 plugin.py:1138 plugin.py:1225
-#: plugin.py:1313 plugin.py:1399 plugin.py:1487 plugin.py:1572 plugin.py:1655
-#: plugin.py:1739 plugin.py:1823 plugin.py:2437 plugin.py:2674 plugin.py:2765
-#: plugin.py:2897 plugin.py:3047 plugin.py:3214
+#: plugin.py:373 plugin.py:506 plugin.py:580 plugin.py:653 plugin.py:728
+#: plugin.py:803 plugin.py:878 plugin.py:951 plugin.py:1025 plugin.py:1096
+#: plugin.py:1170 plugin.py:1244 plugin.py:1318 plugin.py:1396 plugin.py:1467
+#: plugin.py:1539 plugin.py:1610 plugin.py:1679 plugin.py:1757 plugin.py:1881
+#: plugin.py:2006 plugin.py:2272 plugin.py:2404 plugin.py:2523 plugin.py:2638
+#: plugin.py:2765 plugin.py:2962 plugin.py:3041 plugin.py:3145 plugin.py:3251
+#: plugin.py:3399
 msgid " by ))^^(("
 msgstr ""
 
-#: plugin.py:407 plugin.py:2899
+#: plugin.py:374
+msgid "Exit"
+msgstr ""
+
+#: plugin.py:375 plugin.py:3146
 msgid "Uninstall"
 msgstr "Uninstall"
 
-#: plugin.py:408
+#: plugin.py:376
 msgid "Extensions"
 msgstr "Extensions"
 
-#: plugin.py:410
+#: plugin.py:377
 msgid "SatLodge Manager"
 msgstr ""
 
-#: plugin.py:540 plugin.py:621 plugin.py:703 plugin.py:785 plugin.py:870
-#: plugin.py:955 plugin.py:1041 plugin.py:1126 plugin.py:1213 plugin.py:1301
-#: plugin.py:1387 plugin.py:1475 plugin.py:1560 plugin.py:1643 plugin.py:1727
-#: plugin.py:1811 plugin.py:1966 plugin.py:2118 plugin.py:2277
+#: plugin.py:493 plugin.py:568 plugin.py:640 plugin.py:714 plugin.py:790
+#: plugin.py:865 plugin.py:938 plugin.py:1012 plugin.py:1084 plugin.py:1158
+#: plugin.py:1231 plugin.py:1305 plugin.py:1384 plugin.py:1454 plugin.py:1526
+#: plugin.py:1597 plugin.py:1745 plugin.py:1869 plugin.py:1994 plugin.py:2255
+#: plugin.py:2392 plugin.py:2511 plugin.py:2626
 msgid "Getting the list, please wait ..."
 msgstr "Getting the list, please wait ..."
 
-#: plugin.py:549
+#: plugin.py:494 plugin.py:569 plugin.py:641 plugin.py:715 plugin.py:788
+#: plugin.py:791 plugin.py:866 plugin.py:939 plugin.py:1013 plugin.py:1085
+#: plugin.py:1159 plugin.py:1232 plugin.py:1306 plugin.py:1385 plugin.py:1455
+#: plugin.py:1527 plugin.py:1598 plugin.py:1746 plugin.py:1870 plugin.py:1995
+#: plugin.py:2256 plugin.py:2393 plugin.py:2512 plugin.py:2627 plugin.py:2761
+#: plugin.py:3042
+msgid "Install"
+msgstr "Install"
+
+#: plugin.py:495 plugin.py:570 plugin.py:642 plugin.py:716 plugin.py:789
+#: plugin.py:792 plugin.py:867 plugin.py:940 plugin.py:1014 plugin.py:1086
+#: plugin.py:1160 plugin.py:1233 plugin.py:1307 plugin.py:1386 plugin.py:1456
+#: plugin.py:1528 plugin.py:1599 plugin.py:1681 plugin.py:1747 plugin.py:1871
+#: plugin.py:1996 plugin.py:2258 plugin.py:2394 plugin.py:2513 plugin.py:2628
+#: plugin.py:2762 plugin.py:3045 plugin.py:3148 plugin.py:3401
+msgid "Back"
+msgstr ""
+
+#: plugin.py:504
 msgid "..:: DRIVERS ::.."
 msgstr ""
 
-#: plugin.py:562 plugin.py:643 plugin.py:725 plugin.py:808 plugin.py:893
-#: plugin.py:978 plugin.py:1064 plugin.py:1149 plugin.py:1236 plugin.py:1324
-#: plugin.py:1410 plugin.py:1497 plugin.py:1582 plugin.py:1666 plugin.py:1750
-#: plugin.py:1834 plugin.py:1990 plugin.py:2141 plugin.py:2299
+#: plugin.py:519 plugin.py:593 plugin.py:666 plugin.py:741 plugin.py:816
+#: plugin.py:891 plugin.py:964 plugin.py:1038 plugin.py:1109 plugin.py:1183
+#: plugin.py:1257 plugin.py:1330 plugin.py:1408 plugin.py:1479 plugin.py:1551
+#: plugin.py:1623 plugin.py:1771 plugin.py:1895 plugin.py:2018 plugin.py:2286
+#: plugin.py:2417 plugin.py:2536 plugin.py:2651
 msgid "Try again later ..."
 msgstr "Try again later ..."
 
-#: plugin.py:575 plugin.py:656 plugin.py:738 plugin.py:821 plugin.py:906
-#: plugin.py:991 plugin.py:1077 plugin.py:1162 plugin.py:1249 plugin.py:1337
-#: plugin.py:1423 plugin.py:1510 plugin.py:1595 plugin.py:1679 plugin.py:1763
-#: plugin.py:1847 plugin.py:2014 plugin.py:2178 plugin.py:2327
+#: plugin.py:532 plugin.py:606 plugin.py:679 plugin.py:754 plugin.py:829
+#: plugin.py:904 plugin.py:977 plugin.py:1051 plugin.py:1122 plugin.py:1196
+#: plugin.py:1270 plugin.py:1343 plugin.py:1421 plugin.py:1492 plugin.py:1564
+#: plugin.py:1636 plugin.py:1674 plugin.py:1793 plugin.py:1918 plugin.py:2047
+#: plugin.py:2320 plugin.py:2443 plugin.py:2559 plugin.py:2673
 msgid "Please select ..."
 msgstr "Please select ..."
 
-#: plugin.py:630
+#: plugin.py:578
 msgid "..:: DEPENDENCIES ::.."
 msgstr ""
 
-#: plugin.py:712
+#: plugin.py:651
 msgid "..:: PICONS ::.."
 msgstr ""
 
-#: plugin.py:795
+#: plugin.py:726
 msgid "..:: PLUGINS BACKUP ::.."
 msgstr ""
 
-#: plugin.py:880
+#: plugin.py:801
 msgid "..:: PLUGIN EMULATORS CAMS ::.."
 msgstr ""
 
-#: plugin.py:965
+#: plugin.py:876
 msgid "..:: PLUGIN EPG ::.."
 msgstr ""
 
-#: plugin.py:1051
+#: plugin.py:949
 msgid "..:: PLUGIN IPTV ::.."
 msgstr ""
 
-#: plugin.py:1136
+#: plugin.py:1023
 msgid "..:: PLUGIN KODI ::.."
 msgstr ""
 
-#: plugin.py:1223
+#: plugin.py:1094
 msgid "..:: PLUGIN MULTIBOOT ::.."
 msgstr ""
 
-#: plugin.py:1311
+#: plugin.py:1168
 msgid "..:: PLUGIN PPANEL ::.."
 msgstr ""
 
-#: plugin.py:1397
+#: plugin.py:1242
 msgid "..:: PLUGIN SETTINGS PANEL ::.."
 msgstr ""
 
-#: plugin.py:1485
+#: plugin.py:1316
 msgid "..:: PLUGIN SPINNER ::.."
 msgstr ""
 
-#: plugin.py:1570
+#: plugin.py:1394
 msgid "..:: PLUGIN SKINS ::.."
 msgstr ""
 
-#: plugin.py:1653
+#: plugin.py:1465
 msgid "..:: PLUGIN SPORT ::.."
 msgstr ""
 
-#: plugin.py:1737
+#: plugin.py:1537
 msgid "..:: PLUGIN UTILITY ::.."
 msgstr ""
 
-#: plugin.py:1821
+#: plugin.py:1608
 msgid "..:: PLUGIN METEO ::.."
 msgstr ""
 
-#: plugin.py:1895
+#: plugin.py:1677
 msgid "..:: DAILY SETTINGS ::.."
 msgstr ""
 
-#: plugin.py:1896 plugin.py:1975 plugin.py:2128 plugin.py:2287
-#, python-format
-msgid "Version %s"
-msgstr "Version %s"
-
-#: plugin.py:1897 plugin.py:1976 plugin.py:2129 plugin.py:2288
-msgid " (c) by ))^^(("
-msgstr ""
-
-#: plugin.py:1898
+#: plugin.py:1680
 msgid "Select"
 msgstr "Select"
 
-#: plugin.py:1974
+#: plugin.py:1755
 msgid "..:: SETTING Vhannibal ::.."
 msgstr ""
 
-#: plugin.py:2024 plugin.py:2187 plugin.py:2334 plugin.py:2448
+#: plugin.py:1800 plugin.py:1925 plugin.py:2054 plugin.py:2327 plugin.py:2450
+#: plugin.py:2566 plugin.py:2680 plugin.py:2776
 msgid "Do you want to install?"
 msgstr "Do you want to install?"
 
-#: plugin.py:2079 plugin.py:2238 plugin.py:2376
-msgid "Installo i Settings"
-msgstr "Install Settings"
+#: plugin.py:1842 plugin.py:1970 plugin.py:2096 plugin.py:2488 plugin.py:2603
+#: plugin.py:2719
+msgid "Install the Settings"
+msgstr ""
 
-#: plugin.py:2087 plugin.py:2245 plugin.py:2383
-msgid "Setting Installati!"
+#: plugin.py:1848 plugin.py:1975 plugin.py:2102 plugin.py:2373 plugin.py:2493
+#: plugin.py:2608 plugin.py:2724 plugin.py:2949
+msgid "Setting Installed!"
 msgstr "Setting Installed!"
 
-#: plugin.py:2088 plugin.py:2246 plugin.py:2384
-msgid "Installazione eseguita con successo!"
-msgstr "Installation performed successfully!"
+#: plugin.py:1849 plugin.py:1976 plugin.py:2103 plugin.py:2374 plugin.py:2494
+#: plugin.py:2609 plugin.py:2725
+msgid "Installation performed successfully!"
+msgstr ""
 
-#: plugin.py:2127
+#: plugin.py:1879
+msgid "..:: SETTING Milenka61 ::.."
+msgstr ""
+
+#: plugin.py:2004
 msgid "..:: SETTING Manutek ::.."
 msgstr ""
 
-#: plugin.py:2286
+#: plugin.py:2270
 msgid "..:: SETTING Morpheus883 ::.."
 msgstr ""
 
-#: plugin.py:2434
+#: plugin.py:2364
+msgid "Installation Settings"
+msgstr ""
+
+#: plugin.py:2402
+msgid "..:: SETTING Ciefp ::.."
+msgstr ""
+
+#: plugin.py:2521
+msgid "..:: SETTING Malimali ::.."
+msgstr ""
+
+#: plugin.py:2636
+msgid "..:: SETTING Predrag ::.."
+msgstr ""
+
+#: plugin.py:2760
 msgid "Please install ..."
 msgstr "Please install ..."
 
-#: plugin.py:2435
+#: plugin.py:2763
 msgid "..:: Please Select to Install::.."
 msgstr ""
 
-#: plugin.py:2466 plugin.py:2470 plugin.py:2476 plugin.py:2491 plugin.py:2505
-#: plugin.py:2519 plugin.py:2539 plugin.py:2554 plugin.py:2593
+#: plugin.py:2794 plugin.py:2798 plugin.py:2804 plugin.py:2817 plugin.py:2829
+#: plugin.py:2841 plugin.py:2857 plugin.py:2870 plugin.py:2907
 msgid "Installing "
 msgstr "Installing "
 
-#: plugin.py:2466 plugin.py:2470 plugin.py:2476 plugin.py:2491 plugin.py:2505
-#: plugin.py:2519 plugin.py:2539 plugin.py:2554 plugin.py:2593 plugin.py:2625
+#: plugin.py:2794 plugin.py:2798 plugin.py:2804 plugin.py:2817 plugin.py:2829
+#: plugin.py:2841 plugin.py:2857 plugin.py:2870 plugin.py:2907 plugin.py:2933
 msgid "... please wait"
 msgstr "... please wait"
 
-#: plugin.py:2471 plugin.py:2484 plugin.py:2498 plugin.py:2512 plugin.py:2526
-#: plugin.py:2546
+#: plugin.py:2799 plugin.py:2811 plugin.py:2823 plugin.py:2835 plugin.py:2847
+#: plugin.py:2863
 #, python-format
 msgid "Installing: %s"
 msgstr "Installing: %s"
 
-#: plugin.py:2485 plugin.py:2486 plugin.py:2499 plugin.py:2500 plugin.py:2513
-#: plugin.py:2514 plugin.py:2527 plugin.py:2528 plugin.py:2547 plugin.py:2548
-#: plugin.py:2645
+#: plugin.py:2812 plugin.py:2813 plugin.py:2824 plugin.py:2825 plugin.py:2836
+#: plugin.py:2837 plugin.py:2848 plugin.py:2849 plugin.py:2864 plugin.py:2865
+#: plugin.py:2950
 msgid "Installation successful!"
 msgstr "Installation successful!"
 
-#: plugin.py:2533 plugin.py:2822
+#: plugin.py:2852 plugin.py:3097
 msgid "Unknow Image!"
 msgstr "Unknow Image!"
 
-#: plugin.py:2534
+#: plugin.py:2853
 msgid "Installation aborted!"
 msgstr "Installation aborted!"
 
-#: plugin.py:2582
+#: plugin.py:2897
 msgid "Download Failed!"
 msgstr "Download Failed!"
 
-#: plugin.py:2614 plugin.py:2615
+#: plugin.py:2925 plugin.py:2926
 msgid "Addon KodiLite installed!"
 msgstr "Addon KodiLite installed!"
 
-#: plugin.py:2618
+#: plugin.py:2928
 msgid "KodiLite not installed!"
 msgstr "KodiLite not installed!"
 
-#: plugin.py:2625
+#: plugin.py:2933
 msgid "Downloading file select in /tmp"
 msgstr "Downloading file select in /tmp"
 
-#: plugin.py:2630
+#: plugin.py:2938
 msgid "Download file in /tmp successful!"
 msgstr "Download file in /tmp successful!"
 
-#: plugin.py:2631
+#: plugin.py:2939
 msgid "Download file in /tmp successful!!"
 msgstr "Download file in /tmp successful!!"
 
-#: plugin.py:2633
+#: plugin.py:2941
 msgid "Download failed!"
 msgstr "Download failed!"
 
-#: plugin.py:2633
+#: plugin.py:2941
 msgid "... Not supported"
 msgstr "... Not supported"
 
-#: plugin.py:2644
-msgid "Setting Installed!"
-msgstr "Setting Installed!"
-
-#: plugin.py:2695
+#: plugin.py:2981
 msgid "Execution Progress:"
 msgstr "Execution Progress:"
 
-#: plugin.py:2707
+#: plugin.py:2993
 msgid "Execution finished!!"
 msgstr "Execution finished!!"
 
-#: plugin.py:2761
+#: plugin.py:3035
 msgid "..:: INSTALL EXTENSIONS ::.."
 msgstr ""
 
-#: plugin.py:2763
-msgid ""
-"Put addon .ipk .tar.gz .deb and install\n"
-"Set path from config"
+#: plugin.py:3038
+msgid "Put addon .ipk .tar.gz .deb and install from config path"
 msgstr ""
-"Put addon .ipk .tar.gz .deb and install\n"
-"Set path from config"
 
-#: plugin.py:2766
-msgid "Install"
-msgstr "Install"
-
-#: plugin.py:2767 plugin.py:2900
+#: plugin.py:3043 plugin.py:3147
 msgid "Restart"
 msgstr "Restart"
 
-#: plugin.py:2768
+#: plugin.py:3044
 msgid "Remove"
 msgstr "Remove"
 
-#: plugin.py:2804
+#: plugin.py:3079
 msgid "Do you really want to install the selected Addon?"
 msgstr "Do you really want to install the selected Addon?"
 
-#: plugin.py:2833
+#: plugin.py:3107
 msgid "Do you really want to remove selected?"
 msgstr "Do you really want to remove selected?"
 
-#: plugin.py:2845
+#: plugin.py:3119
 msgid "Do you want restart enigma2 to reload installed addons ?"
 msgstr "Do you want restart enigma2 to reload installed addons ?"
 
-#: plugin.py:2895
+#: plugin.py:3143
 msgid "..:: SAT-LODGE UNINSTALLER ::.."
 msgstr ""
 
-#: plugin.py:2932
+#: plugin.py:3180
 #, python-format
 msgid "Removing: %s"
 msgstr "Removing: %s"
 
-#: plugin.py:2954
+#: plugin.py:3202
 msgid "Do you want to remove?"
 msgstr "Do you want to remove?"
 
-#: plugin.py:2973
+#: plugin.py:3206
 msgid "Do you want restart enigma2 ?"
 msgstr "Do you want restart enigma2 ?"
 
-#: plugin.py:3045
+#: plugin.py:3249
 msgid "..:: Sat_Lodge Message::.."
 msgstr ""
 
-#: plugin.py:3059
+#: plugin.py:3263
 msgid "Question"
 msgstr ""
 
-#: plugin.py:3060
+#: plugin.py:3264
 msgid "Information"
 msgstr ""
 
-#: plugin.py:3061
+#: plugin.py:3265
 msgid "Warning"
 msgstr ""
 
-#: plugin.py:3062
+#: plugin.py:3266
 msgid "Error"
 msgstr ""
 
-#: plugin.py:3062
+#: plugin.py:3266
 msgid "Message"
 msgstr ""
 
-#: plugin.py:3067 plugin.py:3069
+#: plugin.py:3271 plugin.py:3273
 msgid "Yes"
 msgstr ""
 
-#: plugin.py:3067 plugin.py:3069
+#: plugin.py:3271 plugin.py:3273
 msgid "No"
 msgstr ""
 
-#: plugin.py:3212
+#: plugin.py:3397
 msgid "..:: Sat-Lodge Config ::.."
 msgstr ""
 
-#: plugin.py:3215
+#: plugin.py:3400
 msgid "Config Panel Addon"
 msgstr "Config Panel Addon"
 
-#: plugin.py:3217
+#: plugin.py:3402
 msgid "Save"
 msgstr "Save"
 
-#: plugin.py:3225
+#: plugin.py:3407
 msgid "Path Manual IPK"
 msgstr "Path Manual IPK"
 
-#: plugin.py:3226
+#: plugin.py:3408
 msgid "Link in Extensions Menu"
 msgstr "Link in Extensions Menu"
 
-#: plugin.py:3227
+#: plugin.py:3409
 msgid "Link in Main Menu"
 msgstr "Link in Main Menu"
 
-#: plugin.py:3228
+#: plugin.py:3410
 msgid "Link in Setup Menu"
 msgstr "Link in Setup Menu"
 
-#: plugin.py:3243
+#: plugin.py:3425
 msgid "Quit without saving"
 msgstr "Quit without saving"
 
-#: plugin.py:3254
+#: plugin.py:3436
 msgid "Device not detected!"
 msgstr "Device not detected!"
 
-#: plugin.py:3262
+#: plugin.py:3444
 msgid "Successfully saved configuration"
 msgstr "Successfully saved configuration"
 
-#: plugin.py:3271 plugin.py:3301 plugin.py:3302 plugin.py:3303 plugin.py:3306
+#: plugin.py:3453 plugin.py:3480 plugin.py:3481 plugin.py:3482
 msgid "SatLodge Panel"
 msgstr ""
+
+#: plugin.py:3485
+#, python-format
+msgid "SatLodge Panel V. %s"
+msgstr ""
+
+#~ msgid "Free"
+#~ msgstr "Free"
+
+#~ msgid "Version %s"
+#~ msgstr "Version %s"
+
+#~ msgid "Installo i Settings"
+#~ msgstr "Install Settings"
+
+#~ msgid "Setting Installati!"
+#~ msgstr "Setting Installed!"
+
+#~ msgid "Installazione eseguita con successo!"
+#~ msgstr "Installation performed successfully!"
+
+#~ msgid ""
+#~ "Put addon .ipk .tar.gz .deb and install\n"
+#~ "Set path from config"
+#~ msgstr ""
+#~ "Put addon .ipk .tar.gz .deb and install\n"
+#~ "Set path from config"
 
 #~ msgid "Download file in KodiLite installed!"
 #~ msgstr "Download file in KodiLite installed!"

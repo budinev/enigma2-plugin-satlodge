@@ -64,6 +64,9 @@ if HD.width() > 1280:
 else:
    skin_path = plugin_path + '/res/skins/hd/'
    
+pics = plugin_path +  '/res/pics/icon.png'
+
+
    
 def getDownloadPath():
     Downloadpath = config.plugins.ImageDown.Downloadlocation.value
@@ -131,27 +134,35 @@ class STBmodel(Screen):
         container = eConsoleAppContainer()
         container.execute(cmd)
         self.close()
-#########		
+
+	
     def ListToMulticontent(self, result = None):
         res = []
         theevents = []
         self.data=process_mode(None)
-        if dwidth == 1280:		
-         self['list'].l.setItemHeight(40)
-         self['list'].l.setFont(0, gFont('Regular', 24))
-         for i in range(0, len(self.data)):
-            res.append(MultiContentEntryText(pos=(0, 5), size=(2, 35), font=0, flags=RT_HALIGN_LEFT, text='', color=16776960, color_sel=16777215))
-            res.append(MultiContentEntryText(pos=(60, 5), size=(720, 35), font=0, flags=RT_HALIGN_LEFT, text=str(self.data[i][0]), color=16776960, color_sel=16777215))	
+        
+        png = plugin_path + '/res/pics/yellow.png'
+        
+        if HD.width() > 1280:	
+
+         self['list'].l.setItemHeight(50)
+         self['list'].l.setFont(0, gFont('Regular', 34))                          
+         for i in range(0, len(self.data)):		 
+         
+            res.append(MultiContentEntryText(pos=(0, 5), size=(2, 44), font=0, text='', color = 0xa6d1fe, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER))
+            res.append(MultiContentEntryText(pos=(60, 0), size=(720, 44), font=0, text=str(self.data[i][0]), color = 0xa6d1fe, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER))
             theevents.append(res)
             res = []
-        else:
-         self['list'].l.setItemHeight(62)
-         self['list'].l.setFont(0, gFont('Regular', 38))                          
-         for i in range(0, len(self.data)):		 
-            res.append(MultiContentEntryText(pos=(0, 5), size=(2, 44), font=0, flags=RT_HALIGN_LEFT, text='', color=16776960, color_sel=16777215))
-            res.append(MultiContentEntryText(pos=(60, 7), size=(720, 44), font=0, flags=RT_HALIGN_LEFT, text=str(self.data[i][0]), color=16776960, color_sel=16777215))
+        else:        
+         self['list'].l.setItemHeight(45)
+         self['list'].l.setFont(0, gFont('Regular', 22))
+         for i in range(0, len(self.data)):
+         
+            res.append(MultiContentEntryText(pos=(0, 5), size=(2, 35), font=0, text='', color = 0xa6d1fe, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER))
+            res.append(MultiContentEntryText(pos=(60, 0), size=(720, 35), text=str(self.data[i][0]), color = 0xa6d1fe, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER))	
             theevents.append(res)
-            res = []			
+            res = []
+			
         self['list'].l.setList(theevents)
         self['list'].show()
 			
@@ -191,25 +202,26 @@ class FEEDmodel(Screen):
         res = []
         theevents = []
         self.data=process_mode(self.param)	
-        if dwidth == 1280:               
-         self['list'].l.setItemHeight(40)
-         self['list'].l.setFont(0, gFont('Regular', 24))
+        if HD.width() > 1280:	  
+         self['list'].l.setItemHeight(50)
+         self['list'].l.setFont(0, gFont('Regular', 34))
          for i in range(0, len(self.data)):
-            res.append(MultiContentEntryText(pos=(0, 5), size=(2, 35), font=0, flags=RT_HALIGN_LEFT, text='', color=16776960, color_sel=16777215))
-            res.append(MultiContentEntryText(pos=(60, 5), size=(720, 35), font=0, flags=RT_HALIGN_LEFT, text=str(self.data[i][0]), color=16776960, color_sel=16777215))
-            theevents.append(res)
-            res = []
-        else:
-         self['list'].l.setItemHeight(62)
-         self['list'].l.setFont(0, gFont('Regular', 38))
-         for i in range(0, len(self.data)):
-            res.append(MultiContentEntryText(pos=(0, 5), size=(2, 44), font=0, flags=RT_HALIGN_LEFT, text='', color=16776960, color_sel=16777215))
-            res.append(MultiContentEntryText(pos=(60, 7), size=(720, 44), font=0, flags=RT_HALIGN_LEFT, text=str(self.data[i][0]), color=16776960, color_sel=16777215))
+            res.append(MultiContentEntryText(pos=(0, 5), size=(2, 44), font=0, text='', color = 0xa6d1fe, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER))
+            res.append(MultiContentEntryText(pos=(60, 0), size=(720, 44), font=0, text=str(self.data[i][0]), color = 0xa6d1fe, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER))
             theevents.append(res)
             res = []		
+        else:            
+         self['list'].l.setItemHeight(45)
+         self['list'].l.setFont(0, gFont('Regular', 22))
+         for i in range(0, len(self.data)):
+            res.append(MultiContentEntryText(pos=(0, 5), size=(2, 35), font=0, text='', color = 0xa6d1fe, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER))
+            res.append(MultiContentEntryText(pos=(60, 0), size=(720, 35), font=0, text=str(self.data[i][0]), color = 0xa6d1fe, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER))
+            theevents.append(res)
+            res = []
         self['list'].l.setList(theevents)
         self['list'].show()
-		
+        
+
     def okClicked(self):
         cindex = self['list'].getSelectionIndex()	   
         param=self.data[cindex][1]
@@ -245,26 +257,31 @@ class SERVERmodel(Screen):
         res = []
         theevents = []
         self.data=process_mode(self.param)
-        if dwidth == 1280:        
-         self['list'].l.setItemHeight(40)
-         self['list'].l.setFont(0, gFont('Regular', 24))        
+        if HD.width() > 1280: 
+         self['list'].l.setItemHeight(50)
+         self['list'].l.setFont(0, gFont('Regular', 34))        
          for i in range(0, len(self.data)):
             model=str(self.data[i][0])
-            res.append(MultiContentEntryText(pos=(0, 5), size=(2, 30), font=0, flags=RT_HALIGN_LEFT, text='', color=16776960, color_sel=16777215))
-            res.append(MultiContentEntryText(pos=(60, 5), size=(540, 30), font=0, flags=RT_HALIGN_LEFT, text=model, color=16776960, color_sel=16777215))
+            res.append(MultiContentEntryText(pos=(0, 5), size=(2, 44), font=0, text='', color = 0xa6d1fe, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER))
+            res.append(MultiContentEntryText(pos=(60, 0), size=(540, 44), font=0, text=model, color = 0xa6d1fe, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER))
             theevents.append(res)
             res = []
-        else:
-         self['list'].l.setItemHeight(62)
-         self['list'].l.setFont(0, gFont('Regular', 38))        
+        else:        
+         self['list'].l.setItemHeight(45)
+         self['list'].l.setFont(0, gFont('Regular', 22))        
          for i in range(0, len(self.data)):
             model=str(self.data[i][0])
-            res.append(MultiContentEntryText(pos=(0, 5), size=(2, 44), font=0, flags=RT_HALIGN_LEFT, text='', color=16776960, color_sel=16777215))
-            res.append(MultiContentEntryText(pos=(60, 7), size=(540, 44), font=0, flags=RT_HALIGN_LEFT, text=model, color=16776960, color_sel=16777215))
+            res.append(MultiContentEntryText(pos=(0, 5), size=(2, 30), font=0, text='', color = 0xa6d1fe, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER))
+            res.append(MultiContentEntryText(pos=(60, 0), size=(540, 30), font=0, text=model, color = 0xa6d1fe, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER))
             theevents.append(res)
             res = []
+            
+
+        
+
         self['list'].l.setList(theevents)
         self['list'].show()
+        
 
     def okClicked(self):           
         cindex = self['list'].getSelectionIndex()
@@ -304,32 +321,9 @@ class DownloaderImage(Screen):
         res = []
         theevents = []
         print "self.param1",self.param		
-        if dwidth == 1280:
-         self['menu'].l.setItemHeight(40)
-         self['menu'].l.setFont(0, gFont('Regular', 24))        
-         self.data=process_mode(self.param)
-         if len(self.data)==0:
-            self['info'].setText("Failed To Get Or No Image !")
-            self['key_green'] = Label(_(' '))
-            return
-         self['key_green'] = Label(_('Select'))
-         for i in range(0, len(self.data)):
-            name=str(self.data[i][0])
-            url = str(self.data[i][1])
-            localname=os.path.split(url)[1]			
-            nfiname=localname.replace(".zip","nfi",)
-            if os.path.exists(downloadpath + localname) or os.path.exists(downloadpath + nfiname):
-                png = plugin_path + '/res/pics/green.png'
-            else:
-                png = plugin_path + '/res/pics/yellow.png'
-            res.append(MultiContentEntryText(pos=(0, 1), size=(5, 30), font=0, flags=RT_HALIGN_LEFT, text='', color=16776960, color_sel=16777215))
-            res.append(MultiContentEntryPixmapAlphaTest(pos=(5, 10), size=(30, 30), png=loadPNG(png)))
-            res.append(MultiContentEntryText(pos=(40, 5), size=(730, 35), font=0, flags=RT_HALIGN_LEFT, text=name, color=16776960, color_sel=16777215))
-            theevents.append(res)
-            res = []
-        else:
-         self['menu'].l.setItemHeight(62)
-         self['menu'].l.setFont(0, gFont('Regular', 38))        
+        if HD.width() > 1280: 
+         self['menu'].l.setItemHeight(50)
+         self['menu'].l.setFont(0, gFont('Regular', 34))        
          self.data=process_mode(self.param)
          if len(self.data)==0:
             self['info'].setText("Failed To Get Or No Image !")
@@ -345,11 +339,35 @@ class DownloaderImage(Screen):
                 png = plugin_path + '/res/pics/green.png'
             else:
                 png = plugin_path + '/res/pics/yellow.png'
-            res.append(MultiContentEntryText(pos=(0, 1), size=(5, 30), font=0, flags=RT_HALIGN_LEFT, text='', color=16776960, color_sel=16777215))
+            res.append(MultiContentEntryText(pos=(0, 1), size=(5, 30), font=0, text='', color = 0xa6d1fe, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER))
             res.append(MultiContentEntryPixmapAlphaTest(pos=(5, 20), size=(30, 30), png=loadPNG(png)))
-            res.append(MultiContentEntryText(pos=(40, 7), size=(1200, 44), font=0, flags=RT_HALIGN_LEFT, text=name, color=16776960, color_sel=16777215))
+            res.append(MultiContentEntryText(pos=(40, 0), size=(1200, 44), font=0, text=name, color = 0xa6d1fe, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER))
             theevents.append(res)
-            res = []		
+            res = []	        
+        else:        
+         self['menu'].l.setItemHeight(45)
+         self['menu'].l.setFont(0, gFont('Regular', 22))        
+         self.data=process_mode(self.param)
+         if len(self.data)==0:
+            self['info'].setText("Failed To Get Or No Image !")
+            self['key_green'] = Label(_(' '))
+            return
+         self['key_green'] = Label(_('Select'))
+         for i in range(0, len(self.data)):
+            name=str(self.data[i][0])
+            url = str(self.data[i][1])
+            localname=os.path.split(url)[1]			
+            nfiname=localname.replace(".zip","nfi",)
+            if os.path.exists(downloadpath + localname) or os.path.exists(downloadpath + nfiname):
+                png = plugin_path + '/res/pics/green.png'
+            else:
+                png = plugin_path + '/res/pics/yellow.png'
+            res.append(MultiContentEntryText(pos=(0, 1), size=(5, 30), font=0, text='', color = 0xa6d1fe, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER))
+            res.append(MultiContentEntryPixmapAlphaTest(pos=(5, 10), size=(30, 30), png=loadPNG(png)))
+            res.append(MultiContentEntryText(pos=(40, 0), size=(730, 35), font=0, text=name, color = 0xa6d1fe, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER))
+            theevents.append(res)
+            res = []
+
         self.theevents = []
         self.theevents = theevents
         self['menu'].l.setList(theevents)
@@ -640,26 +658,26 @@ class ImageDownLoaderFiles(Screen):
         theevents = []
         self.events = []
         self.events = self.nfifiles
-        if dwidth == 1280:
-         self['menu'].l.setItemHeight(40)
-         self['menu'].l.setFont(0, gFont('Regular', 25))
-         for i in range(0, len(self.events)):
-            mfile = self.events[i][0]
-            msize = self.events[i][1] + ' MB'
-            res.append(MultiContentEntryText(pos=(0, 5), size=(2, 35), font=0, flags=RT_HALIGN_LEFT, text='', color=16776960, color_sel=16777215))
-            res.append(MultiContentEntryText(pos=(10, 5), size=(650, 35), font=0, flags=RT_HALIGN_LEFT, text=mfile, color=16776960, color_sel=16777215))
-            res.append(MultiContentEntryText(pos=(660, 5), size=(150, 35), font=0, flags=RT_HALIGN_LEFT, text=msize, color=16776960, color_sel=16777215))
-            theevents.append(res)
-            res = []
-        else:
-         self['menu'].l.setItemHeight(62)
+        if HD.width() > 1280: 
+         self['menu'].l.setItemHeight(50)
          self['menu'].l.setFont(0, gFont('Regular', 34))
          for i in range(0, len(self.events)):
             mfile = self.events[i][0]
             msize = self.events[i][1] + ' MB'
-            res.append(MultiContentEntryText(pos=(0, 11), size=(2, 35), font=0, flags=RT_HALIGN_LEFT, text='', color=16776960, color_sel=16777215))
-            res.append(MultiContentEntryText(pos=(40, 11), size=(1100, 44), font=0, flags=RT_HALIGN_LEFT, text=mfile, color=16776960, color_sel=16777215))
-            res.append(MultiContentEntryText(pos=(1000, 11), size=(170, 35), font=0, flags=RT_HALIGN_LEFT, text=msize, color=16776960, color_sel=16777215))
+            res.append(MultiContentEntryText(pos=(0, 11), size=(2, 35), font=0, text='', color = 0xa6d1fe, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER))
+            res.append(MultiContentEntryText(pos=(40, 11), size=(1100, 44), font=0, text=mfile, color = 0xa6d1fe, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER))
+            res.append(MultiContentEntryText(pos=(1000, 11), size=(170, 35), font=0, text=msize, color = 0xa6d1fe, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER))
+            theevents.append(res)
+            res = []        
+        else:        
+         self['menu'].l.setItemHeight(45)
+         self['menu'].l.setFont(0, gFont('Regular', 25))
+         for i in range(0, len(self.events)):
+            mfile = self.events[i][0]
+            msize = self.events[i][1] + ' MB'
+            res.append(MultiContentEntryText(pos=(0, 5), size=(2, 35), font=0, text='', color = 0xa6d1fe, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER))
+            res.append(MultiContentEntryText(pos=(10, 5), size=(650, 35), font=0, text=mfile, color = 0xa6d1fe, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER))
+            res.append(MultiContentEntryText(pos=(660, 5), size=(150, 35), font=0, text=msize, color = 0xa6d1fe, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER))
             theevents.append(res)
             res = []
 

@@ -1,6 +1,6 @@
 <screen name="slManager" position="0,0" size="1920,1080" flags="wfNoBorder" backgroundColor="#41000000" title="..:: Sat-Lodge Cam Manager ::..">
   <ePixmap position="0,0" zPosition="-2" size="1920,1080" pixmap="/usr/lib/enigma2/python/Plugins/SatLodge/slManager/res/img/center2FHD.png" alphatest="blend" />
-  <widget name="list" position="1138,275" zPosition="3" size="725,557" itemHeight="50" scrollbarMode="showOnDemand" transparent="1" foregroundColorSelected="#cc0000" foregroundColor="#999999" backgroundColorSelected="#99ffcc" halign="right" />
+  <widget name="list" position="1138,275" zPosition="3" size="725,557" scrollbarMode="showOnDemand" transparent="1" foregroundColorSelected="#cc0000" foregroundColor="#999999" backgroundColorSelected="#99ffcc" halign="right" />
   <widget name="info" position="98,275" zPosition="4" size="746,646" font="Regular; 38" foregroundColor="white" transparent="1" halign="left" valign="top" />
   <widget name="desc" position="1198,194" zPosition="4" size="650,50" font="Regular; 40" foregroundColor="#ffcc33" transparent="1" halign="right" valign="top" />
   <widget name="ecminfo" position="99,194" zPosition="4" size="550,50" font="Regular; 40" foregroundColor="#ffcc33" transparent="1" halign="left" valign="top" /> 

@@ -27,7 +27,7 @@ def readnet(url):
 
 def main_cats():
     cats=[]
-    cats.append(("SatLodge Images",''))
+    cats.append(("SATLODGE IMAGES",''))
     for cat in cats:
         print "cat",cat
         cats.sort()
@@ -35,7 +35,7 @@ def main_cats():
              
 
 def getteams(name,url,page):
-    if name == 'SatLodge Images':
+    if name == 'SATLODGE IMAGES':
         mode=159
         teams = [('AirDigital Images','http://webplus.sat-lodge.it/index.php?dir=Zgemma/','')]
 			 

@@ -5,45 +5,41 @@
 #"****************************************"
 from Components.ActionMap import ActionMap, NumberActionMap
 from Components.Button import Button
+from Components.ConfigList import ConfigListScreen
 from Components.Label import Label
 from Components.Language import language
 from Components.MenuList import MenuList
 from Components.MultiContent import MultiContentEntryText, MultiContentEntryPixmapAlphaTest
 from Components.Pixmap import Pixmap
+from Components.PluginComponent import plugins
+from Components.PluginList import *
 from Components.ScrollLabel import ScrollLabel
 from Components.Sources.List import List
 from Components.Sources.StaticText import StaticText 
-from enigma import *
-from enigma import eListbox, eTimer, eListboxPythonMultiContent, eConsoleAppContainer, addFont, gFont 
-from enigma import RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_HALIGN_CENTER, getDesktop, loadPNG, loadPic
-from os import environ as os_environ
-from os import path, listdir, remove, mkdir, chmod
-from Plugins.Plugin import PluginDescriptor
 from Components.config import config, getConfigListEntry, ConfigText, ConfigInteger, ConfigSelection, ConfigSubsection, ConfigYesNo
-from Components.ConfigList import ConfigListScreen
-from Components.PluginComponent import plugins
-from Components.PluginList import *
+from Plugins.Plugin import PluginDescriptor
+from Screens.Console import Console
+from Screens.MessageBox import MessageBox
 from Screens.Screen import Screen
 from Screens.Standby import *
 from Screens.Standby import TryQuitMainloop
 from Tools.Directories import *
 from Tools.Directories import SCOPE_SKIN_IMAGE, resolveFilename, SCOPE_PLUGINS, fileExists, copyfile, SCOPE_LANGUAGE, pathExists
 from Tools.LoadPixmap import LoadPixmap
+from enigma import *
+from enigma import RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_HALIGN_CENTER, getDesktop, loadPNG, loadPic
+from enigma import eListbox, eTimer, eListboxPythonMultiContent, eConsoleAppContainer, addFont, gFont 
+from os import environ as os_environ
+from os import path, listdir, remove, mkdir, chmod
+from twisted.web.client import downloadPage
 from twisted.web.client import getPage
 from xml.dom import Node, minidom
-import gettext
-import os
-import re
 import base64
-import sys
-import urllib
+import gettext
+import os, re, sys
 import shutil
+import urllib
 import urllib2
-from Screens.MessageBox import MessageBox
-
-from Screens.Console import Console
-from twisted.web.client import downloadPage
-
 # def mountipkpth():
 	# ipkpth = []
 	# if os.path.isfile('/proc/mounts'):
@@ -56,11 +52,31 @@ from twisted.web.client import downloadPage
 BRAND = '/usr/lib/enigma2/python/boxbranding.so'
 BRANDP = '/usr/lib/enigma2/python/Plugins/PLi/__init__.pyo'
 BRANDPLI ='/usr/lib/enigma2/python/Tools/StbHardware.pyo'
+############################################# 
+try:
+    import zipfile
+except:
+    pass
+
+def freespace():
+    try:
+        diskSpace = os.statvfs('/')
+        capacity = float(diskSpace.f_bsize * diskSpace.f_blocks)
+        available = float(diskSpace.f_bsize * diskSpace.f_bavail)
+        fspace = round(float(available / 1048576.0), 2)
+        tspace = round(float(capacity / 1048576.0), 1)
+        spacestr = 'Free space(' + str(fspace) + 'MB) Total space(' + str(tspace) + 'MB)'
+        return spacestr
+    except:
+        return ''    
+        
 
 def ReloadBouquet():
     eDVBDB.getInstance().reloadServicelist()
     eDVBDB.getInstance().reloadBouquets() 
-
+def deletetmp():
+    os.system('rm -rf /tmp/unzipped;rm -f /tmp/*.ipk;rm -f /tmp/*.tar;rm -f /tmp/*.zip;rm -f /tmp/*.tar.gz;rm -f /tmp/*.tar.bz2;rm -f /tmp/*.tar.tbz2;rm -f /tmp/*.tar.tbz')    
+   
 def mountipkpth():
     ipkpth = []
     if os.path.isfile('/proc/mounts'):
@@ -81,32 +97,23 @@ config.plugins.slPanel.strtst = ConfigYesNo(default=False)
 config.plugins.slPanel.ipkpth = ConfigSelection(default = "/tmp",choices = mountipkpth())
 # config.plugins.slPanel.autoupd = ConfigYesNo(default=False)
 
-try:
-    import zipfile
-except:
-    pass
+
 
 DESKHEIGHT = getDesktop(0).size().height()
 
-currversion = '1.9'
+currversion = '2.0'
 plugin_path = '/usr/lib/enigma2/python/Plugins/SatLodge/slPanel'
-ico_path = '/usr/lib/enigma2/python/Plugins/SatLodge/slPanel/res/pics/addons3.png'
+ico_path = plugin_path +  '/res/pics/addons3.png'
 ##########################################
 data_upd = 'aHR0cDovL3NhdC1sb2RnZS5pdC9zbFBhbmVsLw=='
 upd_path = base64.b64decode(data_upd)
 data_xml = 'aHR0cDovL3NhdC1sb2RnZS5pdC94bWwv'
 xml_path = base64.b64decode(data_xml)
 #########################################
-data_pics = 'L3Vzci9saWIvZW5pZ21hMi9weXRob24vUGx1Z2lucy9TYXRMb2RnZS9zbFBhbmVsL3Jlcy9waWNzL2ljb24ucG5n'
-pics_path = base64.b64decode(data_pics)
-ico1_plugins = 'L3Vzci9saWIvZW5pZ21hMi9weXRob24vUGx1Z2lucy9TYXRMb2RnZS9zbFBhbmVsL3Jlcy9waWNzL3BsdWdpbnMucG5n'
-ico1_path = base64.b64decode(ico1_plugins)
-ico2_plugin = 'L3Vzci9saWIvZW5pZ21hMi9weXRob24vUGx1Z2lucy9TYXRMb2RnZS9zbFBhbmVsL3Jlcy9waWNzL3BsdWdpbi5wbmc='
-ico2_path = base64.b64decode(ico2_plugin)
-ico3_plugin = 'L3Vzci9saWIvZW5pZ21hMi9weXRob24vUGx1Z2lucy9TYXRMb2RnZS9zbFBhbmVsL3Jlcy9waWNzL2luc3R1bmluc3RsLnBuZw=='
-ico3_path = base64.b64decode(ico3_plugin)
-# data_skin = 'L3Vzci9saWIvZW5pZ21hMi9weXRob24vUGx1Z2lucy9TYXRMb2RnZS9zbFBhbmVsL3Jlcy9za2lucy8='
-# skin_path = base64.b64decode(data_skin)
+pics_path = plugin_path +  '/res/pics/icon.png'
+ico1_path = plugin_path +  '/res/pics/plugins.png'
+ico2_path = plugin_path +  '/res/pics/plugin.png'
+ico3_path = plugin_path +  '/res/pics/instuninstl.png'
 
 skin_path = plugin_path
 HD = getDesktop(0).size()
@@ -114,42 +121,6 @@ if HD.width() > 1280:
    skin_path = plugin_path + '/res/skins/fhd/'
 else:
    skin_path = plugin_path + '/res/skins/hd/'
-
-def freespace():
-    try:
-        diskSpace = os.statvfs('/')
-        capacity = float(diskSpace.f_bsize * diskSpace.f_blocks)
-        available = float(diskSpace.f_bsize * diskSpace.f_bavail)
-        fspace = round(float(available / 1048576.0), 2)
-        tspace = round(float(capacity / 1048576.0), 1)
-        spacestr = 'Free space(' + str(fspace) + 'MB) Total space(' + str(tspace) + 'MB)'
-        return spacestr
-    except:
-        return ''    
-        
-def getMemoria():
-    cret = ''
-    try:
-        out_lines = file('/proc/meminfo').readlines()
-        totmem = 0
-        freemem = 0
-        for lidx in range(len(out_lines) - 1):
-            tstLine = out_lines[lidx].split()
-            if 'MemTotal:' in tstLine:
-                MemTotal = out_lines[lidx].split()
-                totmem = int(MemTotal[1])
-            if 'MemFree:' in tstLine:
-                MemFree = out_lines[lidx].split()
-                freemem = int(MemFree[1])
-
-        if totmem > 0:
-            porcentaje = int(freemem * 100 / totmem)
-            laram = Humanizer(freemem * 1024)
-            cret = 'RAM ' + _('Free') + ': ' + laram.split('.')[0] + ' ' + laram.split(' ')[1] + ' (' + str(porcentaje) + '%)' + '/' + Humanizer(totmem * 1024)
-    except:
-        cret = ' err mem'
-    return cret
-    
 #########################################################
 PluginLanguageDomain = 'slpanel'
 PluginLanguagePath = '/usr/lib/enigma2/python/Plugins/SatLodge/slPanel/res/locale'
@@ -213,15 +184,21 @@ class SLList(MenuList):
 
     def __init__(self, list):
         MenuList.__init__(self, list, False, eListboxPythonMultiContent)
-        
-        if DESKHEIGHT > 1280:	
+
+        self.l.setFont(0, gFont('Regular', 20))
+        self.l.setFont(1, gFont('Regular', 22))
+        self.l.setFont(2, gFont('Regular', 24))
+        self.l.setFont(3, gFont('Regular', 26))
+        self.l.setFont(4, gFont('Regular', 28))
+        self.l.setFont(5, gFont('Regular', 30))
+        self.l.setFont(6, gFont('Regular', 32))
+        self.l.setFont(7, gFont('Regular', 34))
+        self.l.setFont(8, gFont('Regular', 36))
+        self.l.setFont(9, gFont('Regular', 40))        
+        if HD.width() > 1280:
             self.l.setItemHeight(50)
-            self.l.setFont(0, gFont('Regular', 40))	
-        else:            
-            self.l.setItemHeight(30)
-            self.l.setFont(0, gFont('Regular', 24))
-
-
+        else:		
+            self.l.setItemHeight(45)
             
 def SLListEntry(name, idx):
     res = [name]
@@ -262,27 +239,26 @@ def SLListEntry(name, idx):
     elif idx == 17:
         png = ico1_path 
         
-    if DESKHEIGHT > 1280:
+    if HD.width() > 1280:
     	if fileExists(png):
-    		res.append(MultiContentEntryPixmapAlphaTest(pos=(10, 15), size=(20, 20), png=loadPNG(png)))
-    		res.append(MultiContentEntryText(pos=(60, 0), size=(1200, 50), font=0, text=name, color = 0xa6d1fe, flags=RT_VALIGN_CENTER))
+    		res.append(MultiContentEntryPixmapAlphaTest(pos=(10, 12), size=(34, 25), png=loadPNG(png)))
+    		res.append(MultiContentEntryText(pos=(60, 0), size=(1200, 50), font=7, text=name, color = 0xa6d1fe, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER))
     else:
     	if fileExists(png):
-    		res.append(MultiContentEntryPixmapAlphaTest(pos=(10, 7), size=(20, 20), png=loadPNG(png)))
-    		res.append(MultiContentEntryText(pos=(60, 0), size=(1200, 40), font=0, text=name, color = 0xa6d1fe, flags=RT_VALIGN_CENTER))
-    return res         
+    		res.append(MultiContentEntryPixmapAlphaTest(pos=(10, 10), size=(34, 25), png=loadPNG(png)))
+    		res.append(MultiContentEntryText(pos=(60, 0), size=(1200, 50), font=1, text=name, color = 0xa6d1fe, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER))
+    return res        
         
     # if fileExists(png):
         # res.append(MultiContentEntryPixmapAlphaTest(pos=(0, 0), size=(25, 25), png=loadPNG(png)))
         # res.append(MultiContentEntryText(pos=(35, 0), size=(1000, 320), font=0, text=name))
     # return res
 
- 
 Panel_list2 = [
  _('SETTINGS CIEFP'), 
  _('SETTINGS MALIMALI'),  
  _('SETTINGS MANUTEK'),  
- _('SETTINGS MILENKO61'),  
+ _('SETTINGS MILENKA61'), 
  _('SETTINGS MORPHEUS'),
  _('SETTINGS PREDRAG'), 
  _('SETTINGS VHANNIBAL')] 
@@ -303,16 +279,14 @@ def DailyListEntry(name, idx):
         png = ico1_path 
     elif idx == 6:
         png = ico1_path         
-
-
-    if DESKHEIGHT > 1280:	
+    if HD.width() > 1280:    
     	if fileExists(png):
-    		res.append(MultiContentEntryPixmapAlphaTest(pos=(10, 13), size=(20, 20), png=loadPNG(png)))
-    		res.append(MultiContentEntryText(pos=(60, 0), size=(1200, 50), font=0, text=name, color = 0xa6d1fe, flags=RT_VALIGN_CENTER))
-    else:	
+    		res.append(MultiContentEntryPixmapAlphaTest(pos=(10, 12), size=(34, 25), png=loadPNG(png)))
+    		res.append(MultiContentEntryText(pos=(60, 0), size=(1200, 50), font=7, text=name, color = 0xa6d1fe, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER))
+    else:
     	if fileExists(png):
-    		res.append(MultiContentEntryPixmapAlphaTest(pos=(10, 7), size=(20, 20), png=loadPNG(png)))
-    		res.append(MultiContentEntryText(pos=(60, 0), size=(1200, 40), font=0, text=name, color = 0xa6d1fe, flags=RT_VALIGN_CENTER))
+    		res.append(MultiContentEntryPixmapAlphaTest(pos=(10, 10), size=(34, 25), png=loadPNG(png)))
+    		res.append(MultiContentEntryText(pos=(60, 0), size=(1200, 50), font=1, text=name, color = 0xa6d1fe, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER))
     return res
     
     # if fileExists(png):
@@ -324,34 +298,25 @@ def DailyListEntry(name, idx):
 class oneListsl(MenuList):
     def __init__(self, list):
             MenuList.__init__(self, list, True, eListboxPythonMultiContent)
-            if DESKHEIGHT > 1280: 
+            if HD.width() > 1280:
                     self.l.setItemHeight(50)
-                    textfont = int(38)
+                    textfont = int(34)
                     self.l.setFont(0, gFont('Regular', textfont))            
             else:            
-                    self.l.setItemHeight(35)
-                    textfont = int(24)
+                    self.l.setItemHeight(45)
+                    textfont = int(22)
                     self.l.setFont(0, gFont('Regular', textfont))
-
-
-
                
 def oneListEntry(name):
-    #
-    #png2 = ico2_path 
     png2 = ico3_path     
     res = [name]
     #
-    if DESKHEIGHT > 1280:  
-        res.append(MultiContentEntryPixmapAlphaTest(pos=(10, 13), size=(30, 30), png=loadPNG(png2)))
-        res.append(MultiContentEntryText(pos=(60, 0), size=(1200, 50), font=0, text=name, color = 0xa6d1fe, flags=RT_VALIGN_CENTER))  
-    else:        
-        res.append(MultiContentEntryPixmapAlphaTest(pos=(10, 7), size=(30, 30), png=loadPNG(png2)))
-        res.append(MultiContentEntryText(pos=(60, 0), size=(1200, 40), font=0, text=name, color = 0xa6d1fe, flags=RT_VALIGN_CENTER))
-    return res    
-    # res.append(MultiContentEntryPixmapAlphaTest(pos=(0, 0), size=(30, 30), png=loadPNG(png2)))    
-    # res.append(MultiContentEntryText(pos=(50, 0), size=(1000, 420), font=0, text=name))
-
+    if HD.width() > 1280:   
+        res.append(MultiContentEntryPixmapAlphaTest(pos=(10, 12), size=(34, 25), png=loadPNG(png2)))
+        res.append(MultiContentEntryText(pos=(60, 0), size=(1200, 50), font=0, text=name, color = 0xa6d1fe, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER))
+    else:    
+        res.append(MultiContentEntryPixmapAlphaTest(pos=(10, 10), size=(34, 25), png=loadPNG(png2)))
+        res.append(MultiContentEntryText(pos=(60, 0), size=(1200, 50), font=0, text=name, color = 0xa6d1fe, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER))
     return res
 
 def showlist(data, list):                   
@@ -362,49 +327,15 @@ def showlist(data, list):
         plist.append(oneListEntry(name))                               
         icount = icount+1
         list.setList(plist)			
-
-
-# class OtherListsl(MenuList):
-	# def __init__(self, list):
-		# MenuList.__init__(self, list, True, eListboxPythonMultiContent)
-		# if DESKHEIGHT < 1000: 
-		       # self.l.setItemHeight(30)
-		       # textfont = int(24)
-		       # self.l.setFont(0, gFont('Regular', textfont)) 
-		# else:
-		       # self.l.setItemHeight(40)
-		       # textfont = int(36)
-		       # self.l.setFont(0, gFont('Regular', textfont))
-                       
-# ###################
-
-# class skins(Screen):
-    # instance = None
-    # skin = skin_path + 'all.xml'  
-    # f = open(skin, 'r')
-    # skin = f.read()
-    # f.close() 
-    
-# ###################
-
-
    
 class Homesl(Screen):
-    # instance = None
-    # skin = skin_path + 'Homesl.xml'  
-    # f = open(skin, 'r')
-    # skin = f.read()
-    # f.close()     
-    
+
     def __init__(self, session):
         self.session = session
         skin = skin_path + 'Homesl.xml'
         with open(skin, 'r') as f:
             self.skin = f.read()
         self.setup_title = ('Hometv')
-        # assert not Homesl.instance, "only one Homesl instance is allowed!"
-        # Homesl.instance = self
-        # self.skin = Homesl.skin
         Screen.__init__(self, session)
         self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion))         
         self.session = session
@@ -421,7 +352,6 @@ class Homesl(Screen):
         self['key_blue'].hide()
         if fileExists('/usr/lib/enigma2/python/Plugins/SatLodge/slManager/plugin.pyo'):
             self["key_blue"].show()          
-        
         self['actions'] = NumberActionMap(['SetupActions', 'ColorActions', "MenuActions"], {'ok': self.okRun,
          'green': self.IPKinst,
          'menu': self.goConfig,
@@ -433,7 +363,6 @@ class Homesl(Screen):
          'cancel': self.closerm}, -1)
         self.onLayoutFinish.append(self.updateMenuList)
 
-        
     def slImageDownloader(self):
         from .main import STBmodel
         session.open(STBmodel)
@@ -463,7 +392,6 @@ class Homesl(Screen):
             list.append(SLListEntry(x, idx))
             self.menu_list.append(x)
             idx += 1
-
         self['text'].setList(list)
 
     def okRun(self):
@@ -517,6 +445,7 @@ class Homesl(Screen):
         elif sel == _('IMAGE'):
             from .main import STBmodel
             self.session.open(STBmodel)  
+            
 class Drivers(Screen):
     def __init__(self, session):        
   
@@ -525,7 +454,6 @@ class Drivers(Screen):
         with open(skin, 'r') as f:
             self.skin = f.read()
         self.setup_title = ('Drivers')
-        
         Screen.__init__(self, session)
         self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion))         
         self.list = []		
@@ -541,7 +469,6 @@ class Drivers(Screen):
             self.timer.callback.append(self.downloadxmlpage)
         except:
             self.timer_conn = self.timer.timeout.connect(self.downloadxmlpage)
-        
         self.timer.start(1500, True)
         self['title'] = Label(_('..:: DRIVERS ::..'))
         self['version'] = Label(_('V. %s' %  currversion))
@@ -572,7 +499,6 @@ class Drivers(Screen):
             for name in match:
                    self.list.append(name)
                    self['info'].setText(_('Please select ...'))					   
-            
             showlist(self.list, self['text'])							
             self.downloading = True
         except:
@@ -587,20 +513,17 @@ class Drivers(Screen):
                 self.session.open(InstallGo, self.xml, name)
             except:
                 return
-
         else:
             self.close
             
 class slDependencies(Screen):
 
     def __init__(self, session):        
-
         self.session = session
         skin = skin_path + 'all.xml'
         with open(skin, 'r') as f:
             self.skin = f.read()
         self.setup_title = ('slDependencies')
-        
         Screen.__init__(self, session)
         self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion))         
         self.list = []		
@@ -646,7 +569,6 @@ class slDependencies(Screen):
             for name in match:
                    self.list.append(name)
                    self['info'].setText(_('Please select ...'))					   
-            
             showlist(self.list, self['text'])							
             self.downloading = True
         except:
@@ -688,7 +610,6 @@ class Picons(Screen):
             self.timer.callback.append(self.downloadxmlpage)
         except:
             self.timer_conn = self.timer.timeout.connect(self.downloadxmlpage)
-        
         self.timer.start(1500, True)
         self['title'] = Label(_('..:: PICONS ::..'))
         self['version'] = Label(_('V. %s' %  currversion))
@@ -748,7 +669,6 @@ class PluginBackup(Screen):
         self.setup_title = ('PluginBackup')
         Screen.__init__(self, session)
         self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion)) 
-  
         self.list = []		
         self['text'] = oneListsl([]) 		
         self.addon = 'emu'
@@ -794,7 +714,6 @@ class PluginBackup(Screen):
             for name in match:
                    self.list.append(name)
                    self['info'].setText(_('Please select ...'))					   
-            
             showlist(self.list, self['text'])							
             self.downloading = True
         except:
@@ -839,7 +758,6 @@ class PluginEmulators(Screen):
         except:
             self.timer_conn = self.timer.timeout.connect(self.downloadxmlpage)
         self.timer.start(1500, True)
-
         self['title'] = Label(_('..:: PLUGIN EMULATORS CAMS ::..'))
         self['version'] = Label(_('V. %s' %  currversion))
         self['maintener'] = Label(_(' by ))^^((')) 
@@ -869,7 +787,6 @@ class PluginEmulators(Screen):
             for name in match:
                    self.list.append(name)
                    self['info'].setText(_('Please select ...'))					   
-            
             showlist(self.list, self['text'])							
             self.downloading = True
         except:
@@ -896,10 +813,8 @@ class PluginEpg(Screen):
         with open(skin, 'r') as f:
             self.skin = f.read()
         self.setup_title = ('PluginEpg')
-        
         Screen.__init__(self, session)
         self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion)) 
-        
         self.list = []
         self['text'] = oneListsl([])
         self.addon = 'emu'
@@ -944,7 +859,6 @@ class PluginEpg(Screen):
             for name in match:
                    self.list.append(name)
                    self['info'].setText(_('Please select ...'))					   
-            
             showlist(self.list, self['text'])							
             self.downloading = True
         except:
@@ -986,7 +900,6 @@ class PluginIptv(Screen):
             self.timer.callback.append(self.downloadxmlpage)
         except:
             self.timer_conn = self.timer.timeout.connect(self.downloadxmlpage)
-        
         self.timer.start(1500, True)
         self['title'] = Label(_('..:: PLUGIN IPTV ::..'))
         self['version'] = Label(_('V. %s' %  currversion))
@@ -995,7 +908,6 @@ class PluginIptv(Screen):
          'green': self.okRun,
          'red': self.close,   
          'cancel': self.close}, -2)
-
 
     def downloadxmlpage(self):
         url = xml_path + 'PluginIptv.xml'
@@ -1017,7 +929,6 @@ class PluginIptv(Screen):
             for name in match:
                    self.list.append(name)
                    self['info'].setText(_('Please select ...'))					   
-            
             showlist(self.list, self['text'])							
             self.downloading = True
         except:
@@ -1043,10 +954,8 @@ class Kodi(Screen):
         with open(skin, 'r') as f:
             self.skin = f.read()
         self.setup_title = ('Kodi')
-        
         Screen.__init__(self, session)
         self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion)) 
-        
         self.list = []		
         self['text'] = oneListsl([]) 		
         self.addon = 'emu'
@@ -1060,7 +969,6 @@ class Kodi(Screen):
             self.timer.callback.append(self.downloadxmlpage)
         except:
             self.timer_conn = self.timer.timeout.connect(self.downloadxmlpage)
-        
         self.timer.start(1500, True)
         self['title'] = Label(_('..:: PLUGIN KODI ::..'))
         self['version'] = Label(_('V. %s' %  currversion))
@@ -1069,7 +977,6 @@ class Kodi(Screen):
          'green': self.okRun,
          'red': self.close, 
          'cancel': self.close}, -2)
-
 
     def downloadxmlpage(self):
         url = xml_path + 'Kodi.xml'
@@ -1176,10 +1083,8 @@ class PluginMultiboot(Screen):
                 self.session.open(InstallGo, self.xml, name)
             except:
                 return
-
         else:
             self.close			
-
             
 class PluginPpanel(Screen):
     
@@ -1189,10 +1094,8 @@ class PluginPpanel(Screen):
         with open(skin, 'r') as f:
             self.skin = f.read()
         self.setup_title = ('PluginPpanel')
-        
         Screen.__init__(self, session)
         self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion)) 
-        
         self.list = []		
         self['text'] = oneListsl([]) 		
         self.addon = 'emu'
@@ -1214,7 +1117,6 @@ class PluginPpanel(Screen):
          'green': self.okRun,
          'red': self.close,  
          'cancel': self.close}, -2)
-
 
     def downloadxmlpage(self):
         url = xml_path + 'PluginPpanel.xml'
@@ -1250,7 +1152,6 @@ class PluginPpanel(Screen):
                 self.session.open(InstallGo, self.xml, name)
             except:
                 return
-
         else:
             self.close
 
@@ -1279,7 +1180,6 @@ class PluginSettings(Screen):
             self.timer.callback.append(self.downloadxmlpage)
         except:
             self.timer_conn = self.timer.timeout.connect(self.downloadxmlpage)
-        
         self.timer.start(1500, True)
         self['title'] = Label(_('..:: PLUGIN SETTINGS PANEL ::..'))
         self['version'] = Label(_('V. %s' %  currversion))
@@ -1336,10 +1236,8 @@ class PluginSpinner(Screen):
         with open(skin, 'r') as f:
             self.skin = f.read()
         self.setup_title = ('PluginSpinner')
-        
         Screen.__init__(self, session)
         self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion)) 
-        
         self.list = []		
         self['text'] = oneListsl([])
         self.addon = 'emu'
@@ -1401,7 +1299,6 @@ class PluginSpinner(Screen):
             self.close
 
 class PluginSkins(Screen):
-    # instance = None
 
     def __init__(self, session):   
         self.session = session
@@ -1411,14 +1308,6 @@ class PluginSkins(Screen):
         self.setup_title = ('PluginSkins')
         Screen.__init__(self, session)
         self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion)) 
-    
-        # assert not skins.instance, "only one skins instance is allowed!"
-        # skins.instance = self
-        # self.skin = skins.skin  
-        # Screen.__init__(self, session)
-        # self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion))         
-        # self.session = session  
-        
         self.list = []		
         self['text'] = oneListsl([])
         self.addon = 'emu'
@@ -1557,10 +1446,8 @@ class PluginUtility(Screen):
         with open(skin, 'r') as f:
             self.skin = f.read()
         self.setup_title = ('PluginUtility')
-        
         Screen.__init__(self, session)
         self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion)) 
-        
         self.list = []		
         self['text'] = oneListsl([]) 		
         self.addon = 'emu'
@@ -1645,7 +1532,6 @@ class PluginWeather(Screen):
             self.timer.callback.append(self.downloadxmlpage)
         except:
             self.timer_conn = self.timer.timeout.connect(self.downloadxmlpage)
-        
         self.timer.start(1500, True)
         self['title'] = Label(_('..:: PLUGIN METEO ::..'))
         self['version'] = Label(_('V. %s' %  currversion))
@@ -1699,17 +1585,18 @@ class DailySetting(Screen):
 
     def __init__(self, session):        
         self.session = session
-        skin = skin_path + 'DailySetting.xml'
+        # skin = skin_path + 'DailySetting.xml'
+        skin = skin_path + 'all.xml'
         with open(skin, 'r') as f:
             self.skin = f.read()
         self.setup_title = ('DailySetting')
-        
         Screen.__init__(self, session)
         self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion)) 
-
         self['text'] = SLList([])
         self.working = False
         self.selection = 'all'
+        self['info'] = Label('') 
+        self['info'].setText(_('Please select ...'))
         self['title'] = Label(_('..:: DAILY SETTINGS ::..'))
         self['version'] = Label(_('V. %s' %  currversion))
         self['maintener'] = Label(_(' by ))^^((')) 
@@ -1747,17 +1634,14 @@ class DailySetting(Screen):
             self.session.open(slSettingCiefp)             
         elif sel == _('SETTINGS MALIMALI'):
             self.session.open(slSettingMalimali)            
-            
         elif sel == _('SETTINGS MANUTEK'):
             self.session.open(PluginslSettingManutek)             
-        elif sel == _('SETTINGS MILENKO61'):
-            self.session.open(PluginslMilenko61)             
+        elif sel == _('SETTINGS MILENKA61'):
+            self.session.open(PluginslMilenka61)             
         elif sel == _('SETTINGS MORPHEUS'):
             self.session.open(PluginslSettingMorpheus) 
-            
         elif sel == _('SETTINGS PREDRAG'):
             self.session.open(slSettingPredrag)             
-            
         elif sel == _('SETTINGS VHANNIBAL'):
             self.session.open(PluginslSettingVhan)             
             
@@ -1766,13 +1650,13 @@ class PluginslSettingVhan(Screen):
 
     def __init__(self, session):  
         self.session = session
-        skin = skin_path + 'Setting.xml'
+        skin = skin_path + 'all.xml'        
+        # skin = skin_path + 'Setting.xml'
         with open(skin, 'r') as f:
             self.skin = f.read()
         self.setup_title = ('PluginslSettingVhan')
         Screen.__init__(self, session)
         self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion))  
-
         self.list = []		
         self['text'] = oneListsl([]) 		
         self.addon = 'emu'
@@ -1797,7 +1681,6 @@ class PluginslSettingVhan(Screen):
 
 
     def downloadxmlpagecb(self):
-
         url = base64.b64decode("aHR0cDovL3NhdC5hbGZhLXRlY2gubmV0L3VwbG9hZC9zZXR0aW5ncy92aGFubmliYWwv")
         getPage(url).addCallback(self._gotPageLoad).addErrback(self.errorLoad)			
         
@@ -1837,7 +1720,6 @@ class PluginslSettingVhan(Screen):
     def okInstall(self, result):
         if result:
             if self.downloading == True:
-#            try:
                 selection = str(self['text'].getCurrent())
                 idx = self["text"].getSelectionIndex()
                 self.name = self.names[idx]
@@ -1845,11 +1727,8 @@ class PluginslSettingVhan(Screen):
                 dest = "/tmp/settings.zip"
                 print "url =", url
                 downloadPage(url, dest).addCallback(self.install).addErrback(self.showError)
-#            except:
-#                return
             else:
                 self.close  
-                #return
                 
     def showError(self, error):
                 print "download error =", error
@@ -1878,28 +1757,27 @@ class PluginslSettingVhan(Screen):
             cmd.append(cmd3)
             cmd.append(cmd4)
             cmd.append(cmd5)
-            title = _("Installo i Settings")          
+            title = _("Install the Settings")          
             self.session.open(slConsole,_(title),cmd)              
             #self.onShown.append(self.reloadSettings)
 
     def reloadSettings(self):
         ReloadBouquet()
-        self.mbox = self.session.open(slMessageBox, _('Setting Installati!'), slMessageBox.TYPE_INFO, timeout=5)
-        self['info'].setText(_('Installazione eseguita con successo!')) 
+        self.mbox = self.session.open(slMessageBox, _('Setting Installed!'), slMessageBox.TYPE_INFO, timeout=5)
+        self['info'].setText(_('Installation performed successfully!')) 
 
         
-class PluginslMilenko61(Screen):
+class PluginslMilenka61(Screen):
 
     def __init__(self, session):        
         self.session = session
-        skin = skin_path + 'Setting.xml'
+        skin = skin_path + 'all.xml'        
+        # skin = skin_path + 'Setting.xml'
         with open(skin, 'r') as f:
             self.skin = f.read()
-        self.setup_title = ('PluginslMilenko61')
-        
+        self.setup_title = ('PluginslMilenka61')
         Screen.__init__(self, session)
         self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion)) 
-
         self.list = []		
         self['text'] = oneListsl([]) 		
         self.addon = 'emu'
@@ -1914,7 +1792,7 @@ class PluginslMilenko61(Screen):
         except:
             self.timer_conn = self.timer.timeout.connect(self.downloadxmlpagecb)
         self.timer.start(1500, True)
-        self['title'] = Label(_('..:: SETTING Milenko61 ::..'))
+        self['title'] = Label(_('..:: SETTING Milenka61 ::..'))
         self['version'] = Label(_('V. %s' %  currversion))
         self['maintener'] = Label(_(' by ))^^(('))           
         self['actions'] = ActionMap(['SetupActions', 'ColorActions'], {'ok': self.okRun,
@@ -1922,9 +1800,7 @@ class PluginslMilenko61(Screen):
          'red': self.close,  
          'cancel': self.close}, -2)
 
-
     def downloadxmlpagecb(self):
-
         url = base64.b64decode("aHR0cDovL3ZlbnVzY3MubmV0L3NhdHZlbnVzRTIv")
         getPage(url).addCallback(self._gotPageLoad).addErrback(self.errorLoad)			
         
@@ -1946,6 +1822,7 @@ class PluginslMilenko61(Screen):
             for url in match:
                     name = "Satvenus" + url
                     name = name.replace(".zip", "")
+                    name = name.replace("Satvenus%20EX-YU%20Lista%20za%20milenka61%20", "")                     
                     name = name.replace("%20", " ")
                     # name = name.replace("Vhannibal", "")  
                     url64b = base64.b64decode("aHR0cDovL3ZlbnVzY3MubmV0L3NhdHZlbnVzRTIvU2F0dmVudXM=")
@@ -1972,11 +1849,8 @@ class PluginslMilenko61(Screen):
                 dest = "/tmp/settings.zip"
                 print "url =", url
                 downloadPage(url, dest).addCallback(self.install).addErrback(self.showError)
-#            except:
-#                return
             else:
                 self.close  
-                #return
                 
     def showError(self, error):
                 print "download error =", error
@@ -1991,39 +1865,39 @@ class PluginslMilenko61(Screen):
             os.system('rm -rf /etc/enigma2/*.radio')
             os.system('rm -rf /etc/enigma2/*.tv')
             
-            os.system('mkdir /tmp/milenko61')
-            fdest1 = "/tmp/milenko61" 
+            os.system('mkdir /tmp/milenka61')
+            fdest1 = "/tmp/milenka61" 
             fdest2 = "/etc/enigma2"
             cmd1 = "unzip -o -q '/tmp/settings.zip' -d " + fdest1
 #        self.name2 = self.name.replace("%20", " ")
-            cmd2 = "cp -rf /tmp/milenko61/* " + fdest2
+            cmd2 = "cp -rf /tmp/milenka61/* " + fdest2
             print "cmd2 =", cmd2
             cmd3 = "wget -qO - http://127.0.0.1/web/servicelistreload?mode=0 > /tmp/inst.txt 2>&1 &"
             cmd4 = "rm -rf /tmp/settings.zip"
-            cmd5 = "rm -rf /tmp/milenko61*" #+ name + '*' # + selection
+            cmd5 = "rm -rf /tmp/milenka61*" #+ name + '*' # + selection
             cmd = []
             cmd.append(cmd1)
             cmd.append(cmd2)
             cmd.append(cmd3)
             cmd.append(cmd4)
             cmd.append(cmd5)
-            title = _("Installo i Settings")          
+            title = _("Install the Settings")          
             self.session.open(slConsole,_(title),cmd) 
 
     def reloadSettings(self):
         ReloadBouquet()
-        self.mbox = self.session.open(slMessageBox, _('Setting Installati!'), slMessageBox.TYPE_INFO, timeout=5)
-        self['info'].setText(_('Installazione eseguita con successo!')) 
+        self.mbox = self.session.open(slMessageBox, _('Setting Installed!'), slMessageBox.TYPE_INFO, timeout=5)
+        self['info'].setText(_('Installation performed successfully!')) 
         
 class PluginslSettingManutek(Screen):
 
     def __init__(self, session):        
         self.session = session
-        skin = skin_path + 'Setting.xml'
+        skin = skin_path + 'all.xml'        
+        # skin = skin_path + 'Setting.xml'
         with open(skin, 'r') as f:
             self.skin = f.read()
         self.setup_title = ('PluginslSettingManutek')
-        
         Screen.__init__(self, session)
         self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion)) 
         self.list = []		
@@ -2058,31 +1932,24 @@ class PluginslSettingManutek(Screen):
         self.downloading = False
 
     def _gotPageLoad(self, data):
-#        print "In Setting data =", data
         self.xml = data
         self.names = []
         self.urls = []
         try:
             print "In Setting self.xml =", self.xml
-            # regex = 'href="/isetting/index.php?dir=&amp;file=NemoxyzRLS(.*?)"'
-            # match = re.compile(regex,re.DOTALL).findall(self.xml)
             match = re.compile('href=".*?file=(.+?)">', re.DOTALL).findall(self.xml)            
-            
             print "In Setting match =", match
             for url in match:
                     # name = "NemoxyzRLS" + url
                     name = url
                     name = name.replace(".zip", "")
                     name = name.replace("%20", " ")
-                    # self.namexxx = name        
-                    # name = name.replace("NemoxyzRLS_", "")
-                    # name = name.replace("Manutek_", "Manutek ") 
-                    # name = name.replace("_", " ")                       
-                    url64b = base64.b64decode("aHR0cDovL3d3dy5tYW51dGVrLml0L2lzZXR0aW5nL2VuaWdtYTIv")
+                    name = name.replace("NemoxyzRLS_", "")                     
+                    name = name.replace("_", " ")
+                    url64b = base64.b64decode("YUhSMGNEb3ZMM2QzZHk1dFlXNTFkR1ZyTG1sMEwybHpaWFIwYVc1bkwyVnVhV2R0WVRJdg==")
                     url = url64b + url
                     self.urls.append(url)
-                    # self.names.append(namexxx)
-                    self.names.append(name)                    
+                    self.names.append(name)
                     self['info'].setText(_('Please select ...'))					   
             showlist(self.names, self['text'])							
             self.downloading = True
@@ -2103,11 +1970,8 @@ class PluginslSettingManutek(Screen):
                 dest = "/tmp/settings.zip"
                 print "url =", url
                 downloadPage(url, dest).addCallback(self.install).addErrback(self.showError)
-#            except:
-#                return
             else:
                 self.close  
-                #return
                 
     def showError(self, error):
                 print "download error =", error
@@ -2135,20 +1999,136 @@ class PluginslSettingManutek(Screen):
             cmd.append(cmd3)
             cmd.append(cmd4)
             cmd.append(cmd5)
-            title = _("Installo i Settings")          
+            title = _("Install the Settings")          
             self.session.open(slConsole,_(title),cmd)              
             #self.onShown.append(self.reloadSettings)
         
     def reloadSettings(self):
         ReloadBouquet()
-        self.mbox = self.session.open(slMessageBox, _('Setting Installati!'), slMessageBox.TYPE_INFO, timeout=5)
-        self['info'].setText(_('Installazione eseguita con successo!'))                 
-            
-class slSettingCiefp(Screen):
+        self.mbox = self.session.open(slMessageBox, _('Setting Installed!'), slMessageBox.TYPE_INFO, timeout=5)
+        self['info'].setText(_('Installation performed successfully!'))                 
+        
+class PluginslSettingMorpheus(Screen):
 
     def __init__(self, session):        
         self.session = session
-        skin = skin_path + 'Setting.xml'
+        skin = skin_path + 'all.xml'        
+        # skin = skin_path + 'Setting.xml'
+        with open(skin, 'r') as f:
+            self.skin = f.read()
+        self.setup_title = ('PluginslSettingMorpheus')
+        Screen.__init__(self, session)
+        self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion)) 
+        self.list = []		
+        self['text'] = oneListsl([]) 		
+        self.addon = 'emu'
+        self.icount = 0
+        self['info'] = Label(_('Getting the list, please wait ...'))
+        self['key_green'] = Button(_('Install'))
+        self['key_red'] = Button(_('Back'))
+        self.downloading = False
+        self.timer = eTimer()
+        try:
+            self.timer.callback.append(self.downloadxmlpagecb)
+        except:
+            self.timer_conn = self.timer.timeout.connect(self.downloadxmlpagecb)
+        self.timer.start(1500, True)
+        self['title'] = Label(_('..:: SETTING Morpheus883 ::..'))
+        self['version'] = Label(_('V. %s' %  currversion))
+        self['maintener'] = Label(_(' by ))^^(('))           
+        self['actions'] = ActionMap(['SetupActions', 'ColorActions'], {'ok': self.okRun,
+         'green': self.okRun,
+         'red': self.close,   
+         'cancel': self.close}, -2)
+         
+    def downloadxmlpagecb(self):
+        url = base64.b64decode("aHR0cDovL21vcnBoZXVzODgzLmFsdGVydmlzdGEub3JnL2Rvd25sb2FkL2luZGV4LnBocD9kaXI9")
+        getPage(url).addCallback(self._gotPageLoad).addErrback(self.errorLoad)			
+        
+    def errorLoad(self, error):
+        print str(error)	
+        self['info'].setText(_('Try again later ...'))
+        self.downloading = False
+
+    def _gotPageLoad(self, data):
+        self.xml = data
+        self.names = []
+        self.urls = []
+        try:
+            print "In Setting self.xml =", self.xml
+            match = re.compile('href=".*?file=(.+?)">', re.DOTALL).findall(self.xml)            
+            print "In Setting match =", match
+            for url in match:
+                if 'zip' in url.lower():
+                    if 'settings' in url.lower():
+                        continue    
+                    name = url
+                    name = name.replace(".zip", "")
+                    name = name.replace("%20", " ")
+                    name = name.replace("_", " ")
+                    name = name.replace("Morph883", "Morpheus883")    
+                    url64b = base64.b64decode("aHR0cDovL21vcnBoZXVzODgzLmFsdGVydmlzdGEub3JnL3NldHRpbmdzLw==")
+                    url = url64b + url
+                    print 'url 64b-url-', url
+                    self.urls.append(url)
+                    self.names.append(name)
+                    self['info'].setText(_('Please select ...'))					   
+            showlist(self.names, self['text'])							
+            self.downloading = True
+        except:
+            self.downloading = False
+            
+    def okRun(self):
+        self.session.openWithCallback(self.okInstall,slMessageBox,(_("Do you want to install?")), slMessageBox.TYPE_YESNO)             
+            
+    def okInstall(self, result):
+        if result:
+            if self.downloading == True:
+                idx = self["text"].getSelectionIndex()
+                self.name = self.names[idx]
+                url = self.urls[idx]
+                dest = "/tmp/settings.zip"
+                print "url =", url
+                url= str(url)
+                downloadPage(url, dest).addCallback(self.install).addErrback(self.showError)
+            else:
+                self.close  
+                
+    def showError(self, error):
+                print "download error =", error
+                self.close()
+
+    def install(self, fplug):
+            checkfile = '/tmp/settings.zip'
+            if os.path.exists(checkfile):
+                if os.path.exists("/tmp/unzipped"):
+                    os.system('rm -rf /tmp/unzipped')
+                os.system('mkdir -p /tmp/unzipped')
+                os.system('unzip -o -q /tmp/settings.zip -d /tmp/unzipped')
+                path = '/tmp/unzipped'
+                for root, dirs, files in os.walk(path):
+                    for pth in dirs:
+                        cmd = []
+                        os.system('rm -rf /etc/enigma2/lamedb')
+                        os.system('rm -rf /etc/enigma2/*.radio')
+                        os.system('rm -rf /etc/enigma2/*.tv')
+                        cmd1 = "cp -rf /tmp/unzipped/" + pth + "/* '/etc/enigma2'"   
+                        cmd.append(cmd1)                      
+                title = _("Installation Settings")          
+                self.session.open(tvConsole,_(title),cmd) 
+            deletetmp()
+            self.reloadSettings()              
+        
+    def reloadSettings(self):
+        ReloadBouquet()
+        self.mbox = self.session.open(slMessageBox, _('Setting Installed!'), slMessageBox.TYPE_INFO, timeout=5)
+        self['info'].setText(_('Installation performed successfully!'))     
+
+class slSettingCiefp(Screen):
+    def __init__(self, session):        
+        self.session = session
+        skin = skin_path + 'all.xml'        
+        # skin = skin_path + 'Setting.xml'
         with open(skin, 'r') as f:
             self.skin = f.read()
         self.setup_title = ('slSettingCiefp')
@@ -2221,7 +2201,6 @@ class slSettingCiefp(Screen):
     def okInstall(self, result):
         if result:
             if self.downloading == True:
-#            try:
                 selection = str(self['text'].getCurrent())
                 idx = self["text"].getSelectionIndex()
                 self.name = self.names[idx]
@@ -2229,18 +2208,14 @@ class slSettingCiefp(Screen):
                 dest = "/tmp/settings.tar.gz"
                 print "url =", url
                 downloadPage(url, dest).addCallback(self.install).addErrback(self.showError)
-#            except:
-#                return
             else:
                 self.close  
-                #return
                 
     def showError(self, error):
                 print "download error =", error
                 self.close()
 
     def install(self, fplug):
-        
         checkfile = '/tmp/settings.tar.gz'
         if os.path.exists(checkfile):
             # os.system('unzip -o /tmp/download.zip -d /tmp/')
@@ -2255,19 +2230,20 @@ class slSettingCiefp(Screen):
             cmd.append(cmd1)
             cmd.append(cmd3)
             cmd.append(cmd4)
-            title = _("Installo i Settings")          
+            title = _("Install the Settings")          
             self.session.open(slConsole,_(title),cmd)              
         
     def reloadSettings(self):
         ReloadBouquet()
-        self.mbox = self.session.open(slMessageBox, _('Setting Installati!'), slMessageBox.TYPE_INFO, timeout=5)
-        self['info'].setText(_('Installazione eseguita con successo!')) 
+        self.mbox = self.session.open(slMessageBox, _('Setting Installed!'), slMessageBox.TYPE_INFO, timeout=5)
+        self['info'].setText(_('Installation performed successfully!')) 
         
 class slSettingMalimali(Screen):
     
     def __init__(self, session):        
         self.session = session
-        skin = skin_path + 'Setting.xml'
+        skin = skin_path + 'all.xml'        
+        # skin = skin_path + 'Setting.xml'
         with open(skin, 'r') as f:
             self.skin = f.read()
         self.setup_title = ('slSettingMalimali')
@@ -2318,14 +2294,9 @@ class slSettingMalimali(Screen):
             for url in match:
                     
                 if url.find('.tar.gz') != -1 : 
-                    
                     name = "malimali" + url
-                    # name = name.replace(".zip", "")
                     name = name.replace(".tar.gz", "")                    
                     name = name.replace("%20", " ")
-                    #Settings_Morph883_0.8W-4.8E-13E.tar.gz
-                    # name = name.replace("_Morph883_", "Morpheus883 ")                     
-                    # name = name.replace("Settings", "")                     
                     url64b = base64.b64decode("aHR0cDovLzE3OC42My4xNTYuNzUvcGFuZWxhZGRvbnMvTWFsaW1hbGkvbWFsaW1hbGk=")                    
                     url = url64b + url
                     self.urls.append(url)
@@ -2350,11 +2321,8 @@ class slSettingMalimali(Screen):
                 dest = "/tmp/settings.tar.gz"
                 print "url =", url
                 downloadPage(url, dest).addCallback(self.install).addErrback(self.showError)
-#            except:
-#                return
             else:
                 self.close  
-                #return
                 
     def showError(self, error):
                 print "download error =", error
@@ -2364,7 +2332,6 @@ class slSettingMalimali(Screen):
         
         checkfile = '/tmp/settings.tar.gz'
         if os.path.exists(checkfile):
-            # os.system('unzip -o /tmp/download.zip -d /tmp/')
             os.system('rm -rf /etc/enigma2/lamedb')
             os.system('rm -rf /etc/enigma2/*.radio')
             os.system('rm -rf /etc/enigma2/*.tv')
@@ -2376,19 +2343,20 @@ class slSettingMalimali(Screen):
             cmd.append(cmd1)
             cmd.append(cmd3)
             cmd.append(cmd4)
-            title = _("Installo i Settings")          
+            title = _("Install the Settings")          
             self.session.open(slConsole,_(title),cmd)              
         
     def reloadSettings(self):
         ReloadBouquet()
-        self.mbox = self.session.open(slMessageBox, _('Setting Installati!'), slMessageBox.TYPE_INFO, timeout=5)
-        self['info'].setText(_('Installazione eseguita con successo!'))         
+        self.mbox = self.session.open(slMessageBox, _('Setting Installed!'), slMessageBox.TYPE_INFO, timeout=5)
+        self['info'].setText(_('Installation performed successfully!'))         
 
 class slSettingPredrag(Screen):
 
     def __init__(self, session):        
         self.session = session
-        skin = skin_path + 'Setting.xml'
+        skin = skin_path + 'all.xml'        
+        # skin = skin_path + 'Setting.xml'
         with open(skin, 'r') as f:
             self.skin = f.read()
         self.setup_title = ('slSettingPredrag')
@@ -2439,12 +2407,8 @@ class slSettingPredrag(Screen):
             for url in match:
                 if url.find('.tar.gz') != -1 : 
                     name = "predrag" + url
-                    # name = name.replace(".zip", "")
                     name = name.replace(".tar.gz", "")                    
                     name = name.replace("%20", " ")
-                    #Settings_Morph883_0.8W-4.8E-13E.tar.gz
-                    # name = name.replace("_Morph883_", "Morpheus883 ")                     
-                    # name = name.replace("Settings", "")                        
                     url64b = base64.b64decode("aHR0cDovLzE3OC42My4xNTYuNzUvcGFuZWxhZGRvbnMvUHJlZHJAZy9wcmVkcmFn")                 
                     url = url64b + url
                     self.urls.append(url)
@@ -2461,7 +2425,6 @@ class slSettingPredrag(Screen):
     def okInstall(self, result):
         if result:
             if self.downloading == True:
-#            try:
                 selection = str(self['text'].getCurrent())
                 idx = self["text"].getSelectionIndex()
                 self.name = self.names[idx]
@@ -2469,11 +2432,8 @@ class slSettingPredrag(Screen):
                 dest = "/tmp/settings.tar.gz"
                 print "url =", url
                 downloadPage(url, dest).addCallback(self.install).addErrback(self.showError)
-#            except:
-#                return
             else:
                 self.close  
-                #return
                 
     def showError(self, error):
                 print "download error =", error
@@ -2483,7 +2443,6 @@ class slSettingPredrag(Screen):
         
         checkfile = '/tmp/settings.tar.gz'
         if os.path.exists(checkfile):
-            # os.system('unzip -o /tmp/download.zip -d /tmp/')
             os.system('rm -rf /etc/enigma2/lamedb')
             os.system('rm -rf /etc/enigma2/*.radio')
             os.system('rm -rf /etc/enigma2/*.tv')
@@ -2495,134 +2454,16 @@ class slSettingPredrag(Screen):
             cmd.append(cmd1)
             cmd.append(cmd3)
             cmd.append(cmd4)
-            title = _("Installo i Settings")          
+            title = _("Install the Settings")          
             self.session.open(slConsole,_(title),cmd)              
         
     def reloadSettings(self):
         ReloadBouquet()
-        self.mbox = self.session.open(slMessageBox, _('Setting Installati!'), slMessageBox.TYPE_INFO, timeout=5)
-        self['info'].setText(_('Installazione eseguita con successo!'))         
+        self.mbox = self.session.open(slMessageBox, _('Setting Installed!'), slMessageBox.TYPE_INFO, timeout=5)
+        self['info'].setText(_('Installation performed successfully!'))         
 
 
         
-class PluginslSettingMorpheus(Screen):
-
-    def __init__(self, session):        
-        self.session = session
-        skin = skin_path + 'Setting.xml'
-        with open(skin, 'r') as f:
-            self.skin = f.read()
-        self.setup_title = ('PluginslSettingMorpheus')
-        Screen.__init__(self, session)
-        self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion)) 
-        self.list = []		
-        self['text'] = oneListsl([]) 		
-        self.addon = 'emu'
-        self.icount = 0
-        self['info'] = Label(_('Getting the list, please wait ...'))
-        self['key_green'] = Button(_('Install'))
-        self['key_red'] = Button(_('Back'))
-        self.downloading = False
-        self.timer = eTimer()
-        try:
-            self.timer.callback.append(self.downloadxmlpagecb)
-        except:
-            self.timer_conn = self.timer.timeout.connect(self.downloadxmlpagecb)
-        self.timer.start(1500, True)
-        self['title'] = Label(_('..:: SETTING Morpheus883 ::..'))
-        self['version'] = Label(_('V. %s' %  currversion))
-        self['maintener'] = Label(_(' by ))^^(('))           
-        self['actions'] = ActionMap(['SetupActions', 'ColorActions'], {'ok': self.okRun,
-         'green': self.okRun,
-         'red': self.close,   
-         'cancel': self.close}, -2)
-         
-    def downloadxmlpagecb(self):
-        url = base64.b64decode("aHR0cDovL29wZW5lZS5zaWZ0ZWFtLmV1L3NldHRpbmdzL21vcnBoODgzLw==")
-        getPage(url).addCallback(self._gotPageLoad).addErrback(self.errorLoad)			
-
-        
-    def errorLoad(self, error):
-        print str(error)	
-        self['info'].setText(_('Try again later ...'))
-        self.downloading = False
-
-    def _gotPageLoad(self, data):
-#        print "In Setting data =", data
-        self.xml = data
-        self.names = []
-        self.urls = []
-        try:
-            print "In Setting self.xml =", self.xml
-            regex = '<a href="Settings_Morph883(.*?)"'
-            match = re.compile(regex,re.DOTALL).findall(self.xml)
-            print "In Setting match =", match
-            for url in match:
-                    name = "Settings_Morph883" + url
-                    # name = name.replace(".zip", "")
-                    name = name.replace(".tar.gz", "")                    
-                    name = name.replace("%20", " ")
-                    #Settings_Morph883_0.8W-4.8E-13E.tar.gz
-                    name = name.replace("_Morph883_", "Morpheus883 ")                     
-                    name = name.replace("Settings", "")                     
-                    url64b = base64.b64decode("aHR0cDovL29wZW5lZS5zaWZ0ZWFtLmV1L3NldHRpbmdzL21vcnBoODgzL1NldHRpbmdzX01vcnBoODgz")                    
-                    url = url64b + url
-                    self.urls.append(url)
-                    self.names.append(name)
-                    self['info'].setText(_('Please select ...'))					   
-            showlist(self.names, self['text'])							
-            self.downloading = True
-        except:
-            self.downloading = False
-            
-    def okRun(self):
-        self.session.openWithCallback(self.okInstall,slMessageBox,(_("Do you want to install?")), slMessageBox.TYPE_YESNO)             
-            
-    def okInstall(self, result):
-        if result:
-            if self.downloading == True:
-#            try:
-                selection = str(self['text'].getCurrent())
-                idx = self["text"].getSelectionIndex()
-                self.name = self.names[idx]
-                url = self.urls[idx]
-                dest = "/tmp/settings.tar.gz"
-                print "url =", url
-                downloadPage(url, dest).addCallback(self.install).addErrback(self.showError)
-#            except:
-#                return
-            else:
-                self.close  
-                #return
-                
-    def showError(self, error):
-                print "download error =", error
-                self.close()
-
-    def install(self, fplug):
-        
-        checkfile = '/tmp/settings.tar.gz'
-        if os.path.exists(checkfile):
-            # os.system('unzip -o /tmp/download.zip -d /tmp/')
-            os.system('rm -rf /etc/enigma2/lamedb')
-            os.system('rm -rf /etc/enigma2/*.radio')
-            os.system('rm -rf /etc/enigma2/*.tv')
-            cmd1 = "tar -xvf /tmp/*.tar.gz -C /" 
-            print "cmd1 =", cmd1
-            cmd3 = "wget -qO - http://127.0.0.1/web/servicelistreload?mode=0 > /tmp/inst.txt 2>&1 &"
-            cmd4 = "rm -rf /tmp/*.tar.gz"
-            cmd = []
-            cmd.append(cmd1)
-            cmd.append(cmd3)
-            cmd.append(cmd4)
-            title = _("Installo i Settings")          
-            self.session.open(slConsole,_(title),cmd)              
-        
-    def reloadSettings(self):
-        ReloadBouquet()
-        self.mbox = self.session.open(slMessageBox, _('Setting Installati!'), slMessageBox.TYPE_INFO, timeout=5)
-        self['info'].setText(_('Installazione eseguita con successo!'))     
-       
 class InstallGo(Screen):
 
     def __init__(self, session, data, name, selection = None):     
@@ -2694,14 +2535,15 @@ class InstallGo(Screen):
             self.timer.start(100, True)
             self['info'].setText(_('Installing ') + self.dom + _('... please wait'))
             self.session.open(slConsole, _('Installing: %s') % self.dom, ['opkg install -force-overwrite -force-depends %s' % self.com])
+            
         elif self.com.endswith('.tar.gz'):
             self.timer = eTimer()
             self.timer.start(100, True)
             self['info'].setText(_('Installing ') + self.dom + _('... please wait'))
             try:
-                self.timer.callback.append(self.deletetmp)
+                self.timer.callback.append(deletetmp)
             except:
-                self.timer_conn = self.timer.timeout.connect(self.deletetmp)
+                self.timer_conn = self.timer.timeout.connect(deletetmp)
             
             os.system('wget %s -O /tmp/download.tar.gz > /dev/null' % self.com )
             self.session.open(slConsole, _('Installing: %s') % self.dom, ['tar -xzvf ' + '/tmp/download.tar.gz' + ' -C /'])
@@ -2712,9 +2554,9 @@ class InstallGo(Screen):
             self.timer.start(100, True)
             self['info'].setText(_('Installing ') + self.dom + _('... please wait'))
             try:
-                self.timer.callback.append(self.deletetmp)
+                self.timer.callback.append(deletetmp)
             except:
-                self.timer_conn = self.timer.timeout.connect(self.deletetmp)
+                self.timer_conn = self.timer.timeout.connect(deletetmp)
             os.system('wget %s -O /tmp/download.tar.bz2 > /dev/null' % self.com )
             self.session.open(slConsole, _('Installing: %s') % self.dom, ['tar -xyvf ' + '/tmp/download.tar.bz2' + ' -C /'])
             self.mbox = self.session.open(slMessageBox, _('Installation successful!'), slMessageBox.TYPE_INFO, timeout=5)
@@ -2724,9 +2566,9 @@ class InstallGo(Screen):
             self.timer.start(100, True)
             self['info'].setText(_('Installing ') + self.dom + _('... please wait'))
             try:
-                self.timer.callback.append(self.deletetmp)
+                self.timer.callback.append(deletetmp)
             except:
-                self.timer_conn = self.timer.timeout.connect(self.deletetmp)
+                self.timer_conn = self.timer.timeout.connect(deletetmp)
             os.system('wget %s -O /tmp/download.tbz2 > /dev/null' % self.com )
             self.session.open(slConsole, _('Installing: %s') % self.dom, ['tar -xyvf ' + '/tmp/download.tbz2' + ' -C /'])
             self.mbox = self.session.open(slMessageBox, _('Installation successful!'), slMessageBox.TYPE_INFO, timeout=5)
@@ -2736,9 +2578,9 @@ class InstallGo(Screen):
             self.timer.start(100, True)
             self['info'].setText(_('Installing ') + self.dom + _('... please wait'))
             try:
-                self.timer.callback.append(self.deletetmp)
+                self.timer.callback.append(deletetmp)
             except:
-                self.timer_conn = self.timer.timeout.connect(self.deletetmp)
+                self.timer_conn = self.timer.timeout.connect(deletetmp)
             os.system('wget %s -O /tmp/download.tbz > /dev/null' % self.com )
             self.session.open(slConsole, _('Installing: %s') % self.dom, ['tar -xyvf ' + '/tmp/download.tbz' + ' -C /'])
             self.mbox = self.session.open(slMessageBox, _('Installation successful!'), slMessageBox.TYPE_INFO, timeout=5)
@@ -2752,9 +2594,9 @@ class InstallGo(Screen):
                 self.timer.start(100, True)
                 self['info'].setText(_('Installing ') + self.dom + _('... please wait'))
                 try:
-                    self.timer.callback.append(self.deletetmp)
+                    self.timer.callback.append(deletetmp)
                 except:
-                    self.timer_conn = self.timer.timeout.connect(self.deletetmp)
+                    self.timer_conn = self.timer.timeout.connect(deletetmp)
                 os.system('wget %s -O /tmp/download.deb > /dev/null' % self.com )
                 self.session.open(slConsole, _('Installing: %s') % self.dom, ['dpkg -i ' + '/tmp/download.deb'])
                 self.mbox = self.session.open(slMessageBox, _('Installation successful!'), slMessageBox.TYPE_INFO, timeout=5)
@@ -2765,9 +2607,9 @@ class InstallGo(Screen):
                 self.timer.start(100, True)
                 self['info'].setText(_('Installing ') + self.dom + _('... please wait'))
                 try:
-                    self.timer.callback.append(self.deletetmp)
+                    self.timer.callback.append(deletetmp)
                 except:
-                    self.timer_conn = self.timer.timeout.connect(self.deletetmp)
+                    self.timer_conn = self.timer.timeout.connect(deletetmp)
                 os.system('wget %s -O /tmp/download.zip > /dev/null' % self.com )
                 #controllo esistenza file 
                 checkfile = '/tmp/download.zip'
@@ -2792,8 +2634,6 @@ class InstallGo(Screen):
                 else:
                     self.mbox = self.session.open(slMessageBox, _('Download Failed!'), slMessageBox.TYPE_INFO, timeout=5)
             
-            # checkfile = '/usr(lib/enigma2/python/Plugins/Extensions/KodiLite'
-            # if os.path.exists(checkfile):
             if 'plugin.' or 'repository.' or 'script.' in self.dom.lower():
                 checkfile = '/usr/lib/enigma2/python/Plugins/Extensions/KodiLite'
                 # if os.path.exists(checkfile):
@@ -2802,9 +2642,9 @@ class InstallGo(Screen):
                     self.timer.start(100, True)
                     self['info'].setText(_('Installing ') + self.dom + _('... please wait'))
                     try:
-                        self.timer.callback.append(self.deletetmp)
+                        self.timer.callback.append(deletetmp)
                     except:
-                        self.timer_conn = self.timer.timeout.connect(self.deletetmp)
+                        self.timer_conn = self.timer.timeout.connect(deletetmp)
                     downplug = self.dom.replace(' ', '') + '.zip' 
                     os.system('wget %s -O /tmp/%s > /dev/null' % (self.com,downplug) ) 
                     checkfiledwn = '/tmp/%s' % downplug
@@ -2829,8 +2669,6 @@ class InstallGo(Screen):
                 self['info'].setText(_('Downloading file select in /tmp') + self.dom + _('... please wait'))
                 downplug = self.dom.replace(' ', '') + '.zip' 
                 os.system('wget %s -O /tmp/%s > /dev/null' % (self.com,downplug) )                
-                # self.session.open(slConsole, _('Installing: %s') % self.dom, ['unzip -o ' + '/tmp/download.zip' + ' -d /'])
-                # os.system('rm -fr /tmp/download.zip')
                 self.mbox = self.session.open(slMessageBox, _('Download file in /tmp successful!'), slMessageBox.TYPE_INFO, timeout=5)
                 self['info'].setText(_('Download file in /tmp successful!!'))
         else:
@@ -2841,13 +2679,9 @@ class InstallGo(Screen):
         os.system('rm -f /tmp/*.ipk;rm -f /tmp/*.tar;rm -f /tmp/*.zip;rm -f /tmp/*.tar.gz;rm -f /tmp/*.tar.bz2;rm -f /tmp/*.tar.tbz2;rm -f /tmp/*.tar.tbz')
 
     def reloadSettings2(self):
-            # self.eDVBDB = eDVBDB.getInstance()
-            # self.eDVBDB.reloadBouquets()            
-            # self.eDVBDB.reloadServicelist()
             ReloadBouquet()
             self.mbox = self.session.open(slMessageBox, _('Setting Installed!'), slMessageBox.TYPE_INFO, timeout=5)
             self['info'].setText(_('Installation successful!'))  
-
 class slConsole(Screen):
         
     def __init__(self, session, title = None, cmdlist = None, finishedCallback = None, closeOnSuccess = False):
@@ -2934,7 +2768,9 @@ class IPKinst(Screen):
         self['ipkglisttmp'] = List(self.flist)
         self['title'] = Label(_('..:: INSTALL EXTENSIONS ::..'))
         self['version'] = Label(_('V. %s' %  currversion))
-        self['info1'] = Label(_('Put addon .ipk .tar.gz .deb and install\nSet path from config')) 
+        # self['info1'] = Label(_('Put addon .ipk .tar.gz .deb and install\nSet path from config')) 
+        self['info1'] = Label(_('Put addon .ipk .tar.gz .deb and install from config path') + ' ' + str(ipkpth) ) 
+
         self['info'] = Label('')
         self['maintener'] = Label(_(' by ))^^(('))   
         self['key_green'] = Button(_('Install'))

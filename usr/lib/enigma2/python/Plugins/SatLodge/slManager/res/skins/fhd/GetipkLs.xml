@@ -1,6 +1,6 @@
 <screen name="GetipkLs" position="0,0" size="1920,1080" flags="wfNoBorder" backgroundColor="#41000000" title="..:: Sat-Lodge Cam Manager ::..">
 <!-- <widget name="text" position="53,185" size="685,674" font="Regular;40" scrollbarMode="showOnDemand" itemHeight="50" transparent="1" />-->
- <widget name="text" position="53,185" size="685,674" scrollbarMode="showOnDemand" itemHeight="50" transparent="1" />
+ <widget name="text" position="53,185" size="685,674" scrollbarMode="showOnDemand" transparent="1" />
  <widget name="info" position="59,124" zPosition="4" size="550,50" font="Regular;40" foregroundColor="#ffcc33" transparent="1" halign="center" valign="center" />
  <ePixmap position="0,0" zPosition="-2" size="1920,1080" pixmap="/usr/lib/enigma2/python/Plugins/SatLodge/slManager/res/img/center2FHD.png" alphatest="blend" />
   <!--
