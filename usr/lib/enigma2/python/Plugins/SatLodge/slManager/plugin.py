@@ -89,19 +89,19 @@ def show_list(h):
         # cond = readCurrent_1()
         if cond == h:
             res.append(MultiContentEntryPixmapAlphaTest(pos=(5, 6), size=(51, 40), png=loadPNG(png1)))
-            res.append(MultiContentEntryText(pos=(60, 2), size=(698, 50), font=8, text=h+' (Active)', color = 0xadff00 , flags=RT_HALIGN_CENTER))
+            res.append(MultiContentEntryText(pos=(60, 2), size=(698, 50), font=7, text=h+' (Active)', color = 0xadff00 , flags=RT_HALIGN_CENTER))
 
         else:
             res.append(MultiContentEntryPixmapAlphaTest(pos=(5, 6), size=(51, 40), png=loadPNG(png2)))
-            res.append(MultiContentEntryText(pos=(60, 2), size=(698, 50), font=8, text=h, flags=RT_HALIGN_CENTER))
+            res.append(MultiContentEntryText(pos=(60, 2), size=(698, 50), font=7, text=h, flags=RT_HALIGN_CENTER))
         return res    
     else:
         res = [(h)]
         if cond == h:
-            res.append(MultiContentEntryText(pos=(60, 2), size=(406, 40), font=5, text=h+' (Active)', color = 0xadff00, flags=RT_HALIGN_CENTER))
+            res.append(MultiContentEntryText(pos=(60, 2), size=(406, 40), font=2, text=h+' (Active)', color = 0xadff00, flags=RT_HALIGN_CENTER))
             res.append(MultiContentEntryPixmapAlphaTest(pos=(5, 2), size=(51, 40), png=loadPNG(png1)))
         else:
-            res.append(MultiContentEntryText(pos=(60, 2), size=(406, 40), font=5, text=h, flags=RT_HALIGN_CENTER))
+            res.append(MultiContentEntryText(pos=(60, 2), size=(406, 40), font=2, text=h, flags=RT_HALIGN_CENTER))
             res.append(MultiContentEntryPixmapAlphaTest(pos=(5, 2), size=(51, 40), png=loadPNG(png2)))
         return res
 class webList(MenuList):
@@ -129,12 +129,12 @@ def show_list_1(h):
     if HD.width() > 1280: 
 
         res = [h]
-        res.append(MultiContentEntryText(pos=(2, 2), size=(670, 40), font=8, text=h, flags=RT_HALIGN_LEFT))    
+        res.append(MultiContentEntryText(pos=(2, 2), size=(670, 40), font=7, text=h, flags=RT_HALIGN_LEFT))    
     else:       
 
 
         res = [h]
-        res.append(MultiContentEntryText(pos=(2, 2), size=(660, 30), font=3, text=h, flags=RT_HALIGN_LEFT))    
+        res.append(MultiContentEntryText(pos=(2, 2), size=(660, 30), font=2, text=h, flags=RT_HALIGN_LEFT))    
     return res
         
 # def show_list_1(h):

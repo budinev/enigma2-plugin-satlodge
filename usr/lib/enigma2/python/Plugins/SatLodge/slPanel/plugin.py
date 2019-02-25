@@ -101,7 +101,7 @@ config.plugins.slPanel.ipkpth = ConfigSelection(default = "/tmp",choices = mount
 
 DESKHEIGHT = getDesktop(0).size().height()
 
-currversion = '2.0'
+currversion = '2.1'
 plugin_path = '/usr/lib/enigma2/python/Plugins/SatLodge/slPanel'
 ico_path = plugin_path +  '/res/pics/addons3.png'
 ##########################################
@@ -117,7 +117,7 @@ ico3_path = plugin_path +  '/res/pics/instuninstl.png'
 
 skin_path = plugin_path
 HD = getDesktop(0).size()
-if HD.width() > 1280:
+if HD.width() >= 1280:
    skin_path = plugin_path + '/res/skins/fhd/'
 else:
    skin_path = plugin_path + '/res/skins/hd/'
@@ -195,10 +195,10 @@ class SLList(MenuList):
         self.l.setFont(7, gFont('Regular', 34))
         self.l.setFont(8, gFont('Regular', 36))
         self.l.setFont(9, gFont('Regular', 40))        
-        if HD.width() > 1280:
+        if HD.width() >= 1280:
             self.l.setItemHeight(50)
         else:		
-            self.l.setItemHeight(45)
+            self.l.setItemHeight(50)
             
 def SLListEntry(name, idx):
     res = [name]
@@ -239,14 +239,14 @@ def SLListEntry(name, idx):
     elif idx == 17:
         png = ico1_path 
         
-    if HD.width() > 1280:
+    if HD.width() >= 1280:
     	if fileExists(png):
-    		res.append(MultiContentEntryPixmapAlphaTest(pos=(10, 12), size=(34, 25), png=loadPNG(png)))
-    		res.append(MultiContentEntryText(pos=(60, 0), size=(1200, 50), font=7, text=name, color = 0xa6d1fe, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER))
+    		res.append(MultiContentEntryPixmapAlphaTest(pos=(10, 4), size=(34, 25), png=loadPNG(png)))
+    		res.append(MultiContentEntryText(pos=(60, 0), size=(1200, 50), font=6, text=name, color = 0xa6d1fe, flags=RT_HALIGN_LEFT )) #| RT_VALIGN_CENTER
     else:
     	if fileExists(png):
-    		res.append(MultiContentEntryPixmapAlphaTest(pos=(10, 10), size=(34, 25), png=loadPNG(png)))
-    		res.append(MultiContentEntryText(pos=(60, 0), size=(1200, 50), font=1, text=name, color = 0xa6d1fe, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER))
+    		res.append(MultiContentEntryPixmapAlphaTest(pos=(10, 0), size=(34, 25), png=loadPNG(png)))
+    		res.append(MultiContentEntryText(pos=(60, 0), size=(1200, 50), font=1, text=name, color = 0xa6d1fe, flags=RT_HALIGN_LEFT )) #| RT_VALIGN_CENTER
     return res        
         
     # if fileExists(png):
@@ -279,14 +279,14 @@ def DailyListEntry(name, idx):
         png = ico1_path 
     elif idx == 6:
         png = ico1_path         
-    if HD.width() > 1280:    
+    if HD.width() >= 1280:    
     	if fileExists(png):
-    		res.append(MultiContentEntryPixmapAlphaTest(pos=(10, 12), size=(34, 25), png=loadPNG(png)))
-    		res.append(MultiContentEntryText(pos=(60, 0), size=(1200, 50), font=7, text=name, color = 0xa6d1fe, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER))
+    		res.append(MultiContentEntryPixmapAlphaTest(pos=(10, 2), size=(34, 25), png=loadPNG(png)))
+    		res.append(MultiContentEntryText(pos=(60, 0), size=(1200, 50), font=6, text=name, color = 0xa6d1fe, flags=RT_HALIGN_LEFT )) #| RT_VALIGN_CENTER
     else:
     	if fileExists(png):
-    		res.append(MultiContentEntryPixmapAlphaTest(pos=(10, 10), size=(34, 25), png=loadPNG(png)))
-    		res.append(MultiContentEntryText(pos=(60, 0), size=(1200, 50), font=1, text=name, color = 0xa6d1fe, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER))
+    		res.append(MultiContentEntryPixmapAlphaTest(pos=(10, 0), size=(34, 25), png=loadPNG(png)))
+    		res.append(MultiContentEntryText(pos=(60, 0), size=(1200, 50), font=1, text=name, color = 0xa6d1fe, flags=RT_HALIGN_LEFT )) #| RT_VALIGN_CENTER
     return res
     
     # if fileExists(png):
@@ -298,9 +298,9 @@ def DailyListEntry(name, idx):
 class oneListsl(MenuList):
     def __init__(self, list):
             MenuList.__init__(self, list, True, eListboxPythonMultiContent)
-            if HD.width() > 1280:
+            if HD.width() >= 1280:
                     self.l.setItemHeight(50)
-                    textfont = int(34)
+                    textfont = int(32)
                     self.l.setFont(0, gFont('Regular', textfont))            
             else:            
                     self.l.setItemHeight(45)
@@ -311,12 +311,12 @@ def oneListEntry(name):
     png2 = ico3_path     
     res = [name]
     #
-    if HD.width() > 1280:   
-        res.append(MultiContentEntryPixmapAlphaTest(pos=(10, 12), size=(34, 25), png=loadPNG(png2)))
-        res.append(MultiContentEntryText(pos=(60, 0), size=(1200, 50), font=0, text=name, color = 0xa6d1fe, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER))
+    if HD.width() >= 1280:   
+        res.append(MultiContentEntryPixmapAlphaTest(pos=(10, 8), size=(30, 30), png=loadPNG(png2)))
+        res.append(MultiContentEntryText(pos=(60, 4), size=(1200, 50), font=0, text=name, color = 0xa6d1fe, flags=RT_HALIGN_LEFT ))#| RT_VALIGN_CENTER
     else:    
-        res.append(MultiContentEntryPixmapAlphaTest(pos=(10, 10), size=(34, 25), png=loadPNG(png2)))
-        res.append(MultiContentEntryText(pos=(60, 0), size=(1200, 50), font=0, text=name, color = 0xa6d1fe, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER))
+        res.append(MultiContentEntryPixmapAlphaTest(pos=(10, 0), size=(30, 30), png=loadPNG(png2)))
+        res.append(MultiContentEntryText(pos=(60, 0), size=(1200, 50), font=0, text=name, color = 0xa6d1fe, flags=RT_HALIGN_LEFT )) #| RT_VALIGN_CENTER
     return res
 
 def showlist(data, list):                   

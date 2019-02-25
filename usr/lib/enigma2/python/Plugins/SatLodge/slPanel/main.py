@@ -146,7 +146,7 @@ class STBmodel(Screen):
         if HD.width() > 1280:	
 
          self['list'].l.setItemHeight(50)
-         self['list'].l.setFont(0, gFont('Regular', 34))                          
+         self['list'].l.setFont(0, gFont('Regular', 32))                          
          for i in range(0, len(self.data)):		 
          
             res.append(MultiContentEntryText(pos=(0, 5), size=(2, 44), font=0, text='', color = 0xa6d1fe, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER))
@@ -204,7 +204,7 @@ class FEEDmodel(Screen):
         self.data=process_mode(self.param)	
         if HD.width() > 1280:	  
          self['list'].l.setItemHeight(50)
-         self['list'].l.setFont(0, gFont('Regular', 34))
+         self['list'].l.setFont(0, gFont('Regular', 32))
          for i in range(0, len(self.data)):
             res.append(MultiContentEntryText(pos=(0, 5), size=(2, 44), font=0, text='', color = 0xa6d1fe, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER))
             res.append(MultiContentEntryText(pos=(60, 0), size=(720, 44), font=0, text=str(self.data[i][0]), color = 0xa6d1fe, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER))
@@ -259,7 +259,7 @@ class SERVERmodel(Screen):
         self.data=process_mode(self.param)
         if HD.width() > 1280: 
          self['list'].l.setItemHeight(50)
-         self['list'].l.setFont(0, gFont('Regular', 34))        
+         self['list'].l.setFont(0, gFont('Regular', 32))        
          for i in range(0, len(self.data)):
             model=str(self.data[i][0])
             res.append(MultiContentEntryText(pos=(0, 5), size=(2, 44), font=0, text='', color = 0xa6d1fe, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER))
@@ -323,7 +323,7 @@ class DownloaderImage(Screen):
         print "self.param1",self.param		
         if HD.width() > 1280: 
          self['menu'].l.setItemHeight(50)
-         self['menu'].l.setFont(0, gFont('Regular', 34))        
+         self['menu'].l.setFont(0, gFont('Regular', 32))        
          self.data=process_mode(self.param)
          if len(self.data)==0:
             self['info'].setText("Failed To Get Or No Image !")
@@ -660,7 +660,7 @@ class ImageDownLoaderFiles(Screen):
         self.events = self.nfifiles
         if HD.width() > 1280: 
          self['menu'].l.setItemHeight(50)
-         self['menu'].l.setFont(0, gFont('Regular', 34))
+         self['menu'].l.setFont(0, gFont('Regular', 32))
          for i in range(0, len(self.events)):
             mfile = self.events[i][0]
             msize = self.events[i][1] + ' MB'
@@ -671,7 +671,7 @@ class ImageDownLoaderFiles(Screen):
             res = []        
         else:        
          self['menu'].l.setItemHeight(45)
-         self['menu'].l.setFont(0, gFont('Regular', 25))
+         self['menu'].l.setFont(0, gFont('Regular', 22))
          for i in range(0, len(self.events)):
             mfile = self.events[i][0]
             msize = self.events[i][1] + ' MB'
