@@ -50,7 +50,8 @@ for p in harddiskmanager.getMountedPartitions(True):
     mountedDevs.append((p.mountpoint, _(p.description) if p.description else ''))
 mounted_string = 'Nothing mounted at '
 config.plugins.ImageDown = ConfigSubsection()
-config.plugins.ImageDown.Downloadlocation = ConfigText(default='/media/hdd/', visible_width=50, fixed_size=False)
+# config.plugins.ImageDown.Downloadlocation = ConfigText(default='/media/hdd/', visible_width=50, fixed_size=False)
+config.plugins.ImageDown.Downloadlocation = ConfigText(default='/media/usb/downloaded_images/', visible_width=50, fixed_size=False)
 
 DESKHEIGHT = getDesktop(0).size().height()
 dwidth = getDesktop(0).size().width()
@@ -67,13 +68,38 @@ else:
 pics = plugin_path +  '/res/pics/icon.png'
 
 
+def getMediaPath():
+####################
+    for media in ['/media/%s' % x for x in os.listdir('/media')]:
+        if not "downloaded_images" in os.listdir(media):
+            os_system('mkdir /%s/downloaded_images' % media) 
+        if "downloaded_images" in os.listdir(media):    
+            media = os.path.join(media, "downloaded_images")
+            print 'Media: ', media  
+            #Media:  /media/usb/downloaded_images            
+
+getMediaPath()
+####################
+        
+
    
 def getDownloadPath():
+# ####################
+    # for media in ['/media/%s' % x for x in os.listdir('/media')]:
+        # if not "downloaded_images" in os.listdir(media):
+            # os_system('mkdir /%s/downloaded_images' % media) 
+        # elif "downloaded_images" in os.listdir(media):    
+            # media = os.path.join(media, "downloaded_images")
+# ####################
+    getMediaPath()
+
     Downloadpath = config.plugins.ImageDown.Downloadlocation.value
     if Downloadpath.endswith('/'):
         return Downloadpath
     else:
         return Downloadpath + '/'
+        
+     
 
 def freespace():
     downloadlocation = getDownloadPath()
@@ -573,7 +599,7 @@ class ImageDownLoader(Screen):
 
     def updateTarget(self):
         fspace = str(freespace()) + ' MB'
-        self['target'].setText(''.join(config.plugins.ImageDown.Downloadlocation.value + ' Freespace:' + fspace))
+        self['target'].setText(''.join(config.plugins.ImageDown.Downloadlocation.value + '\nFreespace:' + fspace))
 
     def cancel(self, result = None):
         self.close(None)
