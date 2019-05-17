@@ -8,8 +8,10 @@
   <eLabel name="label" position="135,236" size="1210,655" />
   <eLabel position="42,1000" size="20,50" backgroundColor="red" zPosition="1" /> 
   <widget name="key_red" position="62,1000" zPosition="3" size="350,50" valign="center" halign="left" foregroundColor="white" font="Regular;30" transparent="1" shadowColor="#25062748" shadowOffset="-2,-2" />
- 
   <eLabel position="415,1000" size="20,50" backgroundColor="green" zPosition="1" />
   <widget name="key_green" position="442,1000" zPosition="3" size="390,50" valign="center" halign="left" foregroundColor="white" font="Regular;30" transparent="1" shadowColor="#25062748" shadowOffset="-2,-2" />
-
+  <!-- Progress  -->
+  <widget source="progress" zPosition="1" render="Progress" position="1200,1000" size="600,40" transparent="1" borderWidth="0" />
+  <widget source="progresstext" render="Label" position="896,1000" zPosition="1" font="Regular;30" halign="right" transparent="1" size="300,40" foregroundColor="#00cc99" backgroundColor="#000000" />
+    
 </screen>

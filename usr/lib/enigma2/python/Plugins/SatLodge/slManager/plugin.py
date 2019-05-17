@@ -40,7 +40,7 @@ import os
 import os, gettext, sys, time
 import time
 import urllib
-Version = '1.6'
+Version = '1.7'
 plugin_path = '/usr/lib/enigma2/python/Plugins/SatLodge/slManager/'
 
 
@@ -685,28 +685,6 @@ class GetipkLs(Screen):
             com = self.com
             self.session.open(Console, _('Installing: %s') % dom, ['ipkg install -force-overwrite %s' % com])
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 def startConfig(session, **kwargs):
         session.open(slManager)
 
@@ -733,11 +711,6 @@ def autostart(reason, session=None, **kwargs):
 	        pass	
     else:
         pass              
-
-
-
-
-
 
 
 def main(session, **kwargs):

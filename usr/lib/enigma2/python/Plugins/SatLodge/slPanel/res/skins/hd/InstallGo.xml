@@ -16,6 +16,9 @@
   <widget name="key_red" position="43,550" zPosition="3" size="203,37" valign="center" halign="left" foregroundColor="white" font="Regular;24" transparent="1" shadowColor="#25062748" shadowOffset="-2,-2" />
   <eLabel position="245,550" size="10,37" backgroundColor="green" zPosition="1" />
   <widget name="key_green" position="260,550" zPosition="3" size="203,37" valign="center" halign="left" foregroundColor="white" font="Regular;24" transparent="1" shadowColor="#25062748" shadowOffset="-2,-2" />
-    
+  <!-- Progress  -->
+  <widget source="progress" zPosition="1" render="Progress" position="727,552" size="183,30" transparent="1" borderWidth="0" />
+  <widget source="progresstext" render="Label" position="490,553" zPosition="1" font="Regular;18" halign="right" transparent="1" size="233,30" foregroundColor="#00cc99" backgroundColor="#000000" />
+        
   
 </screen>

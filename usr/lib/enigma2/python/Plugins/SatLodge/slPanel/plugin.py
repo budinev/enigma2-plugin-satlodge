@@ -40,6 +40,13 @@ import os, re, sys
 import shutil
 import urllib
 import urllib2
+import ssl
+#############################################
+from Components.ProgressBar import ProgressBar
+from Components.Sources.Progress import Progress
+from Tools.Downloader import downloadWithProgress
+#############################################   
+
 # def mountipkpth():
 	# ipkpth = []
 	# if os.path.isfile('/proc/mounts'):
@@ -57,7 +64,20 @@ try:
     import zipfile
 except:
     pass
-
+    
+def checkInternet():
+    try:
+        response = urllib2.urlopen("http://google.com", None, 5)
+        response.close()
+    except urllib2.HTTPError:
+        return False
+    except urllib2.URLError:
+        return False
+    except socket.timeout:
+        return False
+    else:
+        return True
+        
 def freespace():
     try:
         diskSpace = os.statvfs('/')
@@ -74,6 +94,7 @@ def freespace():
 def ReloadBouquet():
     eDVBDB.getInstance().reloadServicelist()
     eDVBDB.getInstance().reloadBouquets() 
+    
 def deletetmp():
     os.system('rm -rf /tmp/unzipped;rm -f /tmp/*.ipk;rm -f /tmp/*.tar;rm -f /tmp/*.zip;rm -f /tmp/*.tar.gz;rm -f /tmp/*.tar.bz2;rm -f /tmp/*.tar.tbz2;rm -f /tmp/*.tar.tbz')    
    
@@ -92,16 +113,15 @@ def mountipkpth():
     
 config.plugins.slPanel = ConfigSubsection()
 config.plugins.slPanel.strtext = ConfigYesNo(default=True)
-config.plugins.slPanel.strtmain = ConfigYesNo(default=True)
+# config.plugins.slPanel.strtmain = ConfigYesNo(default=True)
 config.plugins.slPanel.strtst = ConfigYesNo(default=False)
 config.plugins.slPanel.ipkpth = ConfigSelection(default = "/tmp",choices = mountipkpth())
 # config.plugins.slPanel.autoupd = ConfigYesNo(default=False)
 
 
-
 DESKHEIGHT = getDesktop(0).size().height()
 
-currversion = '2.1'
+currversion = '2.2'
 plugin_path = '/usr/lib/enigma2/python/Plugins/SatLodge/slPanel'
 ico_path = plugin_path +  '/res/pics/addons3.png'
 ##########################################
@@ -255,13 +275,15 @@ def SLListEntry(name, idx):
     # return res
 
 Panel_list2 = [
- _('SETTINGS CIEFP'), 
- _('SETTINGS MALIMALI'),  
- _('SETTINGS MANUTEK'),  
- _('SETTINGS MILENKA61'), 
- _('SETTINGS MORPHEUS'),
- _('SETTINGS PREDRAG'), 
- _('SETTINGS VHANNIBAL')] 
+ ('UPDATE SATELLITES.XML'), 
+ ('UPDATE TERRESTRIAL.XML'),
+ ('SETTINGS CIEFP'), 
+ ('SETTINGS MALIMALI'),  
+ ('SETTINGS MANUTEK'),  
+ ('SETTINGS MILENKA61'), 
+ ('SETTINGS MORPHEUS'),
+ ('SETTINGS PREDRAG'), 
+ ('SETTINGS VHANNIBAL')] 
  
 def DailyListEntry(name, idx):
     res = [name]
@@ -278,7 +300,12 @@ def DailyListEntry(name, idx):
     elif idx == 5:
         png = ico1_path 
     elif idx == 6:
-        png = ico1_path         
+        png = ico1_path 
+    elif idx == 7:
+        png = ico1_path 
+    elif idx == 8:
+        png = ico1_path 
+        
     if HD.width() >= 1280:    
     	if fileExists(png):
     		res.append(MultiContentEntryPixmapAlphaTest(pos=(10, 2), size=(34, 25), png=loadPNG(png)))
@@ -372,7 +399,7 @@ class Homesl(Screen):
             from Plugins.SatLodge.slManager.plugin import slManager
             self.session.openWithCallback(self.close, slManager)
         else: 
-            self.session.open(MessageBox,("slManager Not Installed!!"), type=MessageBox.TYPE_INFO, timeout=3)
+            self.session.open(slMessageBox,("slManager Not Installed!!"), type=slMessageBox.TYPE_INFO, timeout=3)
 
     def closerm(self):
         #os.system('rm -f /tmp/*.ipk;rm -f /tmp/*.tar;rm -f /tmp/*.zip;rm -f /tmp/*.tar.gz;rm -f /tmp/*.tar.bz2;rm -f /tmp/*.tar.tbz2;rm -f /tmp/*.tar.tbz')
@@ -1629,8 +1656,11 @@ class DailySetting(Screen):
   
     def keyNumberGlobalCB(self, idx):
         sel = self.menu_list[idx]
-           
-        if sel == _('SETTINGS CIEFP'):
+        if sel == _('UPDATE SATELLITES.XML'):
+            self.UpdSatellites()             
+        elif sel == _('UPDATE TERRESTRIAL.XML'):
+            self.UpdTerrestrial()           
+        elif sel == _('SETTINGS CIEFP'):
             self.session.open(slSettingCiefp)             
         elif sel == _('SETTINGS MALIMALI'):
             self.session.open(slSettingMalimali)            
@@ -1645,7 +1675,48 @@ class DailySetting(Screen):
         elif sel == _('SETTINGS VHANNIBAL'):
             self.session.open(PluginslSettingVhan)             
             
+
+# url_sat_oealliance  = 'http://raw.githubusercontent.com/oe-alliance/oe-alliance-tuxbox-common/master/src/satellites.xml'
+# url_sat_openpli   = 'http://raw.githubusercontent.com/OpenPLi/tuxbox-xml/master/xml/satellites.xml' 
+ 
+    def UpdSatellites(self):
+        self.session.openWithCallback(self.okSatellites,slMessageBox,(_("Do you want to install?")), slMessageBox.TYPE_YESNO)             
+            
+    def okSatellites(self, result):
+        if result:
+            if checkInternet():
+                try:            
+                    url_sat_openpli  = 'http://raw.githubusercontent.com/OpenPLi/tuxbox-xml/master/xml/satellites.xml' 
+                    dirCopy = '/etc/tuxbox/satellites.xml' #'/etc/enigma2/satellites.xml'
+                    urllib.urlretrieve(url_sat_openpli, dirCopy, context=ssl._create_unverified_context())
+                    self.mbox = self.session.open(slMessageBox, _('Satellites.xml Updated!'), slMessageBox.TYPE_INFO, timeout=5)
+                    self['info'].setText(_('Installation performed successfully!'))   
         
+                except:
+                    return
+            else:
+                session.open(slMessageBox, "No Internet", slMessageBox.TYPE_INFO)             
+            
+            
+    def UpdTerrestrial(self):
+        self.session.openWithCallback(self.okTerrInstall,slMessageBox,(_("Do you want to install?")), slMessageBox.TYPE_YESNO)             
+            
+    def okTerrInstall(self, result):
+        if result:
+            if checkInternet():
+                try:            
+                    url_sat_openpli  = 'http://raw.githubusercontent.com/OpenPLi/tuxbox-xml/master/xml/terrestrial.xml'
+                    dirCopy       = '/etc/tuxbox/terrestrial.xml' #'/etc/enigma2/terrestrial.xml'
+                    urllib.urlretrieve(url_sat_openpli, dirCopy, context=ssl._create_unverified_context())
+                    self.mbox = self.session.open(slMessageBox, _('Terrestrial.xml Updated!'), slMessageBox.TYPE_INFO, timeout=5)
+                    self['info'].setText(_('Installation performed successfully!'))   
+        
+                except:
+                    return
+            else:
+                session.open(slMessageBox, "No Internet", slMessageBox.TYPE_INFO, timeout=5)         
+                
+                
 class PluginslSettingVhan(Screen):
 
     def __init__(self, session):  
@@ -2115,7 +2186,7 @@ class PluginslSettingMorpheus(Screen):
                         cmd1 = "cp -rf /tmp/unzipped/" + pth + "/* '/etc/enigma2'"   
                         cmd.append(cmd1)                      
                 title = _("Installation Settings")          
-                self.session.open(tvConsole,_(title),cmd) 
+                self.session.open(slConsole,_(title),cmd) 
             deletetmp()
             self.reloadSettings()              
         
@@ -2468,6 +2539,7 @@ class InstallGo(Screen):
 
     def __init__(self, session, data, name, selection = None):     
         self.session = session
+        
         skin = skin_path + 'InstallGo.xml'
         with open(skin, 'r') as f:
             self.skin = f.read()
@@ -2478,7 +2550,11 @@ class InstallGo(Screen):
         print "In slInstallGo data =", data
         print "In slInstallGo name =", name
         self.selection = selection
-        self['info'] = Label()        
+        self['info'] = Label()   
+
+        self['progress'] = Progress()
+        self['progresstext'] = StaticText()
+        
         list = []
         list.sort()				
         n1 = data.find(name, 0)
@@ -2522,7 +2598,34 @@ class InstallGo(Screen):
             idx = self["text"].getSelectionIndex()
             dom = self.names[idx]
             com = self.urls[idx]
-            self.prombt(com, dom)            
+            self.prombt(com, dom)      
+
+#11.05.19            
+    def downloadProgress(self, recvbytes, totalbytes):
+        self['progress'].value = int(100 * recvbytes / float(totalbytes))
+        self['progresstext'].text = '%d of %d kBytes (%.2f%%)' % (recvbytes / 1024, totalbytes / 1024, 100 * recvbytes / float(totalbytes)) 
+                
+    def install(self, fplug):
+        checkfile = '/tmp/ipkdownloaded.ipk'
+        self.timer = eTimer()
+        self.timer.start(100, True)
+        if os.path.exists(checkfile):
+            self.session.open(slConsole, _('Installing: %s') % self.dom, ['opkg install -force-overwrite -force-depends %s' % self.com])
+            if fileExists(BRAND)or fileExists(BRANDP):
+                self.timer.callback.append(deletetmp) #pli
+            else:
+                self.timer_conn = self.timer.timeout.connect(deletetmp) #cvs        
+            self['info'].setText(_('Installation performed successfully!'))      
+        self['info'].setText(_('Please select ...')) 
+        self['progresstext'].text = ''  
+        self.progclear = 0
+        self['progress'].setValue(self.progclear)
+        return
+            
+    def showError(self, error):
+        print "download error =", error
+        self.close()
+##########            
             
     def prombt(self, com, dom):
         self.com = com
@@ -2530,11 +2633,24 @@ class InstallGo(Screen):
         #self.command = ''
         print 'self.com', self.com
         self['info'].setText(_('Installing ') + self.dom + _('... please wait'))
+        # if self.com.endswith('.ipk'):
+            # self.timer = eTimer()
+            # self.timer.start(100, True)
+            # self['info'].setText(_('Installing ') + self.dom + _('... please wait'))
+            # self.session.open(slConsole, _('Installing: %s') % self.dom, ['opkg install -force-overwrite -force-depends %s' % self.com])
+            
         if self.com.endswith('.ipk'):
             self.timer = eTimer()
             self.timer.start(100, True)
             self['info'].setText(_('Installing ') + self.dom + _('... please wait'))
-            self.session.open(slConsole, _('Installing: %s') % self.dom, ['opkg install -force-overwrite -force-depends %s' % self.com])
+            
+            url = self.com
+            dest = '/tmp/ipkdownloaded.ipk'
+            self.download = downloadWithProgress(url, dest)
+            self.download.addProgress(self.downloadProgress)
+            self.download.start().addCallback(self.install).addErrback(self.showError)               
+            
+            
             
         elif self.com.endswith('.tar.gz'):
             self.timer = eTimer()
@@ -2682,6 +2798,7 @@ class InstallGo(Screen):
             ReloadBouquet()
             self.mbox = self.session.open(slMessageBox, _('Setting Installed!'), slMessageBox.TYPE_INFO, timeout=5)
             self['info'].setText(_('Installation successful!'))  
+            
 class slConsole(Screen):
         
     def __init__(self, session, title = None, cmdlist = None, finishedCallback = None, closeOnSuccess = False):
@@ -2828,7 +2945,7 @@ class IPKinst(Screen):
                 
             if self.sel.find('.deb') != -1:
                 if fileExists(BRAND)or fileExists(BRANDP):
-                     self.mbox = self.session.open(MessageBox, _('Unknow Image!'), MessageBox.TYPE_INFO, timeout=5)
+                     self.mbox = self.session.open(slMessageBox, _('Unknow Image!'), slMessageBox.TYPE_INFO, timeout=5)
                 else:
                     self.sel = self.sel[0]
                     cmd0 = 'dpkg -i ' + dest
@@ -3140,7 +3257,7 @@ class slPanelConfig(Screen, ConfigListScreen):
         # configlist.append(getConfigListEntry(_('Auto Update Plugin'), config.plugins.slPanel.autoupd))
         configlist.append(getConfigListEntry(_('Path Manual IPK'), config.plugins.slPanel.ipkpth))
         configlist.append(getConfigListEntry(_('Link in Extensions Menu'), config.plugins.slPanel.strtext))
-        configlist.append(getConfigListEntry(_('Link in Main Menu'), config.plugins.slPanel.strtmain))
+        # configlist.append(getConfigListEntry(_('Link in Main Menu'), config.plugins.slPanel.strtmain))
         configlist.append(getConfigListEntry(_('Link in Setup Menu'), config.plugins.slPanel.strtst))
         self['config'].setList(configlist)
         self['actions'] = ActionMap(['SetupActions', 'ColorActions'], {'cancel': self.extnok,
@@ -3167,7 +3284,7 @@ class slPanelConfig(Screen, ConfigListScreen):
 
     def msgok(self):
         if os.path.exists(config.plugins.slPanel.ipkpth.value) is False:
-            self.mbox = self.session.open(MessageBox, _('Device not detected!'), MessageBox.TYPE_INFO, timeout=4)
+            self.mbox = self.session.open(slMessageBox, _('Device not detected!'), slMessageBox.TYPE_INFO, timeout=4)
         else:
 
             for x in self["config"].list:
@@ -3175,12 +3292,19 @@ class slPanelConfig(Screen, ConfigListScreen):
         
         plugins.clearPluginList()
         plugins.readPluginList(resolveFilename(SCOPE_PLUGINS))
-        self.mbox = self.session.open(MessageBox, _('Successfully saved configuration'), MessageBox.TYPE_INFO, timeout=4)
+        self.mbox = self.session.open(slMessageBox, _('Successfully saved configuration'), slMessageBox.TYPE_INFO, timeout=4)
         self.close(True)            
            
 ###################################################			
 def main(session, **kwargs):
-    session.open(logoStrt)                     
+
+    if checkInternet():
+        session.open(logoStrt)
+    else:
+        session.open(MessageBox, "No Internet", MessageBox.TYPE_INFO)      
+        
+        
+    # session.open(logoStrt)                     
             
 def menu(menuid, **kwargs):
     if menuid == 'mainmenu':
@@ -3212,15 +3336,15 @@ def StartSetup(menuid):
         return []
 
 extDescriptor = PluginDescriptor(name='SatLodge Panel', description=_('SatLodge Panel'), where=PluginDescriptor.WHERE_EXTENSIONSMENU, icon=ico_path, fnc=main)
-mainDescriptor = PluginDescriptor(name='SatLodge Panel', description=_('SatLodge Panel'), where=PluginDescriptor.WHERE_MENU, icon=ico_path, fnc=cfgmain)
+# mainDescriptor = PluginDescriptor(name='SatLodge Panel', description=_('SatLodge Panel'), where=PluginDescriptor.WHERE_MENU, icon=ico_path, fnc=cfgmain)
 strtstDescriptor = PluginDescriptor(name=_('SatLodge Panel'), description=_('SatLodge Panel'), where=PluginDescriptor.WHERE_MENU, icon=ico_path, fnc=StartSetup)
 
 def Plugins(**kwargs):
     result = [PluginDescriptor(name='SatLodge Panel', description=_('SatLodge Panel V. %s' % currversion), where=[PluginDescriptor.WHERE_PLUGINMENU], icon=ico_path, fnc=main)]
     if config.plugins.slPanel.strtext.value:
         result.append(extDescriptor)
-    if config.plugins.slPanel.strtmain.value:
-        result.append(mainDescriptor)
+    # if config.plugins.slPanel.strtmain.value:
+        # result.append(mainDescriptor)
     if config.plugins.slPanel.strtst.value:
         result.append(strtstDescriptor)
     return result   

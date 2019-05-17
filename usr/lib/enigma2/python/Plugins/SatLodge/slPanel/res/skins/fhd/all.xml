@@ -5,13 +5,9 @@
   <widget name="maintener" position="1379,36" zPosition="3" size="324,50" font="Regular;30" backgroundColor="background" transparent="1" foregroundColor="#ffffff" halign="center" />
   <widget name="text" itemHeight="50" position="135,236" size="804,707" foregroundColor="#ffffff" foregroundColorSelected="#0000ff" backgroundColorSelected="#b8b8b8" scrollbarMode="showOnDemand" zPosition="2" />
   <widget name="info" position="138,163" zPosition="4" size="920,60" font="Regular;36" foregroundColor="#7fff00" transparent="1" />
-
- 
   <eLabel name="label" position="135,236" size="804,707" />
   <eLabel position="42,1000" size="20,50" backgroundColor="red" zPosition="1" /> 
   <widget name="key_red" position="62,1000" zPosition="3" size="350,50" valign="center" halign="left" foregroundColor="white" font="Regular;30" transparent="1" shadowColor="#25062748" shadowOffset="-2,-2" />
-
-  
   <eLabel position="415,1000" size="20,50" backgroundColor="green" zPosition="1" />
   <widget name="key_green" position="442,1000" zPosition="3" size="390,50" valign="center" halign="left" foregroundColor="white" font="Regular;30" transparent="1" shadowColor="#25062748" shadowOffset="-2,-2" />
 
