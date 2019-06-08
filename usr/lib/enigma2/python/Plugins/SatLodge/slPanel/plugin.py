@@ -121,7 +121,7 @@ config.plugins.slPanel.ipkpth = ConfigSelection(default = "/tmp",choices = mount
 
 DESKHEIGHT = getDesktop(0).size().height()
 
-currversion = '2.2'
+currversion = '2.3'
 plugin_path = '/usr/lib/enigma2/python/Plugins/SatLodge/slPanel'
 ico_path = plugin_path +  '/res/pics/addons3.png'
 ##########################################
@@ -180,16 +180,16 @@ class logoStrt(Screen):
         self.session.openWithCallback(self.close, Homesl)
 
 Panel_list = [
- _('IMAGE'),
+ _('SATLODGE IMAGE'),
  _('SETTINGS DAILY'),
  _('DEPENDENCIES'),
  _('DRIVERS'), 
  _('PLUGIN BACKUP'),
  _('PLUGIN EPG'), 
  _('PLUGIN EMULATORS CAMS'),
- _('PLUGIN IPTV'),
  _('PLUGIN KODI'),
  _('PLUGIN MULTIBOOT'), 
+ _('PLUGIN MULTIMEDIA'),						 
  _('PLUGIN PICONS'),
  _('PLUGIN PPANEL'),
  _('PLUGIN SETTINGS PANEL'),
@@ -444,13 +444,13 @@ class Homesl(Screen):
         elif sel == _('PLUGIN EMULATORS CAMS'):
             self.session.open(PluginEmulators)
         elif sel == _('PLUGIN EPG'):
-            self.session.open(PluginEpg)            
-        elif sel == _('PLUGIN IPTV'):
-            self.session.open(PluginIptv)
+            self.session.open(PluginEpg)   
         elif sel == _('PLUGIN KODI'):
             self.session.open(Kodi) 
         elif sel == _('PLUGIN MULTIBOOT'):
-            self.session.open(PluginMultiboot)            
+            self.session.open(PluginMultiboot)   			
+        elif sel == _('PLUGIN MULTIMEDIA'):
+            self.session.open(PluginMultim)
         elif sel == _('PLUGIN PICONS'):
             self.session.open(Picons)      
         elif sel == _('PLUGIN PPANEL'):
@@ -469,7 +469,7 @@ class Homesl(Screen):
             self.session.open(PluginUtility)        
         elif sel == _('PLUGIN WEATHER'):
             self.session.open(PluginWeather)
-        elif sel == _('IMAGE'):
+        elif sel == _('SATLODGE IMAGE'):
             from .main import STBmodel
             self.session.open(STBmodel)  
             
@@ -904,14 +904,14 @@ class PluginEpg(Screen):
             self.close
             
             
-class PluginIptv(Screen):
+class PluginMultim(Screen):
 
     def __init__(self, session):        
         self.session = session
         skin = skin_path + 'all.xml'
         with open(skin, 'r') as f:
             self.skin = f.read()
-        self.setup_title = ('PluginIptv')
+        self.setup_title = ('PluginMultim')
         Screen.__init__(self, session)
         self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion)) 
         self.list = []
@@ -928,7 +928,7 @@ class PluginIptv(Screen):
         except:
             self.timer_conn = self.timer.timeout.connect(self.downloadxmlpage)
         self.timer.start(1500, True)
-        self['title'] = Label(_('..:: PLUGIN IPTV ::..'))
+        self['title'] = Label(_('..:: PLUGIN MULTIMEDIA ::..'))
         self['version'] = Label(_('V. %s' %  currversion))
         self['maintener'] = Label(_(' by ))^^(('))        
         self['actions'] = ActionMap(['SetupActions', 'ColorActions'], {'ok': self.okRun,
@@ -1997,12 +1997,14 @@ class PluginslSettingManutek(Screen):
         url = base64.b64decode("aHR0cDovL3d3dy5tYW51dGVrLml0L2lzZXR0aW5nLw==")
         getPage(url).addCallback(self._gotPageLoad).addErrback(self.errorLoad)			
 
+        
     def errorLoad(self, error):
         print str(error)	
         self['info'].setText(_('Try again later ...'))
         self.downloading = False
 
     def _gotPageLoad(self, data):
+
         self.xml = data
         self.names = []
         self.urls = []
@@ -2017,7 +2019,7 @@ class PluginslSettingManutek(Screen):
                     name = name.replace("%20", " ")
                     name = name.replace("NemoxyzRLS_", "")                     
                     name = name.replace("_", " ")
-                    url64b = base64.b64decode("YUhSMGNEb3ZMM2QzZHk1dFlXNTFkR1ZyTG1sMEwybHpaWFIwYVc1bkwyVnVhV2R0WVRJdg==")
+                    url64b = base64.b64decode("aHR0cDovL3d3dy5tYW51dGVrLml0L2lzZXR0aW5nL2VuaWdtYTIv")
                     url = url64b + url
                     self.urls.append(url)
                     self.names.append(name)
@@ -2026,14 +2028,13 @@ class PluginslSettingManutek(Screen):
             self.downloading = True
         except:
             self.downloading = False
-
+            
     def okRun(self):
         self.session.openWithCallback(self.okInstall,slMessageBox,(_("Do you want to install?")), slMessageBox.TYPE_YESNO)             
             
     def okInstall(self, result):
         if result:
             if self.downloading == True:
-#            try:
                 selection = str(self['text'].getCurrent())
                 idx = self["text"].getSelectionIndex()
                 self.name = self.names[idx]
@@ -2041,8 +2042,10 @@ class PluginslSettingManutek(Screen):
                 dest = "/tmp/settings.zip"
                 print "url =", url
                 downloadPage(url, dest).addCallback(self.install).addErrback(self.showError)
+
             else:
                 self.close  
+
                 
     def showError(self, error):
                 print "download error =", error
@@ -2051,28 +2054,32 @@ class PluginslSettingManutek(Screen):
     def install(self, fplug):
         checkfile = '/tmp/settings.zip'
         if os.path.exists(checkfile):
-            # os.system('unzip -o /tmp/download.zip -d /tmp/')
-            os.system('rm -rf /etc/enigma2/lamedb')
-            os.system('rm -rf /etc/enigma2/*.radio')
-            os.system('rm -rf /etc/enigma2/*.tv')
-            fdest1 = "/tmp" 
+            fdest1 = "/tmp/unzipped" 
             fdest2 = "/etc/enigma2"
-            cmd1 = "unzip -o -q '/tmp/settings.zip' -d " + fdest1
-#        self.name2 = self.name.replace("%20", " ")
-            cmd2 = "cp -rf  '/tmp/" + self.name + "'/* " + fdest2
-            print "cmd2 =", cmd2
-            cmd3 = "wget -qO - http://127.0.0.1/web/servicelistreload?mode=0 > /tmp/inst.txt 2>&1 &"
-            cmd4 = "rm -rf /tmp/settings.zip"
-            cmd5 = "rm -rf /tmp/NemoxyzRLS*" #+ name + '*' # + selection
-            cmd = []
-            cmd.append(cmd1)
-            cmd.append(cmd2)
-            cmd.append(cmd3)
-            cmd.append(cmd4)
-            cmd.append(cmd5)
-            title = _("Install the Settings")          
-            self.session.open(slConsole,_(title),cmd)              
-            #self.onShown.append(self.reloadSettings)
+            if os.path.exists("/tmp/unzipped"):
+                cmd = "rm -rf '/tmp/unzipped'"
+                os.system(cmd)
+            cmd1 = "mkdir -p '/tmp/unzipped'"
+            os.system(cmd1)
+            cmd2 = "unzip -o -q '/tmp/settings.zip' -d " + fdest1
+            os.system(cmd2)
+
+            for root, dirs, files in os.walk(fdest1):
+                for name in dirs:
+                    os.system('rm -rf /etc/enigma2/lamedb')
+                    os.system('rm -rf /etc/enigma2/*.radio')
+                    os.system('rm -rf /etc/enigma2/*.tv')
+                    cmd3 = "cp -rf  '/tmp/unzipped/" + name + "'/* " + fdest2
+                    cmd4 = "wget -qO - http://127.0.0.1/web/servicelistreload?mode=0 > /tmp/inst.txt 2>&1 &"
+                    cmd5 = "rm -rf /tmp/settings.zip"
+                    cmd6 = "rm -rf /tmp/unzipped" 
+                    cmd = []
+                    cmd.append(cmd3)
+                    cmd.append(cmd4)
+                    cmd.append(cmd5)
+                    cmd.append(cmd6)
+                title = _("Installation Settings")          
+                self.session.open(slConsole,_(title),cmd) 
         
     def reloadSettings(self):
         ReloadBouquet()

@@ -1,0 +1,100 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: cbpanel\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-06-07 17:40+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: ))^^(( <>\n"
+"Language-Team: *\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Generator: Poedit 1.8.7\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Basepath: ../../../..\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: plugin.py:220 plugin.py:224 plugin.py:330 plugin.py:346 plugin.py:443
+#: plugin.py:459 plugin.py:558 plugin.py:575 plugin.py:679 plugin.py:694
+#: plugin.py:794 plugin.py:810 plugin.py:902 plugin.py:919 plugin.py:1010
+#: plugin.py:1026
+#, python-format
+msgid "..:: slSettings V. %s  ~ Thanks all SettingMan ::.."
+msgstr ""
+
+#: plugin.py:226 plugin.py:379 plugin.py:494 plugin.py:612 plugin.py:731
+#: plugin.py:844 plugin.py:954 plugin.py:1061
+msgid "Please select ..."
+msgstr "Bitte auswählen ..."
+
+#: plugin.py:227
+msgid "Select"
+msgstr "Wählen"
+
+#: plugin.py:228
+msgid "Exit"
+msgstr "Ausfahrt"
+
+#: plugin.py:259
+msgid "UPDATE SATELLITES.XML"
+msgstr ""
+
+#: plugin.py:261
+msgid "UPDATE TERRESTRIAL.XML"
+msgstr ""
+
+#: plugin.py:283 plugin.py:302 plugin.py:386 plugin.py:501 plugin.py:619
+#: plugin.py:738 plugin.py:851 plugin.py:961 plugin.py:1068
+msgid "Do you want to install?"
+msgstr "Möchten Sie installieren ?"
+
+#: plugin.py:292
+msgid "Satellites.xml Updated!"
+msgstr ""
+
+#: plugin.py:293 plugin.py:312 plugin.py:782
+msgid "Installation performed successfully!"
+msgstr "Installation erfolgreich durchgeführt!"
+
+#: plugin.py:311
+msgid "Terrestrial.xml Updated!"
+msgstr ""
+
+#: plugin.py:335 plugin.py:448 plugin.py:563 plugin.py:684 plugin.py:799
+#: plugin.py:907 plugin.py:1015
+msgid "Getting the list, please wait ..."
+msgstr "die Liste bekommen , bitte warten ..."
+
+#: plugin.py:336 plugin.py:449 plugin.py:564 plugin.py:685 plugin.py:800
+#: plugin.py:908 plugin.py:1016
+msgid "Install"
+msgstr "Installieren"
+
+#: plugin.py:337 plugin.py:450 plugin.py:565 plugin.py:686 plugin.py:801
+#: plugin.py:909 plugin.py:1017
+msgid "Back"
+msgstr "Zurück"
+
+#: plugin.py:359 plugin.py:472 plugin.py:589 plugin.py:706 plugin.py:823
+#: plugin.py:932 plugin.py:1039
+msgid "Try again later ..."
+msgstr "Versuchen Sie es später noch einmal ..."
+
+#: plugin.py:430 plugin.py:546 plugin.py:667 plugin.py:773 plugin.py:888
+#: plugin.py:998 plugin.py:1105
+msgid "Installation Settings"
+msgstr "Installationseinstellungen"
+
+#: plugin.py:781
+msgid "Setting Installed!"
+msgstr "Einstellung Installiert!"
+
+#: plugin.py:1127
+msgid "slSettings V."
+msgstr ""
+
+#: plugin.py:1128 plugin.py:1129
+msgid "slSettings"
+msgstr ""
