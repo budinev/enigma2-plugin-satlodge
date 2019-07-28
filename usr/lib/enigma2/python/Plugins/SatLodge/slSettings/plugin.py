@@ -1,5 +1,5 @@
 #"****************************************"
-#"*                           *"
+#"*         by ))^^((                    *"
 #"*     05/06/2019                       *"
 #"****************************************"
 from Components.ActionMap import ActionMap, NumberActionMap
@@ -74,7 +74,7 @@ def deletetmp():
 
 DESKHEIGHT = getDesktop(0).size().height()
 
-currversion = '1.0'
+currversion = '1.1'
 plugin_path = '/usr/lib/enigma2/python/Plugins/SatLodge/slSettings'
 # ico_path = plugin_path + '/logo.png'    
 ico1_path = plugin_path + '/res/pics/plugins.png' 

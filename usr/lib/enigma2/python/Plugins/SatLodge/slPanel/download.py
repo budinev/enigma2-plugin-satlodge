@@ -307,7 +307,7 @@ class downloadTask(Screen):
         with open(skin, 'r') as f:
             self.skin = f.read()        
         Screen.__init__(self, session)
-        self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion))         
+        self.setTitle(_('Sat-Lodge Panel V. %s' % currversion))         
         self.tasklist = tasklist
         self.filename = filename
         self['tasklist'] = List(self.tasklist)

@@ -1,5 +1,5 @@
 #"****************************************"
-#"*    by Lululla                        *"
+#"*          by ))^^((                   *"
 #"*     all right reserved               *"
 #"*          no copy                     *"
 #"****************************************"
@@ -40,7 +40,7 @@ import os
 import os, gettext, sys, time
 import time
 import urllib
-Version = '1.7'
+Version = '1.8'
 plugin_path = '/usr/lib/enigma2/python/Plugins/SatLodge/slManager/'
 
 
@@ -199,7 +199,7 @@ class slManager(Screen):
 
                 Screen.__init__(self, session)
 
-                self.setTitle(_('Sat-Lodge Manager by lululla V. %s' % Version))         
+                self.setTitle(_('Sat-Lodge Manager V. %s' % Version))         
                 self.session = session
         
 
@@ -516,7 +516,7 @@ class GetipklistLs(Screen):
 
         Screen.__init__(self, session)
 
-        self.setTitle(_('Sat-Lodge Manager by lululla V. %s' % Version))         
+        self.setTitle(_('Sat-Lodge Manager V. %s' % Version))         
         self.session = session
         
 
@@ -625,7 +625,7 @@ class GetipkLs(Screen):
         self.skin = GetipkLs.skin
 
         Screen.__init__(self, session)
-        self.setTitle(_('Sat-Lodge Manager by lululla V. %s' % Version))         
+        self.setTitle(_('Sat-Lodge Manager V. %s' % Version))         
         self.session = session
                 
     # def __init__(self, session, xmlparse, selection):

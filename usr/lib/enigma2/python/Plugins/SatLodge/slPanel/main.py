@@ -122,7 +122,7 @@ class STBmodel(Screen):
         with open(skin, 'r') as f:
             self.skin = f.read()
         Screen.__init__(self, session)
-        self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion))         
+        self.setTitle(_('Sat-Lodge Panel V. %s' % currversion))         
         mktmp = 'mkdir -p /tmp/ImageDownloader'
         self.container = eConsoleAppContainer()
         self.container.execute(mktmp)
@@ -207,7 +207,7 @@ class FEEDmodel(Screen):
             self.skin = f.read()
         Screen.__init__(self, session)  
         
-        self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion))         
+        self.setTitle(_('Sat-Lodge Panel V. %s' % currversion))         
         
         self['title'] = Label("Brands")
         self['key_green'] = Label(_('Select'))
@@ -262,7 +262,7 @@ class SERVERmodel(Screen):
         with open(skin, 'r') as f:
             self.skin = f.read()        
         Screen.__init__(self, session)        
-        self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion))         
+        self.setTitle(_('Sat-Lodge Panel V. %s' % currversion))         
         
         self['title'] = Label("Models")
         self['key_green'] = Label(_('Select'))
@@ -324,7 +324,7 @@ class DownloaderImage(Screen):
         with open(skin, 'r') as f:
             self.skin = f.read()        
         Screen.__init__(self, session)
-        self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion))         
+        self.setTitle(_('Sat-Lodge Panel V. %s' % currversion))         
         
         self.param = param
         self['key_green'] = Label(_(' '))
@@ -415,7 +415,7 @@ class ImageDownLoader(Screen):
         with open(skin, 'r') as f:
             self.skin = f.read()        
         Screen.__init__(self, session)
-        self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion))         
+        self.setTitle(_('Sat-Lodge Panel V. %s' % currversion))         
         
         self.param=param
         self.imageurl=param
@@ -613,7 +613,7 @@ class ImageDownLoaderFiles(Screen):
         with open(skin, 'r') as f:
             self.skin = f.read()        
         Screen.__init__(self, session)
-        self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion))         
+        self.setTitle(_('Sat-Lodge Panel V. %s' % currversion))         
         
         list = []
         self['menu'] = MenuList([], True, eListboxPythonMultiContent)
@@ -720,7 +720,7 @@ class ImageDownloadLocation(Screen, HelpableScreen):
         with open(skin, 'r') as f:
             self.skin = f.read()
         Screen.__init__(self, session)
-        self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion))         
+        self.setTitle(_('Sat-Lodge Panel V. %s' % currversion))         
         HelpableScreen.__init__(self)
         self['text'] = StaticText(_('Selected Download Place:'))
         self.text = text
@@ -915,7 +915,7 @@ class Downloader(Screen):
         with open(skin, 'r') as f:
             self.skin = f.read()  
         Screen.__init__(self, session)
-        self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion))         
+        self.setTitle(_('Sat-Lodge Panel V. %s' % currversion))         
         
         print url
         self.url = url

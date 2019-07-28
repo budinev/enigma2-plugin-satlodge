@@ -1,5 +1,5 @@
 #"****************************************"
-#"*    by Lululla                        *"
+#"*    by ))^^((                         *"
 #"*     all right reserved               *"
 #"*          no copy                     *"
 #"****************************************"
@@ -121,7 +121,7 @@ config.plugins.slPanel.ipkpth = ConfigSelection(default = "/tmp",choices = mount
 
 DESKHEIGHT = getDesktop(0).size().height()
 
-currversion = '2.3'
+currversion = '2.4'
 plugin_path = '/usr/lib/enigma2/python/Plugins/SatLodge/slPanel'
 ico_path = plugin_path +  '/res/pics/addons3.png'
 ##########################################
@@ -364,7 +364,7 @@ class Homesl(Screen):
             self.skin = f.read()
         self.setup_title = ('Hometv')
         Screen.__init__(self, session)
-        self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion))         
+        self.setTitle(_('Sat-Lodge Panel V. %s' % currversion))         
         self.session = session
         self['text'] = SLList([])
         self.working = False
@@ -482,7 +482,7 @@ class Drivers(Screen):
             self.skin = f.read()
         self.setup_title = ('Drivers')
         Screen.__init__(self, session)
-        self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion))         
+        self.setTitle(_('Sat-Lodge Panel V. %s' % currversion))         
         self.list = []		
         self['text'] = oneListsl([]) 		
         self.addon = 'emu'
@@ -552,7 +552,7 @@ class slDependencies(Screen):
             self.skin = f.read()
         self.setup_title = ('slDependencies')
         Screen.__init__(self, session)
-        self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion))         
+        self.setTitle(_('Sat-Lodge Panel V. %s' % currversion))         
         self.list = []		
         self['text'] = oneListsl([]) 		
         self.addon = 'emu'
@@ -623,7 +623,7 @@ class Picons(Screen):
             self.skin = f.read()
         self.setup_title = ('Picons')
         Screen.__init__(self, session)
-        self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion))         
+        self.setTitle(_('Sat-Lodge Panel V. %s' % currversion))         
         self.list = []		
         self['text'] = oneListsl([]) 		
         self.addon = 'emu'
@@ -695,7 +695,7 @@ class PluginBackup(Screen):
             self.skin = f.read()
         self.setup_title = ('PluginBackup')
         Screen.__init__(self, session)
-        self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion)) 
+        self.setTitle(_('Sat-Lodge Panel V. %s' % currversion)) 
         self.list = []		
         self['text'] = oneListsl([]) 		
         self.addon = 'emu'
@@ -768,7 +768,7 @@ class PluginEmulators(Screen):
             self.skin = f.read()
         self.setup_title = ('Picons')
         Screen.__init__(self, session)
-        self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion)) 
+        self.setTitle(_('Sat-Lodge Panel V. %s' % currversion)) 
         self.list = []
         self['text'] = oneListsl([])
         self.addon = 'emu'
@@ -841,7 +841,7 @@ class PluginEpg(Screen):
             self.skin = f.read()
         self.setup_title = ('PluginEpg')
         Screen.__init__(self, session)
-        self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion)) 
+        self.setTitle(_('Sat-Lodge Panel V. %s' % currversion)) 
         self.list = []
         self['text'] = oneListsl([])
         self.addon = 'emu'
@@ -913,7 +913,7 @@ class PluginMultim(Screen):
             self.skin = f.read()
         self.setup_title = ('PluginMultim')
         Screen.__init__(self, session)
-        self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion)) 
+        self.setTitle(_('Sat-Lodge Panel V. %s' % currversion)) 
         self.list = []
         self['text'] = oneListsl([]) 
         self.addon = 'emu'
@@ -982,7 +982,7 @@ class Kodi(Screen):
             self.skin = f.read()
         self.setup_title = ('Kodi')
         Screen.__init__(self, session)
-        self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion)) 
+        self.setTitle(_('Sat-Lodge Panel V. %s' % currversion)) 
         self.list = []		
         self['text'] = oneListsl([]) 		
         self.addon = 'emu'
@@ -1052,7 +1052,7 @@ class PluginMultiboot(Screen):
             self.skin = f.read()
         self.setup_title = ('PluginMultiboot')
         Screen.__init__(self, session)
-        self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion)) 
+        self.setTitle(_('Sat-Lodge Panel V. %s' % currversion)) 
         self.list = []		
         self['text'] = oneListsl([]) 		
         self.addon = 'emu'
@@ -1122,7 +1122,7 @@ class PluginPpanel(Screen):
             self.skin = f.read()
         self.setup_title = ('PluginPpanel')
         Screen.__init__(self, session)
-        self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion)) 
+        self.setTitle(_('Sat-Lodge Panel V. %s' % currversion)) 
         self.list = []		
         self['text'] = oneListsl([]) 		
         self.addon = 'emu'
@@ -1192,7 +1192,7 @@ class PluginSettings(Screen):
         self.setup_title = ('PluginSettings')
         
         Screen.__init__(self, session)
-        self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion)) 
+        self.setTitle(_('Sat-Lodge Panel V. %s' % currversion)) 
         
         self.list = []		
         self['text'] = oneListsl([]) 		
@@ -1264,7 +1264,7 @@ class PluginSpinner(Screen):
             self.skin = f.read()
         self.setup_title = ('PluginSpinner')
         Screen.__init__(self, session)
-        self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion)) 
+        self.setTitle(_('Sat-Lodge Panel V. %s' % currversion)) 
         self.list = []		
         self['text'] = oneListsl([])
         self.addon = 'emu'
@@ -1334,7 +1334,7 @@ class PluginSkins(Screen):
             self.skin = f.read()
         self.setup_title = ('PluginSkins')
         Screen.__init__(self, session)
-        self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion)) 
+        self.setTitle(_('Sat-Lodge Panel V. %s' % currversion)) 
         self.list = []		
         self['text'] = oneListsl([])
         self.addon = 'emu'
@@ -1404,7 +1404,7 @@ class PluginSport(Screen):
             self.skin = f.read()
         self.setup_title = ('PluginSport')
         Screen.__init__(self, session)
-        self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion)) 
+        self.setTitle(_('Sat-Lodge Panel V. %s' % currversion)) 
         self.list = []		
         self['text'] = oneListsl([]) 		
         self.addon = 'emu'
@@ -1474,7 +1474,7 @@ class PluginUtility(Screen):
             self.skin = f.read()
         self.setup_title = ('PluginUtility')
         Screen.__init__(self, session)
-        self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion)) 
+        self.setTitle(_('Sat-Lodge Panel V. %s' % currversion)) 
         self.list = []		
         self['text'] = oneListsl([]) 		
         self.addon = 'emu'
@@ -1545,7 +1545,7 @@ class PluginWeather(Screen):
             self.skin = f.read()
         self.setup_title = ('PluginWeather')
         Screen.__init__(self, session)
-        self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion)) 
+        self.setTitle(_('Sat-Lodge Panel V. %s' % currversion)) 
         self.list = []		
         self['text'] = oneListsl([]) 		
         self.addon = 'emu'
@@ -1618,7 +1618,7 @@ class DailySetting(Screen):
             self.skin = f.read()
         self.setup_title = ('DailySetting')
         Screen.__init__(self, session)
-        self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion)) 
+        self.setTitle(_('Sat-Lodge Panel V. %s' % currversion)) 
         self['text'] = SLList([])
         self.working = False
         self.selection = 'all'
@@ -1727,7 +1727,7 @@ class PluginslSettingVhan(Screen):
             self.skin = f.read()
         self.setup_title = ('PluginslSettingVhan')
         Screen.__init__(self, session)
-        self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion))  
+        self.setTitle(_('Sat-Lodge Panel V. %s' % currversion))  
         self.list = []		
         self['text'] = oneListsl([]) 		
         self.addon = 'emu'
@@ -1848,7 +1848,7 @@ class PluginslMilenka61(Screen):
             self.skin = f.read()
         self.setup_title = ('PluginslMilenka61')
         Screen.__init__(self, session)
-        self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion)) 
+        self.setTitle(_('Sat-Lodge Panel V. %s' % currversion)) 
         self.list = []		
         self['text'] = oneListsl([]) 		
         self.addon = 'emu'
@@ -1970,7 +1970,7 @@ class PluginslSettingManutek(Screen):
             self.skin = f.read()
         self.setup_title = ('PluginslSettingManutek')
         Screen.__init__(self, session)
-        self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion)) 
+        self.setTitle(_('Sat-Lodge Panel V. %s' % currversion)) 
         self.list = []		
         self['text'] = oneListsl([]) 		
         self.addon = 'emu'
@@ -2096,7 +2096,7 @@ class PluginslSettingMorpheus(Screen):
             self.skin = f.read()
         self.setup_title = ('PluginslSettingMorpheus')
         Screen.__init__(self, session)
-        self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion)) 
+        self.setTitle(_('Sat-Lodge Panel V. %s' % currversion)) 
         self.list = []		
         self['text'] = oneListsl([]) 		
         self.addon = 'emu'
@@ -2211,7 +2211,7 @@ class slSettingCiefp(Screen):
             self.skin = f.read()
         self.setup_title = ('slSettingCiefp')
         Screen.__init__(self, session)
-        self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion)) 
+        self.setTitle(_('Sat-Lodge Panel V. %s' % currversion)) 
         self.list = []		
         self['text'] = oneListsl([]) 		
         self.addon = 'emu'
@@ -2326,7 +2326,7 @@ class slSettingMalimali(Screen):
             self.skin = f.read()
         self.setup_title = ('slSettingMalimali')
         Screen.__init__(self, session)
-        self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion)) 
+        self.setTitle(_('Sat-Lodge Panel V. %s' % currversion)) 
         self.list = []		
         self['text'] = oneListsl([]) 		
         self.addon = 'emu'
@@ -2439,7 +2439,7 @@ class slSettingPredrag(Screen):
             self.skin = f.read()
         self.setup_title = ('slSettingPredrag')
         Screen.__init__(self, session)
-        self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion)) 
+        self.setTitle(_('Sat-Lodge Panel V. %s' % currversion)) 
         self.list = []		
         self['text'] = oneListsl([]) 		
         self.addon = 'emu'
@@ -2553,7 +2553,7 @@ class InstallGo(Screen):
         self.setup_title = ('InstallGo')
         
         Screen.__init__(self, session)
-        self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion)) 
+        self.setTitle(_('Sat-Lodge Panel V. %s' % currversion)) 
         print "In slInstallGo data =", data
         print "In slInstallGo name =", name
         self.selection = selection
@@ -2617,7 +2617,9 @@ class InstallGo(Screen):
         self.timer = eTimer()
         self.timer.start(100, True)
         if os.path.exists(checkfile):
-            self.session.open(slConsole, _('Installing: %s') % self.dom, ['opkg install -force-overwrite -force-depends %s' % self.com])
+            # self.session.open(slConsole, _('Installing: %s') % self.dom, ['opkg install -force-overwrite -force-depends %s' % self.com])
+            self.session.open(slConsole, _('Installing: %s') % self.dom, ['opkg install %s' % self.com])			
+			
             if fileExists(BRAND)or fileExists(BRANDP):
                 self.timer.callback.append(deletetmp) #pli
             else:
@@ -2751,8 +2753,8 @@ class InstallGo(Screen):
                     os.system('cp -rf /tmp/%s/whitelist /etc/enigma2/' % self.zipname1)
                     os.system('cp -rf /tmp/%s/satellites.xml /etc/tuxbox/' % self.zipname1 )
                     os.system('cp -rf /tmp/%s/terrestrial.xml /etc/tuxbox/' % self.zipname1 )
-                    os.system('rm -fr /tmp/download.zip')
-                    os.system('rm -fr /tmp/%s' % self.zipname1)
+                    os.system('rm -rf /tmp/download.zip')
+                    os.system('rm -rf /tmp/%s' % self.zipname1)
                     self.reloadSettings2()
                 else:
                     self.mbox = self.session.open(slMessageBox, _('Download Failed!'), slMessageBox.TYPE_INFO, timeout=5)
@@ -2815,7 +2817,7 @@ class slConsole(Screen):
             self.skin = f.read()
         self.setup_title = ('slConsole')
         Screen.__init__(self, session)
-        self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion)) 
+        self.setTitle(_('Sat-Lodge Panel V. %s' % currversion)) 
         self['version'] = Label(_('V. %s' %  currversion))
         self['maintener'] = Label(_(' by ))^^(('))         
         self.finishedCallback = finishedCallback
@@ -2876,7 +2878,7 @@ class IPKinst(Screen):
             self.skin = f.read()
         self.setup_title = ('IPKinst')
         Screen.__init__(self, session)
-        self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion))     
+        self.setTitle(_('Sat-Lodge Panel V. %s' % currversion))     
 
         self.flist = []
         idx = 0
@@ -2884,7 +2886,7 @@ class IPKinst(Screen):
         ##ipkpth = ("/tmp")
         pkgs = listdir(ipkpth)
         for fil in pkgs:
-            if fil.find('.ipk') != -1 or fil.find('.tar.gz') != -1 or fil.find('.deb') != -1:  #modded lululla
+            if fil.find('.ipk') != -1 or fil.find('.tar.gz') != -1 or fil.find('.deb') != -1: 
         #    if fil.find('.ipk') != -1:
                 res = (fil, idx)
                 self.flist.append(res)
@@ -2995,7 +2997,7 @@ class pluginSl(Screen):
             self.skin = f.read()
         self.setup_title = ('pluginSl')
         Screen.__init__(self, session)
-        self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion)) 
+        self.setTitle(_('Sat-Lodge Panel V. %s' % currversion)) 
         self.list = []
         self['list'] = oneListsl([])  
         self['title'] = Label(_('..:: SAT-LODGE UNINSTALLER ::..'))
@@ -3091,7 +3093,7 @@ class slMessageBox(Screen):
             self.skin = f.read()
         self.setup_title = ('slMessageBox')
         Screen.__init__(self, session)
-        self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion)) 
+        self.setTitle(_('Sat-Lodge Panel V. %s' % currversion)) 
         self.type = type
         self.msgBoxID = msgBoxID
         self['text'] = Label(text)
@@ -3251,7 +3253,7 @@ class slPanelConfig(Screen, ConfigListScreen):
             self.skin = f.read()
         self.setup_title = ('slPanelConfig')
         Screen.__init__(self, session)
-        self.setTitle(_('Sat-Lodge Panel by lululla V. %s' % currversion)) 
+        self.setTitle(_('Sat-Lodge Panel V. %s' % currversion)) 
         self['title'] = Label(_('..:: Sat-Lodge Config ::..'))
         self['version'] = Label(_('V. %s' %  currversion))
         self['maintener'] = Label(_(' by ))^^((')) 
