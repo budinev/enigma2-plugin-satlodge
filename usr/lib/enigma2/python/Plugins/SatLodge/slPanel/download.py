@@ -225,11 +225,11 @@ class downloadTaskPostcondition(Condition):
             return
 
     def getErrorMessage(self, task):
-        return {task.ERROR_CORRUPT_FILE: _('Video Download Failed!\n\nCorrupted Download File:\n%s' % task.lasterrormsg),
-         task.ERROR_RTMP_ReadPacket: _('Video Download Failed!\n\nCould not read RTMP-Packet:\n%s' % task.lasterrormsg),
-         task.ERROR_SEGFAULT: _('Video Download Failed!\n\nSegmentation fault:\n%s' % task.lasterrormsg),
-         task.ERROR_SERVER: _('Video Download Failed!\n\nServer returned error:\n%s' % task.lasterrormsg),
-         task.ERROR_UNKNOWN: _('Video Download Failed!\n\nUnknown Error:\n%s' % task.lasterrormsg)}[task.error]
+        return {task.ERROR_CORRUPT_FILE: _('Download Failed!\n\nCorrupted Download File:\n%s' % task.lasterrormsg),
+         task.ERROR_RTMP_ReadPacket: _('Download Failed!\n\nCould not read RTMP-Packet:\n%s' % task.lasterrormsg),
+         task.ERROR_SEGFAULT: _('Download Failed!\n\nSegmentation fault:\n%s' % task.lasterrormsg),
+         task.ERROR_SERVER: _('Download Failed!\n\nServer returned error:\n%s' % task.lasterrormsg),
+         task.ERROR_UNKNOWN: _('Download Failed!\n\nUnknown Error:\n%s' % task.lasterrormsg)}[task.error]
 
 class downloadJob(Job):
 

@@ -121,7 +121,7 @@ config.plugins.slPanel.ipkpth = ConfigSelection(default = "/tmp",choices = mount
 
 DESKHEIGHT = getDesktop(0).size().height()
 
-currversion = '2.4'
+currversion = '2.5'
 plugin_path = '/usr/lib/enigma2/python/Plugins/SatLodge/slPanel'
 ico_path = plugin_path +  '/res/pics/addons3.png'
 ##########################################

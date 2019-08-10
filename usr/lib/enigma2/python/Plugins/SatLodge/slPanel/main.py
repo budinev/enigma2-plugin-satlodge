@@ -303,8 +303,6 @@ class SERVERmodel(Screen):
             res = []
             
 
-        
-
         self['list'].l.setList(theevents)
         self['list'].show()
         
@@ -424,22 +422,16 @@ class ImageDownLoader(Screen):
         self.oktext = _('\nSelect To Continue !')
         self.text = ''
         if True:
-            self.list.append(('Download',
-             _('Start Download'),
-             _('\nStarts To Download Image !') + self.oktext,
-             None))
-            # self.list.append(('Background',
-             # _('Download in Background'),
-             # _('\nDownload in Background and Explore other Images !') + self.oktext,
-             # None))
-            self.list.append(('Downloadlocation',
-             _('Set Download Location'),
-             _('\nSelect Your Download Location : HDD or USB !') + self.oktext,
-             None))
-            self.list.append(('Files',
-             _('Explore Local Images'),
-             _('\nView Downloaded Images !') + self.oktext,
-             None))            
+            self.list.append(('Download',_('Start Download'),('\nSelect To Continue !'),None))
+            self.list.append(('FlashImage',_('Flash Image Downloader'),('\nSelect To Continue !'),None))
+            self.list.append(('Downloadlocation',_('Set Download Location: HDD or USB !'),('\nSelect To Continue !'),None))
+            self.list.append(('Files',_('Explore - Flash Local Images'),('\nSelect To Continue !'),None)) 
+
+            # self.list.append(('Download',_('Start Download'),_('\nStarts To Download Image !') + self.oktext,None))
+            # self.list.append(('FlashImage',_('Flash Image Downloader'),_('\nFlash Images from local file downloading !') + self.oktext,None))
+            # self.list.append(('Downloadlocation',_('Set Download Location'),_('\nSelect Your Download Location : HDD or USB !') + self.oktext,None))
+            # self.list.append(('Files',_('Explore - Flash Local Images'),_('\nView - Flash Downloaded Images !') + self.oktext,None)) 
+			
         self['menu'] = List(self.list)
         
         # self['key_red'] = Label(_('Back'))
@@ -561,6 +553,17 @@ class ImageDownLoader(Screen):
                 self.session.open(ImageDownLoaderFiles)
             elif currentEntry == 'Downloadlocation':
                 self.session.openWithCallback(self.Downloadlocation_choosen, ImageDownloadLocation)
+            elif currentEntry == 'FlashImage':
+                # if not self.fnameexists() == True:
+                   # path = getDownloadPath()				
+                   # self.localfile = path + os.path.basename(self.imageurl)
+                   # title=os.path.basename(self.imageurl)
+                   self.session.open(ImageDownLoaderFiles)
+                   # self.session.openWithCallback(self.cancel, ImageDownLoaderFiles.flash_msg, self.imageurl, self.localfile, path)
+				   
+                   # from download import startdownload
+                   # startdownload(self.session, 'download', self.imageurl, self.localfile, title, None, True)				
+				
             # elif currentEntry == 'Background':
                 # if not self.fnameexists() == True:
                    # path = getDownloadPath()				
@@ -604,6 +607,9 @@ class ImageDownLoader(Screen):
     def cancel(self, result = None):
         self.close(None)
         return
+		
+		
+# self.session.openWithCallback(FlashImage, currentSelected[0][0], currentSelected[0][1])
 
 class ImageDownLoaderFiles(Screen):
 
@@ -619,6 +625,7 @@ class ImageDownLoaderFiles(Screen):
         self['menu'] = MenuList([], True, eListboxPythonMultiContent)
         self['key_red'] = Label(_('Back '))
         self['key_green'] = Label(_(' '))
+        self['key_blue'] = Label(_(' '))		
         folder = str(config.plugins.ImageDown.Downloadlocation.value)
         fspace = str(freespace()) + 'MB'
         self['menu'].onSelectionChanged.append(self.selectionChanged)
@@ -628,6 +635,7 @@ class ImageDownLoaderFiles(Screen):
         else:
             self.folder = folder + '/'
         self['actions'] = ActionMap(['SetupActions', 'ColorActions'], {'green': self.delimage,
+		 'blue': self.flash_msg,
          'cancel': self.close}, -2)
         self.fillplgfolders()
 		
@@ -638,10 +646,39 @@ class ImageDownLoaderFiles(Screen):
             filename = self.nfifiles[cindex][0]
             if filename.endswith(".zip") :
                self['key_green'].setText('Delete')
+               self['key_blue'].setText('Flash')
             else:
                 self['key_green'].setText(' ')  
+                self['key_blue'].setText(' ') 
         except:
             pass
+			
+			
+    def flash_msg(self):
+         fname = self['menu'].getCurrent()
+         cindex = self['menu'].getSelectionIndex()
+         filename = self.folder + self.nfifiles[cindex][0]
+         if filename.endswith(".zip") :
+            self['key_blue'].setText('Flash')
+	        # self.session.openWithCallback(FlashImage, currentSelected[0][0], currentSelected[0][1])
+            self.session.openWithCallback(self.flash, MessageBox, _(filename + '\nDo you still want to flash image ?'), MessageBox.TYPE_YESNO)
+
+         else:
+            self['key_blue'].setText(' ') 			
+			
+            
+    def flash(self, result):
+        if result:
+            try:
+                fname = self['menu'].getCurrent()
+                cindex = self['menu'].getSelectionIndex()
+                filename = self.folder + self.nfifiles[cindex][0]
+                from Screens.FlashImage import *
+                self.session.openWithCallback(self.close, FlashImage, fname, filename)
+
+            except:
+                self.session.open(MessageBox, _('Unable To Flash !'), type=MessageBox.TYPE_ERROR, timeout=5, close_on_any_key=True)         
+            
 
     def delimage(self):
          fname = self['menu'].getCurrent()

@@ -19,7 +19,7 @@
 
 
 
-	<widget source="menu" render="Listbox" position="139,236" size="800,240" zPosition="3" transparent="1" foregroundColor="#ffff00" foregroundColorSelected="#ffffff" backgroundColorSelected="#000000" scrollbarMode="showNever">
+	<widget source="menu" render="Listbox" position="139,236" size="800,257" zPosition="3" transparent="1" foregroundColor="#ffff00" foregroundColorSelected="#ffffff" backgroundColorSelected="#000000" scrollbarMode="showNever">
 	<convert type="TemplatedMultiContent">
 	{"template": [
 	MultiContentEntryText(pos = (10, 2), size = (870, 60), flags = RT_HALIGN_LEFT, text = 1), # index 0 is the MenuText,
@@ -29,7 +29,7 @@
 	}
 	</convert>
 	</widget>
-	<widget source="menu" render="Listbox" position="138,477" size="900,150" zPosition="4" scrollbarMode="showNever" selectionDisabled="1" transparent="1">
+	<widget source="menu" render="Listbox" position="138,494" size="900,133" zPosition="4" scrollbarMode="showNever" selectionDisabled="1" transparent="1">
 	<convert type="TemplatedMultiContent">
 	{"template": [
 	MultiContentEntryText(pos = (0, 3), size = (880, 150), flags = RT_HALIGN_CENTER|RT_VALIGN_TOP|RT_WRAP, text = 2), # index 0 is the MenuText,
