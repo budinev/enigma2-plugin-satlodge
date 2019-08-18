@@ -338,11 +338,20 @@ class SettingVhan(Screen):
         self.downloading = False
         self.timer = eTimer()
         
-        if fileExists(BRAND)or fileExists(BRANDP):
-            self.timer.callback.append(self.downxmlpage) #pli
-        else:
-            self.timer_conn = self.timer.timeout.connect(self.downxmlpage) #cvs            
-        self.timer.start(1500, True)
+        # if fileExists(BRAND)or fileExists(BRANDP):
+            # self.timer.callback.append(self.downxmlpage) #pli
+        # else:
+            # self.timer_conn = self.timer.timeout.connect(self.downxmlpage) #cvs            
+        # self.timer.start(1500, True)
+        self.timer = eTimer() 
+        self.timer.start(100, 1)        
+        try: 
+            self.timer_conn = self.timer.timeout.connect(self.downxmlpage)
+        except:
+            self.timer.callback.append(self.downxmlpage)		
+		
+		
+		
         self['title'] = Label(_('..:: slSettings V. %s  ~ Thanks all SettingMan ::..' % currversion))      
         self['actions'] = ActionMap(['SetupActions', 'ColorActions'], {'ok': self.okRun,
          'green': self.okRun,
@@ -449,13 +458,12 @@ class SettingMilenka61(Screen):
         self['key_green'] = Button(_('Install'))
         self['key_red'] = Button(_('Back'))    
         self.downloading = False
-        self.timer = eTimer()
-        
-        if fileExists(BRAND)or fileExists(BRANDP):
-            self.timer.callback.append(self.downxmlpage) #pli
-        else:
-            self.timer_conn = self.timer.timeout.connect(self.downxmlpage) #cvs            
-        self.timer.start(1500, True)
+        self.timer = eTimer() 
+        self.timer.start(100, 1)        
+        try: 
+            self.timer_conn = self.timer.timeout.connect(self.downxmlpage)
+        except:
+            self.timer.callback.append(self.downxmlpage)	
         self['title'] = Label(_('..:: slSettings V. %s  ~ Thanks all SettingMan ::..' % currversion))      
         self['actions'] = ActionMap(['SetupActions', 'ColorActions'], {'ok': self.okRun,
          'green': self.okRun,
@@ -564,14 +572,12 @@ class SettingManutek(Screen):
         self['key_green'] = Button(_('Install'))
         self['key_red'] = Button(_('Back'))    
         self.downloading = False
-        self.timer = eTimer()
-        
-        if fileExists(BRAND)or fileExists(BRANDP):
-            self.timer.callback.append(self.downxmlpage) #pli
-        else:
-            self.timer_conn = self.timer.timeout.connect(self.downxmlpage) #cvs            
-        
-        self.timer.start(1500, True)
+        self.timer = eTimer() 
+        self.timer.start(100, 1)        
+        try: 
+            self.timer_conn = self.timer.timeout.connect(self.downxmlpage)
+        except:
+            self.timer.callback.append(self.downxmlpage)	
         self['title'] = Label(_('..:: slSettings V. %s  ~ Thanks all SettingMan ::..' % currversion)) 
         self['actions'] = ActionMap(['SetupActions', 'ColorActions'], {'ok': self.okRun,
          'green': self.okRun,
@@ -685,12 +691,12 @@ class SettingMorpheus(Screen):
         self['key_green'] = Button(_('Install'))
         self['key_red'] = Button(_('Back'))    
         self.downloading = False
-        self.timer = eTimer()
-        if fileExists(BRAND)or fileExists(BRANDP):
-            self.timer.callback.append(self.downxmlpage) #pli
-        else:
-            self.timer_conn = self.timer.timeout.connect(self.downxmlpage) #cvs            
-        self.timer.start(500, True)
+        self.timer = eTimer() 
+        self.timer.start(100, 1)        
+        try: 
+            self.timer_conn = self.timer.timeout.connect(self.downxmlpage)
+        except:
+            self.timer.callback.append(self.downxmlpage)	
         self['title'] = Label(_('..:: slSettings V. %s  ~ Thanks all SettingMan ::..' % currversion))
         self['actions'] = ActionMap(['SetupActions', 'ColorActions'], {'ok': self.okRun,
          'green': self.okRun,
@@ -800,13 +806,12 @@ class SettingCiefp(Screen):
         self['key_green'] = Button(_('Install'))
         self['key_red'] = Button(_('Back'))    
         self.downloading = False
-        self.timer = eTimer()
-        if fileExists(BRAND)or fileExists(BRANDP):
-            self.timer.callback.append(self.downxmlpage) #pli
-        else:
-            self.timer_conn = self.timer.timeout.connect(self.downxmlpage) #cvs            
-
-        self.timer.start(1500, True)
+        self.timer = eTimer() 
+        self.timer.start(100, 1)        
+        try: 
+            self.timer_conn = self.timer.timeout.connect(self.downxmlpage)
+        except:
+            self.timer.callback.append(self.downxmlpage)	
         self['title'] = Label(_('..:: slSettings V. %s  ~ Thanks all SettingMan ::..' % currversion))
         self['actions'] = ActionMap(['SetupActions', 'ColorActions'], {'ok': self.okRun,
          'green': self.okRun,
@@ -908,14 +913,12 @@ class SettingMalimali(Screen):
         self['key_green'] = Button(_('Install'))
         self['key_red'] = Button(_('Back'))    
         self.downloading = False
-        self.timer = eTimer()
-        
-        if fileExists(BRAND)or fileExists(BRANDP):
-            self.timer.callback.append(self.downxmlpage) #pli
-        else:
-            self.timer_conn = self.timer.timeout.connect(self.downxmlpage) #cvs            
-        
-        self.timer.start(1500, True)
+        self.timer = eTimer() 
+        self.timer.start(100, 1)        
+        try: 
+            self.timer_conn = self.timer.timeout.connect(self.downxmlpage)
+        except:
+            self.timer.callback.append(self.downxmlpage)	
         self['title'] = Label(_('..:: slSettings V. %s  ~ Thanks all SettingMan ::..' % currversion))
         self['actions'] = ActionMap(['SetupActions', 'ColorActions'], {'ok': self.okRun,
          'green': self.okRun,
@@ -1016,13 +1019,12 @@ class SettingPredrag(Screen):
         self['key_green'] = Button(_('Install'))
         self['key_red'] = Button(_('Back'))           
         self.downloading = False
-        self.timer = eTimer()
-        
-        if fileExists(BRAND)or fileExists(BRANDP):
-            self.timer.callback.append(self.downxmlpage) #pli
-        else:
-            self.timer_conn = self.timer.timeout.connect(self.downxmlpage) #cvs            
-        self.timer.start(1500, True)
+        self.timer = eTimer() 
+        self.timer.start(100, 1)        
+        try: 
+            self.timer_conn = self.timer.timeout.connect(self.downxmlpage)
+        except:
+            self.timer.callback.append(self.downxmlpage)	
         self['title'] = Label(_('..:: slSettings V. %s  ~ Thanks all SettingMan ::..' % currversion))
         self['actions'] = ActionMap(['SetupActions', 'ColorActions'], {'ok': self.okRun,
          'green': self.okRun,

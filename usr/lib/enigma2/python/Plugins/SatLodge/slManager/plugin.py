@@ -40,10 +40,8 @@ import os
 import os, gettext, sys, time
 import time
 import urllib
-Version = '1.8'
+Version = '1.9'
 plugin_path = '/usr/lib/enigma2/python/Plugins/SatLodge/slManager/'
-
-
 
 dwidth = getDesktop(0).size().width()
 DESKHEIGHT = getDesktop(0).size().height()
@@ -70,12 +68,6 @@ else:
 # else:
     # loadSkin(plugin_path + 'img/skin.xml')
     
-
-
-
-
-
-
 
 def show_list(h):
     # png1 = '/usr/lib/enigma2/python/Plugins/SatLodge/slManager/res/img/actcam.png'
@@ -166,9 +158,6 @@ class m2list(MenuList):
         else:        
             self.l.setItemHeight(45)  
         
-   
-
-
 ECM_INFO = '/tmp/ecm.info'
 EMPTY_ECM_INFO = ('', '0', '0', '0')
 
@@ -196,14 +185,9 @@ class slManager(Screen):
                 assert not slManager.instance, "only one slManager instance is allowed!"
                 slManager.instance = self
                 self.skin = slManager.skin
-
                 Screen.__init__(self, session)
-
                 self.setTitle(_('Sat-Lodge Manager V. %s' % Version))         
                 self.session = session
-        
-
-                
                 self.index = 0
                 self.emulist = []
                 self.namelist = []
@@ -219,13 +203,10 @@ class slManager(Screen):
                         "red": self.stop,
                 }, -1)
                 self["key_green"] = Button(_("Start"))
-                # self["key_green2"] = Button(_("ReStart"))
-                
                 self["key_blue"] = Button(_("SatLodge Panel"))
                 self['key_blue'].hide()
                 if fileExists('/usr/lib/enigma2/python/Plugins/SatLodge/slPanel/plugin.pyo'):
                     self["key_blue"].show()
-
                 self["key_yellow"] = Button(_("Download"))
                 self["key_red"] = Button(_("Stop"))
                 self['version'] = Label(_('V. %s' % Version))
@@ -237,24 +218,23 @@ class slManager(Screen):
                 self['desc'] = Label()
                 self['ecminfo'] = Label(_('Ecm Info')) 
                 self["list"] = m2list([])
-                self.timer = eTimer()
-                self['desc'].setText(_('Scanning and retrieval list softcam ...'))
-                try:
-                    self.timer.callback.append(self.cgdesc)
-                except:
+                self['desc'].setText(_('Scanning and retrieval list softcam ...'))				
+                self.timer = eTimer() 
+                self.timer.start(100, 1)        
+                try: 
                     self.timer_conn = self.timer.timeout.connect(self.cgdesc)
-                self.timer.start(200, 1)
+                except:
+                    self.timer.callback.append(self.cgdesc)				
                 self.readScripts()
                 self.ecminfo = GetEcmInfo()
                 (newEcmFound, ecmInfo) = self.ecminfo.getEcm()
                 self["info"] = ScrollLabel("".join(ecmInfo))
                 self.EcmInfoPollTimer = eTimer()
+                self.EcmInfoPollTimer.start(100)				
                 try:
                     self.EcmInfoPollTimer.callback.append(self.setEcmInfo)
                 except:
                     self.timer_conn = self.EcmInfoPollTimer.timeout.connect(self.setEcmInfo)
-                self.EcmInfoPollTimer.start(100)
-               
 
         def slpanel(self):
             if fileExists('/usr/lib/enigma2/python/Plugins/SatLodge/slPanel/plugin.pyo'):
@@ -263,7 +243,6 @@ class slManager(Screen):
             else: 
                 self.session.open(MessageBox,("slPanel Not Installed!!"), type=MessageBox.TYPE_INFO, timeout=3)
                
-               
         def setEcmInfo(self):
             (newEcmFound, ecmInfo) = self.ecminfo.getEcm()
             if newEcmFound:
@@ -271,7 +250,6 @@ class slManager(Screen):
             else:
                 self.ecm()
        
-
         def ecm(self):
             ecmf = ""
             if os.path.isfile("/tmp/ecm.info")is True :
@@ -280,7 +258,6 @@ class slManager(Screen):
                 for line in myfile.readlines():
                       print line
                       ecmf = ecmf + line
-
                 self["info"].setText(ecmf)
             else:
                 self["info"].setText(ecmf)
@@ -345,13 +322,11 @@ class slManager(Screen):
                 ##self.close()
 
 
-
         def writeFile(self):
                 if not self.currCam is None:
                         clist = open("/etc/clist.list", "w")
                         clist.write(self.currCam)
                         clist.close()
-                        
                 stcam = open("/etc/startcam.sh", "w")
                 stcam.write("#!/bin/sh\n" + self.cmd1)
                 stcam.close()
@@ -498,7 +473,6 @@ class slManager(Screen):
 class GetipklistLs(Screen):
 
     instance = None
-    
     # if DESKHEIGHT < 1280:		
     skin = skin_path + 'GetipklistLs.xml'
     # else:	
@@ -519,8 +493,6 @@ class GetipklistLs(Screen):
         self.setTitle(_('Sat-Lodge Manager V. %s' % Version))         
         self.session = session
         
-
-
     # def __init__(self, session):
         # Screen.__init__(self, session)
         # # self.list = []
@@ -536,24 +508,17 @@ class GetipklistLs(Screen):
         self.addon = 'emu'
         self.icount = 0
         self.downloading = False
-        self.timer = eTimer()
-        try:
-            self.timer.callback.append(self.downloadxmlpage)
-        except:
+        self.timer = eTimer() 
+        self.timer.start(100, 1)        
+        try: 
             self.timer_conn = self.timer.timeout.connect(self.downloadxmlpage)
-        self.timer.start(100, 1)
+        except:
+            self.timer.callback.append(self.downloadxmlpage)					
+		
         self['actions'] = ActionMap(['SetupActions', 'ColorActions'], {'ok': self.okClicked,
         'cancel': self.close}, -1)
         # self.onShown.append(self.get_list)
 
-
-    # def get_list(self):
-        # self.timer = eTimer()
-        # try:
-            # self.timer.callback.append(self.downloadxmlpage)
-
-        # except:
-            # self.timer_conn = self.timer.timeout.connect(self.downloadxmlpage)
     def downloadxmlpage(self):
         url = 'http://sat-lodge.it/xml/PluginEmulators.xml'    
 
@@ -602,7 +567,6 @@ class GetipklistLs(Screen):
 
         else:
             return        
-
 
 
 

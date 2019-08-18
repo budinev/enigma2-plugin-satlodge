@@ -1,5 +1,5 @@
 #"****************************************"
-#"*    by ))^^((                         *"
+#"*    by Lululla 16.08.2019             *"
 #"*     all right reserved               *"
 #"*          no copy                     *"
 #"****************************************"
@@ -31,8 +31,7 @@ from enigma import RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_HALIGN_CENTER, getDesktop
 from enigma import eListbox, eTimer, eListboxPythonMultiContent, eConsoleAppContainer, addFont, gFont 
 from os import environ as os_environ
 from os import path, listdir, remove, mkdir, chmod
-from twisted.web.client import downloadPage
-from twisted.web.client import getPage
+from twisted.web.client import downloadPage, getPage
 from xml.dom import Node, minidom
 import base64
 import gettext
@@ -121,7 +120,7 @@ config.plugins.slPanel.ipkpth = ConfigSelection(default = "/tmp",choices = mount
 
 DESKHEIGHT = getDesktop(0).size().height()
 
-currversion = '2.5'
+currversion = '2.6'
 plugin_path = '/usr/lib/enigma2/python/Plugins/SatLodge/slPanel'
 ico_path = plugin_path +  '/res/pics/addons3.png'
 ##########################################
@@ -169,12 +168,12 @@ class logoStrt(Screen):
         Screen.__init__(self, session)
         self['actions'] = ActionMap(['SetupActions'], {'ok': self.disappear,
         'cancel': self.disappear}, -1)
-        self.timer = eTimer()
-        try:
+        self.timer = eTimer() 
+        self.timer.start(100, 1)        
+        try: 
             self.timer_conn = self.timer.timeout.connect(self.disappear)
         except:
-            self.timer.callback.append(self.disappear)
-        self.timer.start(2500, True)
+            self.timer.callback.append(self.disappear)    
 
     def disappear(self):
         self.session.openWithCallback(self.close, Homesl)
@@ -204,7 +203,6 @@ class SLList(MenuList):
 
     def __init__(self, list):
         MenuList.__init__(self, list, False, eListboxPythonMultiContent)
-
         self.l.setFont(0, gFont('Regular', 20))
         self.l.setFont(1, gFont('Regular', 22))
         self.l.setFont(2, gFont('Regular', 24))
@@ -269,11 +267,6 @@ def SLListEntry(name, idx):
     		res.append(MultiContentEntryText(pos=(60, 0), size=(1200, 50), font=1, text=name, color = 0xa6d1fe, flags=RT_HALIGN_LEFT )) #| RT_VALIGN_CENTER
     return res        
         
-    # if fileExists(png):
-        # res.append(MultiContentEntryPixmapAlphaTest(pos=(0, 0), size=(25, 25), png=loadPNG(png)))
-        # res.append(MultiContentEntryText(pos=(35, 0), size=(1000, 320), font=0, text=name))
-    # return res
-
 Panel_list2 = [
  ('UPDATE SATELLITES.XML'), 
  ('UPDATE TERRESTRIAL.XML'),
@@ -316,10 +309,6 @@ def DailyListEntry(name, idx):
     		res.append(MultiContentEntryText(pos=(60, 0), size=(1200, 50), font=1, text=name, color = 0xa6d1fe, flags=RT_HALIGN_LEFT )) #| RT_VALIGN_CENTER
     return res
     
-    # if fileExists(png):
-        # res.append(MultiContentEntryPixmapAlphaTest(pos=(0, 0), size=(20, 20), png=loadPNG(png)))
-        # res.append(MultiContentEntryText(pos=(25, 0), size=(1000, 320), font=0, text=name))
-    # return res
 ######################
 
 class oneListsl(MenuList):
@@ -491,12 +480,12 @@ class Drivers(Screen):
         self['key_green'] = Button(_('Install'))
         self['key_red'] = Button(_('Back'))    
         self.downloading = False		
-        self.timer = eTimer()
-        try:
-            self.timer.callback.append(self.downloadxmlpage)
-        except:
+        self.timer = eTimer() 
+        self.timer.start(100, 1)        
+        try: 
             self.timer_conn = self.timer.timeout.connect(self.downloadxmlpage)
-        self.timer.start(1500, True)
+        except:
+            self.timer.callback.append(self.downloadxmlpage) 
         self['title'] = Label(_('..:: DRIVERS ::..'))
         self['version'] = Label(_('V. %s' %  currversion))
         self['maintener'] = Label(_(' by ))^^((')) 
@@ -561,12 +550,12 @@ class slDependencies(Screen):
         self['key_green'] = Button(_('Install'))
         self['key_red'] = Button(_('Back'))  
         self.downloading = False		
-        self.timer = eTimer()
-        try:
-            self.timer.callback.append(self.downloadxmlpage)
-        except:
+        self.timer = eTimer() 
+        self.timer.start(100, 1)        
+        try: 
             self.timer_conn = self.timer.timeout.connect(self.downloadxmlpage)
-        self.timer.start(1500, True)
+        except:
+            self.timer.callback.append(self.downloadxmlpage) 
         self['title'] = Label(_('..:: DEPENDENCIES ::..'))
         self['version'] = Label(_('V. %s' %  currversion))
         self['maintener'] = Label(_(' by ))^^((')) 
@@ -632,12 +621,12 @@ class Picons(Screen):
         self['key_green'] = Button(_('Install'))
         self['key_red'] = Button(_('Back')) 
         self.downloading = False		
-        self.timer = eTimer()
-        try:
-            self.timer.callback.append(self.downloadxmlpage)
-        except:
+        self.timer = eTimer() 
+        self.timer.start(100, 1)        
+        try: 
             self.timer_conn = self.timer.timeout.connect(self.downloadxmlpage)
-        self.timer.start(1500, True)
+        except:
+            self.timer.callback.append(self.downloadxmlpage) 
         self['title'] = Label(_('..:: PICONS ::..'))
         self['version'] = Label(_('V. %s' %  currversion))
         self['maintener'] = Label(_(' by ))^^(('))  
@@ -704,13 +693,12 @@ class PluginBackup(Screen):
         self['key_green'] = Button(_('Install'))
         self['key_red'] = Button(_('Back')) 
         self.downloading = False		
-        self.timer = eTimer()
-        try:
-            self.timer.callback.append(self.downloadxmlpage)
-        except:
+        self.timer = eTimer() 
+        self.timer.start(100, 1)        
+        try: 
             self.timer_conn = self.timer.timeout.connect(self.downloadxmlpage)
-        
-        self.timer.start(1500, True)
+        except:
+            self.timer.callback.append(self.downloadxmlpage) 
 
         self['title'] = Label(_('..:: PLUGINS BACKUP ::..'))
         self['version'] = Label(_('V. %s' %  currversion))
@@ -779,12 +767,12 @@ class PluginEmulators(Screen):
         self['key_green'] = Button(_('Install'))
         self['key_red'] = Button(_('Back'))  
         self.downloading = False
-        self.timer = eTimer()
-        try:
-            self.timer.callback.append(self.downloadxmlpage)
-        except:
+        self.timer = eTimer() 
+        self.timer.start(100, 1)        
+        try: 
             self.timer_conn = self.timer.timeout.connect(self.downloadxmlpage)
-        self.timer.start(1500, True)
+        except:
+            self.timer.callback.append(self.downloadxmlpage) 
         self['title'] = Label(_('..:: PLUGIN EMULATORS CAMS ::..'))
         self['version'] = Label(_('V. %s' %  currversion))
         self['maintener'] = Label(_(' by ))^^((')) 
@@ -850,13 +838,12 @@ class PluginEpg(Screen):
         self['key_green'] = Button(_('Install'))
         self['key_red'] = Button(_('Back')) 
         self.downloading = False
-        self.timer = eTimer()
-        try:
-            self.timer.callback.append(self.downloadxmlpage)
-        except:
+        self.timer = eTimer() 
+        self.timer.start(100, 1)        
+        try: 
             self.timer_conn = self.timer.timeout.connect(self.downloadxmlpage)
-        
-        self.timer.start(1500, True)
+        except:
+            self.timer.callback.append(self.downloadxmlpage)
         self['title'] = Label(_('..:: PLUGIN EPG ::..'))
         self['version'] = Label(_('V. %s' %  currversion))
         self['maintener'] = Label(_(' by ))^^((')) 
@@ -922,12 +909,12 @@ class PluginMultim(Screen):
         self['key_green'] = Button(_('Install'))
         self['key_red'] = Button(_('Back')) 
         self.downloading = False
-        self.timer = eTimer()
-        try:
-            self.timer.callback.append(self.downloadxmlpage)
-        except:
+        self.timer = eTimer() 
+        self.timer.start(100, 1)        
+        try: 
             self.timer_conn = self.timer.timeout.connect(self.downloadxmlpage)
-        self.timer.start(1500, True)
+        except:
+            self.timer.callback.append(self.downloadxmlpage) 
         self['title'] = Label(_('..:: PLUGIN MULTIMEDIA ::..'))
         self['version'] = Label(_('V. %s' %  currversion))
         self['maintener'] = Label(_(' by ))^^(('))        
@@ -991,12 +978,12 @@ class Kodi(Screen):
         self['key_green'] = Button(_('Install'))
         self['key_red'] = Button(_('Back')) 
         self.downloading = False
-        self.timer = eTimer()
-        try:
-            self.timer.callback.append(self.downloadxmlpage)
-        except:
+        self.timer = eTimer() 
+        self.timer.start(100, 1)        
+        try: 
             self.timer_conn = self.timer.timeout.connect(self.downloadxmlpage)
-        self.timer.start(1500, True)
+        except:
+            self.timer.callback.append(self.downloadxmlpage) 
         self['title'] = Label(_('..:: PLUGIN KODI ::..'))
         self['version'] = Label(_('V. %s' %  currversion))
         self['maintener'] = Label(_(' by ))^^(('))          
@@ -1061,12 +1048,12 @@ class PluginMultiboot(Screen):
         self['key_green'] = Button(_('Install'))
         self['key_red'] = Button(_('Back'))  
         self.downloading = False
-        self.timer = eTimer()
-        try:
-            self.timer.callback.append(self.downloadxmlpage)
-        except:
+        self.timer = eTimer() 
+        self.timer.start(100, 1)        
+        try: 
             self.timer_conn = self.timer.timeout.connect(self.downloadxmlpage)
-        self.timer.start(1500, True)
+        except:
+            self.timer.callback.append(self.downloadxmlpage) 
         self['title'] = Label(_('..:: PLUGIN MULTIBOOT ::..'))
         self['version'] = Label(_('V. %s' %  currversion))
         self['maintener'] = Label(_(' by ))^^(('))         
@@ -1131,12 +1118,12 @@ class PluginPpanel(Screen):
         self['key_green'] = Button(_('Install'))
         self['key_red'] = Button(_('Back'))   
         self.downloading = False
-        self.timer = eTimer()
-        try:
-            self.timer.callback.append(self.downloadxmlpage)
-        except:
+        self.timer = eTimer() 
+        self.timer.start(100, 1)        
+        try: 
             self.timer_conn = self.timer.timeout.connect(self.downloadxmlpage)
-        self.timer.start(1500, True)
+        except:
+            self.timer.callback.append(self.downloadxmlpage) 
         self['title'] = Label(_('..:: PLUGIN PPANEL ::..'))
         self['version'] = Label(_('V. %s' %  currversion))
         self['maintener'] = Label(_(' by ))^^((')) 
@@ -1190,10 +1177,8 @@ class PluginSettings(Screen):
         with open(skin, 'r') as f:
             self.skin = f.read()
         self.setup_title = ('PluginSettings')
-        
         Screen.__init__(self, session)
         self.setTitle(_('Sat-Lodge Panel V. %s' % currversion)) 
-        
         self.list = []		
         self['text'] = oneListsl([]) 		
         self.addon = 'emu'
@@ -1202,12 +1187,12 @@ class PluginSettings(Screen):
         self['key_green'] = Button(_('Install'))
         self['key_red'] = Button(_('Back')) 
         self.downloading = False
-        self.timer = eTimer()
-        try:
-            self.timer.callback.append(self.downloadxmlpage)
-        except:
+        self.timer = eTimer() 
+        self.timer.start(100, 1)        
+        try: 
             self.timer_conn = self.timer.timeout.connect(self.downloadxmlpage)
-        self.timer.start(1500, True)
+        except:
+            self.timer.callback.append(self.downloadxmlpage) 
         self['title'] = Label(_('..:: PLUGIN SETTINGS PANEL ::..'))
         self['version'] = Label(_('V. %s' %  currversion))
         self['maintener'] = Label(_(' by ))^^((')) 
@@ -1273,13 +1258,12 @@ class PluginSpinner(Screen):
         self['key_green'] = Button(_('Install'))
         self['key_red'] = Button(_('Back'))         
         self.downloading = False
-        self.timer = eTimer()
-        try:
-            self.timer.callback.append(self.downloadxmlpage)
-        except:
+        self.timer = eTimer() 
+        self.timer.start(100, 1)        
+        try: 
             self.timer_conn = self.timer.timeout.connect(self.downloadxmlpage)
-        
-        self.timer.start(1500, True)
+        except:
+            self.timer.callback.append(self.downloadxmlpage)
         self['title'] = Label(_('..:: PLUGIN SPINNER ::..'))
         self['version'] = Label(_('V. %s' %  currversion))
         self['maintener'] = Label(_(' by ))^^(('))         
@@ -1343,12 +1327,12 @@ class PluginSkins(Screen):
         self['key_green'] = Button(_('Install'))
         self['key_red'] = Button(_('Back'))         
         self.downloading = False
-        self.timer = eTimer()
-        try:
-            self.timer.callback.append(self.downloadxmlpage)
-        except:
+        self.timer = eTimer() 
+        self.timer.start(100, 1)        
+        try: 
             self.timer_conn = self.timer.timeout.connect(self.downloadxmlpage)
-        self.timer.start(1500, True)
+        except:
+            self.timer.callback.append(self.downloadxmlpage) 
         self['title'] = Label(_('..:: PLUGIN SKINS ::..'))
         self['version'] = Label(_('V. %s' %  currversion))
         self['maintener'] = Label(_(' by ))^^(('))            
@@ -1413,13 +1397,12 @@ class PluginSport(Screen):
         self['key_green'] = Button(_('Install'))
         self['key_red'] = Button(_('Back'))  
         self.downloading = False
-        self.timer = eTimer()
-        try:
-            self.timer.callback.append(self.downloadxmlpage)
-        except:
+        self.timer = eTimer() 
+        self.timer.start(100, 1)        
+        try: 
             self.timer_conn = self.timer.timeout.connect(self.downloadxmlpage)
-        
-        self.timer.start(1500, True)
+        except:
+            self.timer.callback.append(self.downloadxmlpage)
         self['title'] = Label(_('..:: PLUGIN SPORT ::..'))
         self['version'] = Label(_('V. %s' %  currversion))
         self['maintener'] = Label(_(' by ))^^(('))     
@@ -1483,13 +1466,12 @@ class PluginUtility(Screen):
         self['key_green'] = Button(_('Install'))
         self['key_red'] = Button(_('Back'))   
         self.downloading = False
-        self.timer = eTimer()
-        try:
-            self.timer.callback.append(self.downloadxmlpage)
-        except:
+        self.timer = eTimer() 
+        self.timer.start(100, 1)        
+        try: 
             self.timer_conn = self.timer.timeout.connect(self.downloadxmlpage)
-        
-        self.timer.start(1500, True)
+        except:
+            self.timer.callback.append(self.downloadxmlpage)
         self['title'] = Label(_('..:: PLUGIN UTILITY ::..'))
         self['version'] = Label(_('V. %s' %  currversion))
         self['maintener'] = Label(_(' by ))^^(('))        
@@ -1554,12 +1536,12 @@ class PluginWeather(Screen):
         self['key_green'] = Button(_('Install'))
         self['key_red'] = Button(_('Back'))  
         self.downloading = False
-        self.timer = eTimer()
-        try:
-            self.timer.callback.append(self.downloadxmlpage)
-        except:
+        self.timer = eTimer() 
+        self.timer.start(100, 1)        
+        try: 
             self.timer_conn = self.timer.timeout.connect(self.downloadxmlpage)
-        self.timer.start(1500, True)
+        except:
+            self.timer.callback.append(self.downloadxmlpage) 
         self['title'] = Label(_('..:: PLUGIN METEO ::..'))
         self['version'] = Label(_('V. %s' %  currversion))
         self['maintener'] = Label(_(' by ))^^(('))          
@@ -1736,12 +1718,12 @@ class PluginslSettingVhan(Screen):
         self['key_green'] = Button(_('Install'))
         self['key_red'] = Button(_('Back'))   
         self.downloading = False
-        self.timer = eTimer()
-        try:
-            self.timer.callback.append(self.downloadxmlpagecb)
+        self.timer = eTimer() 
+        self.timer.start(100, 1)        
+        try: 
+            self.timer_conn = self.timer.timeout.connect(self.downloadxmlpage)
         except:
-            self.timer_conn = self.timer.timeout.connect(self.downloadxmlpagecb)
-        self.timer.start(1500, True)
+            self.timer.callback.append(self.downloadxmlpage) 		
         self['title'] = Label(_('..:: SETTING Vhannibal ::..'))
         self['version'] = Label(_('V. %s' %  currversion))
         self['maintener'] = Label(_(' by ))^^(('))           
@@ -1751,7 +1733,7 @@ class PluginslSettingVhan(Screen):
          'cancel': self.close}, -2)
 
 
-    def downloadxmlpagecb(self):
+    def downloadxmlpage(self):
         url = base64.b64decode("aHR0cDovL3NhdC5hbGZhLXRlY2gubmV0L3VwbG9hZC9zZXR0aW5ncy92aGFubmliYWwv")
         getPage(url).addCallback(self._gotPageLoad).addErrback(self.errorLoad)			
         
@@ -1857,12 +1839,12 @@ class PluginslMilenka61(Screen):
         self['key_green'] = Button(_('Install'))
         self['key_red'] = Button(_('Back')) 
         self.downloading = False
-        self.timer = eTimer()
-        try:
-            self.timer.callback.append(self.downloadxmlpagecb)
+        self.timer = eTimer() 
+        self.timer.start(100, 1)        
+        try: 
+            self.timer_conn = self.timer.timeout.connect(self.downloadxmlpage)
         except:
-            self.timer_conn = self.timer.timeout.connect(self.downloadxmlpagecb)
-        self.timer.start(1500, True)
+            self.timer.callback.append(self.downloadxmlpage) 	
         self['title'] = Label(_('..:: SETTING Milenka61 ::..'))
         self['version'] = Label(_('V. %s' %  currversion))
         self['maintener'] = Label(_(' by ))^^(('))           
@@ -1871,7 +1853,7 @@ class PluginslMilenka61(Screen):
          'red': self.close,  
          'cancel': self.close}, -2)
 
-    def downloadxmlpagecb(self):
+    def downloadxmlpage(self):
         url = base64.b64decode("aHR0cDovL3ZlbnVzY3MubmV0L3NhdHZlbnVzRTIv")
         getPage(url).addCallback(self._gotPageLoad).addErrback(self.errorLoad)			
         
@@ -1979,12 +1961,12 @@ class PluginslSettingManutek(Screen):
         self['key_green'] = Button(_('Install'))
         self['key_red'] = Button(_('Back'))    
         self.downloading = False
-        self.timer = eTimer()
-        try:
-            self.timer.callback.append(self.downloadxmlpagecb)
+        self.timer = eTimer() 
+        self.timer.start(100, 1)        
+        try: 
+            self.timer_conn = self.timer.timeout.connect(self.downloadxmlpage)
         except:
-            self.timer_conn = self.timer.timeout.connect(self.downloadxmlpagecb)
-        self.timer.start(1500, True)
+            self.timer.callback.append(self.downloadxmlpage) 	
         self['title'] = Label(_('..:: SETTING Manutek ::..'))
         self['version'] = Label(_('V. %s' %  currversion))
         self['maintener'] = Label(_(' by ))^^(('))           
@@ -1993,7 +1975,7 @@ class PluginslSettingManutek(Screen):
          'red': self.close,  
          'cancel': self.close}, -2)
 
-    def downloadxmlpagecb(self):
+    def downloadxmlpage(self):
         url = base64.b64decode("aHR0cDovL3d3dy5tYW51dGVrLml0L2lzZXR0aW5nLw==")
         getPage(url).addCallback(self._gotPageLoad).addErrback(self.errorLoad)			
 
@@ -2042,10 +2024,8 @@ class PluginslSettingManutek(Screen):
                 dest = "/tmp/settings.zip"
                 print "url =", url
                 downloadPage(url, dest).addCallback(self.install).addErrback(self.showError)
-
             else:
                 self.close  
-
                 
     def showError(self, error):
                 print "download error =", error
@@ -2105,12 +2085,12 @@ class PluginslSettingMorpheus(Screen):
         self['key_green'] = Button(_('Install'))
         self['key_red'] = Button(_('Back'))
         self.downloading = False
-        self.timer = eTimer()
-        try:
-            self.timer.callback.append(self.downloadxmlpagecb)
+        self.timer = eTimer() 
+        self.timer.start(100, 1)        
+        try: 
+            self.timer_conn = self.timer.timeout.connect(self.downloadxmlpage)
         except:
-            self.timer_conn = self.timer.timeout.connect(self.downloadxmlpagecb)
-        self.timer.start(1500, True)
+            self.timer.callback.append(self.downloadxmlpage) 	
         self['title'] = Label(_('..:: SETTING Morpheus883 ::..'))
         self['version'] = Label(_('V. %s' %  currversion))
         self['maintener'] = Label(_(' by ))^^(('))           
@@ -2119,7 +2099,7 @@ class PluginslSettingMorpheus(Screen):
          'red': self.close,   
          'cancel': self.close}, -2)
          
-    def downloadxmlpagecb(self):
+    def downloadxmlpage(self):
         url = base64.b64decode("aHR0cDovL21vcnBoZXVzODgzLmFsdGVydmlzdGEub3JnL2Rvd25sb2FkL2luZGV4LnBocD9kaXI9")
         getPage(url).addCallback(self._gotPageLoad).addErrback(self.errorLoad)			
         
@@ -2220,12 +2200,12 @@ class slSettingCiefp(Screen):
         self['key_green'] = Button(_('Install'))
         self['key_red'] = Button(_('Back'))         
         self.downloading = False
-        self.timer = eTimer()
-        try:
-            self.timer.callback.append(self.downloadxmlpagecb)
+        self.timer = eTimer() 
+        self.timer.start(100, 1)        
+        try: 
+            self.timer_conn = self.timer.timeout.connect(self.downloadxmlpage)
         except:
-            self.timer_conn = self.timer.timeout.connect(self.downloadxmlpagecb)
-        self.timer.start(1500, True)
+            self.timer.callback.append(self.downloadxmlpage) 	
         self['title'] = Label(_('..:: SETTING Ciefp ::..'))
         self['version'] = Label(_('V. %s' %  currversion))
         self['maintener'] = Label(_(' by ))^^(('))           
@@ -2234,7 +2214,7 @@ class slSettingCiefp(Screen):
          'red': self.close,        
          'cancel': self.close}, -2)
          
-    def downloadxmlpagecb(self):
+    def downloadxmlpage(self):
         url = base64.b64decode("aHR0cDovLzE3OC42My4xNTYuNzUvcGFuZWxhZGRvbnMvQ2llZnAv")
         getPage(url).addCallback(self._gotPageLoad).addErrback(self.errorLoad)			
 
@@ -2335,12 +2315,12 @@ class slSettingMalimali(Screen):
         self['key_green'] = Button(_('Install'))
         self['key_red'] = Button(_('Back')) 
         self.downloading = False
-        self.timer = eTimer()
-        try:
-            self.timer.callback.append(self.downloadxmlpagecb)
+        self.timer = eTimer() 
+        self.timer.start(100, 1)        
+        try: 
+            self.timer_conn = self.timer.timeout.connect(self.downloadxmlpage)
         except:
-            self.timer_conn = self.timer.timeout.connect(self.downloadxmlpagecb)
-        self.timer.start(1500, True)
+            self.timer.callback.append(self.downloadxmlpage) 	
         self['title'] = Label(_('..:: SETTING Malimali ::..'))
         self['version'] = Label(_('V. %s' %  currversion))
         self['maintener'] = Label(_(' by ))^^(('))           
@@ -2349,7 +2329,7 @@ class slSettingMalimali(Screen):
          'red': self.close,  
          'cancel': self.close}, -2)
          
-    def downloadxmlpagecb(self):
+    def downloadxmlpage(self):
         url = base64.b64decode("aHR0cDovLzE3OC42My4xNTYuNzUvcGFuZWxhZGRvbnMvTWFsaW1hbGkv")
         getPage(url).addCallback(self._gotPageLoad).addErrback(self.errorLoad)			
 
@@ -2448,12 +2428,12 @@ class slSettingPredrag(Screen):
         self['key_green'] = Button(_('Install'))
         self['key_red'] = Button(_('Back'))   
         self.downloading = False
-        self.timer = eTimer()
-        try:
-            self.timer.callback.append(self.downloadxmlpagecb)
+        self.timer = eTimer() 
+        self.timer.start(100, 1)        
+        try: 
+            self.timer_conn = self.timer.timeout.connect(self.downloadxmlpage)
         except:
-            self.timer_conn = self.timer.timeout.connect(self.downloadxmlpagecb)
-        self.timer.start(1500, True)
+            self.timer.callback.append(self.downloadxmlpage) 	
         self['title'] = Label(_('..:: SETTING Predrag ::..'))
         self['version'] = Label(_('V. %s' %  currversion))
         self['maintener'] = Label(_(' by ))^^(('))           
@@ -2462,7 +2442,7 @@ class slSettingPredrag(Screen):
          'red': self.close,    
          'cancel': self.close}, -2)
          
-    def downloadxmlpagecb(self):
+    def downloadxmlpage(self):
         url = base64.b64decode("aHR0cDovLzE3OC42My4xNTYuNzUvcGFuZWxhZGRvbnMvUHJlZHJAZy8=")
         getPage(url).addCallback(self._gotPageLoad).addErrback(self.errorLoad)			
 
@@ -2558,10 +2538,8 @@ class InstallGo(Screen):
         print "In slInstallGo name =", name
         self.selection = selection
         self['info'] = Label()   
-
         self['progress'] = Progress()
         self['progresstext'] = StaticText()
-        
         list = []
         list.sort()				
         n1 = data.find(name, 0)
@@ -2614,16 +2592,23 @@ class InstallGo(Screen):
                 
     def install(self, fplug):
         checkfile = '/tmp/ipkdownloaded.ipk'
-        self.timer = eTimer()
-        self.timer.start(100, True)
+
         if os.path.exists(checkfile):
             # self.session.open(slConsole, _('Installing: %s') % self.dom, ['opkg install -force-overwrite -force-depends %s' % self.com])
             self.session.open(slConsole, _('Installing: %s') % self.dom, ['opkg install %s' % self.com])			
-			
-            if fileExists(BRAND)or fileExists(BRANDP):
-                self.timer.callback.append(deletetmp) #pli
-            else:
-                self.timer_conn = self.timer.timeout.connect(deletetmp) #cvs        
+            # self.timer = eTimer()
+            # self.timer.start(100, True)			
+            # if fileExists(BRAND)or fileExists(BRANDP):
+                # self.timer.callback.append(deletetmp) #pli
+            # else:
+                # self.timer_conn = self.timer.timeout.connect(deletetmp) #cvs    
+            self.timer = eTimer() 
+            self.timer.start(100, 1)        
+            try: 
+                self.timer_conn = self.timer.timeout.connect(deletetmp)
+            except:
+                self.timer.callback.append(deletetmp) 	
+				
             self['info'].setText(_('Installation performed successfully!'))      
         self['info'].setText(_('Please select ...')) 
         self['progresstext'].text = ''  
@@ -2643,69 +2628,62 @@ class InstallGo(Screen):
         print 'self.com', self.com
         self['info'].setText(_('Installing ') + self.dom + _('... please wait'))
         # if self.com.endswith('.ipk'):
-            # self.timer = eTimer()
-            # self.timer.start(100, True)
             # self['info'].setText(_('Installing ') + self.dom + _('... please wait'))
             # self.session.open(slConsole, _('Installing: %s') % self.dom, ['opkg install -force-overwrite -force-depends %s' % self.com])
             
         if self.com.endswith('.ipk'):
-            self.timer = eTimer()
-            self.timer.start(100, True)
             self['info'].setText(_('Installing ') + self.dom + _('... please wait'))
-            
             url = self.com
             dest = '/tmp/ipkdownloaded.ipk'
             self.download = downloadWithProgress(url, dest)
             self.download.addProgress(self.downloadProgress)
-            self.download.start().addCallback(self.install).addErrback(self.showError)               
-            
-            
-            
+            self.download.start().addCallback(self.install).addErrback(self.showError)  
+			
         elif self.com.endswith('.tar.gz'):
-            self.timer = eTimer()
-            self.timer.start(100, True)
             self['info'].setText(_('Installing ') + self.dom + _('... please wait'))
-            try:
-                self.timer.callback.append(deletetmp)
-            except:
+            self.timer = eTimer() 
+            self.timer.start(100, 1)        
+            try: 
                 self.timer_conn = self.timer.timeout.connect(deletetmp)
-            
+            except:
+                self.timer.callback.append(deletetmp) 				
             os.system('wget %s -O /tmp/download.tar.gz > /dev/null' % self.com )
             self.session.open(slConsole, _('Installing: %s') % self.dom, ['tar -xzvf ' + '/tmp/download.tar.gz' + ' -C /'])
             self.mbox = self.session.open(slMessageBox, _('Installation successful!'), slMessageBox.TYPE_INFO, timeout=5)
             self['info'].setText(_('Installation successful!'))
         elif self.com.endswith('.tar.bz2'):
-            self.timer = eTimer()
-            self.timer.start(100, True)
             self['info'].setText(_('Installing ') + self.dom + _('... please wait'))
-            try:
-                self.timer.callback.append(deletetmp)
-            except:
+            self.timer = eTimer() 
+            self.timer.start(100, 1)        
+            try: 
                 self.timer_conn = self.timer.timeout.connect(deletetmp)
+            except:
+                self.timer.callback.append(deletetmp) 				
             os.system('wget %s -O /tmp/download.tar.bz2 > /dev/null' % self.com )
             self.session.open(slConsole, _('Installing: %s') % self.dom, ['tar -xyvf ' + '/tmp/download.tar.bz2' + ' -C /'])
             self.mbox = self.session.open(slMessageBox, _('Installation successful!'), slMessageBox.TYPE_INFO, timeout=5)
             self['info'].setText(_('Installation successful!'))
         elif self.com.endswith('.tbz2'):
-            self.timer = eTimer()
-            self.timer.start(100, True)
             self['info'].setText(_('Installing ') + self.dom + _('... please wait'))
-            try:
-                self.timer.callback.append(deletetmp)
-            except:
+            self.timer = eTimer() 
+            self.timer.start(100, 1)        
+            try: 
                 self.timer_conn = self.timer.timeout.connect(deletetmp)
+            except:
+                self.timer.callback.append(deletetmp) 				
+				
             os.system('wget %s -O /tmp/download.tbz2 > /dev/null' % self.com )
             self.session.open(slConsole, _('Installing: %s') % self.dom, ['tar -xyvf ' + '/tmp/download.tbz2' + ' -C /'])
             self.mbox = self.session.open(slMessageBox, _('Installation successful!'), slMessageBox.TYPE_INFO, timeout=5)
             self['info'].setText(_('Installation successful!'))
         elif self.com.endswith('.tbz'):
-            self.timer = eTimer()
-            self.timer.start(100, True)
             self['info'].setText(_('Installing ') + self.dom + _('... please wait'))
-            try:
-                self.timer.callback.append(deletetmp)
-            except:
+            self.timer = eTimer() 
+            self.timer.start(100, 1)        
+            try: 
                 self.timer_conn = self.timer.timeout.connect(deletetmp)
+            except:
+                self.timer.callback.append(deletetmp) 				
             os.system('wget %s -O /tmp/download.tbz > /dev/null' % self.com )
             self.session.open(slConsole, _('Installing: %s') % self.dom, ['tar -xyvf ' + '/tmp/download.tbz' + ' -C /'])
             self.mbox = self.session.open(slMessageBox, _('Installation successful!'), slMessageBox.TYPE_INFO, timeout=5)
@@ -2715,26 +2693,27 @@ class InstallGo(Screen):
                 self.mbox = self.session.open(slMessageBox, _('Unknow Image!'), slMessageBox.TYPE_INFO, timeout=5)
                 self['info'].setText(_('Installation aborted!'))
             else:
-                self.timer = eTimer()
-                self.timer.start(100, True)
                 self['info'].setText(_('Installing ') + self.dom + _('... please wait'))
-                try:
-                    self.timer.callback.append(deletetmp)
-                except:
+                self.timer = eTimer() 
+                self.timer.start(100, 1)        
+                try: 
                     self.timer_conn = self.timer.timeout.connect(deletetmp)
+                except:
+                    self.timer.callback.append(deletetmp) 
+				
                 os.system('wget %s -O /tmp/download.deb > /dev/null' % self.com )
                 self.session.open(slConsole, _('Installing: %s') % self.dom, ['dpkg -i ' + '/tmp/download.deb'])
                 self.mbox = self.session.open(slMessageBox, _('Installation successful!'), slMessageBox.TYPE_INFO, timeout=5)
                 self['info'].setText(_('Installation successful!'))
         elif self.com.endswith('.zip'):
             if 'setting' in self.dom.lower():
-                self.timer = eTimer()
-                self.timer.start(100, True)
                 self['info'].setText(_('Installing ') + self.dom + _('... please wait'))
-                try:
-                    self.timer.callback.append(deletetmp)
-                except:
+                self.timer = eTimer() 
+                self.timer.start(100, 1)        
+                try: 
                     self.timer_conn = self.timer.timeout.connect(deletetmp)
+                except:
+                    self.timer.callback.append(deletetmp) 				
                 os.system('wget %s -O /tmp/download.zip > /dev/null' % self.com )
                 #controllo esistenza file 
                 checkfile = '/tmp/download.zip'
@@ -2763,13 +2742,14 @@ class InstallGo(Screen):
                 checkfile = '/usr/lib/enigma2/python/Plugins/Extensions/KodiLite'
                 # if os.path.exists(checkfile):
                 if fileExists("/usr/lib/enigma2/python/Plugins/Extensions/KodiLite/plugin.pyo"):
-                    self.timer = eTimer()
-                    self.timer.start(100, True)
                     self['info'].setText(_('Installing ') + self.dom + _('... please wait'))
-                    try:
-                        self.timer.callback.append(deletetmp)
-                    except:
+                    self.timer = eTimer() 
+                    self.timer.start(100, 1)        
+                    try: 
                         self.timer_conn = self.timer.timeout.connect(deletetmp)
+                    except:
+                        self.timer.callback.append(deletetmp) 
+					
                     downplug = self.dom.replace(' ', '') + '.zip' 
                     os.system('wget %s -O /tmp/%s > /dev/null' % (self.com,downplug) ) 
                     checkfiledwn = '/tmp/%s' % downplug
@@ -2789,8 +2769,6 @@ class InstallGo(Screen):
                         self.mbox = self.session.open(slMessageBox, _('KodiLite not installed!'), slMessageBox.TYPE_INFO, timeout=5)
                         #pass
             else:
-                self.timer = eTimer()
-                self.timer.start(1000, True)
                 self['info'].setText(_('Downloading file select in /tmp') + self.dom + _('... please wait'))
                 downplug = self.dom.replace(' ', '') + '.zip' 
                 os.system('wget %s -O /tmp/%s > /dev/null' % (self.com,downplug) )                
@@ -3158,11 +3136,12 @@ class slMessageBox(Screen):
     def initTimeout(self, timeout):
         self.timeout = timeout
         if timeout > 0:
-            self.timer = eTimer()
-            try:
+            self.timer = eTimer() 
+            # self.timer.start(100, 1)        
+            try: 
                 self.timer_conn = self.timer.timeout.connect(self.timerTick)
             except:
-                self.timer.callback.append(self.timerTick) 
+                self.timer.callback.append(self.timerTick) 				
             self.onExecBegin.append(self.startTimer)
             self.origTitle = None
             if self.execing:
