@@ -2,6 +2,8 @@
 #"*    by Lululla 16.08.2019             *"
 #"*     all right reserved               *"
 #"*          no copy                     *"
+#"*     all right reserved               *"
+#       mod daimon 11-03-2021            *"
 #"****************************************"
 from Components.ActionMap import ActionMap, NumberActionMap
 from Components.Button import Button
