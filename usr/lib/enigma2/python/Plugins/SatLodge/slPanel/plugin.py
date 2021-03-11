@@ -1,9 +1,7 @@
 #"****************************************"
 #"*    by Lululla 16.08.2019             *"
+#"*     all right reserved               *"
 #"*          no copy                     *"
-#"*        #########                     *"
-#*"     mod daimon satlodge              *"
-#*"       09-02-2021                     *"
 #"****************************************"
 from Components.ActionMap import ActionMap, NumberActionMap
 from Components.Button import Button
@@ -182,9 +180,10 @@ class logoStrt(Screen):
 
 Panel_list = [
  _('SATLODGE IMAGE'),
- _('SETTINGS DAILY'),
- _('PLUGIN EMULATORS CAMS')]
-           
+ _('SETTINGS DAILY'), 
+ _('PLUGIN EMULATORS CAMS'),
+ _('PLUGIN MULTIMEDIA')]						 
+         
 class SLList(MenuList):
 
     def __init__(self, list):
@@ -409,12 +408,14 @@ class Homesl(Screen):
         self.session.open(IPKinst)          
         
     def keyNumberGlobal(self, idx):
-        sel = self.menu_list[idx] 
+        sel = self.menu_list[idx]
 		
         if sel == _('PLUGIN EMULATORS CAMS'):
-            self.session.open(PluginEmulators)     			      
+            self.session.open(PluginEmulators)   			
+        elif sel == _('PLUGIN MULTIMEDIA'):
+            self.session.open(PluginMultim)
         elif sel == _('SETTINGS DAILY'):
-            self.session.open(DailySetting)       
+            self.session.open(DailySetting)
         elif sel == _('SATLODGE IMAGE'):
             from .main import STBmodel
             self.session.open(STBmodel)  
@@ -490,6 +491,77 @@ class PluginEmulators(Screen):
                 return
         else:
             self.close
+                        
+class PluginMultim(Screen):
+
+    def __init__(self, session):        
+        self.session = session
+        skin = skin_path + 'all.xml'
+        with open(skin, 'r') as f:
+            self.skin = f.read()
+        self.setup_title = ('PluginMultim')
+        Screen.__init__(self, session)
+        self.setTitle(_('Sat-Lodge Panel V. %s' % currversion)) 
+        self.list = []
+        self['text'] = oneListsl([]) 
+        self.addon = 'emu'
+        self.icount = 0
+        self['info'] = Label(_('Getting the list, please wait ...'))		
+        self['key_green'] = Button(_('Install'))
+        self['key_red'] = Button(_('Back')) 
+        self.downloading = False
+        self.timer = eTimer() 
+        self.timer.start(100, 1)        
+        try: 
+            self.timer_conn = self.timer.timeout.connect(self.downloadxmlpage)
+        except:
+            self.timer.callback.append(self.downloadxmlpage) 
+        self['title'] = Label(_('..:: PLUGIN MULTIMEDIA ::..'))
+        self['version'] = Label(_('V. %s' %  currversion))
+        self['maintener'] = Label(_(' by ))^^(('))        
+        self['actions'] = ActionMap(['SetupActions', 'ColorActions'], {'ok': self.okRun,
+         'green': self.okRun,
+         'red': self.close,   
+         'cancel': self.close}, -2)
+
+    def downloadxmlpage(self):
+        url = xml_path + 'PluginIptv.xml'
+        getPage(url).addCallback(self._gotPageLoad).addErrback(self.errorLoad)
+
+    def errorLoad(self, error):
+        print str(error)	
+        self['info'].setText(_('Try again later ...'))
+        self.downloading = False
+
+    def _gotPageLoad(self, data):
+        print "In PluginIptv data =", data
+        self.xml = data
+        try:
+            print "In PluginIptv self.xml =", self.xml
+            regex = '<plugins cont="(.*?)"'
+            match = re.compile(regex,re.DOTALL).findall(self.xml)
+            print "In PluginIptv match =", match
+            for name in match:
+                   self.list.append(name)
+                   self['info'].setText(_('Please select ...'))					   
+            showlist(self.list, self['text'])							
+            self.downloading = True
+        except:
+            self.downloading = False
+
+    def okRun(self):
+        if self.downloading == True:
+            try:
+                selection = str(self['text'].getCurrent())
+                idx = self["text"].getSelectionIndex()
+                name = self.list[idx]
+                self.session.open(InstallGo, self.xml, name)
+            except:
+                return
+        else:
+            self.close
+
+
 
 ##############################
 class DailySetting(Screen):
