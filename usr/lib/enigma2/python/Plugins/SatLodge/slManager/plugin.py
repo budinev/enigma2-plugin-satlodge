@@ -520,7 +520,7 @@ class GetipklistLs(Screen):
         # self.onShown.append(self.get_list)
 
     def downloadxmlpage(self):
-        url = 'http://sat-lodge.it/xml/PluginEmulators.xml'    
+        url = 'https://webplusfeeds.sat-lodge.it/xml/PluginEmulators.xml'    
 
         getPage(url).addCallback(self._gotPageLoad).addErrback(self.errorLoad)
 

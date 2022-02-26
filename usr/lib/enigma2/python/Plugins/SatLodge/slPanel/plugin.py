@@ -126,9 +126,9 @@ currversion = '2.6'
 plugin_path = '/usr/lib/enigma2/python/Plugins/SatLodge/slPanel'
 ico_path = plugin_path +  '/res/pics/addons3.png'
 ##########################################
-data_upd = 'aHR0cDovL3NhdC1sb2RnZS5pdC9zbFBhbmVsLw=='
+data_upd = 'aHR0cHM6Ly93ZWJwbHVzZmVlZHMuc2F0LWxvZGdlLml0Lw=='
 upd_path = base64.b64decode(data_upd)
-data_xml = 'aHR0cDovL3NhdC1sb2RnZS5pdC94bWwv'
+data_xml = 'aHR0cHM6Ly93ZWJwbHVzZmVlZHMuc2F0LWxvZGdlLml0L3htbC8='
 xml_path = base64.b64decode(data_xml)
 #########################################
 pics_path = plugin_path +  '/res/pics/icon.png'
