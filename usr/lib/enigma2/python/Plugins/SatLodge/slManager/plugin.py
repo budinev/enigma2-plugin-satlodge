@@ -641,13 +641,13 @@ class GetipkLs(Screen):
         if self.selection == '':
             self.session.openWithCallback(self.callMyMsg, MessageBox, _('Installare...'), MessageBox.TYPE_YESNO)
         else:
-            self.session.open(Console, _('Installing: %s') % dom, ['opkg install -force-overwrite %s' % com])
+            self.session.open(Console, _('Installing: %s') % dom, ['opkg install --force-overwrite --force-depends %s' % com])
 
     def callMyMsg(self, result):
         if result:
             dom = self.dom
             com = self.com
-            self.session.open(Console, _('Installing: %s') % dom, ['ipkg install -force-overwrite %s' % com])
+            self.session.open(Console, _('Installing: %s') % dom, ['opkg install --force-overwrite --force-depends %s' % com])
 
 def startConfig(session, **kwargs):
         session.open(slManager)
