@@ -586,7 +586,7 @@ class SettingManutek(Screen):
 
 
     def downxmlpage(self):
-        url = base64.b64decode("aHR0cDovL3d3dy5tYW51dGVrLml0L2lzZXR0aW5nLw==")
+        url = base64.b64decode("aHR0cDovL3d3dy5tYW51dGVrLml0L2lzZXR0aW5nL2luZGV4LnBocA==")
         getPage(url).addCallback(self._gotPageLoad).addErrback(self.errorLoad)			
 
         
@@ -611,7 +611,7 @@ class SettingManutek(Screen):
                     name = name.replace("%20", " ")
                     name = name.replace("NemoxyzRLS_", "")                     
                     name = name.replace("_", " ")
-                    url64b = base64.b64decode("aHR0cDovL3d3dy5tYW51dGVrLml0L2lzZXR0aW5nL2VuaWdtYTIv")
+                    url64b = base64.b64decode("aHR0cDovL3d3dy5tYW51dGVrLml0L2lzZXR0aW5nL2luZGV4LnBocA==")
                     url = url64b + url
                     self.urls.append(url)
                     self.names.append(name)
